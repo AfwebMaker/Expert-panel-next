@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .fcc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hide scrollbar */
+  .hideScroll::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .badge--success {
+    @apply bg-green-100;
+  }
+  .badge--warning {
+    @apply bg-amber-100;
+  }
+  .badge--error {
+    @apply bg-red-100;
+  }
+  .badge--info {
+    @apply bg-blue-100;
+  }
+}
+
+@layer base {
+  :root {
+    --background-app-rgb: 255, 255, 255;
+
+    --color-primary-900: 20, 83, 45;
+    --color-primary-800: 22, 101, 52;
+    --color-primary-700: 21, 128, 61;
+    --color-primary-600: 22, 163, 74;
+    --color-primary-500: 34, 197, 94;
+    --color-primary-400: 74, 222, 128;
+    --color-primary-300: 134, 239, 172;
+    --color-primary-200: 187, 247, 208;
+    --color-primary-100: 220, 252, 231;
+    --color-primary-50: 240, 253, 244;
+
+    --color-secondary-900: 6, 78, 59;
+    --color-secondary-800: 6, 95, 70;
+    --color-secondary-700: 4, 120, 87;
+    --color-secondary-600: 5, 150, 105;
+    --color-secondary-500: 16, 185, 129;
+    --color-secondary-400: 52, 211, 153;
+    --color-secondary-300: 110, 231, 183;
+    --color-secondary-200: 167, 243, 208;
+    --color-secondary-100: 209, 250, 229;
+    --color-secondary-50: 236, 253, 245;
+
+    --color-tertiary-900: 120, 53, 15;
+    --color-tertiary-800: 146, 64, 14;
+    --color-tertiary-700: 180, 83, 9;
+    --color-tertiary-600: 217, 119, 6;
+    --color-tertiary-500: 245, 158, 11;
+    --color-tertiary-400: 251, 191, 36;
+    --color-tertiary-300: 252, 211, 77;
+    --color-tertiary-200: 253, 230, 138;
+    --color-tertiary-100: 254, 243, 199;
+    --color-tertiary-50: 255, 251, 235;
+
+    --color-success: 16, 185, 129;
+    --color-warning: 251, 146, 60;
+    --color-error: 248, 113, 113;
+    --color-info: 37, 99, 235;
+  }
+}
+
+/* style of html and body tags */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-iranYekanFont);
+  min-height: 100vh;
+  user-select: none;
+  background-color: var(--background-app-rgb);
+}
+
+/* remove arrow of input number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+*:focus {
+  outline: none;
+}

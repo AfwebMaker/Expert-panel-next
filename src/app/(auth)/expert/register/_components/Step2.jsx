@@ -43,10 +43,10 @@ function Step2({ currentStep, setCurrentStep }) {
 
     return (
         <div className='w-full'>
-            <span className='text-cf-300'>به دنبال چه خدمات ساختمانی در کارگشا هستید؟</span>
+            <span className='text-cf-300 text-sm sm:text-base'>به دنبال چه خدمات ساختمانی در کارگشا هستید؟</span>
             <div className='w-full grid grid-cols-4'>
                 {checkBoxState.map((checkBox, i) => (
-                    <div key={i} className={`flex items-center mt-6 ${i === 4 ? 'col-span-4' : 'col-span-2 lg:col-span-1'}`}>
+                    <div key={i} className={`flex items-center mt-6 ${i === 4 ? 'col-span-4' : 'col-span-4 lg:col-span-1 sm:col-span-2'}`}>
                         <div
                             onClick={() => { checkBoxClickHandler(i) }}
                             className={`fcc min-w-[16px] w-4 h-4 rounded-[4px] ml-2 cursor-pointer ${checkBox.state ? 'bg-secondary-500' : 'bg-white border border-black'}`}>
@@ -55,15 +55,16 @@ function Step2({ currentStep, setCurrentStep }) {
                                 alt='check'
                             />
                         </div>
-                        <div className='text-cf-400'>{checkBox.title}</div>
+                        <div className='text-cf-400 text-sm sm:text-base'>{checkBox.title}</div>
                         {checkBox.description &&
-                            <div className='text-cf-300 mr-2'>{checkBox.description}</div>
+                            <div className='text-warning text-sm mr-2 hidden sm:flex'>{checkBox.description}</div>
                         }
                     </div>
                 ))}
+                <div className='col-span-4 mt-4 text-warning text-xs flex sm:hidden'>{checkBoxState[4].description}</div>
                 <textarea
                     style={{ resize: 'none' }}
-                    className='w-full border border-cf-400 col-span-4 mt-4 rounded-md p-2 text-sm'
+                    className='w-full border border-cf-400 col-span-4 mt-4 rounded-md p-2 text-xs sm:text-sm'
                     placeholder='سایر موارد را بنویسید به طور مثال : دیوار چینی'
                     name=""
                     id=""

@@ -25,7 +25,7 @@ function Steps({ currentStep, setCurrentStep }) {
 
   return (
     <div className='w-full fcc'>
-      <div className='relative w-[90%] pb-[70px] flex justify-between items-center'>
+      <div className='relative w-[90%] pb-[10px] sm:pb-[70px] flex justify-between items-center'>
         {stepInformation.map((info) => (
           <Step
             key={info.number}

@@ -20,7 +20,7 @@ function Register() {
     return (
         <main className='w-full h-full min-h-screen fcc flex-col bg-black py-8'>
             <Image alt='background' className='fixed top-0 w-full h-full object-cover' src={backGround} />
-            <div className='z-10 w-[90%] max-w-[1050px] bg-white rounded-lg font-medium'>
+            <div className='z-20 w-[90%] max-w-[1050px] bg-white rounded-lg font-medium'>
                 <div className='pt-6 fcc'>
                     <Image
                         priority={true}

@@ -11,11 +11,11 @@ function Steps({ currentStep, setCurrentStep }) {
     }, {
       number: 2,
       title: 'مرحله دوم',
-      description: 'خدمات درخواستی'
+      description: 'تعیین حوزه فعالیت'
     }, {
       number: 3,
       title: 'مرحله سوم',
-      description: 'امنیت حساب کاربری'
+      description: 'تعیین مناطق و شهر ها فعالیت'
     }, {
       number: 4,
       title: 'مرحله چهارم',

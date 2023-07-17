@@ -18,7 +18,7 @@ function StepController({ currentStep, setCurrentStep, onsubmit }) {
           </button></>
         :
         <Link href='/' className='fcc w-full bg-secondary-500 py-2 px-4 rounded-md'>
-          ورود به پنل کاربری
+          ورود به پنل متخصصین
         </Link>
       }
     </div>

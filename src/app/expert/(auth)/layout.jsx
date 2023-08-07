@@ -1,4 +1,4 @@
-import "../globals.css";
+import "../../globals.css";
 // font
 import iranYekanFont from "@/constants/localFonts";
 

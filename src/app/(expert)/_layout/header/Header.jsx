@@ -9,9 +9,9 @@ function Header() {
     <div className="">
       <div className="h-14"></div>
       <header className="fixed top-0 right-0 w-full h-14 flex items-center px-4 bg-red-500">
-        <div className="flex items-center">
+        <div className="flex items-end">
           <Image
-            className=""
+            className="ml-1"
             src={kargosha_logo}
             alt="Picture of the author"
             width={30}

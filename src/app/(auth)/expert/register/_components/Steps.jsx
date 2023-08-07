@@ -11,11 +11,11 @@ function Steps({ currentStep, setCurrentStep }) {
     }, {
       number: 2,
       title: 'مرحله دوم',
-      description: 'خدمات درخواستی'
+      description: 'تعیین حوزه فعالیت'
     }, {
       number: 3,
       title: 'مرحله سوم',
-      description: 'امنیت حساب کاربری'
+      description: 'تعیین مناطق و شهر ها فعالیت'
     }, {
       number: 4,
       title: 'مرحله چهارم',
@@ -25,7 +25,7 @@ function Steps({ currentStep, setCurrentStep }) {
 
   return (
     <div className='w-full fcc'>
-      <div className='relative w-[90%] pb-[70px] flex justify-between items-center'>
+      <div className='relative w-[90%] pb-[10px] sm:pb-[70px] flex justify-between items-center'>
         {stepInformation.map((info) => (
           <Step
             key={info.number}

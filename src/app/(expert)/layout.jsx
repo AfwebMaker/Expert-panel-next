@@ -16,8 +16,8 @@ export default function RootLayout({ children }) {
         className={`${iranYekanFont.variable} font-sans`}
       >
         <header className="">هدر</header>
-        <aside className="">ساید بار</aside>
         {children}
+        <aside className="">ساید بار</aside>
       </body>
     </html>
   );

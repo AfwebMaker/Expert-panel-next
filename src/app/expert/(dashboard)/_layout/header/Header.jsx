@@ -1,29 +1,43 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
+//components
+import HamburgerMenu from "@/app/expert/(dashboard)/_layout/header/_components/HamburgerMenu";
+import DropDownMenu from "@/app/expert/(dashboard)/_layout/header/_components/DropDownMenu";
 // public --> images
 import kargosha_logo from "@/public/images/layout/header/kargosha_logo.svg";
 import kargosha_typo from "@/public/images/layout/header/kargosha_typo.svg";
 
 function Header() {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <div className="">
       <div className="h-14"></div>
-      <header className="fixed top-0 right-0 w-full h-14 flex items-center px-4 bg-red-500">
+      <header
+        className={`fixed bg-white ${showMenu && "bg-gray-700"} z-10 top-0 right-0 w-full h-14 flex items-center px-4  justify-start transition-all duration-500 delay-[30ms] ${
+          showMenu && "justify-center"
+        }`}
+      >
         <div className="flex items-end">
           <Image
-            className="ml-1"
+            className="ml-2"
             src={kargosha_logo}
             alt="Picture of the author"
             width={30}
             height={30}
           />
           <Image
+            hidden={showMenu}
             src={kargosha_typo}
             alt="Picture of the author"
             height={20}
+            priority
           />
         </div>
+        <HamburgerMenu showMenu={showMenu} setShowMenu={setShowMenu} />
       </header>
+      <DropDownMenu showMenu={showMenu} />
     </div>
   );
 }

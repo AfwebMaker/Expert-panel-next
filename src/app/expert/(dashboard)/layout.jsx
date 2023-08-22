@@ -2,8 +2,8 @@ import "../../globals.css";
 // font
 import iranYekanFont from "@/constants/localFonts";
 // components
-import Header from "./_layout/header/Header"
-
+import Header from "./_layout/header/Header";
+import NavigationBar from "./_layout/NavigationBar/NavigationBar";
 
 export const metadata = {
   title: "پنل متخصصین | ",
@@ -17,9 +17,9 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning={true}
         className={`${iranYekanFont.variable} font-sans`}
       >
-        <Header/>
+        <Header />
         {children}
-        <aside className="">ساید بار</aside>
+        <NavigationBar />
       </body>
     </html>
   );

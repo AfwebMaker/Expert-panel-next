@@ -59,10 +59,12 @@ module.exports = {
           200: "#BFBFBF",
           100: "#FFFFFF",
         },
+        dark: withOpacity("--background-app-dark-rgb"),
         success: withOpacity("--color-success"),
         warning: withOpacity("--color-warning"),
         error: withOpacity("--color-error"),
         info: withOpacity("--color-info"),
+        
       },
       fontFamily: {
         sans: ["var(--font-iranYekanFont)", ...fontFamily.sans],

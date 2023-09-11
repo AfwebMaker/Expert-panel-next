@@ -1,9 +1,8 @@
 import React from 'react'
 
 function page() {
-  // console.log(process.env.NODE_ENV)
   return (
-    <div>home</div>
+    <div className='px-5 py-10'>Residential-Information</div>
   )
 }
 

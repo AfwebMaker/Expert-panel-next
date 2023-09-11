@@ -3,7 +3,7 @@ import "../../globals.css";
 import iranYekanFont from "@/constants/localFonts";
 // components
 import Header from "./_layout/header/Header";
-import NavigationBar from "./_layout/NavigationBar/NavigationBar";
+import NavigationBar from "./_layout/navigationBar/NavigationBar";
 
 export const metadata = {
   title: "پنل متخصصین | ",

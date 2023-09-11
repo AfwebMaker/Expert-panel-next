@@ -21,7 +21,7 @@ const dataNavigationBar = [
     title: "اعلان ها",
     href: "/expert/notifications",
     icon_outline: <HiOutlineBell className={styleIconOutline} />,
-    icon_normal: <HiOutlineBell className={styleIconNormal} />,
+    icon_normal: <HiBell className={styleIconNormal} />,
   },
   {
     id: 2,

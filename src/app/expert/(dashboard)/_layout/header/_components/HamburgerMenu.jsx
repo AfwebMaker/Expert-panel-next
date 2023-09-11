@@ -10,7 +10,7 @@ function HamburgerMenu({ showMenu, setShowMenu }) {
   return (
     <div
       onClick={() => setShowMenu(!showMenu)}
-      className="absolute cursor-pointer left-4 flex flex-col fcc h-8 gap-y-1 transition-all duration-500 lg:hidden"
+      className="absolute cursor-pointer left-4 flex flex-col fcc h-8 gap-y-1 transition-all duration-500 md:hidden"
       role="button"
       tabIndex={0}
     >

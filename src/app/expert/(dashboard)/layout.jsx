@@ -4,6 +4,7 @@ import iranYekanFont from "@/constants/localFonts";
 // components
 import Header from "./_layout/header/Header";
 import NavigatorInterface from "./_layout/navigatorInterface/NavigatorInterface";
+import SideBar from "./_layout/navigatorInterface/SideBar";
 
 export const metadata = {
   title: "پنل متخصصین | ",
@@ -21,10 +22,19 @@ export default function RootLayout({ children }) {
         {/* {children}
         <NavigatorInterface /> */}
         <div className="w-full flex">
-          <div className="bg-blue-300 w-[275px] h-screen hidden lg:flex">f</div>
-          <div className="bg-purple-500 h-full lg:h-screen w-full lg:layout_dashboard">
-            <div className="w-full h-14 lg:h-[88px] bg-yellow-300 sticky top-0">header</div>
+          <SideBar/>
+          <div className="bg-purple-500 h-full lg:h-screen w-full layout_dashboard">
+            <Header />
             <div className="w-full overflow-y-scroll header_dashboard_desk lg:header_dashboard_phone hideScroll">
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
               <div className="w-full h-60 bg-orange-300 mb-3">f</div>
               <div className="w-full h-60 bg-orange-300 mb-3">f</div>
               <div className="w-full h-60 bg-orange-300 mb-3">f</div>

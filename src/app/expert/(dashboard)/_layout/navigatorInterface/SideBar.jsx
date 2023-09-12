@@ -1,9 +1,263 @@
-import React from 'react'
+"use client"
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+// public --> images
+import kargosha_logo from "@/public/images/public/Kargosha_Logo.png";
+// react icons
+import {
+  HiOutlineHome,
+  HiOutlineFingerPrint,
+  HiOutlineBadgeCheck,
+  HiOutlineClipboardList,
+  HiOutlinePresentationChartBar,
+  HiOutlineIdentification,
+  HiOutlineCreditCard,
+  HiOutlineUserGroup,
+  HiOutlineTicket,
+} from "react-icons/hi";
+
 
 function SideBar() {
+  const dataSidebar = [
+    {
+      id: 0,
+      title: "داشبورد",
+    },
+    {
+      id: 1,
+      title: "خانه",
+      icon: <HiOutlineHome />,
+      href: "/expert/home",
+      notifications: 6,
+    },
+    {
+      id: 0,
+      title: "پروفایل",
+    },
+    {
+      id: 2,
+      title: "احراز هویت",
+      icon: <HiOutlineFingerPrint />,
+      href: "",
+      notifications: 7,
+    },
+    {
+      id: 3,
+      title: "احراز صلاحیت",
+      icon: <HiOutlineBadgeCheck />,
+      href: "",
+      notifications: 0,
+    },
+    {
+      id: 0,
+      title: "سفارشات",
+    },
+    {
+      id: 4,
+      title: "سفارشات",
+      icon: <HiOutlineClipboardList />,
+      href: "",
+      notifications: 0,
+    },
+    {
+      id: 5,
+      title: "گزارشات",
+      icon: <HiOutlinePresentationChartBar />,
+      href: "",
+      notifications: 5,
+    },
+    {
+      id: 0,
+      title: "سرویس ها",
+    },
+    {
+      id: 6,
+      title: "نماینده من",
+      icon: <HiOutlineIdentification />,
+      href: "",
+      notifications: 2,
+    },
+    {
+      id: 7,
+      title: "کیف پول",
+      icon: <HiOutlineCreditCard />,
+      href: "",
+      notifications: 2,
+    },
+    {
+      id: 8,
+      title: "دیده شو",
+      icon: <HiOutlineUserGroup />,
+      href: "",
+      notifications: 0,
+    },
+    {
+      id: 0,
+      title: "پشتیبانی",
+    },
+    {
+      id: 9,
+      title: "تیکت ها",
+      icon: <HiOutlineTicket />,
+      href: "",
+      notifications: 2,
+    },
+  ];
+
+
+  const dataBeast = [
+    {
+      title: "",
+      child:[
+        {
+          id: 1,
+          title: "خانه",
+          icon: <HiOutlineHome />,
+          href: "/expert/home",
+          notifications: 6,
+        },
+        
+      ]
+    },
+    {
+      title: "",
+      child:[
+        {
+          id: 2,
+          title: "احراز هویت",
+          icon: <HiOutlineFingerPrint />,
+          href: "",
+          notifications: 7,
+        },
+        {
+          id: 3,
+          title: "احراز صلاحیت",
+          icon: <HiOutlineBadgeCheck />,
+          href: "",
+          notifications: 0,
+        },
+        
+      ]
+    },
+    {
+      title: "",
+      child:[
+        {
+          id: 4,
+          title: "سفارشات",
+          icon: <HiOutlineClipboardList />,
+          href: "",
+          notifications: 0,
+        },
+        {
+          id: 5,
+          title: "گزارشات",
+          icon: <HiOutlinePresentationChartBar />,
+          href: "",
+          notifications: 5,
+        },
+      ]
+    },
+    {
+      title: "",
+      child:[
+        {
+          id: 6,
+          title: "نماینده من",
+          icon: <HiOutlineIdentification />,
+          href: "",
+          notifications: 2,
+        },
+        {
+          id: 7,
+          title: "کیف پول",
+          icon: <HiOutlineCreditCard />,
+          href: "",
+          notifications: 2,
+        },
+        {
+          id: 8,
+          title: "دیده شو",
+          icon: <HiOutlineUserGroup />,
+          href: "",
+          notifications: 0,
+        },
+      ]
+    },
+    {
+      title: "",
+      child:[
+        {
+          id: 9,
+          title: "تیکت ها",
+          icon: <HiOutlineTicket />,
+          href: "",
+          notifications: 2,
+        },
+      ]
+    },
+  ];
+
+  const pathname = usePathname();
+  console.log(pathname)
+
   return (
-    <div className='hidden md:flex w-[275px] h-screen bg-blue-300'>SideBar</div>
-  )
+    <div className="w-[275px] overflow-y-scroll h-screen hidden lg:flex scroll_custom">
+      <div className="py-5 w-full pt-[88px]">
+        <div className="z-50 bg-white w-[275px] h-[88px] fixed top-0 flex items-center justify-start px-3">
+          <Image
+            className="ml-2"
+            src={kargosha_logo}
+            alt="Picture of the author"
+            // width={30}
+            height={30}
+          />
+        </div>
+        <ul className="w-full flex flex-col items-center justify-center px-4 py-2 pb-5">
+          {dataSidebar &&
+            dataSidebar.map((item, index) => {
+              return item.id ? (
+                <li
+                  key={index}
+                  className={`w-full h-[3rem] fcc mb-[1%] cursor-pointer rounded-md px-2 hover:bg-gray-100 transition-all duration-300 ${pathname === item.href && "bg-gray-100"}`}
+                >
+                  <Link
+                    className="w-full h-full flex items-center justify-start font-bold"
+                    href={item.href}
+                  >
+                    <div className="flex items-center justify-start h-full w-5/6 ">
+                      <span className="ml-[10px] text-lg">{item.icon}</span>
+                      <span className="text-sm">{item.title}</span>
+                    </div>
+                    {!!item.notifications && (
+                      <div className="flex h-full w-1/6 fcc">
+                        <span className={`bg-gray-100 text-xs h-[23px] px-3 fcc leading-10 rounded-full ${pathname === item.href && "bg-cf-500 text-white"}`}>
+                          {item.notifications}+
+                        </span>
+                      </div>
+                    )}
+                  </Link>
+                </li>
+              ) : (
+                <li
+                  key={index}
+                  className="w-full text-xs my-2 text-cf-300 pr-2.5"
+                >
+                  {item.title}
+                </li>
+              );
+            })}
+        </ul>
+        <div className="bg-white h-10 fcc text-cf-300 text-[10px] pt-8 pb-5 border-t-2 border-gray-50">
+          پنل متخصصین کارگشا ۱.۰۱
+        </div>
+        <div className="bg-white h-1 pt-8 pb-5"></div>
+        <div className="z-50 w-[270px] h-10 fixed bottom-0 bg-gradient-to-t from-gray-200 to-[#ffffff00]"></div>
+      </div>
+    </div>
+  );
 }
 
-export default SideBar
+export default SideBar;

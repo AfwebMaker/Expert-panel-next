@@ -7,6 +7,7 @@ import DropDownMenu from "@/app/expert/(dashboard)/_layout/header/_components/Dr
 // public --> images
 import kargosha_logo from "@/public/images/layout/header/kargosha_logo.svg";
 import kargosha_typo from "@/public/images/layout/header/kargosha_typo.svg";
+import HeaderDesktop from "./_components/HeaderDesktop";
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
@@ -27,14 +28,14 @@ function Header() {
   }, []);
 
   return (
-    <div className="">
-      <div className="h-14"></div>
+    <div className="w-full h-14 lg:h-[88px] bg-yellow-300 sticky top-0">
+      {/* <div className=""> */}
       <header
-        className={`header fixed ${
+        className={`header z-10 w-full h-14 lg:h-[88px] flex items-center px-4  justify-start transition-all duration-500 delay-[30ms] ${
           showMenu ? "bg-dark" : "bg-white"
-        } z-10 top-0 right-0 w-full h-14 flex items-center px-4  justify-start transition-all duration-500 delay-[30ms]`}
+        }`}
       >
-        <div className="flex items-end">
+        <div className="flex items-end lg:hidden">
           <div
             className="transition-all duration-500"
             style={{ marginRight: `${showMenu ? marginRight : ""}` }}
@@ -56,8 +57,10 @@ function Header() {
           />
         </div>
         <HamburgerMenu showMenu={showMenu} setShowMenu={setShowMenu} />
+        <HeaderDesktop />
       </header>
       <DropDownMenu showMenu={showMenu} />
+      {/* </div> */}
     </div>
   );
 }

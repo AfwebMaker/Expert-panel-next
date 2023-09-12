@@ -113,3 +113,20 @@ input[type="number"] {
     height: calc(100% - 88px)
   }
 }
+
+/* scrollbar */
+.scroll_custom::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.scroll_custom::-webkit-scrollbar-track {
+  background:transparent;
+}
+
+/* Handle */
+.scroll_custom::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: rgb(214, 214, 214);
+  /* background: linear-gradient(45deg, #D24CF9 0%, #2138A0 35%, #81269F 100%); */
+}

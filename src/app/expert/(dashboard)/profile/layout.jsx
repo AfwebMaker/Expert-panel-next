@@ -4,7 +4,7 @@ import DesktopNavigation from './_components/DesktopNavigation'
 
 function RootLayout({ children }) {
     return (
-        <div className='pt-5 pb-9 px-5'>
+        <div className='pt-5 pb-9 px-5 md:px-28'>
             <DesktopNavigation />
             {children}
         </div>

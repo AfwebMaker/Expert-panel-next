@@ -1,11 +1,8 @@
 import React from 'react'
-
+//components
 import MobileNavigation from './_components/MobileNavigation'
-import DesktopNavigation from './_components/DesktopNavigation'
 
 function page() {
-
-
   return (
     <MobileNavigation />
   )

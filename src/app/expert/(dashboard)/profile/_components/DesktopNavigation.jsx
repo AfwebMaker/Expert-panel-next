@@ -43,7 +43,7 @@ function DesktopNavigation() {
   ]
 
   return (
-    <div className='hidden md:block'>
+    <div className='hidden lg:block'>
       <nav>
         <ul className='font-medium text-lg'>
           {navigation_data.map((item, index) => (

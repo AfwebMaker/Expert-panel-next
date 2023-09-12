@@ -12,6 +12,8 @@ import {
   HiOutlineOfficeBuilding,
   HiOutlineLockOpen
 } from "react-icons/hi";
+//components
+import Stars from '@/app/_components/Stars'
 
 function mobileNavigation() {
   const active = true
@@ -43,14 +45,14 @@ function mobileNavigation() {
   ]
 
   return (
-    <div className='block md:hidden'>
+    <div className='block lg:hidden'>
       <div className='w-full fcc flex-col'>
         <div className='w-[150px] h-[150px] bg-black rounded-full mb-5'>
 
         </div>
         <div className='font-bold flex-col fcc'>
-          <div className='text-lg mb-1'>محمد جوادی</div>
-          <div className='fcc mb-1'>
+          <div className='text-lg mb-2'>محمد جوادی</div>
+          <div className='fcc mb-2'>
             <div className='text-sm text-primary-500'>وضعیت : </div>
             <div className='text-cf-300 font-medium text-sm fcc'>
               <div className='mx-1'>فعال</div>
@@ -62,10 +64,11 @@ function mobileNavigation() {
               </div>
             </div>
           </div>
-          <div className='fcc mb-1'>
+          <div className='fcc mb-2'>
             <div className='text-sm text-secondary-500'>امتیاز متخصص : </div>
-            <div className='text-cf-300 font-medium text-sm'>
-              (متوسط)
+            <div className='text-cf-300 font-medium text-sm fcc'>
+              <Stars point={3} />
+              {/* (متوسط) */}
             </div>
           </div>
         </div>

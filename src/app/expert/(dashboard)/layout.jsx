@@ -22,25 +22,11 @@ export default function RootLayout({ children }) {
         {/* {children}
         <NavigatorInterface /> */}
         <div className="w-full flex">
-          <SideBar/>
+          <SideBar />
           <div className="bg-purple-500 h-full lg:h-screen w-full layout_dashboard">
             <Header />
             <div className="w-full overflow-y-scroll header_dashboard_desk lg:header_dashboard_phone hideScroll">
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
-              <div className="w-full h-60 bg-orange-300 mb-3">f</div>
+              {children}
             </div>
           </div>
         </div>

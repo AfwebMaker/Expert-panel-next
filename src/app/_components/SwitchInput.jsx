@@ -1,18 +1,12 @@
 "use client"
 
-import { useState, useEffect } from 'react'
 import { Switch } from '@headlessui/react'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function SwitchInput({ setLegalFormIsActive }) {
-  const [enabled, setEnabled] = useState(false)
-
-  useEffect(() => {
-    setLegalFormIsActive(enabled)
-  }, [enabled])
+export default function SwitchInput({ enabled, setEnabled }) {
 
   return (
     <Switch

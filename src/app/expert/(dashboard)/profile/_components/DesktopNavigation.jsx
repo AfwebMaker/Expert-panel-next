@@ -1,7 +1,8 @@
 "use client"
 
 import Link from 'next/link';
-import React, { useState } from 'react'
+import { usePathname } from 'next/navigation';
+import React from 'react'
 //react icons
 import {
   HiOutlineUser,
@@ -13,7 +14,7 @@ import {
 } from "react-icons/hi";
 
 function DesktopNavigation() {
-  const [activeId, setActiveId] = useState(0)
+  const pathName = usePathname()
   const navigation_data = [
     {
       id: 0,
@@ -54,13 +55,13 @@ function DesktopNavigation() {
       <nav>
         <ul className='font-medium text-lg flex flex-wrap justify-between'>
           {navigation_data.map((item, index) => (
-            <li onClick={() => {setActiveId(item.id)}} key={item.id} className={`w-[49%] justify-between xl:w-[340px] flex items-center h-[85px] rounded-lg ${item.id === activeId ? 'bg-white' : ''}`}>
+            <li key={item.id} className={`w-[49%] justify-between xl:w-[340px] flex items-center h-[85px] rounded-lg ${pathName === item.link ? 'bg-white' : ''}`}>
               <Link className='w-full flex justify-between items-center py-2 my-2 px-2 h-full' href={item.link} >
                 <div className='flex items-center'>
-                  <div className={`w-16 h-16 ml-5 ${item.id === activeId ? 'bg-[#F8F9F9] text-primary-500' : 'bg-white text-cf-400'} rounded-lg fcc`}>
+                  <div className={`w-16 h-16 ml-5 ${pathName === item.link ? 'bg-[#F8F9F9] text-primary-500' : 'bg-white text-cf-400'} rounded-lg fcc`}>
                     {item.icon}
                   </div>
-                  <div className={`${item.id === activeId ? 'text-primary-500' : 'text-cf-400'}`}>
+                  <div className={`${pathName === item.link ? 'text-primary-500' : 'text-cf-400'}`}>
                     <div>{item.title}</div>
                     <div className='font-normal text-sm'>{item.description}</div>
                   </div>

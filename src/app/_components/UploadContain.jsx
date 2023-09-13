@@ -17,10 +17,10 @@ function UploadContain({ multiple, accept }) {
     }
 
     return (
-        <div className={`uploadBorder w-full h-[150px] rounded-lg border-cf-400 relative overflow-hidden fcc ${!ImageUploaded ? 'text-gray-400' : 'text-white'}`}>
+        <div className={`uploadBorder w-full cursor-pointer h-[150px] rounded-lg border-cf-400 relative overflow-hidden fcc ${!ImageUploaded ? 'text-gray-400' : 'text-white'}`}>
             <input
                 onChange={inputFileHandler}
-                className='absolute z-10 w-full h-full opacity-0'
+                className='absolute z-10 w-full h-full opacity-0 cursor-pointer right-0'
                 type="file"
                 multiple={multiple}
                 accept={accept}

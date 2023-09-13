@@ -4,7 +4,7 @@ import Input from '@/app/_components/Input'
 import SwitchInput from '@/app/_components/SwitchInput'
 
 function LegalForm() {
-    const [LegalFormIsActive, setLegalFormIsActive] = useState(false)
+    const [enabled, setEnableSwitch] = useState(false);
 
     const inputData = [
         {
@@ -65,29 +65,28 @@ function LegalForm() {
 
     return (
         <div className='flex flex-col my-10 px-1'>
-            <span className='fcc font-normal text-xs text-cf-300 mb-5'>در صورتی که شما به عنوان یه شخص حقوقی (شرکت های پیمانکاری، خصوصی و ...) می خواهید اهراز هویت کنید شناسه ملی شرکت خود را در این قسمت وارد کنید.
+            <span className='flex justify-start items-center font-normal text-xs text-cf-300 mb-5'>در صورتی که شما به عنوان یه شخص حقوقی (شرکت های پیمانکاری، خصوصی و ...) می خواهید اهراز هویت کنید شناسه ملی شرکت خود را در این قسمت وارد کنید.
             </span>
             <div className='flex flex-col'>
                 <div className='flex justify-between items-center mb-2'>
-                    <div className='font-medium text-sm'>کاربر حقوقی هستم</div>
-                    <SwitchInput setLegalFormIsActive={setLegalFormIsActive} />
+                    <div className={`font-medium text-sm ${enabled ? 'text-primary-500' : ''}`}>کاربر حقوقی هستم</div>
+                    <SwitchInput enabled={enabled} setEnabled={setEnableSwitch} />
                 </div>
-
-                {LegalFormIsActive &&
-
-                    inputData.map(item => (
-                        <Input
-                            key={item.id}
-                            active={item.active}
-                            title={item.title}
-                            state={item.state}
-                            type={item.type}
-                            className={item.className}
-                            placeholder={item.placeholder}
-                        />
-                    ))
-
-                }
+                <div className='flex flex-wrap justify-between'>
+                    {enabled &&
+                        inputData.map(item => (
+                            <Input
+                                key={item.id}
+                                active={item.active}
+                                title={item.title}
+                                state={item.state}
+                                type={item.type}
+                                className={`${item.className} w-full lg:w-[49%]`}
+                                placeholder={item.placeholder}
+                            />
+                        ))
+                    }
+                </div>
             </div>
         </div>
 

@@ -81,8 +81,7 @@ function InformationForm() {
     return (
         <div>
             <div className='font-medium text-sm text-cf-400 mb-4'>اطلاعات اولیه</div>
-
-            <form>
+            <div className='flex flex-wrap justify-between'>
                 {inputData.map(item => (
                     <Input
                         key={item.id}
@@ -90,11 +89,11 @@ function InformationForm() {
                         title={item.title}
                         state={item.state}
                         type={item.type}
-                        className={item.className}
+                        className={`${item.className} w-full lg:w-[49%]`}
                         placeholder={item.placeholder}
                     />
                 ))}
-            </form>
+            </div>
         </div>
     )
 }

@@ -4,7 +4,7 @@ import React from "react";
 // components
 import Header from "../_layout/header/Header";
 import NavigatorInterface from "../_layout/navigatorInterface/NavigatorInterface";
-import SideBar from "../_layout/navigatorInterface/SideBar";
+import SideBar from "./navigatorInterface/_components/SideBar";
 //redux
 import { useSelector } from "react-redux";
 

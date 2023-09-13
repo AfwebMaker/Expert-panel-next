@@ -26,7 +26,7 @@ function HeaderDesktop() {
       <div
         role="button"
         onClick={clickHandler}
-        className="h-full w-10 fcc text-3xl text-cf-300"
+        className="h-full w-10 fcc text-2xl text-cf-300"
       >
         <HiLogout
           className={`${
@@ -36,8 +36,8 @@ function HeaderDesktop() {
       </div>
       <div className="flex fcc">
         <div className="ml-4 fcc">
-          <span className="ml-4 text-2xl text-yellow-500"><HiOutlineSun/></span>
-          <span className="ml-3 text-2xl text-cf-300"><HiOutlineBell/></span>
+          <span role="button" className="ml-4 text-2xl text-yellow-500 cursor-pointer"><HiOutlineSun/></span>
+          <span role="button" className="ml-3 text-2xl text-cf-300 cursor-pointer"><HiOutlineBell/></span>
         </div>
         <ProfileDropdown />
       </div>

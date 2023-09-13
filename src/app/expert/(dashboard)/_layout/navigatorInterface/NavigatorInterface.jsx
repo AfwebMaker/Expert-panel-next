@@ -1,7 +1,7 @@
 import React from 'react'
 // components
-import NavigationBar from './NavigationBar'
-import SideBar from './SideBar'
+import NavigationBar from './_components/NavigationBar'
+import SideBar from './_components/SideBar'
 
 
 function NavigatorInterface() {

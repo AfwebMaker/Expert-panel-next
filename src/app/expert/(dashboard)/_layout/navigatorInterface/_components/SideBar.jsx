@@ -207,39 +207,37 @@ function SideBar() {
 
   return (
     <div
-      className={` h-screen hidden lg:flex  transition-all duration-300 border-l border-gray-200 ${
-        toggleSidebar
-          ? "w-[275px] overflow-y-scroll scroll_custom"
-          : "w-[80px] hideScroll"
-      }`}
+      className={` h-screen  hidden lg:flex lg:flex-col transition-all duration-300 border-l border-gray-200 
+      ${toggleSidebar ? "w-[275px]" : "w-[80px] hideScroll"}
+      `}
     >
-      <div className="py-5 w-full pt-[88px]">
+      <div
+        className={`z-50 bg-red-200 h-[88px] flex items-center justify-start px-3 transition-all duration-300 ${
+          toggleSidebar ? "w-[275px] " : "w-[80px]"
+        }`}
+      >
         <div
-          className={`z-50 bg-white h-[88px] fixed top-0 flex items-center justify-start px-3 transition-all duration-300 ${
-            toggleSidebar ? "w-[270px] " : "w-[75px]"
-          }`}
+          className={`flex items-center w-full h-full 
+            ${toggleSidebar ? "" : "items-center justify-center"}`}
         >
-          <div
-            className={`flex items-center w-full h-full 
-            ${ toggleSidebar ? "" : "items-center justify-center"}`}
-          >
-            <Image
-              className={toggleSidebar ? "ml-2" : ""}
-              src={kargosha_logo}
-              alt="Picture of the author"
-              width={30}
-              height={30}
-            />
-            <Image
-              hidden={!toggleSidebar}
-              src={kargosha_typo}
-              alt="Picture of the author"
-              height={20}
-              priority
-            />
-          </div>
+          <Image
+            className={toggleSidebar ? "ml-2" : ""}
+            src={kargosha_logo}
+            alt="Picture of the author"
+            width={30}
+            height={30}
+          />
+          <Image
+            hidden={!toggleSidebar}
+            src={kargosha_typo}
+            alt="Picture of the author"
+            height={20}
+            priority
+          />
         </div>
-        <ul className="w-full flex flex-col items-center justify-center px-4 py-2 pb-5">
+      </div>
+      <div style={{height: "calc(100vh - 88px)"}} className="py-5 w-full overflow-y-scroll scroll_custom">
+        <ul className="w-full flex flex-col items-center justify-center px-4">
           {dataSidebar &&
             dataSidebar.map((item, index) => {
               return item.id ? (
@@ -266,7 +264,10 @@ function SideBar() {
                       >
                         {item.icon}
                       </span>
-                      <span hidden={!toggleSidebar} className="text-sm transition-all duration-300 delay-100">
+                      <span
+                        hidden={!toggleSidebar}
+                        className="text-black text-sm"
+                      >
                         {item.title}
                       </span>
                     </div>
@@ -280,8 +281,16 @@ function SideBar() {
                       >
                         <span
                           className={`fcc leading-10 rounded-full 
-                          ${pathname === item.href ? "bg-black text-white" : "bg-gray-100"}
-                          ${toggleSidebar ? "px-3 text-xs h-[23px]" : "px-1 text-[10px] h-[19px]"}
+                          ${
+                            pathname === item.href
+                              ? "bg-black text-white"
+                              : "bg-gray-100"
+                          }
+                          ${
+                            toggleSidebar
+                              ? "px-3 text-xs h-[23px]"
+                              : "px-1 text-[10px] h-[19px]"
+                          }
                           `}
                         >
                           {item.notifications}+
@@ -306,9 +315,8 @@ function SideBar() {
             <div className="bg-white h-10 fcc text-cf-300 text-[10px] pt-8 pb-5 border-t-2 border-gray-50">
               پنل متخصصین کارگشا ۱.۰۱
             </div>
-            <div className="bg-white h-1 pt-8 pb-5"></div>
             <div
-              className={`z-50 h-10 fixed bottom-0 bg-gradient-to-t from-gray-200 to-[#ffffff00] transition-all duration-300 ${
+              className={`z-50 h-10 fixed bottom-0 bg-gradient-to-t from-gray-100 to-[#ffffff00] transition-all duration-300 ${
                 toggleSidebar ? "w-[270px] " : "w-[75px]"
               }`}
             ></div>

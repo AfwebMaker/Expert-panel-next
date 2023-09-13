@@ -16,14 +16,14 @@ function HeaderDesktop() {
   };
 
   return (
-    <div className="hidden lg:flex items-center justify-between bg-red-400 w-full h-full">
+    <div className="hidden lg:flex items-center justify-between  w-full h-full">
       <div
         onClick={clickHandler}
-        className="h-full w-10 bg-amber-300 fcc text-3xl text-cf-300"
+        className="h-full w-10  fcc text-3xl text-cf-300"
       >
         <HiLogout className={`${toggleSidebar ? "rotate-0" : "rotate-180" } transition-all duration-300`} />
       </div>
-      <div className="h-full bg-amber-500">d</div>
+      <div className="h-full "></div>
     </div>
   );
 }

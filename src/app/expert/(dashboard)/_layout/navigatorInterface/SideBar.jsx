@@ -207,29 +207,32 @@ function SideBar() {
 
   return (
     <div
-      className={`overflow-y-scroll h-screen hidden lg:flex scroll_custom transition-all duration-300 ${
-        toggleSidebar ? "w-[275px] " : "w-[80px]"
+      className={` h-screen hidden lg:flex  transition-all duration-300 border-l border-gray-200 ${
+        toggleSidebar
+          ? "w-[275px] overflow-y-scroll scroll_custom"
+          : "w-[80px] hideScroll"
       }`}
     >
       <div className="py-5 w-full pt-[88px]">
         <div
-          className={`z-50 bg-white h-[88px] fixed top-0 flex items-center justify-start px-3 ${
-            toggleSidebar ? "w-[270px] " : "w-[80px]"
+          className={`z-50 bg-white h-[88px] fixed top-0 flex items-center justify-start px-3 transition-all duration-300 ${
+            toggleSidebar ? "w-[270px] " : "w-[75px]"
           }`}
         >
-          <div className="flex items-end lg:hidden">
-            <div
-              className="transition-all duration-500"
-            >
-              <Image
-                className="ml-2"
-                src={kargosha_logo}
-                alt="Picture of the author"
-                width={30}
-                height={30}
-              />
-            </div>
+          <div
+            className={`flex items-center w-full h-full ${
+              !toggleSidebar && "items-center justify-center"
+            }`}
+          >
             <Image
+              className={toggleSidebar && "ml-2"}
+              src={kargosha_logo}
+              alt="Picture of the author"
+              width={30}
+              height={30}
+            />
+            <Image
+              hidden={!toggleSidebar}
               src={kargosha_typo}
               alt="Picture of the author"
               height={20}
@@ -243,24 +246,44 @@ function SideBar() {
               return item.id ? (
                 <li
                   key={index}
-                  className={`w-full h-[3rem] fcc mb-[1%] cursor-pointer rounded-md px-2 hover:bg-gray-100 transition-all duration-300 ${
-                    pathname === item.href && "bg-gray-100"
-                  }`}
+                  className={`w-full h-[3rem] fcc relative cursor-pointer rounded-md px-2 hover:bg-gray-100 transition-all duration-300 
+                  ${pathname === item.href && "bg-gray-100"}
+                  ${toggleSidebar ? "mb-[1%]" : "mb-3"}
+                  `}
                 >
                   <Link
-                    className="w-full h-full flex items-center justify-start font-bold"
+                    className={`w-full h-full flex items-center justify-start font-bold  ${
+                      toggleSidebar ? "justify-start" : "justify-center w-full"
+                    }`}
                     href={item.href}
                   >
-                    <div className="flex items-center justify-start h-full w-5/6 ">
-                      <span className="ml-[10px] text-lg">{item.icon}</span>
-                      <span className="text-sm">{item.title}</span>
+                    <div
+                      className={`flex items-center justify-start h-full w-5/6`}
+                    >
+                      <span
+                        className={`text-lg h-full fcc ${
+                          toggleSidebar ? "ml-[10px]" : "ml-0 w-full"
+                        }`}
+                      >
+                        {item.icon}
+                      </span>
+                      <span hidden={!toggleSidebar} className="text-sm transition-all duration-300 delay-100">
+                        {item.title}
+                      </span>
                     </div>
                     {!!item.notifications && (
-                      <div className="flex h-full w-1/6 fcc">
+                      <div
+                        className={`${
+                          toggleSidebar
+                            ? "flex h-full w-1/6 fcc"
+                            : "absolute -top-1.5 -left-1.5"
+                        }`}
+                      >
                         <span
-                          className={`bg-gray-100 text-xs h-[23px] px-3 fcc leading-10 rounded-full ${
-                            pathname === item.href && "bg-cf-500 text-white"
-                          }`}
+                          className={`fcc leading-10 rounded-full 
+                          ${pathname === item.href ? "bg-black text-white" : "bg-gray-100"}
+                          ${toggleSidebar ? "px-3 text-xs h-[23px]" : "px-1 text-[10px] h-[19px]"}
+                          `}
                         >
                           {item.notifications}+
                         </span>
@@ -270,6 +293,7 @@ function SideBar() {
                 </li>
               ) : (
                 <li
+                  hidden={!toggleSidebar}
                   key={index}
                   className="w-full text-xs my-2 text-cf-300 pr-2.5"
                 >
@@ -278,15 +302,19 @@ function SideBar() {
               );
             })}
         </ul>
-        <div className="bg-white h-10 fcc text-cf-300 text-[10px] pt-8 pb-5 border-t-2 border-gray-50">
-          پنل متخصصین کارگشا ۱.۰۱
-        </div>
-        <div className="bg-white h-1 pt-8 pb-5"></div>
-        <div
-          className={`z-50 h-10 fixed bottom-0 bg-gradient-to-t from-gray-200 to-[#ffffff00] ${
-            toggleSidebar ? "w-[270px] " : "w-[80px]"
-          }`}
-        ></div>
+        {toggleSidebar && (
+          <>
+            <div className="bg-white h-10 fcc text-cf-300 text-[10px] pt-8 pb-5 border-t-2 border-gray-50">
+              پنل متخصصین کارگشا ۱.۰۱
+            </div>
+            <div className="bg-white h-1 pt-8 pb-5"></div>
+            <div
+              className={`z-50 h-10 fixed bottom-0 bg-gradient-to-t from-gray-200 to-[#ffffff00] transition-all duration-300 ${
+                toggleSidebar ? "w-[270px] " : "w-[75px]"
+              }`}
+            ></div>
+          </>
+        )}
       </div>
     </div>
   );

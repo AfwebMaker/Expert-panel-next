@@ -1,10 +1,13 @@
-"use client"
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+//redux
+import { useSelector } from "react-redux";
 // public --> images
-import kargosha_logo from "@/public/images/public/Kargosha_Logo.png";
+import kargosha_logo from "@/public/images/layout/header/kargosha_logo.svg";
+import kargosha_typo from "@/public/images/layout/header/kargosha_typo.svg";
 // react icons
 import {
   HiOutlineHome,
@@ -17,7 +20,6 @@ import {
   HiOutlineUserGroup,
   HiOutlineTicket,
 } from "react-icons/hi";
-
 
 function SideBar() {
   const dataSidebar = [
@@ -106,11 +108,10 @@ function SideBar() {
     },
   ];
 
-
   const dataBeast = [
     {
       title: "",
-      child:[
+      child: [
         {
           id: 1,
           title: "خانه",
@@ -118,12 +119,11 @@ function SideBar() {
           href: "/expert/home",
           notifications: 6,
         },
-        
-      ]
+      ],
     },
     {
       title: "",
-      child:[
+      child: [
         {
           id: 2,
           title: "احراز هویت",
@@ -138,12 +138,11 @@ function SideBar() {
           href: "",
           notifications: 0,
         },
-        
-      ]
+      ],
     },
     {
       title: "",
-      child:[
+      child: [
         {
           id: 4,
           title: "سفارشات",
@@ -158,11 +157,11 @@ function SideBar() {
           href: "",
           notifications: 5,
         },
-      ]
+      ],
     },
     {
       title: "",
-      child:[
+      child: [
         {
           id: 6,
           title: "نماینده من",
@@ -184,11 +183,11 @@ function SideBar() {
           href: "",
           notifications: 0,
         },
-      ]
+      ],
     },
     {
       title: "",
-      child:[
+      child: [
         {
           id: 9,
           title: "تیکت ها",
@@ -196,24 +195,47 @@ function SideBar() {
           href: "",
           notifications: 2,
         },
-      ]
+      ],
     },
   ];
 
   const pathname = usePathname();
-  console.log(pathname)
+  //redux
+  const toggleSidebar = useSelector(
+    (state) => state.layoutConfig.toggleSidebar
+  );
 
   return (
-    <div className="w-[275px] overflow-y-scroll h-screen hidden lg:flex scroll_custom">
+    <div
+      className={`overflow-y-scroll h-screen hidden lg:flex scroll_custom transition-all duration-300 ${
+        toggleSidebar ? "w-[275px] " : "w-[80px]"
+      }`}
+    >
       <div className="py-5 w-full pt-[88px]">
-        <div className="z-50 bg-white w-[275px] h-[88px] fixed top-0 flex items-center justify-start px-3">
-          <Image
-            className="ml-2"
-            src={kargosha_logo}
-            alt="Picture of the author"
-            // width={30}
-            height={30}
-          />
+        <div
+          className={`z-50 bg-white h-[88px] fixed top-0 flex items-center justify-start px-3 ${
+            toggleSidebar ? "w-[270px] " : "w-[80px]"
+          }`}
+        >
+          <div className="flex items-end lg:hidden">
+            <div
+              className="transition-all duration-500"
+            >
+              <Image
+                className="ml-2"
+                src={kargosha_logo}
+                alt="Picture of the author"
+                width={30}
+                height={30}
+              />
+            </div>
+            <Image
+              src={kargosha_typo}
+              alt="Picture of the author"
+              height={20}
+              priority
+            />
+          </div>
         </div>
         <ul className="w-full flex flex-col items-center justify-center px-4 py-2 pb-5">
           {dataSidebar &&
@@ -221,7 +243,9 @@ function SideBar() {
               return item.id ? (
                 <li
                   key={index}
-                  className={`w-full h-[3rem] fcc mb-[1%] cursor-pointer rounded-md px-2 hover:bg-gray-100 transition-all duration-300 ${pathname === item.href && "bg-gray-100"}`}
+                  className={`w-full h-[3rem] fcc mb-[1%] cursor-pointer rounded-md px-2 hover:bg-gray-100 transition-all duration-300 ${
+                    pathname === item.href && "bg-gray-100"
+                  }`}
                 >
                   <Link
                     className="w-full h-full flex items-center justify-start font-bold"
@@ -233,7 +257,11 @@ function SideBar() {
                     </div>
                     {!!item.notifications && (
                       <div className="flex h-full w-1/6 fcc">
-                        <span className={`bg-gray-100 text-xs h-[23px] px-3 fcc leading-10 rounded-full ${pathname === item.href && "bg-cf-500 text-white"}`}>
+                        <span
+                          className={`bg-gray-100 text-xs h-[23px] px-3 fcc leading-10 rounded-full ${
+                            pathname === item.href && "bg-cf-500 text-white"
+                          }`}
+                        >
                           {item.notifications}+
                         </span>
                       </div>
@@ -254,7 +282,11 @@ function SideBar() {
           پنل متخصصین کارگشا ۱.۰۱
         </div>
         <div className="bg-white h-1 pt-8 pb-5"></div>
-        <div className="z-50 w-[270px] h-10 fixed bottom-0 bg-gradient-to-t from-gray-200 to-[#ffffff00]"></div>
+        <div
+          className={`z-50 h-10 fixed bottom-0 bg-gradient-to-t from-gray-200 to-[#ffffff00] ${
+            toggleSidebar ? "w-[270px] " : "w-[80px]"
+          }`}
+        ></div>
       </div>
     </div>
   );

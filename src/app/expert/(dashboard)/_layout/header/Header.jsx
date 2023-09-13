@@ -1,13 +1,14 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 //components
 import HamburgerMenu from "@/app/expert/(dashboard)/_layout/header/_components/HamburgerMenu";
 import DropDownMenu from "@/app/expert/(dashboard)/_layout/header/_components/DropDownMenu";
+import HeaderDesktop from "./_components/HeaderDesktop";
 // public --> images
 import kargosha_logo from "@/public/images/layout/header/kargosha_logo.svg";
 import kargosha_typo from "@/public/images/layout/header/kargosha_typo.svg";
-import HeaderDesktop from "./_components/HeaderDesktop";
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);

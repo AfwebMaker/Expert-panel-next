@@ -212,7 +212,7 @@ function SideBar() {
       `}
     >
       <div
-        className={`z-50 bg-red-200 h-[88px] flex items-center justify-start px-3 transition-all duration-300 ${
+        className={`z-50 h-[88px] flex items-center justify-start px-3 transition-all duration-300 ${
           toggleSidebar ? "w-[275px] " : "w-[80px]"
         }`}
       >

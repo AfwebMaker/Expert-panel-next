@@ -29,10 +29,10 @@ function Header() {
   }, []);
 
   return (
-    <div className="w-full h-14 lg:h-[88px] bg-yellow-300 sticky top-0">
+    <div className="w-full h-14 lg:h-[88px] sticky top-0">
       {/* <div className=""> */}
       <header
-        className={`header z-10 w-full h-14 lg:h-[88px] flex items-center px-4  justify-start transition-all duration-500 delay-[30ms] ${
+        className={`header z-10 w-full h-14 lg:h-[88px] flex items-center pr-4 pl-6 justify-start transition-all duration-500 delay-[30ms] ${
           showMenu ? "bg-dark" : "bg-white"
         }`}
       >

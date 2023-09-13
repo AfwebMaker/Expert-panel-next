@@ -220,12 +220,11 @@ function SideBar() {
           }`}
         >
           <div
-            className={`flex items-center w-full h-full ${
-              !toggleSidebar && "items-center justify-center"
-            }`}
+            className={`flex items-center w-full h-full 
+            ${ toggleSidebar ? "" : "items-center justify-center"}`}
           >
             <Image
-              className={toggleSidebar && "ml-2"}
+              className={toggleSidebar ? "ml-2" : ""}
               src={kargosha_logo}
               alt="Picture of the author"
               width={30}
@@ -247,7 +246,7 @@ function SideBar() {
                 <li
                   key={index}
                   className={`w-full h-[3rem] fcc relative cursor-pointer rounded-md px-2 hover:bg-gray-100 transition-all duration-300 
-                  ${pathname === item.href && "bg-gray-100"}
+                  ${pathname === item.href ? "bg-gray-100" : ""}
                   ${toggleSidebar ? "mb-[1%]" : "mb-3"}
                   `}
                 >

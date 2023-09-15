@@ -19,24 +19,28 @@ function mobileNavigation() {
   const active = true
   const navigation_data = [
     {
+      id: 0,
       icon: <HiOutlineUser size={24} className='text-primary-500' />,
       title: 'اطلاعات کاربری',
       warning: false,
       link: '/expert/profile/Personal-Information'
     },
     {
+      id: 1,
       icon: <HiOutlineCreditCard size={24} className='text-primary-500' />,
       title: 'اطلاعات بانکی',
       warning: false,
       link: '/expert/profile/Bank-Information'
     },
     {
+      id: 2,
       icon: <HiOutlineOfficeBuilding size={24} className='text-primary-500' />,
       title: 'اطلاعات سکونتی',
       warning: false,
       link: '/expert/profile/Residential-Information'
     },
     {
+      id: 3,
       icon: <HiOutlineLockOpen size={24} className='text-primary-500' />,
       title: 'امنیت',
       warning: true,
@@ -79,7 +83,7 @@ function mobileNavigation() {
       <nav>
         <ul className='font-medium text-lg'>
           {navigation_data.map((item, index) => (
-            <li className='w-full'>
+            <li key={item.id} className='w-full'>
               <Link className='flex justify-between items-center py-2 my-2 px-2' href={item.link} >
                 <div className='flex items-center'>
                   <div className='ml-2'>

@@ -9,7 +9,7 @@ function CheckOtp({ forgetPassword, setPageState }) {
     //check otp length for auto submit
     useEffect(() => {
         otpSubmitHandler()
-    }, [otp])
+    }, [otp, otpSubmitHandler])
 
     //otp submit
     const otpSubmitHandler = () => {

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React, { useState, useRef } from 'react'
 //react icons
 import { HiOutlineCloudUpload } from 'react-icons/hi'
@@ -25,7 +26,7 @@ function UploadContain({ multiple, accept }) {
                 multiple={multiple}
                 accept={accept}
             />
-            <img ref={previewImageBox} className='hidden brightness-75 fcc w-[98%] h-[95%] absolute object-cover rounded-lg' src='' alt="" />
+            <Image ref={previewImageBox} className='hidden brightness-75 fcc w-[98%] h-[95%] absolute object-cover rounded-lg' src='' alt="doc" />
             <div className='absolute flex justify-start items-center w-full h-full top-0 p-5'>
                 <div className='ml-2'>
                     <HiOutlineCloudUpload strokeWidth={1} size={70} />

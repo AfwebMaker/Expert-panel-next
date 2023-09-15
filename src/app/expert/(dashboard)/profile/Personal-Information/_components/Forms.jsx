@@ -10,7 +10,6 @@ import UploadForm from './UploadForm'
 import Button from '@/app/_components/Button'
 
 function Forms() {
-    console.log(process.env.BASE_URL)
     return (
         <form onSubmit={e => {e.preventDefault()}}>
             <InformationForm />

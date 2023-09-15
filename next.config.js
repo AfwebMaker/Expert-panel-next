@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+require('dotenv').config({path: `.env.${process.env.NEXT_PUBLIC_ENV_STATE}`})
+
+const nextConfig = {
+}
 
 module.exports = nextConfig

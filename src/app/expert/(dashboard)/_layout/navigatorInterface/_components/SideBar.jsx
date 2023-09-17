@@ -259,14 +259,14 @@ function SideBar() {
                     >
                       <span
                         className={`text-lg h-full fcc ${
-                          toggleSidebar ? "ml-[10px]" : "ml-0 w-full"
+                          toggleSidebar ? "ml-[10px]" : "ml-0 w-full "
                         }`}
                       >
                         {item.icon}
                       </span>
                       <span
                         hidden={!toggleSidebar}
-                        className="text-black text-sm"
+                        className="text-black text-sm truncate"
                       >
                         {item.title}
                       </span>

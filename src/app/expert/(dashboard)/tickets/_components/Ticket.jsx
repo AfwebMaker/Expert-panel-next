@@ -10,7 +10,7 @@ import {
 
 function Ticket({ title, status, description }) {
   return (
-    <li className="w-[49%] justify-between xl:w-[390px] flex items-center h-[160px] rounded-xl bg-white mt-3 hover:shadow-inner">
+    <li className="w-[49%] justify-between xl:w-[390px] flex items-center h-[160px] rounded-xl bg-white mt-3 hover:drop-shadow-md">
       <Link className="w-full h-full fcc items-center" href="#">
         <div className="w-full h-full flex flex-col items-center justify-between pt-4 pb-1 px-6">
           <div className="w-full h-[30%] flex items-center justify-between">

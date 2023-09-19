@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Button({ icon, title, bg, type }) {
+function Button({ icon, title, type, disable }) {
   return (
-    <button type={type ? type : 'button'} className={`rounded-md w-full fcc text-white h-11 ${bg ? '' : 'bg-primary-500'}`}>
+    <button disabled={disable} type={type ? type : 'button'} className={`rounded-md w-full fcc text-white h-11 ${disable ? 'bg-gray-400' : 'bg-primary-500' }`}>
       <div>
         {icon}
       </div>

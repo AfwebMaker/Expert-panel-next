@@ -2,78 +2,78 @@ import React from 'react'
 //components
 import Input from '@/app/_components/Input'
 
-function InformationForm() {
+function InformationForm({ formik }) {
     const inputData = [
         {
-            id: 0,
+            id: 'firstName',
+            name: 'firstName',
             active: true,
             title: 'نام',
             state: 'required',
             type: 'type',
-            className: 'my-2',
             placeholder: 'به طور مثال : محمد'
         },
         {
-            id: 1,
+            id: 'lastName',
+            name: 'lastName',
             active: true,
             title: 'نام خانوادگی',
             state: 'required',
             type: 'type',
-            className: 'my-2',
             placeholder: 'به طور مثال : جواد زاده'
         },
         {
-            id: 2,
+            id: 'fatherName',
+            name: 'fatherName',
             active: true,
             title: 'نام پدر',
             state: 'required',
             type: 'type',
-            className: 'my-2',
             placeholder: 'به طور مثال : احمد'
         },
         {
-            id: 3,
+            id: 'personalId',
+            name: 'personalId',
             active: true,
             title: 'کد ملی',
             state: 'required',
             type: 'type',
-            className: 'my-2',
             placeholder: 'به طور مثال : ۰۰٥٦۲۷۹۸٤٥'
         },
         {
-            id: 4,
+            id: 'phoneNumber',
+            name: 'phoneNumber',
             active: true,
             title: 'شماره تلفن برای احراز هویت',
             state: 'required',
             type: 'type',
-            className: 'my-2',
             placeholder: 'به طور مثال : ۰۹۱۲۸٤٦۹۷۸۷'
         },
         {
-            id: 5,
+            id: 'birthDay',
+            name: 'birthDay',
             active: true,
             title: 'تاریخ تولد',
             state: 'required',
             type: 'type',
-            className: 'my-2',
             placeholder: 'به طور مثال : ۱۳۷۱/۰۲/۱٥'
         },
         {
-            id: 6,
+            id: 'placeBirth',
+            name: 'placeBirth',
             active: true,
             title: 'محل تولد',
             state: 'optional',
             type: 'type',
-            className: 'my-2',
             placeholder: 'به طور مثال : تهران'
         },
         {
-            id: 7,
+            id: 'email',
+            name: 'email',
             active: true,
             title: 'ایمیل',
             state: 'optional',
             type: 'type',
-            className: 'my-2',
             placeholder: 'به طور مثال : email@example.com'
         },
     ]
@@ -89,8 +89,16 @@ function InformationForm() {
                         title={item.title}
                         state={item.state}
                         type={item.type}
-                        className={`${item.className} w-full lg:w-[49%]`}
+                        className='my-2 w-full lg:w-[49%]'
                         placeholder={item.placeholder}
+
+                        id={item.id}
+                        name={item.name}
+                        value={formik.values[item.name]}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.errors[item.name]}
+                        touched={formik.touched[item.name]}
                     />
                 ))}
             </div>

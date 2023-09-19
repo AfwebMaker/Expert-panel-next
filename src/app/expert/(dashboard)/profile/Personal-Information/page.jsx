@@ -7,7 +7,7 @@ import Forms from './_components/Forms'
 
 function page() {
   return (
-    <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full xl:max-w-[1000px]'>
+    <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full'>
       <div className='flex items-center justify-between mb-10 lg:hidden'>
         <Link href='/expert/profile/' className='fcc'>
           <HiOutlineChevronRight className='text-cf-400' />

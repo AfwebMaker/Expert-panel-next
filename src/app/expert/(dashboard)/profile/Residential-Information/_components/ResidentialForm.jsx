@@ -34,9 +34,9 @@ function ResidentialForm() {
         <form onSubmit={formik.handleSubmit} className='my-5'>
             <div className='flex flex-wrap justify-between mb-10'>
                 <Input
-                    active={true}
                     title='آدرس'
                     state='required'
+                    confirmed={false}
                     type='text'
                     placeholder='به طور مثال : تهران، پونک، خیابان لاله..'
                     className='my-2 w-full lg:w-[49%]'

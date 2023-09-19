@@ -28,19 +28,31 @@ function Forms() {
             .required('لطفا نام پدر خود را وارد کنید.')
             .matches(/^[\u0600-\u06FF\s]+$/, 'نام پدر باید با حروف فارسی نوشته شود.')
             .min(3, 'لطفا نام پدر خود را به درستی وارد کنید.'),
-        personalId: Yup.string()
+        nationalCode: Yup.string()
             .required('لطفا کد ملی خود را وارد کنید.')
             .min(10, 'کد ملی باید شامل 10 رقم باشد.')
             .max(10, 'کد ملی باید شامل 10 رقم باشد.'),
-        phoneNumber: Yup.string()
+        mobile: Yup.string()
             .required('لطفا شماره تلفن خود را وارد کنید.')
             .min(11, 'شماره تلفن باید شامل 11 رقم باشد.')
             .max(11, 'شماره تلفن باید شامل 11 رقم باشد.'),
-        birthDay: Yup.string()
+        birthday: Yup.string()
             .required('لطفا تاریخ تولد خود را وارد کنید.'),
     }
     const legalValidation = {
-
+        componyName: Yup.string()
+            .required('لطفا نام شرکت خود را وارد کنید.')
+            .matches(/^[\u0600-\u06FF\s]+$/, 'نام شرکت باید با حروف فارسی نوشته شود.')
+            .min(3, 'لطفا نام شرکت خود را به درستی وارد کنید.'),
+        nationalCodeCompony: Yup.string()
+            .required('لطفا شناسه ملی خود را وارد کنید.')
+            .min(11, 'شناسه ملی باید شامل 11 رقم باشد.')
+            .max(11, 'شناسه ملی باید شامل 11 رقم باشد.'),
+        activitySubject: Yup.string()
+            .required('لطفا موضوع فعالیت خود را وارد کنید.')
+            .matches(/^[\u0600-\u06FF\s]+$/, 'موضوع فعالیت باید با حروف فارسی نوشته شود.'),
+        dateEstablishment: Yup.string()
+            .required('لطفا تاریخ تاسیس خود را وارد کنید.'),
     }
     const validationSchema = Yup.object().shape(validation);
 
@@ -53,16 +65,20 @@ function Forms() {
 
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
-            fatherName: '',
-            personalId: '',
-            phoneNumber: '',
-            birthDay: '',
-            placeBirth: '',
+            firstName: 'ییی',
+            lastName: 'یبا',
+            fatherName: 'یبذب',
+            nationalCode: '',
+            mobile: '',
+            birthday: '',
+            birthPlace: '',
             email: '',
             componyName: '',
-            nationalId: '',
+            nationalCodeCompony: '',
+            activitySubject: '',
+            companyType: '',
+            dateEstablishment: '',
+            registrationNumber: ''
         },
         validationSchema,
         onSubmit: values => {

@@ -32,13 +32,13 @@ function BankForm() {
     return (
         <form onSubmit={formik.handleSubmit} className='my-5'>
             <Input
-                active={true}
                 title='شماره شبا'
                 state='required'
+                required={true}
+                confirmed={false}
                 type='text'
                 placeholder='به طور مثال : ۱۲٦٥٤۸۷۹۸٦٥۳۲۳۳۳۱۰۰۰۰۱۰۲۳٥۱'
                 className='mb-10'
-
                 id='cart'
                 name='cart'
                 value={formik.values.cart}

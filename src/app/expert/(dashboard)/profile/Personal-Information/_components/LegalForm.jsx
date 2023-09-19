@@ -7,63 +7,57 @@ function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
 
     const inputData = [
         {
-            id: 0,
-            name: 0,
-            active: true,
+            id: 'componyName',
+            name: 'componyName',
             title: 'نام شرکت',
             state: 'required',
+            confirmed: false,
             type: 'text',
-            className: 'my-5',
             placeholder: 'به طور مثال : مهراز گستر'
         },
         {
-            id: 1,
-            name: 1,
-            active: true,
+            id: 'nationalCodeCompony',
+            name: 'nationalCodeCompony',
             title: 'شناسه ملی',
             state: 'required',
+            confirmed: false,
             type: 'text',
-            className: 'my-5',
             placeholder: 'به طور مثال : ۸٤٦۹۷۰۲۸۷'
         },
         {
-            id: 2,
-            name: 2,
-            active: true,
+            id: 'activitySubject',
+            name: 'activitySubject',
             title: 'موضوع فعالیت',
             state: 'required',
+            confirmed: false,
             type: 'text',
-            className: 'my-5',
             placeholder: 'به طور مثال : پیمانکارا خدمات بازسازی'
         },
         {
-            id: 3,
-            name: 3,
-            active: true,
+            id: 'companyType',
+            name: 'companyType',
             title: 'نوع شرکت',
             state: 'required',
+            confirmed: false,
             type: 'text',
-            className: 'my-5',
             placeholder: ''
         },
         {
-            id: 4,
-            name: 4,
-            active: true,
+            id: 'dateEstablishment',
+            name: 'dateEstablishment',
             title: 'تاریخ تاسیس',
             state: 'required',
+            confirmed: false,
             type: 'text',
-            className: 'my-5',
             placeholder: 'به طور مثال : ۱۳۷۱/۰۲/۱٥'
         },
         {
-            id: 5,
-            name: 5,
-            active: true,
+            id: 'registrationNumber',
+            name: 'registrationNumber',
             title: 'شماره ثبت',
             state: 'required',
+            confirmed: false,
             type: 'text',
-            className: 'my-5',
             placeholder: 'به طور مثال : ۱۱۳۷۲۱٥'
         }
     ]
@@ -82,13 +76,12 @@ function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
                         inputData.map(item => (
                             <Input
                                 key={item.id}
-                                active={item.active}
                                 title={item.title}
                                 state={item.state}
+                                confirmed={item.confirmed}
                                 type={item.type}
-                                className={`${item.className} w-full lg:w-[49%]`}
+                                className={`${item.className} w-full my-2 lg:w-[49%]`}
                                 placeholder={item.placeholder}
-
                                 id={item.id}
                                 name={item.name}
                                 value={formik.values[item.name]}

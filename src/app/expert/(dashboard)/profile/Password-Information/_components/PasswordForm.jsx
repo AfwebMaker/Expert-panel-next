@@ -41,9 +41,9 @@ function PasswordForm() {
     return (
         <form onSubmit={formik.handleSubmit} className='my-5'>
             <Input
-                active={true}
                 title='رمز عبور قدیمی'
                 state='required'
+                confirmed={false}
                 type='text'
                 placeholder='••••••••••••'
                 className='my-2 w-full'
@@ -58,9 +58,9 @@ function PasswordForm() {
 
             <div className='flex flex-wrap justify-between mb-10'>
                 <Input
-                    active={true}
                     title='رمز عبور جدید'
                     state='required'
+                    confirmed={false}
                     type='text'
                     placeholder='••••••••••••'
                     className='my-2 w-full lg:w-[49%]'

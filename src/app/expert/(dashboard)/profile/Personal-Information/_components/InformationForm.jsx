@@ -7,72 +7,69 @@ function InformationForm({ formik }) {
         {
             id: 'firstName',
             name: 'firstName',
-            active: true,
             title: 'نام',
-            state: 'required',
+            required: true,
             type: 'type',
             placeholder: 'به طور مثال : محمد'
         },
         {
             id: 'lastName',
             name: 'lastName',
-            active: true,
             title: 'نام خانوادگی',
-            state: 'required',
+            required: true,
             type: 'type',
             placeholder: 'به طور مثال : جواد زاده'
         },
         {
             id: 'fatherName',
             name: 'fatherName',
-            active: true,
             title: 'نام پدر',
-            state: 'required',
+            required: true,
             type: 'type',
             placeholder: 'به طور مثال : احمد'
         },
         {
-            id: 'personalId',
-            name: 'personalId',
-            active: true,
+            id: 'nationalCode',
+            name: 'nationalCode',
             title: 'کد ملی',
-            state: 'required',
+            required: true,
+            confirmed: false,
             type: 'type',
             placeholder: 'به طور مثال : ۰۰٥٦۲۷۹۸٤٥'
         },
         {
-            id: 'phoneNumber',
-            name: 'phoneNumber',
-            active: true,
+            id: 'mobile',
+            name: 'mobile',
             title: 'شماره تلفن برای احراز هویت',
-            state: 'required',
+            required: true,
+            confirmed: false,
             type: 'type',
             placeholder: 'به طور مثال : ۰۹۱۲۸٤٦۹۷۸۷'
         },
         {
-            id: 'birthDay',
-            name: 'birthDay',
-            active: true,
+            id: 'birthday',
+            name: 'birthday',
             title: 'تاریخ تولد',
-            state: 'required',
+            required: true,
+            confirmed: false,
             type: 'type',
             placeholder: 'به طور مثال : ۱۳۷۱/۰۲/۱٥'
         },
         {
-            id: 'placeBirth',
-            name: 'placeBirth',
-            active: true,
+            id: 'birthPlace',
+            name: 'birthPlace',
             title: 'محل تولد',
-            state: 'optional',
+            required: false,
+            confirmed: false,
             type: 'type',
             placeholder: 'به طور مثال : تهران'
         },
         {
             id: 'email',
             name: 'email',
-            active: true,
             title: 'ایمیل',
-            state: 'optional',
+            required: false,
+            confirmed: false,
             type: 'type',
             placeholder: 'به طور مثال : email@example.com'
         },
@@ -85,13 +82,12 @@ function InformationForm({ formik }) {
                 {inputData.map(item => (
                     <Input
                         key={item.id}
-                        active={item.active}
                         title={item.title}
-                        state={item.state}
+                        state='Low'
+                        required={item.required}
                         type={item.type}
                         className='my-2 w-full lg:w-[49%]'
                         placeholder={item.placeholder}
-
                         id={item.id}
                         name={item.name}
                         value={formik.values[item.name]}

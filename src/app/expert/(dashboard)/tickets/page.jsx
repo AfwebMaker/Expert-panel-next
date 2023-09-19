@@ -8,7 +8,7 @@ function page() {
   return (
     <div className="flex">
       {/* <MobileNavigation /> */}
-      <div className="rounded-lg bg-white w-[715px] max-w-[715px] flex flex-col items-center justify-start py-10 px-5">
+      <div className="w-[100%] h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start py-10 px-5">
         <div className="rounded-full bg-primary-200 w-20 h-20 fcc text-5xl text-primary-500">
           <HiOutlineTicket />
         </div>

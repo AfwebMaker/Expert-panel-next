@@ -8,13 +8,17 @@ import {
   HiOutlineDotsCircleHorizontal,
 } from "react-icons/hi";
 
-function Ticket({ title, status, description }) {
+function Ticket({ title, status, description, createdAt, ticketNumber, id, pathName }) {
+
+  let str = pathName;
+  let slug = str.split('/').pop();
+
   return (
-    <li className="w-[49%] justify-between xl:w-[390px] flex items-center h-[160px] rounded-xl bg-white mt-3 hover:drop-shadow-md">
-      <Link className="w-full h-full fcc items-center" href="#">
+    <li key={id} className="w-[49%] min-w-[390px] justify-between xl:w-[390px] flex items-center h-[160px] mt-3 bg_ticket bg_ticket_hover">
+      <Link className="w-full h-full fcc items-center" href={`/expert/tickets/${id}`}>
         <div className="w-full h-full flex flex-col items-center justify-between pt-4 pb-1 px-6">
           <div className="w-full h-[30%] flex items-center justify-between">
-            <h2 className="text-sm text-cf-500">{title}</h2>
+            <h2 className={`text-sm  ${slug === String(id) ? "text-primary-500 font-bold" : "text-cf-500"}`}>{title}</h2>
             {/* status */}
             {status === "pending" ? (
               <div className="flex bg-amber-100 text-warning fcc px-2 rounded-full h-8">
@@ -43,14 +47,14 @@ function Ticket({ title, status, description }) {
           </div>
 
           <div className="w-full h-8 fcc relative">
-            <div className="rounded-tl-full rounded-bl-full h-8 w-4 bg-[#F8F9F9] absolute top-0 -right-6"></div>
+            {/* <div className="rounded-tl-full rounded-bl-full h-8 w-4 bg-[#F8F9F9] absolute top-0 -right-6"></div> */}
             <hr className="border-t-2 border-cf-200 border-dashed w-full" />
-            <div className="rounded-tr-full rounded-br-full h-8 w-4 bg-[#F8F9F9] absolute top-0 -left-6"></div>
+            {/* <div className="rounded-tr-full rounded-br-full h-8 w-4 bg-[#F8F9F9] absolute top-0 -left-6"></div> */}
           </div>
 
           <div className="w-full h-[15%] flex items-center justify-between text-[10px] text-cf-300 pb-1.5">
-            <div>۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵</div>
-            <div>شماره تیکت: ٤٥٤۸۳۱</div>
+            <div>{createdAt}</div>
+            <div>شماره تیکت: {ticketNumber}</div>
           </div>
         </div>
       </Link>

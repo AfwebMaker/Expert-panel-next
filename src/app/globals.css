@@ -142,3 +142,11 @@ input[type="number"] {
   border-radius: 10px;
 
 }
+
+.bg_ticket {
+  background: center no-repeat url("../../public/images/bg/ticket.svg");
+}
+
+.bg_ticket_hover:hover {
+  background: center no-repeat url("../../public/images/bg/ticket_hover.svg");
+}

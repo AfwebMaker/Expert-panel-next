@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 // react icons
 import {
@@ -7,9 +8,12 @@ import {
 } from "react-icons/hi";
 
 function ChatBoxHeader({ name, problem, ticketNumber, status }) {
+  // status = answered, pending, *
 
-    // status = answered, pending, *
-    
+  const removeTicketHandler = () => {
+    console.log("removeTicketHandler")
+  }
+
   return (
     <div className="w-full h-[140px] flex items-center justify-start px-10 py-5 mt-5">
       <div className="bg-black h-24 w-24 rounded-full fcc"></div>
@@ -37,6 +41,10 @@ function ChatBoxHeader({ name, problem, ticketNumber, status }) {
             </div>
           )}
         </div>
+      </div>
+      <div onClick={removeTicketHandler} role="button" className="hover:bg-red-500 hover:text-white cursor-pointer rounded-full px-3 py-2 absolute top-3 left-3 text-red-500 fcc text-sm gap-x-1 transition-all duration-300">
+        بستن تیکت
+        <HiOutlineXCircle />
       </div>
     </div>
   );

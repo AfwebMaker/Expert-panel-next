@@ -12,7 +12,6 @@ import { HiOutlineChat } from "react-icons/hi";
 function DesktopNavigation() {
   
   const pathName = usePathname();
-  console.log(pathName)
   const router = useRouter();
   const navigation_data = [
     {

@@ -1,8 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-//axios
-import axios from "axios";
-
+// services
+import { fetchMessages } from "@/src/services/ChatBoxTickets/fetchMessages";
+import { sendMessage } from "@/src/services/ChatBoxTickets/sendMessage";
+import { fetchNewMessages } from "@/src/services/ChatBoxTickets/fetchNewMessages";
+// components
 import ChatBoxHeader from "./_components/ChatBoxHeader";
 import ChatBoxMain from "./_components/ChatBoxMain";
 import ChatBoxFooter from "./_components/ChatBoxFooter";
@@ -11,17 +13,46 @@ function page() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      const response = await axios.get("YOUR_SERVER_URL");
-      setMessages("");
-    };
-
-    fetchMessages();
+    fetchMessages()
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          setMessages("ok");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
+  const fetchNewMessagesHandler = () => {
+    fetchNewMessages()
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          setMessages([...messages, res.data]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const sendMessageHandler = (value, setValue) => {
-    setMessages([...messages, value]);
     setValue("");
+    const postData = {
+      id: 1,
+    };
+    sendMessage(postData)
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          fetchNewMessagesHandler();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

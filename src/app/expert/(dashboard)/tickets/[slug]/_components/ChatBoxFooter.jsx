@@ -18,10 +18,6 @@ function ChatBoxFooter({ sendMessageHandler }) {
     sendMessageHandler(value, setValue);
   };
 
-  const handleKeyDown = () => {
-    
-  }
-
   return (
     <div className="w-full h-[110px] absolute bottom-0 flex items-center justify-start px-5 pt-8 pb-5">
       <div className="w-full h-full fcc overflow-hidden rounded-lg">
@@ -29,9 +25,9 @@ function ChatBoxFooter({ sendMessageHandler }) {
           <textarea
             value={value}
             onChange={changeHandler}
-            onKeyDown={handleKeyDown}
+            // onKeyDown={handleKeyDown}
             placeholder="پیام خود را بنویسید ..."
-            className="w-full h-full pr-5 pl-2 border-none outline-none bg-transparent resize-none scroll_custom text-sm caret-primary-500"
+            className="w-full h-full pr-5 pl-2 pt-[10px] border-none outline-none bg-transparent resize-none scroll_custom text-sm caret-primary-500"
           />
           <HiOutlinePhotograph
             role="button"

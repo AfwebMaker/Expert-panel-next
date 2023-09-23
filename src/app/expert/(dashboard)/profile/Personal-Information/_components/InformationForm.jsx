@@ -9,7 +9,7 @@ function InformationForm({ formik }) {
             name: 'firstName',
             title: 'نام',
             required: true,
-            type: 'type',
+            type: 'text',
             placeholder: 'به طور مثال : محمد'
         },
         {
@@ -17,7 +17,7 @@ function InformationForm({ formik }) {
             name: 'lastName',
             title: 'نام خانوادگی',
             required: true,
-            type: 'type',
+            type: 'text',
             placeholder: 'به طور مثال : جواد زاده'
         },
         {
@@ -25,7 +25,7 @@ function InformationForm({ formik }) {
             name: 'fatherName',
             title: 'نام پدر',
             required: true,
-            type: 'type',
+            type: 'text',
             placeholder: 'به طور مثال : احمد'
         },
         {
@@ -34,7 +34,7 @@ function InformationForm({ formik }) {
             title: 'کد ملی',
             required: true,
             confirmed: false,
-            type: 'type',
+            type: 'text',
             placeholder: 'به طور مثال : ۰۰٥٦۲۷۹۸٤٥'
         },
         {
@@ -43,7 +43,7 @@ function InformationForm({ formik }) {
             title: 'شماره تلفن برای احراز هویت',
             required: true,
             confirmed: false,
-            type: 'type',
+            type: 'text',
             placeholder: 'به طور مثال : ۰۹۱۲۸٤٦۹۷۸۷'
         },
         {
@@ -52,7 +52,7 @@ function InformationForm({ formik }) {
             title: 'تاریخ تولد',
             required: true,
             confirmed: false,
-            type: 'type',
+            type: 'date',
             placeholder: 'به طور مثال : ۱۳۷۱/۰۲/۱٥'
         },
         {
@@ -61,7 +61,7 @@ function InformationForm({ formik }) {
             title: 'محل تولد',
             required: false,
             confirmed: false,
-            type: 'type',
+            type: 'text',
             placeholder: 'به طور مثال : تهران'
         },
         {
@@ -70,7 +70,7 @@ function InformationForm({ formik }) {
             title: 'ایمیل',
             required: false,
             confirmed: false,
-            type: 'type',
+            type: 'text',
             placeholder: 'به طور مثال : email@example.com'
         },
     ]
@@ -95,6 +95,7 @@ function InformationForm({ formik }) {
                         onBlur={formik.handleBlur}
                         error={formik.errors[item.name]}
                         touched={formik.touched[item.name]}
+                        formik={formik}
                     />
                 ))}
             </div>

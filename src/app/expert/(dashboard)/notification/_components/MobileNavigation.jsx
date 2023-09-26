@@ -29,15 +29,15 @@ function mobileNavigation() {
     {
       id: 3,
       title: 'تیکت ها',
-      notification: 0,
+      notification: 10,
       link: '/expert/notification/tickets'
     }
   ]
 
   return (
-    <div className='block lg:hidden bg-white'>
-      <nav>
-        <ul className='fcc font-bold text-sm'>
+    <div className='block md:hidden bg-white'>
+      <nav className='whitespace-nowrap overflow-x-auto w-full hideScroll' >
+        <ul className='fcc font-bold text-sm border-b border-gray-400 w-full min-w-[430px]'>
           {navigation_data.map((item) => (
             <li key={item.id} className={`w-full h-full pb-[10px] fcc mx-1 ${pathName === item.link ? 'border-b-[3px] border-primary-500' : ''}`}>
               <Link className='fcc px-2' href={item.link} >

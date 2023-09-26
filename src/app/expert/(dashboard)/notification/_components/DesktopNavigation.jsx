@@ -45,7 +45,7 @@ function DesktopNavigation() {
   ];
 
   return (
-    <div className="hidden lg:block ml-5 xl:w-[350px] py-5 xl:py-0">
+    <div className="hidden md:block xl:ml-5 xl:w-[350px] px-5 lg:px-0 py-5 xl:py-0">
       <nav>
         <ul className="font-medium text-lg flex flex-wrap justify-between">
           {navigation_data.map((item, index) => (

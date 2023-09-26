@@ -1,14 +1,18 @@
 import React from "react";
 //components
-import MobileNavigation from "./_components/MobileNavigation";
+import MobileTickets from "./_components/MobileTickets";
 // react icons
 import { HiOutlineTicket } from "react-icons/hi";
 
 function page() {
   return (
-    <div className="flex">
-      {/* <MobileNavigation /> */}
-      <div className="w-[100%] h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start py-10 px-5 overflow-y-scroll hideScroll">
+    <div className="flex mb-10 xl:mb-0">
+      <div className="h-[calc(100vh-210px)] w-full flex md:hidden">
+        <ul className="h-full w-full overflow-y-scroll hideScroll font-medium text-lg flex flex-col items-center px-[3%] sm:px-0">
+          <MobileTickets />
+        </ul>
+      </div>
+      <div className="hidden md:flex w-[100%] h-[calc(100vh-190px)] rounded-lg bg-white flex-col items-center justify-start py-10 px-5 overflow-y-scroll hideScroll">
         <div className="w-full h-auto flex flex-col items-center justify-start">
           <div className="rounded-full bg-primary-200 w-20 h-20 fcc text-5xl text-primary-500">
             <HiOutlineTicket />

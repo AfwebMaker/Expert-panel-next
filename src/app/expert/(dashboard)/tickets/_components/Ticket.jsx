@@ -14,25 +14,29 @@ function Ticket({ title, status, description, createdAt, ticketNumber, id, pathN
   let slug = str.split('/').pop();
 
   return (
-    <li key={id} className="w-[49%] min-w-[390px] justify-between xl:w-[390px] flex items-center h-[160px] mt-3 bg_ticket bg_ticket_hover">
+    <li key={id} className="w-full max-w-full bg-white hover:bg-gray-50 border rounded-lg border-gray-200 md:min-w-[390px] lg:max-w-[390px] justify-between xl:w-[390px] flex items-center h-[160px] mt-2">
       <Link className="w-full h-full fcc items-center" href={`/expert/tickets/${id}`}>
-        <div className="w-full h-full flex flex-col items-center justify-between pt-4 pb-1 px-6">
+        <div className="w-full h-full flex flex-col items-center justify-between pt-4 pb-1 px-4 sm:px-6">
           <div className="w-full h-[30%] flex items-center justify-between">
-            <h2 className={`text-sm  ${slug === String(id) ? "text-primary-500 font-bold" : "text-cf-500"}`}>{title}</h2>
+            <h2 className={`text-sm  ${slug === String(id) ? "text-primary-500 font-bold" : "text-cf-500"}`}>
+              {title.length > 20
+                ? title.slice(0, 20 - 1) + " ..."
+                : title}
+            </h2>
             {/* status */}
             {status === "pending" ? (
-              <div className="flex bg-amber-100 text-warning fcc px-2 rounded-full h-8">
-                <span className="text-xs">در انتظار پاسخ</span>
+              <div className="flex bg-amber-100 text-warning fcc px-1 sm:px-2 rounded-full h-7 sm:h-8">
+                <span className="text-[10px] sm:text-xs">در انتظار پاسخ</span>
                 <HiOutlineDotsCircleHorizontal className="mr-1" />
               </div>
             ) : status === "answered" ? (
-              <div className="flex bg-emerald-100 text-success fcc px-2 rounded-full h-8">
-                <span className="text-xs">پاسخ داده شده</span>
+              <div className="flex bg-emerald-100 text-success fcc px-1 sm:px-2 rounded-full h-7 sm:h-8">
+                <span className="text-[10px] sm:text-xs">پاسخ داده شده</span>
                 <HiOutlineCheckCircle className="mr-1" />
               </div>
             ) : (
-              <div className="flex bg-red-100 text-error fcc px-2 rounded-full h-8">
-                <span className="text-xs">بسته شده</span>
+              <div className="flex bg-red-100 text-error fcc px-1 sm:px-2 rounded-full h-7 sm:h-8">
+                <span className="text-[10px] sm:text-xs">بسته شده</span>
                 <HiOutlineXCircle className="mr-1" />
               </div>
             )}

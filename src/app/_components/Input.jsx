@@ -18,7 +18,7 @@ function Input({ state, title, placeholder, type, className, onChange, onBlur, v
       document.getElementsByName('birthday')[0] && document.getElementsByName('birthday')[0].focus()
     }
 
-  }, [focus])
+  }, [focus, type])
 
   const clickHandler = () => {
     state !== 'None' && setSelfState('Low')

@@ -6,7 +6,7 @@ import React from 'react'
 //scroll
 import ScrollContainer from 'react-indiana-drag-scroll'
 
-function mobileNavigation() {
+function MobileNavigation() {
   const pathName = usePathname();
   const navigation_data = [
     {
@@ -61,4 +61,4 @@ function mobileNavigation() {
   )
 }
 
-export default mobileNavigation
+export default MobileNavigation

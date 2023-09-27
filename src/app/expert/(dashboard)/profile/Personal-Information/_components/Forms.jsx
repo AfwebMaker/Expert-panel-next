@@ -61,7 +61,7 @@ function Forms() {
         !legalFormIsActive ?
             setValidation(baseValidation) :
             setValidation({ ...baseValidation, ...legalValidation })
-    }, [legalFormIsActive, baseValidation, legalValidation])
+    }, [legalFormIsActive])
 
     const formik = useFormik({
         initialValues: {

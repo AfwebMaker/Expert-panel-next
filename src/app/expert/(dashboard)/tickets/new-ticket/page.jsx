@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
 // react icons
-import { HiOutlinePlusCircle } from "react-icons/hi";
+import { HiOutlinePlusCircle, HiTicket } from "react-icons/hi";
 //formik
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // components
 import InfoCard from "@/app/_components/InfoCard";
 import Input from "@/app/_components/Input";
-import UploadContain from "@/app/_components/UploadContain";
+import MultipleContainingUploads from "@/app/_components/MultipleContainingUploads";
 
 function newTicket() {
   const validationSchema = Yup.object().shape({
@@ -43,47 +43,74 @@ function newTicket() {
     },
   });
 
+  const SendTicket = () => {
+    console.log("Send ticket ==> create ticket new");
+  };
+
   return (
     <div className="w-[100%] h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start py-10 px-5 overflow-y-scroll hideScroll">
-      <div className="flex items-center justify-center text-primary-500 font-bold w-full pb-10">
-        <h1>ارسال تیکت جدید</h1>
-        <HiOutlinePlusCircle className="mr-1 text-lg" />
-      </div>
-      <InfoCard styleCustom="text-blue-600 w-full">
-        متخصص گرامی چنانچه سوالی دارید می‌توانید با جستجو در قسمت سوالات متداول
-        پاسخ اکثر سوالات خود را بیابید ، در صورتیکه به پاسخ مورد نظر خود دست
-        نیافتید می‌توانید از طریق ارسال تیکت به دپارتمان مربوطه با کارشناسان
-        کارگشا در ارتباط باشید.
-      </InfoCard>
-      <form className="mt-10 w-full">
-        <div>
-          <h2 className="text-sm text-cf-300 leading-6">
-            در این قسمت میتوانید موضوع مشکل خود را از بین یکی از دسته بندی های
-            زیر اتخاب کنید و سپس از زیر دسته آن به راحتی به دپارتمان مورد نطرتان
-            وصل شوید.
-          </h2>
-          <div className="flex w-full items-center justify-around gap-x-3 mt-3">
+      <div className="w-full h-auto flex flex-col items-center justify-start">
+        <div className="flex items-center justify-center text-primary-500 font-bold w-full pb-10">
+          <h1>ارسال تیکت جدید</h1>
+          <HiOutlinePlusCircle className="mr-1 text-lg" />
+        </div>
+        <InfoCard styleCustom="text-blue-600 w-full">
+          متخصص گرامی چنانچه سوالی دارید می‌توانید با جستجو در قسمت سوالات
+          متداول پاسخ اکثر سوالات خود را بیابید ، در صورتیکه به پاسخ مورد نظر
+          خود دست نیافتید می‌توانید از طریق ارسال تیکت به دپارتمان مربوطه با
+          کارشناسان کارگشا در ارتباط باشید.
+        </InfoCard>
+        <form className="mt-10 w-full">
+          <div>
+            <h2 className="text-sm text-cf-300 leading-6">
+              در این قسمت میتوانید موضوع مشکل خود را از بین یکی از دسته بندی های
+              زیر اتخاب کنید و سپس از زیر دسته آن به راحتی به دپارتمان مورد
+              نطرتان وصل شوید.
+            </h2>
+            <div className="flex w-full items-center justify-around gap-x-3 mt-3">
+              <Input
+                active={true}
+                title="تکرار رمز عبور جدید"
+                state="required"
+                type="text"
+                placeholder="••••••••••••"
+                className="my-2 w-full"
+                id="confirmNewPassword"
+                name="confirmNewPassword"
+                value={formik.values.confirmNewPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.errors.confirmNewPassword}
+                touched={formik.touched.confirmNewPassword}
+              />
+              <Input
+                active={true}
+                title="تکرار رمز عبور جدید"
+                state="required"
+                type="text"
+                placeholder="••••••••••••"
+                className="my-2 w-full"
+                id="confirmNewPassword"
+                name="confirmNewPassword"
+                value={formik.values.confirmNewPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.errors.confirmNewPassword}
+                touched={formik.touched.confirmNewPassword}
+              />
+            </div>
+          </div>
+          <div className="w-full items-center justify-around gap-x-3 mt-3">
+            <h2 className="text-sm text-cf-300 leading-6">
+              در این قسمت با توضیحات بیشتر در مورد مشکلات همکاران مارا در
+              راهنمایی بهتر و رفع سریع تر مشکل شما یاری کنید.
+            </h2>
             <Input
               active={true}
-              title="تکرار رمز عبور جدید"
+              title="مشکل خود را در این قسمت بنویسید"
               state="required"
               type="text"
-              placeholder="••••••••••••"
-              className="my-2 w-full"
-              id="confirmNewPassword"
-              name="confirmNewPassword"
-              value={formik.values.confirmNewPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.errors.confirmNewPassword}
-              touched={formik.touched.confirmNewPassword}
-            />
-            <Input
-              active={true}
-              title="تکرار رمز عبور جدید"
-              state="required"
-              type="text"
-              placeholder="••••••••••••"
+              placeholder="مشکل خود را در این قسمت بنویسید"
               className="my-2 w-full"
               id="confirmNewPassword"
               name="confirmNewPassword"
@@ -94,37 +121,22 @@ function newTicket() {
               touched={formik.touched.confirmNewPassword}
             />
           </div>
-        </div>
-        <div className="w-full items-center justify-around gap-x-3 mt-3">
-          <h2 className="text-sm text-cf-300 leading-6">
-            در این قسمت با توضیحات بیشتر در مورد مشکلات همکاران مارا در راهنمایی
-            بهتر و رفع سریع تر مشکل شما یاری کنید.
-          </h2>
-          <Input
-            active={true}
-            title="مشکل خود را در این قسمت بنویسید"
-            state="required"
-            type="text"
-            placeholder="مشکل خود را در این قسمت بنویسید"
-            className="my-2 w-full"
-            id="confirmNewPassword"
-            name="confirmNewPassword"
-            value={formik.values.confirmNewPassword}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors.confirmNewPassword}
-            touched={formik.touched.confirmNewPassword}
-          />
-        </div>
-        <div className="w-full items-center justify-around gap-x-3 mt-10">
-          <h2 className="text-sm text-cf-400 leading-6 mb-4">اسناد و فایل‌ها</h2>
-          <p className="text-sm text-cf-300 leading-6 mb-3">
-            مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از
-            فرمت های JPG , JPEG , PNG آپلود کنید.
-          </p>
-          <UploadContain/>
-        </div>
-      </form>
+          <div className="w-full items-center justify-around gap-x-3 mt-10">
+            <h2 className="text-sm text-cf-400 leading-6 mb-4">
+              اسناد و فایل‌ها
+            </h2>
+            <p className="text-sm text-cf-300 leading-6 mb-3">
+              مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از
+              فرمت های JPG , JPEG , PNG آپلود کنید.
+            </p>
+            <MultipleContainingUploads multiple={true} />
+          </div>
+          <div onClick={SendTicket} className="cursor-pointer bg-primary-500 rounded-lg text-white fcc h-12 mt-10">
+            <HiTicket className="ml-1 text-xl"/>
+            <span>ارسال تیکت</span>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

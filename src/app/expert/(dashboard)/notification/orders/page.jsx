@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 //components
 import NotificationHeader from '../_components/NotificationHeader'
 import NotificationMain from '../_components/NotificationMain'

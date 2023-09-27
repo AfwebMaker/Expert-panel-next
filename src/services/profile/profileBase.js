@@ -1,12 +1,11 @@
 import { dynamicApiCall } from "../dynamicApiCall";
-import { ticketRequestAPI } from '../APIRepositories'
+import { personAPI } from '../APIRepositories'
 
-const fetchNewMessages = async (data) => {
+const profileBase = async () => {
     const option = {
-        axios: ticketRequestAPI,
+        axios: personAPI,
         method: 'GET',
-        endpoint: '/album',
-        data: data,
+        endpoint: '/ExpertInfo/GetProfileBase/'
     }
 
     const response = await dynamicApiCall(option)
@@ -17,4 +16,4 @@ const fetchNewMessages = async (data) => {
     }
 };
 
-export default fetchNewMessages;
+export default profileBase;

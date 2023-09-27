@@ -1,7 +1,7 @@
 import { dynamicApiCall } from "../dynamicApiCall";
 import { ticketRequestAPI } from '../APIRepositories'
 
-export const sendMessage = async (data) => {
+const sendMessage = async (data) => {
     const option = {
         axios: ticketRequestAPI,
         method: 'POST',
@@ -10,10 +10,11 @@ export const sendMessage = async (data) => {
     }
 
     const response = await dynamicApiCall(option)
-
-    if (response.status === 200) {
+    try {
         return response
-    } else {
+    } catch (error) {
         throw response
     }
 };
+
+export default sendMessage;

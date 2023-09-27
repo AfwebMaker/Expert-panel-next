@@ -9,8 +9,8 @@ export const ticketRequestAPI = axios.create({
 })
 
 //test
-export const mmdRequestAPI = axios.create({
-    baseURL: process.env.BASE_URL3,
+export const personAPI = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL_PERSON,
     timeout: 20000,
     headers: {
         "Accept": "application/json"

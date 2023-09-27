@@ -4,7 +4,7 @@ import MobileTickets from "./_components/MobileTickets";
 // react icons
 import { HiOutlineTicket } from "react-icons/hi";
 
-function page() {
+function Page() {
   return (
     <div className="flex mb-10 xl:mb-0">
       <div className="h-[calc(100vh-210px)] w-full flex md:hidden">
@@ -50,4 +50,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

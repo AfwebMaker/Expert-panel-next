@@ -1,15 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
 // services
-import { fetchMessages } from "@/src/services/ChatBoxTickets/fetchMessages";
-import { sendMessage } from "@/src/services/ChatBoxTickets/sendMessage";
-import { fetchNewMessages } from "@/src/services/ChatBoxTickets/fetchNewMessages";
+import  fetchMessages  from "@/src/services/ChatBoxTickets/fetchMessages";
+import  sendMessage  from "@/src/services/ChatBoxTickets/sendMessage";
+import  fetchNewMessages  from "@/src/services/ChatBoxTickets/fetchNewMessages";
 // components
 import ChatBoxHeader from "./_components/ChatBoxHeader";
 import ChatBoxMain from "./_components/ChatBoxMain";
 import ChatBoxFooter from "./_components/ChatBoxFooter";
 
-function page() {
+function Page() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -69,4 +69,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

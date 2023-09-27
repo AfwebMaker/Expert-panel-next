@@ -10,7 +10,7 @@ import InfoCard from "@/app/_components/InfoCard";
 import Input from "@/app/_components/Input";
 import MultipleContainingUploads from "@/app/_components/MultipleContainingUploads";
 
-function newTicket() {
+function Page() {
   const validationSchema = Yup.object().shape({
     oldPassword: Yup.string().required("لطفا رمز عبور قدیمی خود را وارد کنید"),
     newPassword: Yup.string()
@@ -141,4 +141,4 @@ function newTicket() {
   );
 }
 
-export default newTicket;
+export default Page;

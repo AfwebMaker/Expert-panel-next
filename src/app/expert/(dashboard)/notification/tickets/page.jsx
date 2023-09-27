@@ -5,7 +5,7 @@ import React, {useState} from 'react'
 import NotificationHeader from '../_components/NotificationHeader'
 import NotificationMain from '../_components/NotificationMain'
 
-function page() {
+function Page() {
   const [readAll, setReadAll] = useState(false)
 
   return (
@@ -16,4 +16,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

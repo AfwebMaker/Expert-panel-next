@@ -1,11 +1,17 @@
-"use client"; 
+"use client";
 
 import { Provider } from "react-redux"
 import store from "./store"
+//toast 
+import { Toaster } from 'react-hot-toast';
 
-function Providers({children}) {
+function Providers({ children }) {
   return (
-    <Provider store={store}>{children}</Provider>
+    <>
+      <Toaster />
+      <Provider store={store}>{children}</Provider>
+
+    </>
   )
 }
 

@@ -2,6 +2,10 @@
 // import {store} from "../features/store";
 // import {logoutHandler} from "../features/authentication/auth";
 
+// //toast
+// import toast from 'react-hot-toast';
+
+import customToast from '@/app/_components/customToast'
 
 export const dynamicApiCall = async (options) => {
     try {
@@ -22,6 +26,7 @@ export const dynamicApiCall = async (options) => {
         } else if (error.response.status === 422) {
             throw error
         } else if (error.response.status === 401) {
+            customToast('', 'salam mammad')
             // store.dispatch(logoutHandler())
             throw error
         } else {

@@ -13,7 +13,7 @@ const services = [
     { id: 1, name: 'ممد' },
     { id: 2, name: 'قلی' },
     { id: 3, name: 'کاووس' },
-    { id: 4, name: 'سریا' },
+    { id: 4, name: 'ثریا' },
     // More users...
 ]
 
@@ -21,7 +21,7 @@ const parts = [
     { id: 1, name: 'ممد' },
     { id: 2, name: 'قلی' },
     { id: 3, name: 'کاووس' },
-    { id: 4, name: 'سریا' },
+    { id: 4, name: 'ثریا' },
     // More users...
 ]
 

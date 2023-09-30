@@ -1,43 +1,79 @@
 "use client"
 
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
+//formik
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 //assets
 import X_circle from '@/public/icons/X_circle.svg'
 import Link from 'next/link'
+//services
+import searchNumber from '@/services/person_kg_local/search'
+
+//validation
+const validationSchema = Yup.object().shape({
+    phoneNumber: Yup.string()
+        .required('لطفا شماره خود را وارد کنید.')
+        .matches(/^\d+$/, 'شماره باید فقط شامل اعداد باشد.')
+        .min(10, 'لطفا نام خود را به درستی وارد کنید.'),
+});
 
 function CheckNumber({ setPageState }) {
-    const [phoneNumber, setPhoneNumber] = useState('')
 
-    const checkNumberHandler = () => {
-        setPageState('checkPassword')
-    }
+    const formik = useFormik({
+        initialValues: {
+            phoneNumber: ''
+        },
+        validationSchema,
+        onSubmit: values => {
+            searchNumber(values.phoneNumber)
+                .then(res => {
+                    console.log(res)
+                    setPageState('checkPassword')
+                })
+                .catch(err => {
+                    if (err.response.status === 404) {
+                        setPageState('checkOtp')
+                    }
+                })
+        },
+    });
 
     return (
         <div className='w-full p-5 text-sm font-medium'>
             <span className='flex my-4 font-medium text-sm text-cf-400 sm:text-base justify-center sm:justify-start'>ورود | ثبت نام کاربران</span>
-            <form onSubmit={(event) => event.preventDefault()} className='flex flex-col my-2'>
+            <form onSubmit={formik.handleSubmit} className='flex flex-col my-2'>
                 <label className='flex text-center text-xs sm:text-sm my-2 text-gray-500 justify-center sm:justify-start' htmlFor="phoneNumber">
                     برای ورود یا ثبت نام شماره تلفن خود را وارد کنید.
                 </label>
-                <div className='relative fcc my-2 w-full text-xs sm:text-sm h-9 sm:h-11'>
-                    <input
-                        id='phoneNumber'
-                        dir='ltr'
-                        className='w-full h-full focus:outline-0 text-right px-4 border border-black rounded-md'
-                        type='number'
-                        value={phoneNumber}
-                        onChange={(e) => { setPhoneNumber(e.target.value) }}
-                        placeholder='به طور مثال : ۰۹۱۲۸٤٦۳٥۱۲'
-                    />
-                    <Image
-                        src={X_circle}
-                        alt='X_circle'
-                        onClick={() => { setPhoneNumber('') }}
-                        className='absolute left-4 cursor-pointer w-4 sm:w-5'
-                    />
+                <div className="mt-2 relative flex flex-col items-start my-2">
+                    <div className='relative fcc w-full text-xs sm:text-sm h-9 sm:h-11'>
+                        <input
+                            id='phoneNumber'
+                            name='phoneNumber'
+                            dir='ltr'
+                            className='w-full h-full focus:outline-0 text-right px-4 border border-black rounded-md'
+                            type='number'
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.phoneNumber}
+                            placeholder='به طور مثال : ۰۹۱۲۸٤٦۳٥۱۲'
+                        />
+                        <Image
+                            src={X_circle}
+                            alt='X_circle'
+                            onClick={() => { formik.setFieldValue("phoneNumber", '') }}
+                            className='absolute left-4 cursor-pointer w-4 sm:w-5'
+                        />
+                    </div>
+                    {formik.touched.phoneNumber && formik.errors.phoneNumber &&
+                        <span className='bg-[#fb923c1a] text-[#FB923C] rounded-[4px] mt-2 text-xs'>
+                            {formik.errors.phoneNumber}
+                        </span>
+                    }
                 </div>
-                <button onClick={checkNumberHandler} className='my-2 w-full text-xs sm:text-sm h-9 sm:h-10 bg-secondary-500 rounded-md text-white'>
+                <button type='submit' className='my-2 w-full text-xs sm:text-sm h-9 sm:h-10 bg-secondary-500 rounded-md text-white'>
                     ورود و ثبت نام
                 </button>
             </form>

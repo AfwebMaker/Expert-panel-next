@@ -1,11 +1,11 @@
 import { dynamicApiCall } from "../dynamicApiCall";
-import { personAPI } from '../APIRepositories'
+import { person_kg_local } from '../APIRepositories'
 
-const profileBase = async () => {
+const search = async (data) => {
     const option = {
-        axios: personAPI,
+        axios: person_kg_local,
         method: 'GET',
-        endpoint: '/ExpertInfo/GetProfileBase/'
+        endpoint: `/registration/Search/${data}`,
     }
 
     const response = await dynamicApiCall(option)
@@ -16,4 +16,4 @@ const profileBase = async () => {
     }
 };
 
-export default profileBase;
+export default search;

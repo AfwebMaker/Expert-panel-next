@@ -4,12 +4,7 @@ import OtpInput from 'react-otp-input';
 
 function CheckOtp({ forgetPassword, setPageState }) {
     const [otp, setOtp] = useState('');
-    const router = useRouter()
-
-    //check otp length for auto submit
-    useEffect(() => {
-        otpSubmitHandler()
-    }, [otp, otpSubmitHandler])
+    const router = useRouter();
 
     //otp submit
     const otpSubmitHandler = () => {
@@ -17,10 +12,15 @@ function CheckOtp({ forgetPassword, setPageState }) {
             if (forgetPassword) {
                 setPageState('forgetPassword')
             } else {
-                router.push('/user/register')
+                router.push('/expert/register')
             }
         }
     }
+
+    //check otp length for auto submit
+    useEffect(() => {
+        otpSubmitHandler()
+    }, [otp, otpSubmitHandler])
 
     return (
         <div className='w-full p-5 text-sm font-medium'>

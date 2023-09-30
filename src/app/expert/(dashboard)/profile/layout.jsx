@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 //components
 import DesktopNavigation from './_components/DesktopNavigation'
 //services
-import profileBase from '@/src/services/profile/profileBase'
+import profileBase from '@/src/services/person_kg_local/profileBase'
 
 function RootLayout({ children }) {
 

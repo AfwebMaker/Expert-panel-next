@@ -1,5 +1,3 @@
-"use client"
-
 import Image from 'next/image'
 import React from 'react'
 //formik
@@ -10,6 +8,9 @@ import X_circle from '@/public/icons/X_circle.svg'
 import Link from 'next/link'
 //services
 import searchNumber from '@/services/person_kg_local/search'
+import sendOtp from '@/services/register_kg_local/phoneNumber'
+//functions
+import setCookie from '@/src/functions/setCookie'
 
 //validation
 const validationSchema = Yup.object().shape({
@@ -19,7 +20,7 @@ const validationSchema = Yup.object().shape({
         .min(10, 'لطفا نام خود را به درستی وارد کنید.'),
 });
 
-function CheckNumber({ setPageState }) {
+function CheckNumber({ setPhoneNumber, setPageState }) {
 
     const formik = useFormik({
         initialValues: {
@@ -27,14 +28,24 @@ function CheckNumber({ setPageState }) {
         },
         validationSchema,
         onSubmit: values => {
+            setPhoneNumber(values.phoneNumber)
+            //check number exists 
             searchNumber(values.phoneNumber)
-                .then(res => {
-                    console.log(res)
+                .then(() => {
                     setPageState('checkPassword')
                 })
                 .catch(err => {
                     if (err.response.status === 404) {
-                        setPageState('checkOtp')
+                        //send otp
+                        sendOtp(values.phoneNumber)
+                            .then(res => {
+                                console.log(res)
+                                setCookie('guid', res.data.data)
+                                setPageState('checkOtp')
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                     }
                 })
         },

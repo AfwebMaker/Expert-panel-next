@@ -5,7 +5,7 @@
 // //toast
 // import toast from 'react-hot-toast';
 
-import customToast from '@/app/_components/customToast'
+import customToast from '@/src/functions/customToast'
 
 export const dynamicApiCall = async (options) => {
     try {

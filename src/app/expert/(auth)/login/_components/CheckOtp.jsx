@@ -1,20 +1,42 @@
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import OtpInput from 'react-otp-input';
+//services
+import checkOtp from '@/services/register_kg_local/checkOtp'
+import sendOtp from '@/services/register_kg_local/phoneNumber'
 
-function CheckOtp({ forgetPassword, setPageState }) {
+function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
     const [otp, setOtp] = useState('');
-    const router = useRouter();
+    const router = useRouter()
 
     //otp submit
     const otpSubmitHandler = () => {
         if (otp.length === 4) {
-            if (forgetPassword) {
-                setPageState('forgetPassword')
-            } else {
-                router.push('/expert/register')
-            }
+            checkOtp(otp)
+                .then(res => {
+                    console.log(res)
+                    if (forgetPassword) {
+                        setPageState('forgetPassword')
+                    } else {
+                        router.push('/expert/register/')
+                    }
+                })
+                .catch(() => {
+
+                })
         }
+    }
+
+    const resendOtp = () => {
+        console.log(phoneNumber)
+        sendOtp(phoneNumber)
+            .then(res => {
+                console.log(res)
+                setCookie('guid', res.data.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     //check otp length for auto submit
@@ -41,9 +63,9 @@ function CheckOtp({ forgetPassword, setPageState }) {
                 />
                 <div className='w-full fcc my-4 text-xs'>
                     <span className='flex ml-1 text-gray-500'>کد را دریافت نکردید:</span>
-                    <div className='text-secondary-500 cursor-pointer'>ارسال مجدد کد</div>
+                    <div onClick={resendOtp} className='text-secondary-500 cursor-pointer'>ارسال مجدد کد</div>
                 </div>
-                <button onClick={otpSubmitHandler} className='mt-2 w-full h-9 sm:h-10 bg-secondary-500 rounded-md text-white'>
+                <button type='submit' onClick={otpSubmitHandler} className='mt-2 w-full h-9 sm:h-10 bg-secondary-500 rounded-md text-white'>
                     تایید
                 </button>
             </div>

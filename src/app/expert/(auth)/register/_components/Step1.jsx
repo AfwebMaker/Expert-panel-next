@@ -10,6 +10,10 @@ import X_circle from '@/public/icons/X_circle.svg'
 import User from '@/public/icons/User.svg'
 import User_group from '@/public/icons/User_group.svg'
 import Key from '@/public/icons/Key.svg'
+//services
+import information from '@/services/register_kg_local/information'
+//functions
+import getCookie from '@/src/functions/getCookie'
 
 //validation
 const validationSchema = Yup.object().shape({
@@ -45,8 +49,21 @@ function Step1({ currentStep, setCurrentStep }) {
         },
         validationSchema,
         onSubmit: values => {
-            setCurrentStep(currentStep + 1)
-            console.log(JSON.stringify(values, null, 2));
+            const data = {
+                guid: getCookie('guid'),
+                name: values.firstName,
+                family: values.lastName,
+                pass1: values.password,
+                pass2: values.confirmPassword
+            }
+
+            information(data)
+                .then(res => {
+                    setCurrentStep(currentStep + 1)
+                })
+                .catch(() => {
+
+                })
         },
     });
 

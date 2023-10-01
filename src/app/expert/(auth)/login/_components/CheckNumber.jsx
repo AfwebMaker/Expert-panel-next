@@ -35,7 +35,7 @@ function CheckNumber({ setPhoneNumber, setPageState }) {
                     setPageState('checkPassword')
                 })
                 .catch(err => {
-                    if (err.response.status === 404) {
+                    if (err.response && err.response.status === 404) {
                         //send otp
                         sendOtp(values.phoneNumber)
                             .then(res => {

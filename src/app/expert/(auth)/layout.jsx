@@ -1,6 +1,8 @@
 import "../../globals.css";
 // font
 import iranYekanFont from "@/constants/localFonts";
+//toast
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "login",
@@ -14,6 +16,7 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning={true}
         className={`${iranYekanFont.variable} font-sans`}
       >
+        <Toaster />
         {children}
       </body>
     </html>

@@ -49,7 +49,7 @@ function Login() {
         }
 
         {pageState === 'forgetPassword' &&
-          <ForgetPassword setForgetPassword={setForgetPassword} setPageState={setPageState} />
+          <ForgetPassword setPageState={setPageState} />
         }
 
       </div>

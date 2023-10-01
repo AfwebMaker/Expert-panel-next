@@ -89,6 +89,7 @@ export default function Step2({ currentStep, setCurrentStep }) {
                                 onChange={(event) => setQuery1(event.target.value)}
                                 displayValue={(service) => service?.name}
                                 placeholder='به طور مثال : نیرو های پیمانکار'
+                                autoComplete='off'
                             />
                             <Combobox.Button className="absolute inset-y-0 left-0 flex items-center rounded-r-md px-2 focus:outline-none">
                                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -145,6 +146,7 @@ export default function Step2({ currentStep, setCurrentStep }) {
                                 onChange={(event) => setQuery2(event.target.value)}
                                 displayValue={(part) => part?.name}
                                 placeholder='به طور مثال : نقاشی ساختمان'
+                                autoComplete='off'
                             />
                             <Combobox.Button className="absolute inset-y-0 left-0 flex items-center rounded-r-md px-2 focus:outline-none">
                                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />

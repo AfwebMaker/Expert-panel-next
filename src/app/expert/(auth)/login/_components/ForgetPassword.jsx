@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'
 //formik
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //assets
 import Eye from '@/public/icons/Eye.svg'
 import Key from '@/public/icons/Key.svg'
+//services
+import forgetChangePassword from '@/services/register_kg_local/forgetChangePassword'
+//toast
+import customToast from '@/src/functions/customToast';
 
 //validation
 const validationSchema = Yup.object().shape({
@@ -22,9 +27,10 @@ const validationSchema = Yup.object().shape({
 
 });
 
-function ForgetPassword() {
+function ForgetPassword({ setPageState }) {
     const [isPasswordVisible1, setIsPAsswordVisible1] = useState(false)
     const [isPasswordVisible2, setIsPAsswordVisible2] = useState(false)
+    const router = useRouter()
 
     //step1 submit handler
     const formik = useFormik({
@@ -34,8 +40,15 @@ function ForgetPassword() {
         },
         validationSchema,
         onSubmit: values => {
-            setCurrentStep(currentStep + 1)
-            console.log(JSON.stringify(values, null, 2));
+            forgetChangePassword(values.password)
+                .then((res) => {
+                    console.log(res)
+                    customToast('success', 'رمز شما با موفقیت تغییر کرد.')
+                    setPageState('checkNumber')
+                })
+                .catch(() => {
+
+                })
         }
     });
 

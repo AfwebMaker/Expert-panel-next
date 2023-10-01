@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 //formik
 import { useFormik } from 'formik';
@@ -12,6 +12,7 @@ import User_group from '@/public/icons/User_group.svg'
 import Key from '@/public/icons/Key.svg'
 //services
 import information from '@/services/register_kg_local/information'
+import stepInformation from '@/services/register_kg_local/stepInformation'
 //functions
 import getCookie from '@/src/functions/getCookie'
 
@@ -39,11 +40,25 @@ const validationSchema = Yup.object().shape({
 });
 
 function Step1({ currentStep, setCurrentStep }) {
+    const [initialValues, setInitialValues] = useState({})
+
+    //get initial data
+    useEffect(() => {
+        stepInformation(0)
+            .then((res) => {
+                console.log(res.data)
+                setInitialValues(res.data.data)
+            })
+            .catch(() => {
+
+            })
+    }, [])
+
     //step1 submit handler
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
+            firstName: 'initialValues.name',
+            lastName: 'initialValues.family',
             password: '',
             confirmPassword: ''
         },

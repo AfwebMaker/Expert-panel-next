@@ -4,6 +4,10 @@ import OtpInput from 'react-otp-input';
 //services
 import checkOtp from '@/services/register_kg_local/checkOtp'
 import sendOtp from '@/services/register_kg_local/phoneNumber'
+import forgetCheckOtp from '@/services/register_kg_local/forgetCheckOtp'
+import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
+//functions
+import setCookie from '@/src/functions/setCookie'
 
 function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
     const [otp, setOtp] = useState('');
@@ -12,31 +16,50 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
     //otp submit
     const otpSubmitHandler = () => {
         if (otp.length === 4) {
-            checkOtp(otp)
-                .then(res => {
-                    console.log(res)
-                    if (forgetPassword) {
+            if (forgetPassword) {
+                forgetCheckOtp({ phoneNumber: phoneNumber, otp: otp })
+                    .then((res) => {
+                        console.log(res)
+                        setCookie('guid', res.data.data)
                         setPageState('forgetPassword')
-                    } else {
-                        router.push('/expert/register/')
-                    }
-                })
-                .catch(() => {
+                    })
+                    .catch(() => {
 
-                })
+                    })
+
+            } else {
+                checkOtp(otp)
+                    .then(() => {
+                        router.push('/expert/register/')
+                    })
+                    .catch(() => {
+
+                    })
+            }
+
         }
     }
 
     const resendOtp = () => {
-        console.log(phoneNumber)
-        sendOtp(phoneNumber)
-            .then(res => {
-                console.log(res)
-                setCookie('guid', res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        if (forgetPassword) {
+            forgetPhoneNumber(phoneNumber)
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(() => {
+
+                })
+        } else {
+            sendOtp(phoneNumber)
+                .then(res => {
+                    console.log(res)
+                    setCookie('guid', res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
     }
 
     //check otp length for auto submit

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 //formik
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -8,21 +9,25 @@ import Eye from '@/public/icons/Eye.svg'
 import check from '@/public/icons/check.svg'
 //services
 import auth from '@/services/person_kg_local/auth'
+import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
+//functions
+import setCookie from '@/src/functions/setCookie';
 
 //validation
 const validationSchema = Yup.object().shape({
-    // password: Yup.string()
-    //     .required('لطفا رمز عبور خود را وارد کنید!')
-    //     .min(8, 'رمز عبور باید حداقل شامل ۸ کاراکتر باشد!')
-    //     .matches(/[A-Z]/, 'رمز عبور باید شامل حداقل یک حرف بزرگ باشد!')
-    //     .matches(/[a-z]/, 'رمز عبور باید شامل حداقل یک حرف کوچک باشد!')
-    //     .matches(/[0-9]/, 'رمز عبور باید شامل حداقل یک عدد باشد!')
-    //     .matches(/[@$!%*?&]/, 'رمز عبور باید شامل کاراکترهای خاص (!@#$%...) باشد!'),
+    password: Yup.string()
+        .required('لطفا رمز عبور خود را وارد کنید!')
+        .min(8, 'رمز عبور باید حداقل شامل ۸ کاراکتر باشد!')
+        .matches(/[A-Z]/, 'رمز عبور باید شامل حداقل یک حرف بزرگ باشد!')
+        .matches(/[a-z]/, 'رمز عبور باید شامل حداقل یک حرف کوچک باشد!')
+        .matches(/[0-9]/, 'رمز عبور باید شامل حداقل یک عدد باشد!')
+        .matches(/[@$!%*?&]/, 'رمز عبور باید شامل کاراکترهای خاص (!@#$%...) باشد!'),
 });
 
 function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
     const [rememberMe, setRememberMe] = useState(false)
+    const router = useRouter()
 
     const formik = useFormik({
         initialValues: {
@@ -30,9 +35,11 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
         },
         validationSchema,
         onSubmit: values => {
-            auth({ "mobile": phoneNumber, "pass": values.password,"appRequest": "expert" })
-                .then(() => {
-
+            auth({ "mobile": phoneNumber, "pass": values.password, "appRequest": "expert" })
+                .then((res) => {
+                    console.log(res)
+                    setCookie('TOKEN', res.data.data)
+                    router.push('/expert/home/')
                 })
                 .catch(err => {
                     // console.log(err)
@@ -41,8 +48,15 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
     });
 
     const checkOtpHandler = () => {
-        setForgetPassword(true)
-        setPageState('checkOtp')
+        forgetPhoneNumber(phoneNumber)
+            .then(res => {
+                console.log(res)
+                setForgetPassword(true)
+                setPageState('checkOtp')
+            })
+            .catch(() => {
+
+            })
     }
 
     return (
@@ -57,7 +71,7 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
                             name='password'
                             dir='ltr'
                             className='w-full h-full focus:outline-0 text-right text-xs sm:text-sm'
-                            type={isPasswordVisible ? 'number' : 'password'}
+                            type={isPasswordVisible ? 'text' : 'password'}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.password}
@@ -89,7 +103,7 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
                         </div>
                         <span className='text-gray-500 text-xs sm:sm'>مرا به خاطر بسپار</span>
                     </div>
-                    <button onClick={checkOtpHandler} className='text-secondary-500 text-xs sm:sm' href='/'>رمز عبور خود را فراموش کردید؟
+                    <button type='button' onClick={checkOtpHandler} className='text-secondary-500 text-xs sm:sm' href='/'>رمز عبور خود را فراموش کردید؟
                     </button>
                 </div>
                 <button type='submit' className='mt-2 w-full h-9 sm:h-10 bg-secondary-500 rounded-md text-white'>ورود</button>

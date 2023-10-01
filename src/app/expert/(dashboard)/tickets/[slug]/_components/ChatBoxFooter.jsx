@@ -20,8 +20,8 @@ function ChatBoxFooter({ sendMessageHandler }) {
 
   return (
     <div className="w-full h-[110px] absolute bottom-0 flex items-center justify-start px-5 pt-8 pb-5">
-      <div className="w-full h-full fcc overflow-hidden rounded-lg">
-        <div className="w-[calc(100%-112px)] h-full bg-gray-100 pl-12 py-2 relative">
+      <div className="w-full h-full fcc overflow-hidden">
+        <div className="w-[calc(100%-64px)] md:w-[calc(100%-112px)] h-full bg-gray-100 pl-12 py-2 relative rounded-tr-lg rounded-br-lg">
           <textarea
             value={value}
             onChange={changeHandler}
@@ -38,10 +38,10 @@ function ChatBoxFooter({ sendMessageHandler }) {
         <div
           onClick={clickHandler}
           role="button"
-          className="w-28 h-full text-white bg-primary-500 fcc text-sm cursor-pointer gap-x-1 fcc"
+          className="w-16 md:w-28 h-full text-white bg-primary-500 rounded-tl-lg rounded-bl-lg fcc text-sm cursor-pointer gap-x-1 fcc"
         >
-          ارسال پیام
-          <HiOutlinePaperAirplane className="-rotate-90" />
+          <span className="hidden md:flex">ارسال پیام</span>
+          <HiOutlinePaperAirplane className="-rotate-90 text-2xl md:text-sm" />
         </div>
       </div>
     </div>

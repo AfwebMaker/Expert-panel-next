@@ -56,7 +56,7 @@ function Page() {
   };
 
   return (
-    <div className="w-[100%] mb-10 xl:mb-0 h-[calc(100vh-220px)] lg:h-[calc(100vh-190px)] rounded-lg bg-red-200 flex flex-col items-center justify-start relative">
+    <div className="w-[100%] mb-16 xl:mb-0 h-[calc(100vh-150px)] md:h-[calc(100vh-220px)] lg:h-[calc(100vh-190px)] rounded-lg mt-5 md:mt-0  flex flex-col items-center justify-start relative">
       <ChatBoxHeader
         name={"سید میثاق حمزه زاده موسوی"}
         problem={"مشکل در پذیرش سفارش"}

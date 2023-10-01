@@ -2,13 +2,21 @@ import React from "react";
 //components
 import MobileTickets from "./_components/MobileTickets";
 // react icons
-import { HiOutlineTicket } from "react-icons/hi";
+import { HiOutlineTicket, HiOutlineChat } from "react-icons/hi";
 
 function Page() {
   return (
-    <div className="flex mb-10 xl:mb-0">
+    <div className="flex flex-col mb-10 xl:mb-0">
+      <div className="flex md:hidden text-primary-500 text-base px-[3%] md:px-0 fcc my-10">
+        <h2>پشتیبانی و ارسال تیکت</h2>
+        <HiOutlineTicket className="mr-1 text-lg" />
+      </div>
+      <div className="flex md:hidden text-cf-300 text-sm px-[3%] md:px-0 mb-5">
+        <HiOutlineChat className="ml-1 text-base" />
+        <h2>تیکت های من</h2>
+      </div>
       <div className="h-[calc(100vh-210px)] w-full flex md:hidden">
-        <ul className="h-full w-full overflow-y-scroll hideScroll font-medium text-lg flex flex-col items-center px-[3%] sm:px-0">
+        <ul className="h-full w-full overflow-y-scroll hideScroll font-medium text-lg flex flex-col items-center px-[3%] md:px-0">
           <MobileTickets />
         </ul>
       </div>

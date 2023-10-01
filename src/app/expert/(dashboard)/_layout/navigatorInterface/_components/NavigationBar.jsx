@@ -57,7 +57,7 @@ function NavigationBar() {
 
   return (
     <div className="lg:hidden">
-      <div className="h-14"></div>
+      {/* <div className="h-14"></div> */}
       <nav
         style={{ boxShadow: "0px -3px 15px rgba(38, 38, 38, 0.1)" }}
         className="fixed z-10 bottom-0 right-0 w-full h-20 flex items-center px-4 justify-start transition-all duration-500 delay-[30ms] bg-white"

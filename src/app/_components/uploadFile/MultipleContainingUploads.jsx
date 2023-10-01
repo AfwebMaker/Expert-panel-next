@@ -43,7 +43,7 @@ function UploadContain({ multiple, accept }) {
       console.log(data)
       await axios
         .post(
-          `${process.env.NEXT_PUBLIC_file_kg_local}admin/category/UploadImage`,
+          `${process.env.NEXT_PUBLIC_file_kg_local}/admin/category/UploadImage`,
           data,
           {
             onUploadProgress: (progressEvent) => {

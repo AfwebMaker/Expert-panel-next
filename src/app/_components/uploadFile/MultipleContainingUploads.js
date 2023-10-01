@@ -30,7 +30,7 @@ function MultipleContainingUploads({ accept }) {
             ]);
             setShowProgress(true);
 
-            axios.post(`${process.env.NEXT_PUBLIC_file_kg_local}admin/category/UploadImage`, formData, {
+            axios.post(`${process.env.NEXT_PUBLIC_file_kg_local}/admin/category/UploadImage`, formData, {
                 onUploadProgress: ({ loaded, total }) => {
                     setFiles(pre => {
                         const newFiles = [...pre]

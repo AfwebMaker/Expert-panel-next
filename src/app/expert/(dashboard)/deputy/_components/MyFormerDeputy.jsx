@@ -16,7 +16,7 @@ function MyFormerDeputy({ dataExpertData }) {
           dataExpertData.map((item) => (
             <DeputyCard
               key={item.id}
-              status={"deactive"}
+              status={"deactivate"}
               phone={item.mobile}
               name={item.nameFamily}
             />

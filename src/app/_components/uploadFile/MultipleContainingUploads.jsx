@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 //components
-import ProgressBar from "@/app/_components/ProgressBar";
+import ProgressBar from "@/app/_components/uploadFile/ProgressBar";
 //react icons
 import { HiOutlineCloudUpload, HiCheckCircle } from "react-icons/hi";
 //axios

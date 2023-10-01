@@ -23,3 +23,11 @@ export const register_kg_local = axios.create({
         "Accept": "application/json"
     }
 })
+
+export const deputy_kg_local = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_deputy_kg_local,
+    timeout: 20000,
+    headers: {
+        "Accept": "application/json"
+    }
+})

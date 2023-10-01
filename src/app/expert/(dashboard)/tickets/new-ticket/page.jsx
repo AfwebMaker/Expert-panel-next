@@ -9,8 +9,8 @@ import * as Yup from "yup";
 // components
 import InfoCard from "@/app/_components/InfoCard";
 import Input from "@/app/_components/Input";
-import MultipleContainingUploads from "@/app/_components/MultipleContainingUploads.jsx";
-import MultipleContainingUpload from "@/app/_components/MultipleContainingUploads.js";
+import MultipleContainingUploads from "@/app/_components/uploadFile/MultipleContainingUploads.jsx";
+import MultipleContainingUpload from "@/app/_components/uploadFile/MultipleContainingUploads.js";
 
 function Page() {
   const validationSchema = Yup.object().shape({

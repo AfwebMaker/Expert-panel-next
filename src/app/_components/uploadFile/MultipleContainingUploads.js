@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // components
-import Upload from "@/app/_components/Upload"
+import Upload from "@/app/_components/uploadFile/Upload"
 //react icons
 import { HiOutlineCloudUpload, HiCheckCircle } from "react-icons/hi";
 // axios

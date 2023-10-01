@@ -17,6 +17,7 @@ import backGround from '@/public/images/login/backGround.png'
 
 function Register() {
     const [currentStep, setCurrentStep] = useState(0)
+
     return (
         <main className='w-full h-full min-h-screen fcc flex-col bg-black py-8'>
             <Image alt='background' className='fixed top-0 w-full h-full object-cover' src={backGround} />

@@ -14,8 +14,10 @@ import Arrow_right from '@/public/icons/Arrow_right.svg'
 import backGround from '@/public/images/login/backGround.png'
 
 function Login() {
-  const [pageState, setPageState] = useState('checkNumber')
-  const [forgetPassword, setForgetPassword] = useState(false)
+  const [pageState, setPageState] = useState('checkNumber');
+  const [forgetPassword, setForgetPassword] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [nextStepData, setNextStepData] = useState('')
 
   return (
     <main className='w-full h-full min-h-screen fcc flex-col bg-black py-8'>
@@ -35,15 +37,15 @@ function Login() {
         </div>
 
         {pageState === 'checkNumber' &&
-          <CheckNumber setPageState={setPageState} />
+          <CheckNumber setPhoneNumber={setPhoneNumber} setPageState={setPageState} />
         }
 
         {pageState === 'checkOtp' &&
-          <CheckOtp forgetPassword={forgetPassword} setPageState={setPageState} />
+          <CheckOtp phoneNumber={phoneNumber} forgetPassword={forgetPassword} setPageState={setPageState} />
         }
 
         {pageState === 'checkPassword' &&
-          <CheckPassword setForgetPassword={setForgetPassword} setPageState={setPageState} />
+          <CheckPassword phoneNumber={phoneNumber} setForgetPassword={setForgetPassword} setPageState={setPageState} />
         }
 
         {pageState === 'forgetPassword' &&

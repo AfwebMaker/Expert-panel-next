@@ -6,6 +6,7 @@ import ProgressBar from "@/app/_components/ProgressBar";
 import { HiOutlineCloudUpload, HiCheckCircle } from "react-icons/hi";
 //axios
 import axios from "axios";
+import { headers } from "next/dist/client/components/headers";
 
 function UploadContain({ multiple, accept }) {
   const [uploadedImages, setUploadedImages] = useState([]);
@@ -33,21 +34,42 @@ function UploadContain({ multiple, accept }) {
 
       let data = new FormData();
       data.append("file", files[0]);
-      await axios.post("/upload", data, {
-        onUploadProgress: (progressEvent) => {
-          let percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          setUploadProgress(percentCompleted);
-        },
-      });
+      console.log("files",files[0]);
+      
+      // for (let i = 0; i < files.length; i++) {
+      //   data.append("file" + i, files[i]);
+      //   console.log(data.append("file" + i, files[i]));
+      // }
+      console.log(data)
+      await axios
+        .post(
+          `${process.env.NEXT_PUBLIC_file_kg_local}admin/category/UploadImage`,
+          data,
+          {
+            onUploadProgress: (progressEvent) => {
+              let percentCompleted = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setUploadProgress(percentCompleted);
+            },
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((res) => {
+
+          if (res.data.status === 200) console.log(res.data.data)
+        }
+        
+        );
       setIsUploading(false);
     }
     console.log(files);
   };
-  console.log(uploadedImages.length);
-  console.log(uploadedImages);
-  console.log(uploadProgress);
+  // console.log(uploadedImages.length);
+  // console.log(uploadedImages);
+  // console.log(uploadProgress);
   return (
     <div
       className={`uploadBorder w-full cursor-pointer h-auto rounded-lg border-cf-400 relative overflow-hidden fcc ${
@@ -74,13 +96,19 @@ function UploadContain({ multiple, accept }) {
           </div>
           <div>
             {isUploading ? (
-              <div className="font-bold text-sm text-primary-500">در حال آپلود کردن عکس</div>
+              <div className="font-bold text-sm text-primary-500">
+                در حال آپلود کردن عکس
+              </div>
             ) : (
               <div className="font-bold text-sm">آپلود کردن عکس</div>
             )}
           </div>
         </div>
-        <div className={`flex items-center justify-start gap-3 flex-wrap w-full ${uploadedImages.length ? "mb-10" : ""}`}>
+        <div
+          className={`flex items-center justify-start gap-3 flex-wrap w-full ${
+            uploadedImages.length ? "mb-10" : ""
+          }`}
+        >
           {uploadedImages.map((data, index) =>
             multiple ? (
               <div

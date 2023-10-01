@@ -18,6 +18,32 @@ function ChatBoxMain({ messages }) {
               message={message}
             />
           ))}
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
+          <div>dfghkflds</div>
       </ul>
     </div>
   );

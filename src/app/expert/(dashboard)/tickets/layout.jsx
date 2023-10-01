@@ -5,7 +5,7 @@ import DesktopTicket from "./_components/DesktopTicket";
 function RootLayout({ children }) {
   return (
     <div className="lg:px-5 lg:pt-5">
-      <div className="w-full h-[70px] fcc">
+      <div className="w-full h-[70px] hidden md:fcc">
         <div className="w-full h-full max-w-[1605px] flex items-center">تیکت‌ها</div>
       </div>
       <div className="fcc">

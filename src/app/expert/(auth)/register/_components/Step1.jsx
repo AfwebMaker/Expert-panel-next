@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import StepController from './StepController'
 //assets
 import X_circle from '@/public/icons/X_circle.svg'
+import Eye from '@/public/icons/Eye.svg'
 import User from '@/public/icons/User.svg'
 import User_group from '@/public/icons/User_group.svg'
 import Key from '@/public/icons/Key.svg'
@@ -40,14 +41,15 @@ const validationSchema = Yup.object().shape({
 });
 
 function Step1({ currentStep, setCurrentStep }) {
-    const [initialValues, setInitialValues] = useState({})
-
+    const [passwordVisible, setPasswordVisible] = useState('')
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState('')
+    
     //get initial data
     useEffect(() => {
         stepInformation(0)
             .then((res) => {
-                console.log(res.data)
-                setInitialValues(res.data.data)
+                formik.setFieldValue("firstName", res.data.data.name)
+                formik.setFieldValue("lastName", res.data.data.family)
             })
             .catch(() => {
 
@@ -57,8 +59,8 @@ function Step1({ currentStep, setCurrentStep }) {
     //step1 submit handler
     const formik = useFormik({
         initialValues: {
-            firstName: 'initialValues.name',
-            lastName: 'initialValues.family',
+            firstName: '',
+            lastName: '',
             password: '',
             confirmPassword: ''
         },
@@ -168,7 +170,7 @@ function Step1({ currentStep, setCurrentStep }) {
                             <input
                                 id="password"
                                 name="password"
-                                type="password"
+                                type={passwordVisible ? "text" : "password"}
                                 autoComplete='off'
                                 placeholder='••••••••••••'
                                 onChange={formik.handleChange}
@@ -177,9 +179,9 @@ function Step1({ currentStep, setCurrentStep }) {
                                 className="w-full h-9 sm:h-10 rounded-md border border-cf-400 sm:text-sm text-xs placeholder:text-gray-400 px-10"
                             />
                             <Image
-                                src={X_circle}
+                                src={Eye}
                                 alt='X_circle'
-                                onClick={() => { formik.setFieldValue("password", '') }}
+                                onClick={() => { setPasswordVisible(passwordVisible => !passwordVisible) }}
                                 className='absolute left-3 text-color-2 cursor-pointer w-4 sm:w-5'
                             />
                         </div>
@@ -202,7 +204,7 @@ function Step1({ currentStep, setCurrentStep }) {
                             <input
                                 id="confirmPassword"
                                 name="confirmPassword"
-                                type="password"
+                                type={confirmPasswordVisible ? "text" : "password"}
                                 autoComplete='off'
                                 placeholder='••••••••••••'
                                 onChange={formik.handleChange}
@@ -211,9 +213,9 @@ function Step1({ currentStep, setCurrentStep }) {
                                 className="w-full h-9 sm:h-10 rounded-md border border-cf-400 sm:text-sm text-xs placeholder:text-gray-400 px-10"
                             />
                             <Image
-                                src={X_circle}
+                                src={Eye}
                                 alt='X_circle'
-                                onClick={() => { formik.setFieldValue("confirmPassword", '') }}
+                                onClick={() => { setConfirmPasswordVisible(confirmPasswordVisible => !confirmPasswordVisible) }}
                                 className='absolute left-3 text-color-2 cursor-pointer w-4 sm:w-5'
                             />
                         </div>

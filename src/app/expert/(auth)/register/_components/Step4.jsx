@@ -1,8 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 //components
 import StepController from './StepController'
+//services
+import stepInformation from '@/services/register_kg_local/stepInformation'
 
 function Step4({ currentStep, setCurrentStep }) {
+
+    //get initial data
+    useEffect(() => {
+        stepInformation(3)
+            .then((res) => {
+                console.log(res)
+                formik.setFieldValue("firstName", res.data.data.name)
+                formik.setFieldValue("lastName", res.data.data.family)
+            })
+            .catch(() => {
+
+            })
+    }, [])
 
     const submitHandler = () => {
         setCurrentStep(currentStep + 1)

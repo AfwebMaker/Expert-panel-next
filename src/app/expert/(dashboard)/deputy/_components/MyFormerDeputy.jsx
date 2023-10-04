@@ -2,16 +2,16 @@ import React from "react";
 // components
 import DeputyCard from "../_components/DeputyCard";
 // react icons
-import { HiOutlineBadgeCheck } from "react-icons/hi";
+import { HiOutlineUserGroup } from "react-icons/hi";
 
 function MyFormerDeputy({ dataExpertData }) {
   return (
     <div className="flex flex-col w-full">
-      <div className="text-primary-500 flex gap-x-2 items-center justify-start my-10">
-        <HiOutlineBadgeCheck />
-        <span>نماینده های پیشین من</span>
+      <div className="text-cf-300 md:text-primary-500 flex gap-x-1 items-center justify-start mt-10 mb-5">
+        <HiOutlineUserGroup className="text-lg" />
+        <span className="text-xs md:text-sm">نماینده های پیشین من</span>
       </div>
-      <div className="flex w-full gap-x-5">
+      <div className="flex flex-wrap md:grid md:grid-cols-12 w-full gap-5">
         {dataExpertData &&
           dataExpertData.map((item) => (
             <DeputyCard
@@ -21,6 +21,48 @@ function MyFormerDeputy({ dataExpertData }) {
               name={item.nameFamily}
             />
           ))}
+        <DeputyCard
+          // key={item.id}
+          status={"deactivate"}
+          phone={"09106686121"}
+          name={"سید میثاق حمزه زاده موسوی"}
+        />
+        <DeputyCard
+          // key={item.id}
+          status={"deactivate"}
+          phone={"09106686121"}
+          name={"سید میثاق حمزه زاده موسوی"}
+        />
+        <DeputyCard
+          // key={item.id}
+          status={"deactivate"}
+          phone={"09106686121"}
+          name={"سید میثاق حمزه زاده موسوی"}
+        />
+        <DeputyCard
+          // key={item.id}
+          status={"deactivate"}
+          phone={"09106686121"}
+          name={"سید میثاق حمزه زاده موسوی"}
+        />
+        <DeputyCard
+          // key={item.id}
+          status={"deactivate"}
+          phone={"09106686121"}
+          name={"سید میثاق حمزه زاده موسوی"}
+        />
+        <DeputyCard
+          // key={item.id}
+          status={"deactivate"}
+          phone={"09106686121"}
+          name={"سید میثاق حمزه زاده موسوی"}
+        />
+        <DeputyCard
+          // key={item.id}
+          status={"deactivate"}
+          phone={"09106686121"}
+          name={"سید میثاق حمزه زاده موسوی"}
+        />
       </div>
     </div>
   );

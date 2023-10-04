@@ -7,7 +7,7 @@ function RootLayout({ children }) {
         <div className="w-full h-full max-w-[1605px] flex items-center">نماینده من</div>
       </div>
       <div className="fcc">
-        <div className="flex w-full max-w-[1605px] flex-col xl:flex-row xl:justify-center py-0 md:px-5 xl:items-start">
+        <div className="flex w-full max-w-[1605px] flex-col xl:flex-row xl:justify-center md:px-4 lg:px-0 xl:items-start">
           {children}
           {/* {React.cloneElement(children, { data })} */}
         </div>

@@ -12,7 +12,7 @@ const dataMenu = [
 function DropDownMenu({ showMenu }) {
   return (
     <div
-      className={` transition-all duration-500 w-full absolute -top-[1000px] fcc p-4 text-white ${
+      className={`lg:hidden transition-all duration-500 w-full absolute -top-[1000px] fcc p-4 text-white ${
         showMenu ? "top-14 bg-dark transition-all duration-500 -z-10" : "bg-white"
       }`}
     >

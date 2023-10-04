@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 // components
 import DeputyCard from "../_components/DeputyCard";
 // react icons
@@ -7,22 +8,49 @@ import {
   HiOutlinePlus,
   HiOutlineUserAdd,
 } from "react-icons/hi";
-import Link from "next/link";
 
 function MyActiveDeputy({ activeData, newData }) {
   return (
     <div className="flex flex-col w-full">
-      <div className="text-primary-500 flex gap-x-2 items-center justify-start mb-10">
-        <HiOutlineBadgeCheck />
-        <span>نماینده های فعال من</span>
+      <div className="w-full flex items-center justify-between md:justify-start mb-5">
+        <div className="text-cf-300 md:text-primary-500 flex gap-x-1 items-center justify-start">
+          <HiOutlineBadgeCheck className="text-lg" />
+          <span className="text-xs md:text-sm">نماینده های فعال من</span>
+        </div>
+        <Link href={"#"} className="text-primary-500 flex md:hidden gap-x-1 items-center justify-start">
+          <span className="text-xs md:text-sm">اضافه کردن نماینده جدید</span>
+          <HiOutlineUserAdd className="text-lg" />
+        </Link>
       </div>
-      <div className="flex w-full gap-x-5">
-        {activeData && <DeputyCard status={"active"} phone={activeData.mobile} name={activeData.nameFamily} />}
-        {newData && <DeputyCard status={"pending"} phone={newData.mobile} name={newData.nameFamily} />}
-        <div className="bg-white max-w-[350px] h-[290px] w-full rounded-lg p-5 flex flex-col items-center uploadBorder_active">
+      <div className="flex flex-wrap md:grid md:grid-cols-12 w-full gap-5">
+        {activeData && (
+          <DeputyCard
+            status={"active"}
+            phone={activeData.mobile}
+            name={activeData.nameFamily}
+          />
+        )}
+        <DeputyCard
+          status={"active"}
+          phone={"09106686121"}
+          name={"سید میثاق حمزه زاده موسوی"}
+        />
+        {newData && (
+          <DeputyCard
+            status={"pending"}
+            phone={newData.mobile}
+            name={newData.nameFamily}
+          />
+        )}
+        <DeputyCard
+          status={"pending"}
+          phone={"newData.mobile"}
+          name={"newData.nameFamily"}
+        />
+        <div className="hidden md:flex bg-white md:col-span-6 xl:col-span-4 w-full rounded-lg p-5 flex-col items-center uploadBorder_active">
           <section className="w-full fcc mt-5 mb-5">
-            <div className="bg-primary-100 h-20 w-h-20 md:h-24 md:w-24 rounded-full fcc">
-              <HiOutlineUserAdd className="text-primary-500 text-3xl"/>
+            <div className="bg-primary-100 h-20 w-20 md:h-24 md:w-24 rounded-full fcc">
+              <HiOutlineUserAdd className="text-primary-500 text-3xl" />
             </div>
           </section>
           <span className="w-full fcc mb-12 text-primary-500">

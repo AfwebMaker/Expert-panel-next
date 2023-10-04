@@ -39,6 +39,7 @@ function Forms() {
         birthday: Yup.string()
             .required('لطفا تاریخ تولد خود را وارد کنید.'),
     }
+
     const legalValidation = {
         componyName: Yup.string()
             .required('لطفا نام شرکت خود را وارد کنید.')
@@ -54,6 +55,7 @@ function Forms() {
         dateEstablishment: Yup.string()
             .required('لطفا تاریخ تاسیس خود را وارد کنید.'),
     }
+    
     const validationSchema = Yup.object().shape(validation);
 
     //validation field control

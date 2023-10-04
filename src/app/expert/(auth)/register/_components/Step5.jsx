@@ -1,12 +1,26 @@
-import React, { useState } from 'react'
+'use client'
+
+import React from 'react'
+import { useRouter } from 'next/navigation';
 //components
 import StepController from './StepController'
-import Image from 'next/image'
+//services
+import confirm from '@/services/register_kg_local/confirm'
+//functions
+import setCookie from '@/src/functions/setCookie'
 
 function Step5({ currentStep, setCurrentStep }) {
+    const router = useRouter();
 
     const submitHandler = () => {
-        setCurrentStep(currentStep + 1)
+        confirm()
+            .then((res) => {
+                setCookie('TOKEN', res.data.data)
+                router.push('/expert/home/')
+            })
+            .catch(() => {
+
+            })
     }
 
     return (

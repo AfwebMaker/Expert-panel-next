@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 //react icons
 import {
   HiOutlineUser,
@@ -12,16 +12,32 @@ import {
   HiOutlineOfficeBuilding,
   HiOutlineLockOpen
 } from "react-icons/hi";
+//services
+import profileBase from '@/src/services/person_kg_local/profileBase'
 
 function DesktopNavigation() {
+  const [data, setData] = useState({})
   const pathName = usePathname()
+
+  //get data
+  useEffect(() => {
+    profileBase()
+      .then(res => {
+        console.log(res.data.data)
+        setData(res.data.data)
+      })
+      .catch(error => {
+        // console.log(error)
+      })
+  }, [])
+
   const navigation_data = [
     {
       id: 0,
       icon: <HiOutlineUser size={24} />,
       title: 'اطلاعات کاربری',
       description: 'اطلاعات شخصی شما',
-      warning: false,
+      warning: data.background,
       link: '/expert/profile/Personal-Information'
     },
     {
@@ -29,7 +45,7 @@ function DesktopNavigation() {
       icon: <HiOutlineCreditCard size={24} />,
       title: 'اطلاعات بانکی',
       description: 'اطلاعات مربوط به احراز بانکی',
-      warning: false,
+      warning: data.bank,
       link: '/expert/profile/Bank-Information'
     },
     {
@@ -37,7 +53,7 @@ function DesktopNavigation() {
       icon: <HiOutlineOfficeBuilding size={24} />,
       title: 'اطلاعات سکونتی',
       description: 'اطلاعات مربوط به محل زندگی',
-      warning: false,
+      warning: data.livingLocation,
       link: '/expert/profile/Residential-Information'
     },
     {
@@ -45,7 +61,7 @@ function DesktopNavigation() {
       icon: <HiOutlineLockOpen size={24} />,
       title: 'امنیت',
       description: 'رمز عبور و تنظیمات',
-      warning: true,
+      warning: data.security,
       link: '/expert/profile/Password-Information'
     }
   ]
@@ -70,7 +86,7 @@ function DesktopNavigation() {
                   <div className='ml-2'>
                     {
                       item.warning ? <HiExclamationCircle size={20} className='text-warning' /> :
-                        index === 2 ? <HiBadgeCheck size={20} className='text-primary-500' /> : ''
+                        item.warning === 0 ? <HiBadgeCheck size={20} className='text-primary-500' /> : ''
                     }
                   </div>
                 </div>

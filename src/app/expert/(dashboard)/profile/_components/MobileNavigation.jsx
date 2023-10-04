@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import React from 'react'
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react'
 //react icons
 import {
   HiOutlineUser,
@@ -14,54 +15,73 @@ import {
 } from "react-icons/hi";
 //components
 import Stars from '@/app/_components/Stars'
+//services
+import profileBase from '@/src/services/person_kg_local/profileBase'
 
 function mobileNavigation() {
-  const active = true
+  const [data, setData] = useState({})
+
+  //get data
+  useEffect(() => {
+    profileBase()
+      .then(res => {
+        setData(res.data.data)
+      })
+      .catch(error => {
+        // console.log(error)
+      })
+  }, [])
+
   const navigation_data = [
     {
       id: 0,
       icon: <HiOutlineUser size={24} className='text-primary-500' />,
       title: 'اطلاعات کاربری',
-      warning: false,
+      warning: data.background,
       link: '/expert/profile/Personal-Information'
     },
     {
       id: 1,
       icon: <HiOutlineCreditCard size={24} className='text-primary-500' />,
       title: 'اطلاعات بانکی',
-      warning: false,
+      warning: data.bank,
       link: '/expert/profile/Bank-Information'
     },
     {
       id: 2,
       icon: <HiOutlineOfficeBuilding size={24} className='text-primary-500' />,
       title: 'اطلاعات سکونتی',
-      warning: false,
+      warning: data.livingLocation,
       link: '/expert/profile/Residential-Information'
     },
     {
       id: 3,
       icon: <HiOutlineLockOpen size={24} className='text-primary-500' />,
       title: 'امنیت',
-      warning: true,
+      warning: data.security,
       link: '/expert/profile/Password-Information'
     }
   ]
 
   return (
-    <div className='block lg:hidden'>
+    <div className='block lg:hidden pb-[80px]'>
       <div className='w-full fcc flex-col'>
-        <div className='w-[150px] h-[150px] bg-black rounded-full mb-5'>
-
+        <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
+          <Image
+            src={data.avatar ? data.avatar : "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"}
+            alt="sample image"
+            fill={true}
+            className='object-cover'
+          />
         </div>
         <div className='font-bold flex-col fcc'>
-          <div className='text-lg mb-2'>محمد جوادی</div>
+          <div className='text-lg mb-2'>{data.name} {data.family}</div>
           <div className='fcc mb-2'>
             <div className='text-sm text-primary-500'>وضعیت : </div>
             <div className='text-cf-300 font-medium text-sm fcc'>
-              <div className='mx-1'>فعال</div>
+              <div className='mx-1'>{data.isActive ? 'فعال' : 'غیر فعال'}</div>
               <div>
-                {active ?
+                {data.isActive ?
                   <HiCheckCircle size={16} className='text-primary-500' /> :
                   <HiXCircle size={16} className='text-warning' />
                 }
@@ -71,7 +91,7 @@ function mobileNavigation() {
           <div className='fcc mb-2'>
             <div className='text-sm text-secondary-500'>امتیاز متخصص : </div>
             <div className='text-cf-300 font-medium text-sm fcc'>
-              <Stars point={3} />
+              <Stars point={data.score ? data.score : 0} />
               {/* (متوسط) */}
             </div>
           </div>
@@ -97,7 +117,7 @@ function mobileNavigation() {
                   <div className='ml-2'>
                     {
                       item.warning ? <HiExclamationCircle size={20} className='text-warning' /> :
-                        index === 2 ? <HiBadgeCheck size={20} className='text-primary-500' /> : ''
+                        item.warning === 0 ? <HiBadgeCheck size={20} className='text-primary-500' /> : ''
                     }
                   </div>
                   <div>

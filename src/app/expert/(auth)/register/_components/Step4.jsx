@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 //components
 import StepController from './StepController'
 //services
 import stepInformation from '@/services/register_kg_local/stepInformation'
 
 function Step4({ currentStep, setCurrentStep }) {
+    const [data, setData] = useState({})
 
     //get initial data
     useEffect(() => {
         stepInformation(3)
             .then((res) => {
-                console.log(res)
-                formik.setFieldValue("firstName", res.data.data.name)
-                formik.setFieldValue("lastName", res.data.data.family)
+                setData(res.data.data)
             })
             .catch(() => {
 
@@ -31,11 +30,11 @@ function Step4({ currentStep, setCurrentStep }) {
                     <div className='flex flex-col sm:flex-row text-cf-400 mr-2'>
                         <div className='ml-8 sm:mb-0 mb-2'>
                             <span className='text-sm sm:text-base'>نام : </span>
-                            <span className='text-cf-300 font-normal text-sm sm:text-base'>sss</span>
+                            <span className='text-cf-300 font-normal text-sm sm:text-base'>{data.dInfo && data.dInfo.name}</span>
                         </div>
                         <div>
                             <span className='text-sm sm:text-base'>نام خانوادگی : </span>
-                            <span className='text-cf-300 font-normal text-sm sm:text-base'>sss</span>
+                            <span className='text-cf-300 font-normal text-sm sm:text-base'>{data.dInfo && data.dInfo.family}</span>
                         </div>
                     </div>
                 </div>
@@ -44,8 +43,41 @@ function Step4({ currentStep, setCurrentStep }) {
                     <span className='flex text-secondary-500 mb-4 text-sm sm:text-base'>خدمات درخواستی شما :</span>
                     <div className='flex text-cf-400'>
                         <div className='ml-8 mr-2 flex flex-col sm:flex-row'>
-                            <span className='text-sm sm:text-base ml-1 mb-2 sm:mb-0'>خدمات : </span>
-                            <span className='text-cf-300 font-normal text-sm sm:text-base'>sss</span>
+                            <span className='text-sm sm:text-base ml-1 mb-2 sm:mb-0 flex'>خدمات : </span>
+                            <div className='flex flex-wrap'>
+                                {data.dActivity &&
+                                    data.dActivity.activities.map((item, i) => (
+                                        <div key={i} className='flex flex-nowrap'>
+                                            <span className='text-cf-300 font-normal text-sm sm:text-base flex flex-nowrap'>
+                                                {`${item.area} - ${item.part}`}
+                                            </span>
+                                            {i !== data.dActivity.activities.length - 1 && <span className='mx-2 flex'>,</span>}
+                                        </div>
+                                    ))
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div className='mb-4 flex flex-col'>
+                    <span className='flex text-secondary-500 mb-4 text-sm sm:text-base'>شهر ها و مناطق فعالیت شما :</span>
+                    <div className='flex text-cf-400'>
+                        <div className='ml-8 mr-2 flex flex-col sm:flex-row'>
+                            <span className='text-sm sm:text-base ml-1 mb-2 sm:mb-0 flex flex-nowrap whitespace-nowrap'>شهر ها و مناطق : </span>
+                            <div className='flex flex-wrap'>
+                                {data.dLocation &&
+                                    data.dLocation.workplaces.map((item, i) => (
+                                        <div key={i} className='flex flex-nowrap'>
+                                            <span className='text-cf-300 font-normal text-sm sm:text-base'>
+                                                {`${item.city} - ${item.area}`}
+                                            </span>
+                                            {i !== data.dLocation.workplaces.length - 1 && <span className='mx-2'>,</span>}
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

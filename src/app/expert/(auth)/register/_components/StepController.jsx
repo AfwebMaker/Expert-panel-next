@@ -17,9 +17,9 @@ function StepController({ currentStep, setCurrentStep, onsubmit }) {
             {currentStep === 3 ? 'تایید اطلاعات' : 'مرحله بعد'}
           </button></>
         :
-        <Link href='/expert/home/' className='fcc w-full bg-secondary-500 py-2 px-4 rounded-md'>
+        <button type='submit' onClick={onsubmit} className='fcc w-full bg-secondary-500 py-2 px-4 rounded-md cursor-pointer'>
           ورود به پنل متخصصین
-        </Link>
+        </button>
       }
     </div>
   )

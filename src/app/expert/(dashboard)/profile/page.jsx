@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect } from 'react'
 //components
 import MobileNavigation from './_components/MobileNavigation'
 

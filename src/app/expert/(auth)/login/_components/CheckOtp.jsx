@@ -8,6 +8,7 @@ import forgetCheckOtp from '@/services/register_kg_local/forgetCheckOtp'
 import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
 //functions
 import setCookie from '@/src/functions/setCookie'
+import toast from 'react-hot-toast';
 
 function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
     const [otp, setOtp] = useState('');
@@ -23,8 +24,10 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
                         setCookie('guid', res.data.data)
                         setPageState('forgetPassword')
                     })
-                    .catch(() => {
-
+                    .catch((error) => {
+                        if (error.response.status === 502) {
+                            toast.error('کد پیامکی اشتباه است.')
+                        }
                     })
 
             } else {
@@ -32,8 +35,10 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
                     .then(() => {
                         router.push('/expert/register/')
                     })
-                    .catch(() => {
-
+                    .catch((error) => {
+                        if (error.response.status === 502) {
+                            toast.error('کد پیامکی اشتباه است.')
+                        }
                     })
             }
 
@@ -78,6 +83,8 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
                     placeholder='____'
                     containerStyle={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '8px', direction: 'ltr', textAlign: 'right' }}
                     inputStyle={{ border: '#808080 solid 1px', margin: '6px', borderRadius: '6px', height: '59px', width: '44px' }}
+
+                    shouldAutoFocus={true}
                     value={otp}
                     onChange={setOtp}
                     numInputs={4}

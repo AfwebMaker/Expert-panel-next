@@ -12,6 +12,8 @@ import auth from '@/services/person_kg_local/auth'
 import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
 //functions
 import setCookie from '@/src/functions/setCookie';
+//toast
+import toast from 'react-hot-toast';
 
 //validation
 const validationSchema = Yup.object().shape({
@@ -42,7 +44,9 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
                     router.push('/expert/home/')
                 })
                 .catch(err => {
-                    // console.log(err)
+                    if (err.response.status === 404) {
+                        toast.error('شماره تلفن یا رمز عبور اشتباه است.')
+                    }
                 })
         },
     });

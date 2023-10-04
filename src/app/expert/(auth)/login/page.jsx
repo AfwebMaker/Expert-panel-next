@@ -17,7 +17,6 @@ function Login() {
   const [pageState, setPageState] = useState('checkNumber');
   const [forgetPassword, setForgetPassword] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [nextStepData, setNextStepData] = useState('')
 
   return (
     <main className='w-full h-full min-h-screen fcc flex-col bg-black py-8'>

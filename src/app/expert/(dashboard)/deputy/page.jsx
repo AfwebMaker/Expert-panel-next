@@ -38,7 +38,6 @@ function Page() {
           {dataExpertData.deActiveData && (
             <MyFormerDeputy dataExpertData={dataExpertData.deActiveData} />
           )}
-          <MyFormerDeputy dataExpertData={dataExpertData.deActiveData} />
         </div>
       </div>
     </div>

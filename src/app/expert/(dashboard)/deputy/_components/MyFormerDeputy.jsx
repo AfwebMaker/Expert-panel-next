@@ -21,48 +21,6 @@ function MyFormerDeputy({ dataExpertData }) {
               name={item.nameFamily}
             />
           ))}
-        <DeputyCard
-          // key={item.id}
-          status={"deactivate"}
-          phone={"09106686121"}
-          name={"سید میثاق حمزه زاده موسوی"}
-        />
-        <DeputyCard
-          // key={item.id}
-          status={"deactivate"}
-          phone={"09106686121"}
-          name={"سید میثاق حمزه زاده موسوی"}
-        />
-        <DeputyCard
-          // key={item.id}
-          status={"deactivate"}
-          phone={"09106686121"}
-          name={"سید میثاق حمزه زاده موسوی"}
-        />
-        <DeputyCard
-          // key={item.id}
-          status={"deactivate"}
-          phone={"09106686121"}
-          name={"سید میثاق حمزه زاده موسوی"}
-        />
-        <DeputyCard
-          // key={item.id}
-          status={"deactivate"}
-          phone={"09106686121"}
-          name={"سید میثاق حمزه زاده موسوی"}
-        />
-        <DeputyCard
-          // key={item.id}
-          status={"deactivate"}
-          phone={"09106686121"}
-          name={"سید میثاق حمزه زاده موسوی"}
-        />
-        <DeputyCard
-          // key={item.id}
-          status={"deactivate"}
-          phone={"09106686121"}
-          name={"سید میثاق حمزه زاده موسوی"}
-        />
       </div>
     </div>
   );

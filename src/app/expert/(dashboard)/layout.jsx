@@ -12,6 +12,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  console.log()
   return (
     <html lang="fa" dir="rtl">
       <body

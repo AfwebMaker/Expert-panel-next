@@ -16,7 +16,7 @@ import Arrow_right from '@/public/icons/Arrow_right.svg'
 import backGround from '@/public/images/login/backGround.png'
 
 function Register() {
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(1)
 
     return (
         <main className='w-full h-full min-h-screen fcc flex-col bg-black py-8'>

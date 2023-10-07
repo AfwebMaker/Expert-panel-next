@@ -17,7 +17,7 @@ function MyActiveDeputy({ activeData, newData }) {
           <HiOutlineBadgeCheck className="text-lg" />
           <span className="text-xs md:text-sm">نماینده های فعال من</span>
         </div>
-        <Link href={"#"} className="text-primary-500 flex md:hidden gap-x-1 items-center justify-start">
+        <Link href="deputy/new" className="text-primary-500 flex md:hidden gap-x-1 items-center justify-start">
           <span className="text-xs md:text-sm">اضافه کردن نماینده جدید</span>
           <HiOutlineUserAdd className="text-lg" />
         </Link>
@@ -30,11 +30,6 @@ function MyActiveDeputy({ activeData, newData }) {
             name={activeData.nameFamily}
           />
         )}
-        <DeputyCard
-          status={"active"}
-          phone={"09106686121"}
-          name={"سید میثاق حمزه زاده موسوی"}
-        />
         {newData && (
           <DeputyCard
             status={"pending"}
@@ -42,11 +37,6 @@ function MyActiveDeputy({ activeData, newData }) {
             name={newData.nameFamily}
           />
         )}
-        <DeputyCard
-          status={"pending"}
-          phone={"newData.mobile"}
-          name={"newData.nameFamily"}
-        />
         <div className="hidden md:flex bg-white md:col-span-6 xl:col-span-4 w-full rounded-lg p-5 flex-col items-center uploadBorder_active">
           <section className="w-full fcc mt-5 mb-5">
             <div className="bg-primary-100 h-20 w-20 md:h-24 md:w-24 rounded-full fcc">
@@ -57,7 +47,7 @@ function MyActiveDeputy({ activeData, newData }) {
             نماینده جدید
           </span>
           <Link
-            href={"#"}
+            href="deputy/new"
             className="rounded-lg bg-primary-500 fcc w-full h-10 gap-x-1 text-white"
           >
             <HiOutlinePlus className="text-xl" />

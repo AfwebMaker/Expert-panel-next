@@ -33,7 +33,6 @@ function InformationForm({ formik }) {
             name: 'nationalCode',
             title: 'کد ملی',
             required: true,
-            confirmed: false,
             type: 'text',
             placeholder: 'به طور مثال : ۰۰٥٦۲۷۹۸٤٥'
         },
@@ -42,7 +41,6 @@ function InformationForm({ formik }) {
             name: 'mobile',
             title: 'شماره تلفن برای احراز هویت',
             required: true,
-            confirmed: false,
             type: 'text',
             placeholder: 'به طور مثال : ۰۹۱۲۸٤٦۹۷۸۷'
         },
@@ -51,7 +49,6 @@ function InformationForm({ formik }) {
             name: 'birthday',
             title: 'تاریخ تولد',
             required: true,
-            confirmed: false,
             type: 'date',
             placeholder: 'به طور مثال : ۱۳۷۱/۰۲/۱٥'
         },
@@ -60,7 +57,6 @@ function InformationForm({ formik }) {
             name: 'birthPlace',
             title: 'محل تولد',
             required: false,
-            confirmed: false,
             type: 'text',
             placeholder: 'به طور مثال : تهران'
         },
@@ -69,7 +65,6 @@ function InformationForm({ formik }) {
             name: 'email',
             title: 'ایمیل',
             required: false,
-            confirmed: false,
             type: 'text',
             placeholder: 'به طور مثال : email@example.com'
         },

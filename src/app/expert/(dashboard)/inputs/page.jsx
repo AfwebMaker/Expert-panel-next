@@ -44,6 +44,15 @@ function Page() {
             required: true,
             type: 'text',
             placeholder: 'به طور مثال : جواد زاده'
+        },
+        {
+            id: 'checkBoxMultipleInput',
+            name: 'checkBoxMultipleInput',
+            inputType: 'checkBoxMultiple',
+            title: 'نام خانوادگی',
+            required: true,
+            type: 'text',
+            placeholder: 'به طور مثال : جواد زاده'
         }
     ]
 
@@ -51,7 +60,8 @@ function Page() {
         initialValues: {
             textInput: 'یییی',
             lastName: '5',
-            test: ''
+            test: '',
+            checkBoxMultipleInput:''
         },
         validationSchema,
         onSubmit: values => {

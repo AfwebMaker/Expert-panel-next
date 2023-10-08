@@ -64,11 +64,6 @@ function Page() {
                             placeholder={item.placeholder}
                             id={item.id}
                             name={item.name}
-                            value={formik.values[item.name]}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            error={formik.errors[item.name]}
-                            touched={formik.touched[item.name]}
                             formik={formik}
                         />
                     ))

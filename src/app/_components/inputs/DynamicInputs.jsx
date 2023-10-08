@@ -19,11 +19,7 @@ function DynamicInputs({ state, title, placeholder, className, onChange, onBlur,
                     placeholder={placeholder}
                     id={id}
                     name={name}
-                    value={value}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    error={error}
-                    touched={touched}
+                    formik={formik}
                 />
             }
 
@@ -37,11 +33,6 @@ function DynamicInputs({ state, title, placeholder, className, onChange, onBlur,
                     placeholder={placeholder}
                     id={id}
                     name={name}
-                    value={value}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    error={error}
-                    touched={touched}
                     formik={formik}
                 />
             }

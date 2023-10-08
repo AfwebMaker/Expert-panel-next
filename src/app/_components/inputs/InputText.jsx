@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 //react icons
 import { HiExclamation, HiBadgeCheck } from 'react-icons/hi'
 
-function InputText({ state, title, placeholder, type, className, onChange, onBlur, value, id, name, touched, error, required }) {
+function InputText({ state, title, placeholder, type, className, id, name, required, formik }) {
+    const errorCondition = formik.touched[name] && formik.errors[name]
     const inputRef = useRef(null)
     const [focus, setFocus] = useState(false);
     const [selfState, setSelfState] = useState(state);
@@ -22,13 +23,13 @@ function InputText({ state, title, placeholder, type, className, onChange, onBlu
 
     return (
         <div className={`${className}`}>
-            <div onClick={clickHandler} className={`${selfState !== 'None' ? 'cursor-pointer' : ''} bg-white h-[60px] relative fcc flex-col rounded-md overflow-hidden ${focus ? error && touched ? 'ring-2 ring-error' : 'ring-primary-500 ring-2' : ''} ${!focus && required ? selfState === 'None' ? 'ring-primary-500 ring-2' : selfState === 'Medium' ? 'border-dashed border-warning border-2' : selfState === 'High' ? 'ring-error ring-2' : 'ring-1 ring-cf-200' : 'ring-1 ring-cf-200'}`}>
+            <div onClick={clickHandler} className={`${selfState !== 'None' ? 'cursor-pointer' : ''} bg-white h-[60px] relative fcc flex-col rounded-md overflow-hidden ${focus ? errorCondition ? 'ring-2 ring-error' : 'ring-primary-500 ring-2' : ''} ${!focus && required ? selfState === 'None' ? 'ring-primary-500 ring-2' : selfState === 'Medium' ? 'border-dashed border-warning border-2' : selfState === 'High' ? 'ring-error ring-2' : 'ring-1 ring-cf-200' : 'ring-1 ring-cf-200'}`}>
 
-                <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${value && !focus ? error && touched ? 'text-error' : selfState === 'Medium' ? 'text-warning' : selfState === 'High' ? 'text-error' : 'text-primary-500' : 'text-cf-300'} ${(value !== '' || focus) ? 'top-1' : ''}`}>
+                <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${formik.values[name] && !focus ? errorCondition ? 'text-error' : selfState === 'Medium' ? 'text-warning' : selfState === 'High' ? 'text-error' : 'text-primary-500' : 'text-cf-300'} ${(formik.values[name] !== '' || focus) ? 'top-1' : ''}`}>
                     {title}
                 </div>
 
-                <div className={`left-4 absolute font-bold text-xs z-20 ${!required ? 'text-cf-300' : selfState === 'Medium' ? 'text-warning' : selfState === 'High' ? 'text-error' : (touched && error) ? 'text-error' : 'text-primary-500'}`}>
+                <div className={`left-4 absolute font-bold text-xs z-20 ${!required ? 'text-cf-300' : selfState === 'Medium' ? 'text-warning' : selfState === 'High' ? 'text-error' : errorCondition ? 'text-error' : 'text-primary-500'}`}>
                     {
                         required ?
                             selfState === 'None' ?
@@ -42,17 +43,17 @@ function InputText({ state, title, placeholder, type, className, onChange, onBlu
                     }
                 </div>
 
-                {(value !== '' || focus) &&
+                {(formik.values[name] !== '' || focus) &&
                     <input
                         id={id}
                         disabled={!(required && state !== 'None' || !required)}
                         name={name}
                         ref={inputRef}
-                        value={value}
+                        value={formik.values[name]}
                         type={type}
                         placeholder={placeholder}
-                        onChange={onChange}
-                        onBlur={(e) => { setFocus(false); onBlur(e) }}
+                        onChange={formik.handleChange}
+                        onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
                         className='w-full absolute bottom-0 fcc px-4 py-1 bg-white'
                     />
                 }
@@ -60,8 +61,8 @@ function InputText({ state, title, placeholder, type, className, onChange, onBlu
             </div>
             <div className='flex text-error rounded-[4px] mt-2 pr-2 font-bold text-xs'>
                 {
-                    touched && error ? (
-                        <div>{error}</div>
+                    errorCondition ? (
+                        <div>{formik.errors[name]}</div>
                     ) : null
                 }
             </div>

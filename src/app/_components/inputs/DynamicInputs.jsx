@@ -6,7 +6,7 @@ import React from 'react'
 import InputText from '@/app/_components/inputs/InputText'
 import CheckBox from '@/app/_components/inputs/checkBox/CheckBox'
 
-function DynamicInputs({ state, title, placeholder, className, onChange, onBlur, value, id, name, touched, error, required, inputType, formik }) {
+function DynamicInputs({ state, title, placeholder, className, id, name, required, inputType, formik }) {
     return (
         <>
             {inputType === 'text' &&

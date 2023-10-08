@@ -28,6 +28,15 @@ function Page() {
             placeholder: 'به طور مثال : محمد'
         },
         {
+            id: 'test',
+            name: 'test',
+            inputType: 'text',
+            title: 'اختیاری',
+            required: false,
+            type: 'text',
+            placeholder: 'به طور مثال : محمد'
+        },
+        {
             id: 'lastName',
             name: 'lastName',
             inputType: 'checkBox',
@@ -40,8 +49,9 @@ function Page() {
 
     const formik = useFormik({
         initialValues: {
-            textInput: '',
-            lastName: ''
+            textInput: 'یییی',
+            lastName: '5',
+            test: ''
         },
         validationSchema,
         onSubmit: values => {
@@ -58,8 +68,8 @@ function Page() {
                             key={item.id}
                             inputType={item.inputType}
                             title={item.title}
-                            state='Low'
-                            required={true}
+                            state=''
+                            required={item.required}
                             className='my-2 w-full lg:w-[49%]'
                             placeholder={item.placeholder}
                             id={item.id}

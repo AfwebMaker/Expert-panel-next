@@ -107,7 +107,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                     {title}
                 </div>
 
-                <div className={`left-4 absolute font-bold text-xs z-20 ${getIconColor()}`}>
+                <div className={`left-4 absolute font-bold text-xs z-10 ${getIconColor()}`}>
                     {getRequiredIcon()}
                 </div>
 

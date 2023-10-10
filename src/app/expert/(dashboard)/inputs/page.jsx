@@ -59,7 +59,7 @@ function Page() {
     const formik = useFormik({
         initialValues: {
             textInput: 'یییی',
-            lastName: '5',
+            lastName: '',
             test: '',
             checkBoxMultipleInput:''
         },

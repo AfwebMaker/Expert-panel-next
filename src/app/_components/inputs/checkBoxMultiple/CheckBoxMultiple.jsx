@@ -51,13 +51,13 @@ function CheckBox({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (parentElem.current && !parentElem.current.contains(event.target)) {
-        setFocus(false)
+        setFocus(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -129,7 +129,7 @@ function CheckBox({
 
   return (
     <div ref={parentElem} className={`${className}`}>
-        {/* <div onClick={(e) => { setFocus(false)}} className="w-screen h-screen top-0 right-0 absolute bg-black"></div> */}
+      {/* <div onClick={(e) => { setFocus(false)}} className="w-screen h-screen top-0 right-0 absolute bg-black"></div> */}
       <div
         onClick={clickHandler}
         className={`transition-all duration-200 min-h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${

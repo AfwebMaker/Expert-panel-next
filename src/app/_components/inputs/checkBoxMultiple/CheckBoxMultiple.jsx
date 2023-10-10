@@ -22,23 +22,26 @@ function CheckBox({
   const buttonRef = useRef(null);
   const [focus, setFocus] = useState(false);
   const [selfState, setSelfState] = useState(state);
+  const [selected, setSelected] = useState([]);
+  const [forceOpenInput, setForceOpenInput] = useState(forceOpen);
 
   const items = {
     list: [
       { id: 1, text: "تهران" },
       { id: 2, text: "شیراز" },
       { id: 3, text: "کرمان" },
-      { id: 4, text: "دماوند" },
+      { id: 4, text: "دماونددماونددماونددماوندv" },
       { id: 5, text: "قزوین" },
       { id: 6, text: "سیستان" },
     ],
-    active: [3, 4],
+    active: [],
   };
 
   //focus handler
   useEffect(() => {
+    selected.length ? setForceOpenInput(true) : setForceOpenInput(false);
     focus && inputRef.current.focus();
-  }, [focus]);
+  }, [focus, selected]);
 
   const clickHandler = () => {
     if (state !== "None" && state !== "Medium") {
@@ -70,7 +73,7 @@ function CheckBox({
   };
 
   const getIconColor = () => {
-    if (formik.values[name] && !focus) {
+    if (selected.length && !focus) {
       if (errorCondition) return "text-error";
       switch (selfState) {
         case "Medium":
@@ -113,7 +116,7 @@ function CheckBox({
       >
         <div
           className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${
-            formik.values[name] !== "" || focus || forceOpen
+            formik.values[name] !== "" || focus || forceOpenInput
               ? "top-2 text-sm font-normal transition-all duration-200"
               : ""
           }`}
@@ -134,7 +137,7 @@ function CheckBox({
           inputRef={inputRef}
           buttonRef={buttonRef}
           className={
-            formik.values[name] !== "" || focus || forceOpen
+            formik.values[name] !== "" || focus || forceOpenInput
               ? "opacity-100"
               : "opacity-0"
           }
@@ -147,6 +150,10 @@ function CheckBox({
           }}
           formik={formik}
           data={items}
+          focus={focus}
+          state={selfState}
+          selected={selected}
+          setSelected={setSelected}
         />
       </div>
       <div className="flex text-error rounded-[4px] mt-2 pr-2 font-bold text-xs">

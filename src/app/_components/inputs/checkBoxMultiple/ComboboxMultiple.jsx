@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 // headlessUi
 import { Combobox, Transition } from "@headlessui/react";
 // react icons
-import { HiOutlineCheck } from "react-icons/hi";
+import { HiOutlineCheck, HiOutlineX } from "react-icons/hi";
 
 export default function ComboBox({
   name,
@@ -14,27 +14,23 @@ export default function ComboBox({
   className,
   activeInput,
   data,
+  focus,
+  state,
+  selected,
+  setSelected
 }) {
   const [items] = useState(data);
-  const [selected, setSelected] = useState([]);
+  
   const [query, setQuery] = useState("");
   const optionsRef = useRef(null);
 
   //find initial value
   useEffect(() => {
-    console.log("items", items)
-    console.log("items", items["list"])
-    items["list"].forEach((item) => {
-      // String(item.id) === String(formik.values[name]) && setSelected(item);
-      items["active"].forEach((i) => {
-        // console.log(i)
-        console.log(item)
-        String(item.id) === String(i) && setSelected([...selected,item]);
-      });
-    });
+    const selectedItems = items.list.filter((item) =>
+      items.active.includes(item.id)
+    );
+    setSelected(selectedItems);
   }, [items]);
-
-  console.log(selected)
 
   const filteredItems =
     query === ""
@@ -61,9 +57,44 @@ export default function ComboBox({
     }
   }, [selected]);
 
+  const removeItem = (id) => {
+    if (!activeInput) setSelected(selected.filter((item) => item.id !== id));
+  };
+
+  const getStateIcon = (e) => {
+    switch (state) {
+      case "None":
+        return <HiOutlineCheck className="text-lg mr-2" />;
+      case "Medium":
+        return "";
+      case "High":
+        return <HiOutlineX onClick={e} className="text-lg mr-2" />;
+      default:
+        return <HiOutlineX onClick={e} className="text-lg mr-2" />;
+    }
+  };
+
+  const getStateColor = () => {
+    switch (state) {
+      case "None":
+        return "bg-primary-100 text-primary-600 border border-primary-200"
+      case "Medium":
+        return "bg-orange-100 text-orange-600 border border-orange-200";
+      case "High":
+        return focus ? "bg-primary-100 text-primary-600 border border-primary-200" : "bg-red-100 text-red-600 border border-red-200"
+      default:
+        return "bg-primary-100 text-primary-600 border border-primary-200";
+    }
+  };
+
   return (
     <>
-      <div className={`w-full mt-10 ${className}`}>
+      <div
+        className={`w-full transition-all duration-300 
+        ${className}
+        ${state === "None" || state === "Medium" ? "mt-6" : focus || selected.length ? "mt-10" : "mt-6" }
+        `}
+      >
         <Combobox
           disabled={activeInput}
           value={selected}
@@ -72,7 +103,12 @@ export default function ComboBox({
         >
           <div className="relative mt-1">
             <div className="relative w-full cursor-default text-left sm:text-sm ">
-              <Combobox.Button ref={buttonRef} className="w-full">
+              <Combobox.Button
+                ref={buttonRef}
+                // ${state === "None" || state === "Medium" ? "hidden" : focus || selected.length || data.active.length ? "flex" : "hidden" }
+                // ${focus  ? "flex" : "hidden"}
+                className={`w-full ${state === "None" || state === "Medium" ? "hidden" : focus || selected.length ? "flex" : "hidden" } `}
+              >
                 <Combobox.Input
                   autoComplete="off"
                   ref={inputRef}
@@ -87,10 +123,20 @@ export default function ComboBox({
                   }}
                 ></Combobox.Input>
               </Combobox.Button>
-              <div className="w-full flex items-center p-3 gap-2 flex-wrap">
+              <div
+                className={`w-full items-center p-3 gap-2 flex-wrap pl-24 ${
+                  selected.length ? "flex" : "hidden"
+                }`}
+              >
                 {selected.map((item) => (
-                  <div key={item.id} className="bg-primary-100 w-36 h-8 rounded-lg fcc">
-                    {item.text}
+                  <div
+                    key={item.id}
+                    className={`h-8 rounded-lg flex items-center justify-between px-2 ${getStateColor()}`}
+                  >
+                    <span>{item.text}</span>
+                    <div className="h-full text-lg fcc">
+                      {getStateIcon(() => removeItem(item.id))}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -122,6 +168,7 @@ export default function ComboBox({
                         } ${selected ? "bg-primary-100 text-primary-500" : ""}`
                       }
                       value={item}
+                      onClick={(e) => {e.stopPropagation()}}
                     >
                       {({ selected, active }) => (
                         <>

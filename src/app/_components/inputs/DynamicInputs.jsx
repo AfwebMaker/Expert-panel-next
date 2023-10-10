@@ -48,7 +48,7 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
                     id={id}
                     name={name}
                     formik={formik}
-                    forceOpen={true}
+                    forceOpen={false}
                 />
             }
         </>

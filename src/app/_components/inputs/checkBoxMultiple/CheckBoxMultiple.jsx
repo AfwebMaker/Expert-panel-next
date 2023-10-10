@@ -20,6 +20,7 @@ function CheckBox({
     (required && state !== "None" && state !== "Medium") || !required;
   const inputRef = useRef(null);
   const buttonRef = useRef(null);
+  const parentElem = useRef(null);
   const [focus, setFocus] = useState(false);
   const [selfState, setSelfState] = useState(state);
   const [selected, setSelected] = useState([]);
@@ -34,16 +35,36 @@ function CheckBox({
       { id: 5, text: "قزوین" },
       { id: 6, text: "سیستان" },
     ],
-    active: [],
+    active: [1, 2],
   };
 
   //focus handler
   useEffect(() => {
-    selected.length ? setForceOpenInput(true) : setForceOpenInput(false);
     focus && inputRef.current.focus();
-  }, [focus, selected]);
+  }, [focus]);
 
-  const clickHandler = () => {
+  useEffect(() => {
+    selected.length ? setForceOpenInput(true) : setForceOpenInput(false);
+  }, [selected]);
+
+  //get click out side of element
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (parentElem.current && !parentElem.current.contains(event.target)) {
+        setFocus(false)
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const clickHandler = (e) => {
+    if (e.target !== parentElem.current) {
+    }
+
     if (state !== "None" && state !== "Medium") {
       setSelfState("Low");
     }
@@ -107,7 +128,8 @@ function CheckBox({
   };
 
   return (
-    <div className={`${className}`}>
+    <div ref={parentElem} className={`${className}`}>
+        {/* <div onClick={(e) => { setFocus(false)}} className="w-screen h-screen top-0 right-0 absolute bg-black"></div> */}
       <div
         onClick={clickHandler}
         className={`transition-all duration-200 min-h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${
@@ -145,12 +167,12 @@ function CheckBox({
           placeholder={placeholder}
           onChange={formik.handleChange}
           onBlur={(e) => {
-            setFocus(false);
             formik.handleBlur(e);
           }}
           formik={formik}
           data={items}
           focus={focus}
+          setFocus={setFocus}
           state={selfState}
           selected={selected}
           setSelected={setSelected}

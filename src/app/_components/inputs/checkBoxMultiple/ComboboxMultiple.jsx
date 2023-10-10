@@ -17,7 +17,8 @@ export default function ComboBox({
   focus,
   state,
   selected,
-  setSelected
+  setSelected,
+  setFocus
 }) {
   const [items] = useState(data);
   
@@ -44,11 +45,11 @@ export default function ComboBox({
 
   //fix this code
   const onBlurHandler = (e) => {
-    setTimeout(() => {
+    // setTimeout(() => {
       onBlur(e);
-      inputRef.current.blur();
+      // inputRef.current.blur();
       formik.setFieldTouched(name);
-    }, 120);
+    // }, 120);
   };
 
   useEffect(() => {
@@ -59,18 +60,19 @@ export default function ComboBox({
 
   const removeItem = (id) => {
     if (!activeInput) setSelected(selected.filter((item) => item.id !== id));
+    
   };
 
   const getStateIcon = (e) => {
     switch (state) {
       case "None":
-        return <HiOutlineCheck className="text-lg mr-2" />;
+        return <HiOutlineCheck className="text-lg mr-2 cursor-pointer" />;
       case "Medium":
         return "";
       case "High":
-        return <HiOutlineX onClick={e} className="text-lg mr-2" />;
+        return <HiOutlineX onClick={e} className="text-lg mr-2 cursor-pointer" />;
       default:
-        return <HiOutlineX onClick={e} className="text-lg mr-2" />;
+        return <HiOutlineX onClick={e} className="text-lg mr-2 cursor-pointer" />;
     }
   };
 
@@ -92,7 +94,7 @@ export default function ComboBox({
       <div
         className={`w-full transition-all duration-300 
         ${className}
-        ${state === "None" || state === "Medium" ? "mt-6" : focus || selected.length ? "mt-10" : "mt-6" }
+        ${state === "None" || state === "Medium" ? "mt-6" : focus ? "mt-10" : "mt-6" }
         `}
       >
         <Combobox
@@ -105,9 +107,9 @@ export default function ComboBox({
             <div className="relative w-full cursor-default text-left sm:text-sm ">
               <Combobox.Button
                 ref={buttonRef}
-                // ${state === "None" || state === "Medium" ? "hidden" : focus || selected.length || data.active.length ? "flex" : "hidden" }
+                // ${state === "None" || state === "Medium" ? "hidden" : focus || selected.length ? "flex" : "hidden" }
                 // ${focus  ? "flex" : "hidden"}
-                className={`w-full ${state === "None" || state === "Medium" ? "hidden" : focus || selected.length ? "flex" : "hidden" } `}
+                className={`w-full ${state === "None" || state === "Medium" ? "hidden" : focus ? "flex" : "hidden" } `}
               >
                 <Combobox.Input
                   autoComplete="off"
@@ -168,7 +170,10 @@ export default function ComboBox({
                         } ${selected ? "bg-primary-100 text-primary-500" : ""}`
                       }
                       value={item}
-                      onClick={(e) => {e.stopPropagation()}}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        
+                      }}
                     >
                       {({ selected, active }) => (
                         <>

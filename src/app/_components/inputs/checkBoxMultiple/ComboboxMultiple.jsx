@@ -15,22 +15,31 @@ export default function ComboBox({
   activeInput,
   data,
 }) {
-  const [items] = useState(data.list);
+  const [items] = useState(data);
   const [selected, setSelected] = useState([]);
   const [query, setQuery] = useState("");
   const optionsRef = useRef(null);
 
   //find initial value
   useEffect(() => {
-    items.forEach((item) => {
-      String(item.id) === String(formik.values[name]) && setSelected(item);
+    console.log("items", items)
+    console.log("items", items["list"])
+    items["list"].forEach((item) => {
+      // String(item.id) === String(formik.values[name]) && setSelected(item);
+      items["active"].forEach((i) => {
+        // console.log(i)
+        console.log(item)
+        String(item.id) === String(i) && setSelected([...selected,item]);
+      });
     });
   }, [items]);
 
+  console.log(selected)
+
   const filteredItems =
     query === ""
-      ? items
-      : items.filter((item) =>
+      ? items["list"]
+      : items["list"].filter((item) =>
           item.text
             .toLowerCase()
             .replace(/\s+/g, "")
@@ -95,7 +104,7 @@ export default function ComboBox({
             >
               <Combobox.Options
                 ref={optionsRef}
-                className="z-10 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                className="z-20 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
               >
                 {filteredItems.length === 0 && query !== "" ? (
                   <div className="relative cursor-default select-none py-2 px-4 text-gray-700">

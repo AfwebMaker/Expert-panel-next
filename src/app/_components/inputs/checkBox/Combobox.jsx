@@ -27,11 +27,8 @@ export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRe
 
     //fix this code
     const onBlurHandler = (e) => {
-        setTimeout(() => {
-            onBlur(e)
-            inputRef.current.blur()
-            formik.setFieldTouched(name)
-        }, 120);
+        onBlur(e)
+        formik.setFieldTouched(name)
     }
 
     useEffect(() => {
@@ -64,7 +61,7 @@ export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRe
                         leaveTo="opacity-0"
                         afterLeave={() => setQuery('')}
                     >
-                        <Combobox.Options ref={optionsRef} className="z-20 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        <Combobox.Options on ref={optionsRef} className="z-20 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                             {filteredItems.length === 0 && query !== '' ? (
                                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                                     اطلاعات مورد نظر پیدا نشد.
@@ -81,12 +78,12 @@ export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRe
                                     >
                                         {({ selected, active }) => (
                                             <>
-                                            {selected ? (
+                                                {selected ? (
                                                     <span
                                                         className={`absolute inset-y-0 right-0 flex items-center pl-1 ${active ? 'text-primary-500 bg-primary-500 h-full' : 'text-teal-600 bg-primary-500 h-full '
                                                             }`}
                                                     >
-                                                        
+
                                                     </span>
                                                 ) : null}
                                                 <span
@@ -95,7 +92,7 @@ export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRe
                                                 >
                                                     {item.text}
                                                 </span>
-                                                
+
                                             </>
                                         )}
                                     </Combobox.Option>

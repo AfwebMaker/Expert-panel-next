@@ -5,12 +5,13 @@ import { HiOutlineChevronDown, HiBadgeCheck } from "react-icons/hi";
 import ComboBox from "./ComboBox"
 import ComboBoxIcon from "./ComboBoxIcon"
 
-function CheckBox({ state, title, placeholder, className, id, name, required, formik }) {
+function CheckBox({ state, title, placeholder, className, id, name, required, formik, inputType }) {
     const [cartNumbers, setCartNumbers] = useState([])
     const errorCondition = formik.touched[name] && formik.errors[name]
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
     const inputRef = useRef(null)
     const buttonRef = useRef(null)
+    const parentElem = useRef(null)
     const [focus, setFocus] = useState(false);
     const [selfState, setSelfState] = useState(state);
 
@@ -42,13 +43,27 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
         return String(cartNum.match(/.{1,4}/g).join(" - "))
     }
 
+    //bankCart edit format
     useEffect(() => {
         const newData = data2.list.map((item) => {
             return { ...item, text: cartNumberFormat(item.text) }
         })
-
         setCartNumbers(newData)
     }, [])
+
+    //get click out side of element
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (parentElem.current && !parentElem.current.contains(event.target)) {
+                setFocus(false)
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     //focus handler
     useEffect(() => {
@@ -113,7 +128,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
     }
 
     return (
-        <div className={`${className}`}>
+        <div ref={parentElem} className={`${className}`}>
             <div onClick={clickHandler} className={`transition-all duration-200 min-h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
 
                 <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(formik.values[name] !== '' || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
@@ -124,7 +139,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                     {getRequiredIcon()}
                 </div>
 
-                {false ?
+                {inputType === 'dropDown' ?
                     <ComboBox
                         id={id}
                         name={name}
@@ -135,7 +150,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                         value={formik.values[name]}
                         placeholder={placeholder}
                         onChange={formik.handleChange}
-                        onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
+                        onBlur={(e) => { formik.handleBlur(e) }}
                         formik={formik}
                         data={data1}
                     /> :
@@ -149,7 +164,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                         value={formik.values[name]}
                         placeholder={placeholder}
                         onChange={formik.handleChange}
-                        onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
+                        onBlur={(e) => { formik.handleBlur(e) }}
                         formik={formik}
                         items={cartNumbers}
                     />

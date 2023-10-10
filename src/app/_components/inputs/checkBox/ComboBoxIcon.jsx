@@ -27,11 +27,8 @@ export default function ComboBoxIcon({ name, placeholder, onBlur, inputRef, butt
 
     //fix this code
     const onBlurHandler = (e) => {
-        setTimeout(() => {
-            onBlur(e)
-            inputRef.current.blur()
-            formik.setFieldTouched(name)
-        }, 120);
+        onBlur(e)
+        formik.setFieldTouched(name)
     }
 
     useEffect(() => {
@@ -68,7 +65,7 @@ export default function ComboBoxIcon({ name, placeholder, onBlur, inputRef, butt
                         leaveTo="opacity-0"
                         afterLeave={() => setQuery('')}
                     >
-                        <Combobox.Options ref={optionsRef} className="z-20 scroll_custom  absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        <Combobox.Options ref={optionsRef} className="z-20 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                             {filteredItems.length === 0 && query !== '' ? (
                                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                                     اطلاعات مورد نظر پیدا نشد.

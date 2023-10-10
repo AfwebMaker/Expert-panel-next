@@ -24,7 +24,7 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
                 />
             }
 
-            {inputType === 'checkBox' &&
+            {(inputType === 'dropDown_Icon' || inputType === 'dropDown') &&
                 <CheckBox
                     inputType={inputType}
                     title={title}

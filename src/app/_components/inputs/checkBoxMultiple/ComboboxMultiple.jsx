@@ -18,10 +18,10 @@ export default function ComboBox({
   state,
   selected,
   setSelected,
-  setFocus
+  setFocus,
 }) {
   const [items] = useState(data);
-  
+
   const [query, setQuery] = useState("");
   const optionsRef = useRef(null);
 
@@ -45,11 +45,8 @@ export default function ComboBox({
 
   //fix this code
   const onBlurHandler = (e) => {
-    // setTimeout(() => {
-      onBlur(e);
-      // inputRef.current.blur();
-      formik.setFieldTouched(name);
-    // }, 120);
+    onBlur(e);
+    formik.setFieldTouched(name);
   };
 
   useEffect(() => {
@@ -60,7 +57,6 @@ export default function ComboBox({
 
   const removeItem = (id) => {
     if (!activeInput) setSelected(selected.filter((item) => item.id !== id));
-    
   };
 
   const getStateIcon = (e) => {
@@ -70,20 +66,26 @@ export default function ComboBox({
       case "Medium":
         return "";
       case "High":
-        return <HiOutlineX onClick={e} className="text-lg mr-2 cursor-pointer" />;
+        return (
+          <HiOutlineX onClick={e} className="text-lg mr-2 cursor-pointer" />
+        );
       default:
-        return <HiOutlineX onClick={e} className="text-lg mr-2 cursor-pointer" />;
+        return (
+          <HiOutlineX onClick={e} className="text-lg mr-2 cursor-pointer" />
+        );
     }
   };
 
   const getStateColor = () => {
     switch (state) {
       case "None":
-        return "bg-primary-100 text-primary-600 border border-primary-200"
+        return "bg-primary-100 text-primary-600 border border-primary-200";
       case "Medium":
         return "bg-orange-100 text-orange-600 border border-orange-200";
       case "High":
-        return focus ? "bg-primary-100 text-primary-600 border border-primary-200" : "bg-red-100 text-red-600 border border-red-200"
+        return focus
+          ? "bg-primary-100 text-primary-600 border border-primary-200"
+          : "bg-red-100 text-red-600 border border-red-200";
       default:
         return "bg-primary-100 text-primary-600 border border-primary-200";
     }
@@ -94,7 +96,13 @@ export default function ComboBox({
       <div
         className={`w-full transition-all duration-300 
         ${className}
-        ${state === "None" || state === "Medium" ? "mt-6" : focus ? "mt-10" : "mt-6" }
+        ${
+          state === "None" || state === "Medium"
+            ? "mt-6"
+            : focus
+            ? "mt-10"
+            : "mt-6"
+        }
         `}
       >
         <Combobox
@@ -109,7 +117,13 @@ export default function ComboBox({
                 ref={buttonRef}
                 // ${state === "None" || state === "Medium" ? "hidden" : focus || selected.length ? "flex" : "hidden" }
                 // ${focus  ? "flex" : "hidden"}
-                className={`w-full ${state === "None" || state === "Medium" ? "hidden" : focus ? "flex" : "hidden" } `}
+                className={`w-full ${
+                  state === "None" || state === "Medium"
+                    ? "hidden"
+                    : focus
+                    ? "flex"
+                    : "hidden"
+                } `}
               >
                 <Combobox.Input
                   autoComplete="off"
@@ -171,8 +185,7 @@ export default function ComboBox({
                       }
                       value={item}
                       onClick={(e) => {
-                        e.stopPropagation()
-                        
+                        e.stopPropagation();
                       }}
                     >
                       {({ selected, active }) => (

@@ -6,6 +6,7 @@ import ComboBox from "./ComboBox"
 import ComboBoxIcon from "./ComboBoxIcon"
 
 function CheckBox({ state, title, placeholder, className, id, name, required, formik }) {
+    const [cartNumbers, setCartNumbers] = useState([])
     const errorCondition = formik.touched[name] && formik.errors[name]
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
     const inputRef = useRef(null)
@@ -27,15 +28,27 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
 
     const data2 = {
         list: [
-            { id: 1, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
-            { id: 2, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
-            { id: 3, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
-            { id: 4, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
-            { id: 5, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
-            { id: 6, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
+            { id: 1, text: '12344321****6789' },
+            { id: 1, text: '12344321****6789' },
+            { id: 1, text: '12344321****6789' },
+            { id: 2, text: '43572352****3526' }
         ],
         active: '5'
     }
+
+    //edit input format
+    const cartNumberFormat = (cartNum) => {
+        console.log(cartNum)
+        return String(cartNum.match(/.{1,4}/g).join(" - "))
+    }
+
+    useEffect(() => {
+        const newData = data2.list.map((item) => {
+            return { ...item, text: cartNumberFormat(item.text) }
+        })
+
+        setCartNumbers(newData)
+    }, [])
 
     //focus handler
     useEffect(() => {
@@ -101,7 +114,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
 
     return (
         <div className={`${className}`}>
-            <div onClick={clickHandler} className={`transition-all duration-200 h-[80px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
+            <div onClick={clickHandler} className={`transition-all duration-200 min-h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
 
                 <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(formik.values[name] !== '' || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
                     {title}
@@ -138,7 +151,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                         onChange={formik.handleChange}
                         onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
                         formik={formik}
-                        data={data2}
+                        items={cartNumbers}
                     />
                 }
 

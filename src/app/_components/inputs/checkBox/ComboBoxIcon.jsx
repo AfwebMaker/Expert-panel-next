@@ -1,12 +1,9 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
+import Image from 'next/image';
 // headlessUi
 import { Combobox, Transition } from '@headlessui/react'
-// react icons
-import { HiOutlineCheck } from "react-icons/hi";
-import Image from 'next/image';
 
-export default function ComboBoxIcon({ name, placeholder, onBlur, inputRef, buttonRef, formik, className, activeInput, data }) {
-    const [items] = useState(data.list)
+export default function ComboBoxIcon({ name, placeholder, onBlur, inputRef, buttonRef, formik, className, activeInput, items }) {
     const [selected, setSelected] = useState({})
     const [query, setQuery] = useState('')
     const optionsRef = useRef(null)
@@ -44,7 +41,7 @@ export default function ComboBoxIcon({ name, placeholder, onBlur, inputRef, butt
     }, [selected])
 
     return (
-        <div className={`w-full absolute bottom-0 ${className}`}>
+        <div className={`w-full relative bottom-0 mt-7 ${className}`}>
             <Combobox disabled={activeInput} value={selected} onChange={setSelected}>
                 <div className="relative mt-1">
                     <div className="relative w-full cursor-default text-left sm:text-sm">
@@ -53,17 +50,15 @@ export default function ComboBoxIcon({ name, placeholder, onBlur, inputRef, butt
                                 <Image className='object-contain' src={'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'} fill />
                             </div>
                             <Combobox.Input
+                                style={{ direction: 'ltr' }}
                                 autoComplete='off'
                                 ref={inputRef}
                                 onBlur={onBlurHandler}
                                 placeholder={placeholder}
-                                className={`w-full outline-none rounded-md border-none pl-10 text-sm leading-5 text-gray-900 ${activeInput ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                                className={`text-right flex w-full outline-none rounded-md border-none pl-10 text-sm leading-5 text-gray-900 ${activeInput ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                                 displayValue={(item) => item.text}
                                 onChange={(event) => { setQuery(event.target.value) }}
                             />
-                        </Combobox.Button>
-                        <Combobox.Button className="absolute top-[-14px] left-0 flex items-center pl-2">
-
                         </Combobox.Button>
                     </div>
                     <Transition
@@ -73,7 +68,7 @@ export default function ComboBoxIcon({ name, placeholder, onBlur, inputRef, butt
                         leaveTo="opacity-0"
                         afterLeave={() => setQuery('')}
                     >
-                        <Combobox.Options ref={optionsRef} className="z-20 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        <Combobox.Options ref={optionsRef} className="z-20 scroll_custom  absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                             {filteredItems.length === 0 && query !== '' ? (
                                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                                     اطلاعات مورد نظر پیدا نشد.
@@ -106,7 +101,9 @@ export default function ComboBoxIcon({ name, placeholder, onBlur, inputRef, butt
                                                         <div className='w-10 h-10 ml-2 relative fcc'>
                                                             <Image className='object-contain' src={'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'} fill />
                                                         </div>
-                                                        {item.text}
+                                                        <div style={{ direction: 'ltr' }} className='flex items-center'>
+                                                            {item.text}
+                                                        </div>
                                                     </div>
                                                 </span>
 

@@ -1,8 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 // headlessUi
 import { Combobox, Transition } from '@headlessui/react'
-// react icons
-import { HiOutlineCheck } from "react-icons/hi";
 
 export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRef, formik, className, activeInput, data }) {
     const [items] = useState(data.list)
@@ -57,9 +55,6 @@ export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRe
                                 displayValue={(item) => item.text}
                                 onChange={(event) => { setQuery(event.target.value) }}
                             />
-                        </Combobox.Button>
-                        <Combobox.Button className="absolute top-[-14px] left-0 flex items-center pl-2">
-
                         </Combobox.Button>
                     </div>
                     <Transition

@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect } from 'react'
 //react icons
 import { HiOutlineChevronDown, HiBadgeCheck } from "react-icons/hi";
 // component
-import ComboBox from "./Combobox"
+import ComboBox from "./ComboBox"
+import ComboBoxIcon from "./ComboBoxIcon"
 
 function CheckBox({ state, title, placeholder, className, id, name, required, formik }) {
     const errorCondition = formik.touched[name] && formik.errors[name]
@@ -12,7 +13,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
     const [focus, setFocus] = useState(false);
     const [selfState, setSelfState] = useState(state);
 
-    const items = {
+    const data1 = {
         list: [
             { id: 1, text: 'ضصثیب' },
             { id: 2, text: 'سثیببص' },
@@ -20,6 +21,18 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
             { id: 4, text: 'صثبب' },
             { id: 5, text: 'صثبصثب' },
             { id: 6, text: 'ضصثق' },
+        ],
+        active: '5'
+    }
+
+    const data2 = {
+        list: [
+            { id: 1, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
+            { id: 2, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
+            { id: 3, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
+            { id: 4, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
+            { id: 5, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
+            { id: 6, text: '٦۲۷٤ - ۱۲۱۱ - **** - ۱۰۸۲' },
         ],
         active: '5'
     }
@@ -88,7 +101,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
 
     return (
         <div className={`${className}`}>
-            <div onClick={clickHandler} className={`transition-all duration-200 h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
+            <div onClick={clickHandler} className={`transition-all duration-200 h-[80px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
 
                 <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(formik.values[name] !== '' || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
                     {title}
@@ -98,20 +111,36 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                     {getRequiredIcon()}
                 </div>
 
-                <ComboBox
-                    id={id}
-                    name={name}
-                    activeInput={!activeInputCondition}
-                    inputRef={inputRef}
-                    buttonRef={buttonRef}
-                    className={(formik.values[name] !== '' || focus) ? 'opacity-100' : 'opacity-0'}
-                    value={formik.values[name]}
-                    placeholder={placeholder}
-                    onChange={formik.handleChange}
-                    onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
-                    formik={formik}
-                    data={items}
-                />
+                {false ?
+                    <ComboBox
+                        id={id}
+                        name={name}
+                        activeInput={!activeInputCondition}
+                        inputRef={inputRef}
+                        buttonRef={buttonRef}
+                        className={(formik.values[name] !== '' || focus) ? 'opacity-100' : 'opacity-0'}
+                        value={formik.values[name]}
+                        placeholder={placeholder}
+                        onChange={formik.handleChange}
+                        onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
+                        formik={formik}
+                        data={data1}
+                    /> :
+                    <ComboBoxIcon
+                        id={id}
+                        name={name}
+                        activeInput={!activeInputCondition}
+                        inputRef={inputRef}
+                        buttonRef={buttonRef}
+                        className={(formik.values[name] !== '' || focus) ? 'opacity-100' : 'opacity-0'}
+                        value={formik.values[name]}
+                        placeholder={placeholder}
+                        onChange={formik.handleChange}
+                        onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
+                        formik={formik}
+                        data={data2}
+                    />
+                }
 
             </div>
             <div className='flex text-error rounded-[4px] mt-2 pr-2 font-bold text-xs'>

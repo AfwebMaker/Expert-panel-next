@@ -7,7 +7,7 @@ import ComboBoxIcon from "./ComboBoxIcon"
 
 function CheckBox({ state, title, placeholder, className, id, name, required, formik, inputType }) {
     const [cartNumbers, setCartNumbers] = useState([])
-    const errorCondition = formik.errors[name]
+    const errorCondition = (formik.touched[name] && formik.errors[name])
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
     const inputRef = useRef(null)
     const buttonRef = useRef(null)

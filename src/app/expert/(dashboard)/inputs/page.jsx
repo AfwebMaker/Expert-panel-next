@@ -17,6 +17,9 @@ function Page() {
             .required("لطفا نام خانوادگی خود را به درستی وارد کنید."),
         dropDown_Icon: Yup.string()
             .required("لطفا نام خانوادگی خود را به درستی وارد کنید."),
+        checkBoxMultipleInput: Yup.string()
+            .required("لطفا نام خانوادگی خود را به درستی وارد کنید."),
+
     });
 
     const inputObjects = [
@@ -70,12 +73,15 @@ function Page() {
     const formik = useFormik({
         initialValues: {
             textInput: '',
-            lastName: '',
+            dropDown: '',
+            dropDown_Icon: '',
             test: '',
             checkBoxMultipleInput: ''
         },
         validationSchema,
         onSubmit: values => {
+
+            console.log(JSON.parse(values.dropDown_Icon)[3])
             alert(JSON.stringify(values, null, 2));
         },
     });

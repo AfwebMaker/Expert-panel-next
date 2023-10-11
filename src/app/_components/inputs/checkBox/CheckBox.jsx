@@ -7,7 +7,7 @@ import ComboBoxIcon from "./ComboBoxIcon"
 
 function CheckBox({ state, title, placeholder, className, id, name, required, formik, inputType }) {
     const [cartNumbers, setCartNumbers] = useState([])
-    const errorCondition = formik.touched[name] && formik.errors[name]
+    const errorCondition = formik.errors[name]
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
     const inputRef = useRef(null)
     const buttonRef = useRef(null)
@@ -30,18 +30,19 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
     const data2 = {
         list: [
             { id: 1, text: '12344321****6789' },
-            { id: 1, text: '12344321****6789' },
-            { id: 1, text: '12344321****6789' },
-            { id: 2, text: '43572352****3526' }
+            { id: 2, text: '12344321****6789' },
+            { id: 3, text: '12344321****6789' },
+            { id: 4, text: '43572352****3526' }
         ],
         active: '5'
     }
 
     //edit input format
     const cartNumberFormat = (cartNum) => {
-        console.log(cartNum)
         return String(cartNum.match(/.{1,4}/g).join(" - "))
     }
+
+    console.log(formik.touched[name])
 
     //bankCart edit format
     useEffect(() => {

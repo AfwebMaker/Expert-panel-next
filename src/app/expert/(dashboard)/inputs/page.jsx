@@ -13,9 +13,10 @@ function Page() {
             .required("لطفا نام خود را وارد کنید.")
             .matches(/^[\u0600-\u06FF\s]+$/, "نام باید با حروف فارسی نوشته شود.")
             .min(3, "لطفا نام خود را به درستی وارد کنید."),
-        lastName: Yup.string().required(
-            "لطفا نام خانوادگی خود را به درستی وارد کنید."
-        ),
+        dropDown: Yup.string()
+            .required("لطفا نام خانوادگی خود را به درستی وارد کنید."),
+        dropDown_Icon: Yup.string()
+            .required("لطفا نام خانوادگی خود را به درستی وارد کنید."),
     });
 
     const inputObjects = [
@@ -47,8 +48,8 @@ function Page() {
             placeholder: "به طور مثال : جواد زاده",
         },
         {
-            id: "dropDown",
-            name: "dropDown",
+            id: "dropDown_Icon",
+            name: "dropDown_Icon",
             inputType: "dropDown_Icon",
             title: "نام خانوادگی",
             required: true,

@@ -18,7 +18,6 @@ export default function ComboBox({
   state,
   selected,
   setSelected,
-  setFocus,
 }) {
   const [items] = useState(data);
 
@@ -28,7 +27,7 @@ export default function ComboBox({
   //find initial value
   useEffect(() => {
     const selectedItems = items.list.filter((item) =>
-      items.active.includes(item.id)
+      formik.values[name].includes(item.id)
     );
     setSelected(selectedItems);
   }, [items]);
@@ -50,8 +49,12 @@ export default function ComboBox({
   };
 
   useEffect(() => {
-    if (selected && selected.id !== undefined) {
-      formik.setFieldValue(name, selected.id);
+    if (selected) {
+      const itemSelect = selected.map((item) => {
+        return item.id;
+      });
+
+      formik.setFieldValue(name, itemSelect);
     }
   }, [selected]);
 
@@ -115,8 +118,6 @@ export default function ComboBox({
             <div className="relative w-full cursor-default text-left sm:text-sm ">
               <Combobox.Button
                 ref={buttonRef}
-                // ${state === "None" || state === "Medium" ? "hidden" : focus || selected.length ? "flex" : "hidden" }
-                // ${focus  ? "flex" : "hidden"}
                 className={`w-full ${
                   state === "None" || state === "Medium"
                     ? "hidden"
@@ -140,7 +141,7 @@ export default function ComboBox({
                 ></Combobox.Input>
               </Combobox.Button>
               <div
-                className={`w-full items-center p-3 gap-2 flex-wrap pl-24 ${
+                className={`w-full items-center p-3 gap-2 flex-wrap pl-24 ${activeInput ? "cursor-not-allowed" : ""} ${
                   selected.length ? "flex" : "hidden"
                 }`}
               >

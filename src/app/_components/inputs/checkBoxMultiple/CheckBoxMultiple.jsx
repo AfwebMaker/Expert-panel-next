@@ -35,7 +35,6 @@ function CheckBox({
       { id: 5, text: "قزوین" },
       { id: 6, text: "سیستان" },
     ],
-    active: [1, 2],
   };
 
   //focus handler
@@ -128,8 +127,7 @@ function CheckBox({
   };
 
   return (
-    <div ref={parentElem} className={`${className}`}>
-      {/* <div onClick={(e) => { setFocus(false)}} className="w-screen h-screen top-0 right-0 absolute bg-black"></div> */}
+    <div ref={parentElem} className={className}>
       <div
         onClick={clickHandler}
         className={`transition-all duration-200 min-h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${
@@ -137,8 +135,9 @@ function CheckBox({
         } ${activeInputCondition ? "bg-white" : "bg-gray-100"}`}
       >
         <div
+        // formik.values[name].length !== "" ||
           className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${
-            formik.values[name] !== "" || focus || forceOpenInput
+            focus || forceOpenInput
               ? "top-2 text-sm font-normal transition-all duration-200"
               : ""
           }`}
@@ -158,11 +157,7 @@ function CheckBox({
           activeInput={!activeInputCondition}
           inputRef={inputRef}
           buttonRef={buttonRef}
-          className={
-            formik.values[name] !== "" || focus || forceOpenInput
-              ? "opacity-100"
-              : "opacity-0"
-          }
+          className={focus || forceOpenInput ? "opacity-100" : "opacity-0"}
           value={formik.values[name]}
           placeholder={placeholder}
           onChange={formik.handleChange}

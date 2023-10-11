@@ -1,17 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { HiExclamation, HiBadgeCheck } from 'react-icons/hi'
+//date picker
+import Datepicker from "react-tailwindcss-datepicker";
 
-function InputTextarea({ state, title, placeholder, type, className, id, name, required, formik }) {
+function CustomDatePicker({ state, title, placeholder, type, className, id, name, required, formik }) {
     const errorCondition = formik.touched[name] && formik.errors[name]
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
     const inputRef = useRef(null)
     const [focus, setFocus] = useState(false);
     const [selfState, setSelfState] = useState(state);
 
-    //when click on custom component focus on html input 
-    useEffect(() => {
-        focus && inputRef.current.focus()
-    }, [focus])
+    const [value, setValue] = useState({});
+
+
+    const handleValueChange = (newValue) => {
+        console.log("newValue:", newValue);
+        setValue(newValue);
+    }
+
+    // //when click on custom component focus on html input 
+    // useEffect(() => {
+    //     focus && inputRef.current.focus()
+    // }, [focus])
 
     //click on custom input body
     const clickHandler = () => {
@@ -72,29 +82,44 @@ function InputTextarea({ state, title, placeholder, type, className, id, name, r
 
     return (
         <div className={className}>
-            <div onClick={clickHandler} className={`transition-all min-h-[200px] pb-1 duration-200 px-1 relative fcc flex-col rounded-md overflow-hidden ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
+            <div onClick={clickHandler} className={`transition-all duration-200 h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
 
-                <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(formik.values[name] !== '' || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : 'top-2'}`}>
+                <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(formik.values[name] !== '' || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
                     {title}
                 </div>
 
-                <div className={`left-4 top-4 absolute font-bold text-xs z-10 ${getIconColor()}`}>
+                <div className={`left-4 absolute font-bold text-xs z-10 ${getIconColor()}`}>
                     {getRequiredIcon()}
                 </div>
 
                 {(formik.values[name] !== '' || focus) &&
-                    <textarea
-                        id={id}
-                        disabled={!activeInputCondition}
-                        name={name}
-                        ref={inputRef}
-                        value={formik.values[name]}
-                        type={type}
-                        placeholder={placeholder}
-                        onChange={formik.handleChange}
-                        onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
-                        className={`w-full min-h-[156px] max-h-[300px] mt-10 scroll_custom fcc px-4 pb-2 pl-16 font-medium text-sm ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-                    />
+                    <div className={`w-full absolute bottom-0 fcc px-4 pb-2 pl-16 font-medium text-sm ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}>
+                        <Datepicker
+                            i18n='fa'
+                            placeholder={placeholder}
+                            toggleClassName={'flex ml-2'}
+                            inputClassName={'flex items-center absolute bottom-0 right-2 mb-10'}
+                            containerClassName="w-full flex "
+                            value={value}
+                            onChange={handleValueChange}
+                            asSingle={true}
+                            useRange={false}
+
+                        />
+                    </div>
+
+                    // <input
+                    //     id={id}
+                    //     disabled={!activeInputCondition}
+                    //     name={name}
+                    //     ref={inputRef}
+                    //     value={formik.values[name]}
+                    //     type={type}
+                    //     placeholder={placeholder}
+                    //     onChange={formik.handleChange}
+                    //     onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
+                    //     className={`w-full absolute bottom-0 fcc px-4 pb-2 pl-16 font-medium text-sm ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                    // />
                 }
 
             </div>
@@ -109,4 +134,4 @@ function InputTextarea({ state, title, placeholder, type, className, id, name, r
     )
 }
 
-export default InputTextarea
+export default CustomDatePicker

@@ -31,6 +31,15 @@ function Page() {
 
   const inputObjects = [
     {
+      id: "datePicker",
+      name: "datePicker",
+      inputType: "datePicker",
+      title: "زمان",
+      required: true,
+      type: "text",
+      placeholder: "به طور مثال : 1401/2/2",
+    },
+    {
       id: "textInput",
       name: "textInput",
       inputType: "text",
@@ -43,7 +52,7 @@ function Page() {
       id: "test",
       name: "test",
       inputType: "text",
-      title: "اختیاری",
+      title: "تکست(اختیاری)",
       required: false,
       type: "text",
       placeholder: "به طور مثال : محمد",
@@ -52,7 +61,7 @@ function Page() {
       id: "dropDown",
       name: "dropDown",
       inputType: "dropDown",
-      title: "نام خانوادگی",
+      title: "دراپ دان",
       required: true,
       type: "text",
       placeholder: "به طور مثال : جواد زاده",
@@ -61,7 +70,7 @@ function Page() {
       id: "dropDown_Icon",
       name: "dropDown_Icon",
       inputType: "dropDown_Icon",
-      title: "نام خانوادگی",
+      title: "دراپ دان(ایکون)",
       required: true,
       type: "text",
       placeholder: "به طور مثال : جواد زاده",
@@ -70,7 +79,7 @@ function Page() {
       id: "checkBoxMultipleInput",
       name: "checkBoxMultipleInput",
       inputType: "checkBoxMultiple",
-      title: "نام خانوادگی",
+      title: "چک باکس",
       required: true,
       type: "text",
       placeholder: "به طور مثال : جواد زاده",
@@ -79,7 +88,7 @@ function Page() {
       id: "inputTextarea",
       name: "inputTextarea",
       inputType: "inputTextarea",
-      title: "مشکل خود را در این قسمت بنویسید",
+      title: "تکس تریا",
       required: true,
       type: "text",
       placeholder: "به طور مثال : سلام روز بخیر ..",
@@ -88,6 +97,7 @@ function Page() {
 
   const formik = useFormik({
     initialValues: {
+      datePicker: "",
       textInput: "",
       dropDown: "",
       dropDown_Icon: "",

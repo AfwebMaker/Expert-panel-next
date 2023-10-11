@@ -80,8 +80,6 @@ function Page() {
         },
         validationSchema,
         onSubmit: values => {
-
-            console.log(JSON.parse(values.dropDown_Icon)[3])
             alert(JSON.stringify(values, null, 2));
         },
     });

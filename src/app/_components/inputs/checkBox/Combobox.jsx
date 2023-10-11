@@ -1,12 +1,11 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 // headlessUi
 import { Combobox, Transition } from '@headlessui/react'
 
-export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRef, formik, className, activeInput, data }) {
+export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRef, formik, className, activeInput, data, focus }) {
     const [items] = useState(data.list)
     const [selected, setSelected] = useState({})
     const [query, setQuery] = useState('')
-    const optionsRef = useRef(null)
 
     //find initial value
     useEffect(() => {
@@ -54,52 +53,54 @@ export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRe
                             />
                         </Combobox.Button>
                     </div>
-                    <Transition
-                        as={Fragment}
-                        leave="transition ease-in duration-100"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                        afterLeave={() => setQuery('')}
-                    >
-                        <Combobox.Options ref={optionsRef} className="z-20 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {filteredItems.length === 0 && query !== '' ? (
-                                <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
-                                    اطلاعات مورد نظر پیدا نشد.
-                                </div>
-                            ) : (
-                                filteredItems.map((item) => (
-                                    <Combobox.Option
-                                        key={item.id}
-                                        className={({ active, selected }) =>
-                                            `relative cursor-default select-none py-3 pl-10 pr-4 ${active ? 'bg-primary-100 text-primary-500' : 'text-gray-900'
-                                            } ${selected ? 'bg-primary-100 text-primary-500' : ''}`
-                                        }
-                                        value={item}
-                                    >
-                                        {({ selected, active }) => (
-                                            <>
-                                                {selected ? (
+                    {focus &&
+                        <Transition
+                            as={Fragment}
+                            leave="transition ease-in duration-100"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                            afterLeave={() => setQuery('')}
+                        >
+                            <Combobox.Options className="z-20 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                {filteredItems.length === 0 && query !== '' ? (
+                                    <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                                        اطلاعات مورد نظر پیدا نشد.
+                                    </div>
+                                ) : (
+                                    filteredItems.map((item) => (
+                                        <Combobox.Option
+                                            key={item.id}
+                                            className={({ active, selected }) =>
+                                                `relative cursor-default select-none py-3 pl-10 pr-4 ${active ? 'bg-primary-100 text-primary-500' : 'text-gray-900'
+                                                } ${selected ? 'bg-primary-100 text-primary-500' : ''}`
+                                            }
+                                            value={item}
+                                        >
+                                            {({ selected, active }) => (
+                                                <>
+                                                    {selected ? (
+                                                        <span
+                                                            className={`absolute inset-y-0 right-0 flex items-center pl-1 ${active ? 'text-primary-500 bg-primary-500 h-full' : 'text-teal-600 bg-primary-500 h-full '
+                                                                }`}
+                                                        >
+
+                                                        </span>
+                                                    ) : null}
                                                     <span
-                                                        className={`absolute inset-y-0 right-0 flex items-center pl-1 ${active ? 'text-primary-500 bg-primary-500 h-full' : 'text-teal-600 bg-primary-500 h-full '
+                                                        className={`block truncate ${selected ? 'font-medium text-primary-500' : 'font-normal'
                                                             }`}
                                                     >
-
+                                                        {item.text}
                                                     </span>
-                                                ) : null}
-                                                <span
-                                                    className={`block truncate ${selected ? 'font-medium text-primary-500' : 'font-normal'
-                                                        }`}
-                                                >
-                                                    {item.text}
-                                                </span>
 
-                                            </>
-                                        )}
-                                    </Combobox.Option>
-                                ))
-                            )}
-                        </Combobox.Options>
-                    </Transition>
+                                                </>
+                                            )}
+                                        </Combobox.Option>
+                                    ))
+                                )}
+                            </Combobox.Options>
+                        </Transition>
+                    }
                 </div>
             </Combobox>
         </div>

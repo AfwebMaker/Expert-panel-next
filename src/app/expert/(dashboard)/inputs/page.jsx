@@ -101,6 +101,53 @@ function Page() {
       alert(JSON.stringify(values, null, 2));
     },
   });
+    const inputObjects = [
+        {
+            id: "textInput",
+            name: "textInput",
+            inputType: "text",
+            title: "textBox(required)",
+            required: true,
+            type: "text",
+            placeholder: "به طور مثال : محمد",
+        },
+        {
+            id: "test",
+            name: "test",
+            inputType: "text",
+            title: "textBox",
+            required: false,
+            type: "text",
+            placeholder: "به طور مثال : محمد",
+        },
+        {
+            id: "dropDown",
+            name: "dropDown",
+            inputType: "dropDown",
+            title: "dropDown",
+            required: true,
+            type: "text",
+            placeholder: "به طور مثال : جواد زاده",
+        },
+        {
+            id: "dropDown_Icon",
+            name: "dropDown_Icon",
+            inputType: "dropDown_Icon",
+            title: "dropDown(icon)",
+            required: true,
+            type: "text",
+            placeholder: "به طور مثال : جواد زاده",
+        },
+        {
+            id: "checkBoxMultipleInput",
+            name: "checkBoxMultipleInput",
+            inputType: "checkBoxMultiple",
+            title: "نام خانوادگی",
+            required: true,
+            type: "text",
+            placeholder: "به طور مثال : جواد زاده",
+        },
+    ];
 
   return (
     <form onSubmit={formik.handleSubmit}>

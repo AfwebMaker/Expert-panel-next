@@ -42,8 +42,6 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
         return String(cartNum.match(/.{1,4}/g).join(" - "))
     }
 
-    console.log(formik.touched[name])
-
     //bankCart edit format
     useEffect(() => {
         const newData = data2.list.map((item) => {
@@ -52,24 +50,16 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
         setCartNumbers(newData)
     }, [])
 
-    //get click out side of element
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (parentElem.current && !parentElem.current.contains(event.target)) {
+    //input blur handler
+    const onBlurHandler = (e) => {
+        formik.handleBlur(e);
+        setTimeout(() => {
+            if (focus) {
+                inputRef.current.blur()
                 setFocus(false)
             }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
-    //focus handler
-    useEffect(() => {
-        focus && inputRef.current.focus()
-    }, [focus])
+        }, 120);
+    }
 
     const clickHandler = () => {
         if (state !== 'None' && state !== 'Medium') {
@@ -78,6 +68,7 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
 
         if (activeInputCondition) {
             buttonRef.current.click()
+            !focus ? inputRef.current.focus() : inputRef.current.blur()
             setFocus(true)
         }
     }
@@ -151,9 +142,10 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                         value={formik.values[name]}
                         placeholder={placeholder}
                         onChange={formik.handleChange}
-                        onBlur={(e) => { formik.handleBlur(e) }}
+                        onBlur={onBlurHandler}
                         formik={formik}
                         data={data1}
+                        focus={focus}
                     /> :
                     <ComboBoxIcon
                         id={id}
@@ -165,9 +157,10 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                         value={formik.values[name]}
                         placeholder={placeholder}
                         onChange={formik.handleChange}
-                        onBlur={(e) => { formik.handleBlur(e) }}
+                        onBlur={onBlurHandler}
                         formik={formik}
                         items={cartNumbers}
+                        focus={focus}
                     />
                 }
 

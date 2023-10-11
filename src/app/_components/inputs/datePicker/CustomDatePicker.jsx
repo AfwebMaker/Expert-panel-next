@@ -14,7 +14,7 @@ function CustomDatePicker({ state, title, placeholder, type, className, id, name
 
 
     const handleValueChange = (newValue) => {
-        console.log("newValue:", newValue);
+        formik.setFieldValue(name, '');
         setValue(newValue);
     }
 
@@ -93,18 +93,20 @@ function CustomDatePicker({ state, title, placeholder, type, className, id, name
                 </div>
 
                 {(formik.values[name] !== '' || focus) &&
-                    <div className={`w-full absolute bottom-0 fcc px-4 pb-2 pl-16 font-medium text-sm ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}>
+                    <div className='absolute bottom-1 w-full pl-16'>
                         <Datepicker
                             i18n='fa'
+                            startFrom={new Date().toLocaleDateString('fa-IR-u-nu-latn')}
+                            displayFormat={"DD/MM/YYYY"}
+                            primaryColor='green'
                             placeholder={placeholder}
-                            toggleClassName={'flex ml-2'}
-                            inputClassName={'flex items-center absolute bottom-0 right-2 mb-10'}
-                            containerClassName="w-full flex "
+                            toggleClassName="hidden"
+                            inputClassName="pr-4 w-full relative text-cf-400 flex flex"
+                            containerClassName="relative z-50 bg-red-500 font-bold text-sm"
                             value={value}
                             onChange={handleValueChange}
                             asSingle={true}
                             useRange={false}
-
                         />
                     </div>
 

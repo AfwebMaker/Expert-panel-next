@@ -1,38 +1,66 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { HiExclamation, HiBadgeCheck } from 'react-icons/hi'
 //date picker
 import Datepicker from "react-tailwindcss-datepicker";
 
-function CustomDatePicker({ state, title, placeholder, type, className, id, name, required, formik }) {
+function CustomDatePicker({ state, title, placeholder, className, name, required, formik }) {
     const errorCondition = formik.touched[name] && formik.errors[name]
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
-    const inputRef = useRef(null)
+    const [dateInput, setDateInput] = useState({})
+    const parentElem = useRef(null)
     const [focus, setFocus] = useState(false);
     const [selfState, setSelfState] = useState(state);
-
     const [value, setValue] = useState({});
 
-
+    //change date input handler
     const handleValueChange = (newValue) => {
-        formik.setFieldValue(name, '');
+        setTimeout(() => {
+            setFocus(false)
+            dateInput[0].blur()
+        }, 0);
+
+        formik.setFieldValue(name, newValue.startDate);
         setValue(newValue);
     }
 
-    // //when click on custom component focus on html input 
-    // useEffect(() => {
-    //     focus && inputRef.current.focus()
-    // }, [focus])
+    //get input element
+    useLayoutEffect(() => {
+        setDateInput(document.getElementsByClassName(name))
+        console.log(document.getElementsByClassName(`${name}-contain`))
+    }, [])
 
-    //click on custom input body
+    //click on custom input body 
     const clickHandler = () => {
         if (state !== 'None' && state !== 'Medium') {
             setSelfState('Low')
         }
 
-        if ((required && (state !== 'None' && state !== 'Medium') || !required)) {
+        if ((required && (state !== 'None' && state !== 'Medium') || !required)) {    
+            dateInput[0] && dateInput[0].focus()
             setFocus(true)
         }
     }
+
+    useEffect(() => {
+        focus && dateInput[0].focus()
+    }, [focus])
+
+    //get click out side of element
+    useEffect(() => {
+        if (focus) {
+            const handleClickOutside = (event) => {
+                if (parentElem.current && !parentElem.current.contains(event.target)) {
+                    setFocus(false)
+                    formik.setFieldTouched(name, true);
+                }
+            };
+    
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }
+    }, [focus]);
 
     const getRingStyle = () => {
         if (focus) return errorCondition ? 'ring-2 ring-error' : 'ring-primary-500 ring-2';
@@ -81,7 +109,7 @@ function CustomDatePicker({ state, title, placeholder, type, className, id, name
     }
 
     return (
-        <div className={className}>
+        <div ref={parentElem} className={className}>
             <div onClick={clickHandler} className={`transition-all duration-200 h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
 
                 <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(formik.values[name] !== '' || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
@@ -93,35 +121,23 @@ function CustomDatePicker({ state, title, placeholder, type, className, id, name
                 </div>
 
                 {(formik.values[name] !== '' || focus) &&
-                    <div className='absolute bottom-1 w-full pl-16'>
+                    <div className={`absolute bottom-1 w-full pl-16`}>
                         <Datepicker
                             i18n='fa'
                             startFrom={new Date().toLocaleDateString('fa-IR-u-nu-latn')}
-                            displayFormat={"DD/MM/YYYY"}
+                            displayFormat={"YYYY/MM/DD"}
                             primaryColor='green'
                             placeholder={placeholder}
                             toggleClassName="hidden"
-                            inputClassName="pr-4 w-full relative text-cf-400 flex flex"
-                            containerClassName="relative z-50 bg-red-500 font-bold text-sm"
+                            inputClassName={`${name} pr-4 w-full relative text-cf-400 flex flex ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                            containerClassName={`${name}-contain relative z-50 font-bold text-sm `}
                             value={value}
                             onChange={handleValueChange}
                             asSingle={true}
                             useRange={false}
+                            disabled={!activeInputCondition}
                         />
                     </div>
-
-                    // <input
-                    //     id={id}
-                    //     disabled={!activeInputCondition}
-                    //     name={name}
-                    //     ref={inputRef}
-                    //     value={formik.values[name]}
-                    //     type={type}
-                    //     placeholder={placeholder}
-                    //     onChange={formik.handleChange}
-                    //     onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
-                    //     className={`w-full absolute bottom-0 fcc px-4 pb-2 pl-16 font-medium text-sm ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-                    // />
                 }
 
             </div>

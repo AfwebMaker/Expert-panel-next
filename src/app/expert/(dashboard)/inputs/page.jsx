@@ -27,6 +27,8 @@ function Page() {
       .required("لطفا این فیلد را پر کنید")
       .min(5, "توضیحات باید حداقل 5 کاراکتر باشد")
       .max(500, "توضیحات نمی‌تواند بیش از 500 کاراکتر باشد"),
+    datePicker: Yup.date()
+      .required("لطفا این فیلد را پر کنید"),
   });
 
   const inputObjects = [

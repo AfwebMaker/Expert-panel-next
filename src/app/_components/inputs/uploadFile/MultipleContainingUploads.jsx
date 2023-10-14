@@ -1,10 +1,11 @@
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 //components
-import ProgressBar from "@/app/_components/uploadFile/ProgressBar";
+import ProgressBar from "@/app/_components/inputs/uploadFile/ProgressBar";
 //react icons
 import { HiOutlineCloudUpload, HiCheckCircle } from "react-icons/hi";
 //axios
+import getCookie from '@/src/functions/getCookie'
 import axios from "axios";
 import { headers } from "next/dist/client/components/headers";
 
@@ -46,6 +47,9 @@ function UploadContain({ multiple, accept }) {
           `${process.env.NEXT_PUBLIC_file_kg_local}/admin/category/UploadImage`,
           data,
           {
+            headers: {
+              'Authorization': `Bearer ${getCookie('TOKEN')}`
+            },
             onUploadProgress: (progressEvent) => {
               let percentCompleted = Math.round(
                 (progressEvent.loaded * 100) / progressEvent.total

@@ -27,10 +27,27 @@ function Page() {
       .required("لطفا این فیلد را پر کنید")
       .min(5, "توضیحات باید حداقل 5 کاراکتر باشد")
       .max(500, "توضیحات نمی‌تواند بیش از 500 کاراکتر باشد"),
-    uploadFile: Yup.string()
-      .required("لطفا این فیلد را پر کنید"),
-    uploadFile_multiple: Yup.string()
-      .required("لطفا این فیلد را پر کنید"),
+    uploadFile: Yup.mixed()
+      .test(
+        "required",
+        "لطفا یک فایل را انتخاب کنید",
+        (value) => value && value.length
+      )
+      .test(
+        "fileSize",
+        "حجم فایل بیش از حد مجاز است (1MB)",
+        (value) => value && (!value.size ? true : 23001 <= 1024 * 1024)
+      )
+      .test(
+        "fileFormat",
+        "فرمت فایل پشتیبانی نمی‌شود",
+        (value) =>
+          value &&
+          (!value.type
+            ? true
+            : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
+      ),
+    uploadFile_multiple: Yup.string().required("لطفا این فیلد را پر کنید"),
   });
 
   const inputObjects = [
@@ -103,7 +120,7 @@ function Page() {
       inputType: "uploadFile",
       title: "آپلود فایل",
       required: true,
-      type: "text",
+      type: "file",
       placeholder: "به طور مثال : سلام روز بخیر ..",
     },
     {
@@ -112,7 +129,7 @@ function Page() {
       inputType: "uploadFile_multiple",
       title: "آپلود فایل",
       required: true,
-      type: "text",
+      type: "file",
       placeholder: "به طور مثال : سلام روز بخیر ..",
     },
   ];
@@ -126,7 +143,7 @@ function Page() {
       test: "",
       checkBoxMultipleInput: [],
       inputTextarea: "",
-      uploadFile: ["https://cdn.kargosha.com/kg-category/Image_20231014102530180_Huckleberry.jpg"],
+      uploadFile: [],
       uploadFile_multiple: [],
     },
     validationSchema,

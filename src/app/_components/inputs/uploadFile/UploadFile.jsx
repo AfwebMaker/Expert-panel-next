@@ -20,7 +20,7 @@ function UploadFile({
   const errorCondition = formik.touched[name] && formik.errors[name];
   const activeInputCondition =
     (required && state !== "None" && state !== "Medium") || !required;
-//   const inputRef = useRef(null);
+  //   const inputRef = useRef(null);
   const [focus, setFocus] = useState(false);
   const [selfState, setSelfState] = useState(state);
 
@@ -110,7 +110,10 @@ function UploadFile({
             // ref={inputRef}
             value={formik.values[name]}
             type={type}
+            state={state}
+            focus={focus}
             placeholder={placeholder}
+            formik={formik}
             onChange={formik.handleChange}
             onBlur={(e) => {
               setFocus(false);
@@ -128,7 +131,10 @@ function UploadFile({
             // ref={inputRef}
             value={formik.values[name]}
             type={type}
+            state={state}
+            focus={focus}
             placeholder={placeholder}
+            formik={formik}
             onChange={formik.handleChange}
             onBlur={(e) => {
               setFocus(false);

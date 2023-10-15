@@ -27,8 +27,6 @@ function Page() {
       .required("لطفا این فیلد را پر کنید")
       .min(5, "توضیحات باید حداقل 5 کاراکتر باشد")
       .max(500, "توضیحات نمی‌تواند بیش از 500 کاراکتر باشد"),
-    datePicker: Yup.date()
-      .required("لطفا این فیلد را پر کنید"),
   });
 
   const inputObjects = [
@@ -95,6 +93,24 @@ function Page() {
       type: "text",
       placeholder: "به طور مثال : سلام روز بخیر ..",
     },
+    {
+      id: "uploadFile",
+      name: "uploadFile",
+      inputType: "uploadFile",
+      title: "آپلود فایل",
+      required: true,
+      type: "text",
+      placeholder: "به طور مثال : سلام روز بخیر ..",
+    },
+    {
+      id: "uploadFile_multiple",
+      name: "uploadFile_multiple",
+      inputType: "uploadFile_multiple",
+      title: "آپلود فایل",
+      required: true,
+      type: "text",
+      placeholder: "به طور مثال : سلام روز بخیر ..",
+    },
   ];
 
   const formik = useFormik({
@@ -106,6 +122,8 @@ function Page() {
       test: "",
       checkBoxMultipleInput: [],
       inputTextarea: "",
+      uploadFile: ["https://cdn.kargosha.com/kg-category/Image_20231014102530180_Huckleberry.jpg"],
+      uploadFile_multiple: [],
     },
     validationSchema,
     onSubmit: (values) => {
@@ -113,7 +131,6 @@ function Page() {
       alert(JSON.stringify(values, null, 2));
     },
   });
-
 
   return (
     <form onSubmit={formik.handleSubmit}>

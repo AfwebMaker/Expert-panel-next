@@ -3,11 +3,12 @@
 //react
 import React from "react";
 //components
-import InputText from "@/app/_components/inputs/InputText";
+import InputText from "@/app/_components/inputs/inputText/InputText";
 import DatePicker from "@/app/_components/inputs/datePicker/CustomDatePicker";
 import CheckBox from "@/app/_components/inputs/checkBox/CheckBox";
 import CheckBoxMultiple from "@/app/_components/inputs/checkBoxMultiple/CheckBoxMultiple";
-import InputTextarea from "@/app/_components/inputs/InputTextarea";
+import InputTextarea from "@/app/_components/inputs/inputTextarea/InputTextarea";
+import UploadFile from "@/app/_components/inputs/uploadFile/UploadFile";
 
 function DynamicInputs({ state, title, placeholder, className, id, name, required, inputType, formik }) {
   return (
@@ -77,6 +78,20 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
           placeholder={placeholder}
           name={name}
           formik={formik}
+        />
+      )}
+      {(inputType === "uploadFile" || inputType === "uploadFile_multiple") && (
+        <UploadFile
+          inputType={inputType}
+          title={title}
+          state={state}
+          required={required}
+          className={className}
+          placeholder={placeholder}
+          id={id}
+          name={name}
+          formik={formik}
+          forceOpen={true}
         />
       )}
     </>

@@ -93,7 +93,7 @@ function InputTextarea({ state, title, placeholder, type, className, id, name, r
                         placeholder={placeholder}
                         onChange={formik.handleChange}
                         onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
-                        className={`w-full min-h-[156px] max-h-[300px] mt-10 scroll_custom fcc px-4 pb-2 pl-16 font-medium text-sm ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                        className={`w-full min-h-[156px] max-h-[300px] mt-10 scroll_custom fcc px-4 pb-2 font-medium text-sm ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
                     />
                 }
 

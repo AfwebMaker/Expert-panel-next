@@ -123,7 +123,7 @@ function Page() {
             key={item.id}
             inputType={item.inputType}
             title={item.title}
-            state="Low"
+            state="None"
             required={item.required}
             className="my-2 w-full lg:w-[49%]"
             placeholder={item.placeholder}

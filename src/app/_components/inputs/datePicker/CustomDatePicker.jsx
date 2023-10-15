@@ -2,15 +2,20 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { HiExclamation, HiBadgeCheck } from 'react-icons/hi'
 //date picker
 import Datepicker from "react-tailwindcss-datepicker";
+import moment from 'jalali-moment'
 
 function CustomDatePicker({ state, title, placeholder, className, name, required, formik }) {
     const errorCondition = formik.touched[name] && formik.errors[name]
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
     const [dateInput, setDateInput] = useState({})
+    const [container, setContainer] = useState({})
     const parentElem = useRef(null)
     const [focus, setFocus] = useState(false);
     const [selfState, setSelfState] = useState(state);
-    const [value, setValue] = useState({});
+    const [value, setValue] = useState({
+        startDate: formik.values[name] && moment(formik.values[name], 'YYYY/MM/DD').format('jYYYY/jMM/jDD'),
+        endDate: formik.values[name] && moment(formik.values[name], 'YYYY/MM/DD').format('jYYYY/jMM/jDD')
+    });
 
     //change date input handler
     const handleValueChange = (newValue) => {
@@ -19,14 +24,15 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
             dateInput[0].blur()
         }, 0);
 
-        formik.setFieldValue(name, newValue.startDate);
+        const gregorianFormat = moment(newValue.startDate, 'jYYYY/jMM/jDD').format('YYYY/MM/DD')
+        formik.setFieldValue(name, gregorianFormat);
         setValue(newValue);
     }
 
     //get input element
     useLayoutEffect(() => {
         setDateInput(document.getElementsByClassName(name))
-        console.log(document.getElementsByClassName(`${name}-contain`))
+        setContainer(document.getElementsByClassName(`${name}-contain`))
     }, [])
 
     //click on custom input body 
@@ -35,14 +41,16 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
             setSelfState('Low')
         }
 
-        if ((required && (state !== 'None' && state !== 'Medium') || !required)) {    
+        if ((required && (state !== 'None' && state !== 'Medium') || !required)) {
             dateInput[0] && dateInput[0].focus()
             setFocus(true)
         }
     }
 
+    //focus on input element when focus on parent element
     useEffect(() => {
         focus && dateInput[0].focus()
+        container[0] && (container[0].children[2].children[0].style.display = 'none')
     }, [focus])
 
     //get click out side of element
@@ -51,10 +59,10 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
             const handleClickOutside = (event) => {
                 if (parentElem.current && !parentElem.current.contains(event.target)) {
                     setFocus(false)
-                    formik.setFieldTouched(name, true);
+                    formik.setFieldTouched(name, true)
                 }
             };
-    
+
             document.addEventListener("mousedown", handleClickOutside);
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
@@ -131,7 +139,7 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
                             toggleClassName="hidden"
                             inputClassName={`${name} pr-4 w-full relative text-cf-400 flex flex ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
                             containerClassName={`${name}-contain relative z-50 font-bold text-sm `}
-                            value={value}
+                            value={value ? value : {}}
                             onChange={handleValueChange}
                             asSingle={true}
                             useRange={false}

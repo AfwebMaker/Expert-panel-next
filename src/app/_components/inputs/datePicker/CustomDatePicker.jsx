@@ -24,6 +24,7 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
             dateInput[0].blur()
         }, 0);
 
+        console.log(newValue)
         const gregorianFormat = moment(newValue.startDate, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
         formik.setFieldValue(name, gregorianFormat);
         setValue(newValue);
@@ -47,10 +48,23 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
         }
     }
 
+    //change style of ready component
+    useEffect(() => {
+        if (focus) {
+            container[0] && (container[0].children[2].children[0].style.display = 'none')
+            container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[0].style.direction = 'ltr')
+            container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[0].children[1].style.direction = 'rtl')
+            container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[1].children[0].style.display = 'none')
+            container[0] && (container[0].children[2].children[0].style.display = 'none')
+            container[0] && (container[0].children[2].children[1].children[0].style.padding = "8px 0px 0px 0px")
+            container[0] && (container[0].children[2].children[1].children[0].children[0].style.padding = "0px 4px 0px 4px")
+            container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[1].style.minHeight = 'auto')
+        }
+    }, [focus])
+
     //focus on input element when focus on parent element
     useEffect(() => {
         focus && dateInput[0].focus()
-        container[0] && (container[0].children[2].children[0].style.display = 'none')
     }, [focus])
 
     //get click out side of element

@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { HiExclamation, HiBadgeCheck } from 'react-icons/hi'
 
-function InputText({ state, title, placeholder, type, className, id, name, required, formik }) {
+function InputText({ state, title, placeholder, className, id, name, required, formik }) {
     const errorCondition = formik.touched[name] && formik.errors[name]
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
     const inputRef = useRef(null)
     const [focus, setFocus] = useState(false);
     const [selfState, setSelfState] = useState(state);
 
-    //when click on custom component focus on html input 
+    //when click on custom component focus on html input
     useEffect(() => {
         focus && inputRef.current.focus()
     }, [focus])
@@ -89,7 +89,7 @@ function InputText({ state, title, placeholder, type, className, id, name, requi
                         name={name}
                         ref={inputRef}
                         value={formik.values[name]}
-                        type={type}
+                        type={'text'}
                         placeholder={placeholder}
                         onChange={formik.handleChange}
                         onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}

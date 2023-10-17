@@ -5,7 +5,7 @@ import { HiOutlineChevronDown, HiBadgeCheck } from "react-icons/hi";
 import ComboBox from "./ComboBox"
 import ComboBoxIcon from "./ComboBoxIcon"
 
-function CheckBox({ state, title, placeholder, className, id, name, required, formik, inputType }) {
+function CheckBox({ state, title, placeholder, className, name, required, formik, inputType }) {
     const [cartNumbers, setCartNumbers] = useState([])
     const errorCondition = (formik.touched[name] && formik.errors[name])
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
@@ -133,7 +133,6 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
 
                 {inputType === 'dropDown' ?
                     <ComboBox
-                        id={id}
                         name={name}
                         activeInput={!activeInputCondition}
                         inputRef={inputRef}
@@ -148,7 +147,6 @@ function CheckBox({ state, title, placeholder, className, id, name, required, fo
                         focus={focus}
                     /> :
                     <ComboBoxIcon
-                        id={id}
                         name={name}
                         activeInput={!activeInputCondition}
                         inputRef={inputRef}

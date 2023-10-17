@@ -40,6 +40,7 @@ function Page() {
       )
       .test(
         "fileFormat",
+
         "فرمت فایل پشتیبانی نمی‌شود",
         (value) =>
           value &&
@@ -47,7 +48,11 @@ function Page() {
             ? true
             : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
       ),
-    uploadFile_multiple: Yup.string().required("لطفا این فیلد را پر کنید"),
+    uploadFile_multiple: Yup.array().test(
+      "required",
+      "لطفا یک فایل را انتخاب کنید",
+      (value) => value && value.length
+    ),
   });
 
   const inputObjects = [
@@ -144,7 +149,15 @@ function Page() {
       checkBoxMultipleInput: [],
       inputTextarea: "",
       uploadFile: [],
-      uploadFile_multiple: [],
+      uploadFile_multiple: [
+        {
+          id: 3,
+          name: "Theme=Lighttttttttttttttttt",
+          size: 23801,
+          type: "image/jpg",
+          url: "",
+        },
+      ],
     },
     validationSchema,
     onSubmit: (values) => {

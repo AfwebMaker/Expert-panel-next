@@ -59,7 +59,7 @@ function Only({
 
     axios
       .post(
-        `${process.env.NEXT_PUBLIC_file_kg_local}/admin/category/UploadImage`,
+        `${process.env.NEXT_PUBLIC_file_kg_local}/uploadFile`,
         formData,
         {
           headers: {
@@ -102,7 +102,6 @@ function Only({
         id={id}
         type="file"
         name={name}
-        // value={formik.values[name]}
         className={`absolute w-full h-full opacity-0  right-0 z-20 ${
           disabled ? "cursor-not-allowed -z-20" : "cursor-pointer"
         }`}

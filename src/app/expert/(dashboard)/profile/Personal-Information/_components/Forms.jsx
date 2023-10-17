@@ -53,9 +53,13 @@ function Forms() {
             .required('لطفا موضوع فعالیت خود را وارد کنید.')
             .matches(/^[\u0600-\u06FF\s]+$/, 'موضوع فعالیت باید با حروف فارسی نوشته شود.'),
         dateEstablishment: Yup.string()
-            .required('لطفا تاریخ تاسیس خود را وارد کنید.'),
+            .required('لطفا تاریخ تاسیس شرکت خود را وارد کنید.'),
+        companyType: Yup.string()
+            .required("لطفا نوع شرکت خود را وارد کنید."),
+        registrationNumber: Yup.string()
+            .required("لطفا شماره ثبت شرکت خود را وارد کنید."),
     }
-    
+
     const validationSchema = Yup.object().shape(validation);
 
     //validation field control
@@ -67,9 +71,9 @@ function Forms() {
 
     const formik = useFormik({
         initialValues: {
-            firstName: 'ییی',
-            lastName: 'یبا',
-            fatherName: 'یبذب',
+            firstName: '',
+            lastName: '',
+            fatherName: '',
             nationalCode: '',
             mobile: '',
             birthday: '',

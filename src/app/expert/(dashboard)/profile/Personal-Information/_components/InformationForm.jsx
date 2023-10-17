@@ -1,52 +1,53 @@
 import React from 'react'
 //components
-import Input from '@/app/_components/Input'
+import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
 
 function InformationForm({ formik }) {
     const inputData = [
         {
-            id: 'firstName',
-            name: 'firstName',
-            title: 'نام',
+            id: "firstName",
+            name: "firstName",
+            inputType: "text",
+            title: "نام",
             required: true,
-            type: 'text',
-            placeholder: 'به طور مثال : محمد'
+            placeholder: 'به طور مثال : محمد',
         },
         {
             id: 'lastName',
             name: 'lastName',
+            inputType: "text",
             title: 'نام خانوادگی',
             required: true,
-            type: 'text',
             placeholder: 'به طور مثال : جواد زاده'
         },
         {
             id: 'fatherName',
             name: 'fatherName',
+            inputType: "text",
             title: 'نام پدر',
             required: true,
-            type: 'text',
             placeholder: 'به طور مثال : احمد'
         },
         {
             id: 'nationalCode',
             name: 'nationalCode',
+            inputType: "text",
             title: 'کد ملی',
             required: true,
-            type: 'text',
             placeholder: 'به طور مثال : ۰۰٥٦۲۷۹۸٤٥'
         },
         {
             id: 'mobile',
             name: 'mobile',
+            inputType: "text",
             title: 'شماره تلفن برای احراز هویت',
             required: true,
-            type: 'text',
             placeholder: 'به طور مثال : ۰۹۱۲۸٤٦۹۷۸۷'
         },
         {
             id: 'birthday',
             name: 'birthday',
+            inputType: "datePicker",
             title: 'تاریخ تولد',
             required: true,
             type: 'date',
@@ -55,17 +56,17 @@ function InformationForm({ formik }) {
         {
             id: 'birthPlace',
             name: 'birthPlace',
+            inputType: "text",
             title: 'محل تولد',
             required: false,
-            type: 'text',
             placeholder: 'به طور مثال : تهران'
         },
         {
             id: 'email',
             name: 'email',
+            inputType: "text",
             title: 'ایمیل',
             required: false,
-            type: 'text',
             placeholder: 'به طور مثال : email@example.com'
         },
     ]
@@ -75,21 +76,16 @@ function InformationForm({ formik }) {
             <div className='font-medium text-sm text-cf-400 mb-4'>اطلاعات اولیه</div>
             <div className='flex flex-wrap justify-between'>
                 {inputData.map(item => (
-                    <Input
+                    <DynamicInputs
                         key={item.id}
+                        inputType={item.inputType}
                         title={item.title}
-                        state='Low'
+                        state="Low"
                         required={item.required}
-                        type={item.type}
-                        className='my-2 w-full lg:w-[49%]'
+                        className="my-2 w-full lg:w-[49%]"
                         placeholder={item.placeholder}
                         id={item.id}
                         name={item.name}
-                        value={formik.values[item.name]}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.errors[item.name]}
-                        touched={formik.touched[item.name]}
                         formik={formik}
                     />
                 ))}

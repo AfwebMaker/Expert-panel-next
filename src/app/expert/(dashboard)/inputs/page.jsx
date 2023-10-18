@@ -36,10 +36,7 @@ function Page() {
       .test(
         "fileSize",
         "حجم فایل بیش از حد مجاز است (1MB)",
-        (value) => {
-          console.log(value)
-          value && (!value.size ? true : 23001 <= 1024 * 1024)
-        }
+        (value) => {value && (!value.size ? true : 23001 <= 1024 * 1024)}
       )
       .test(
         "fileFormat",

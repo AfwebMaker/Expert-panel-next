@@ -40,7 +40,7 @@ function Only({
   }, []);
 
   useEffect(() => {
-    console.log("imageSrc",imageSrc)
+    console.log("imageSrc", imageSrc);
     if (imageSrc) {
       const imageSelect = imageSrc.map((item) => {
         return item;
@@ -80,7 +80,7 @@ function Only({
           });
           if (loaded == total) {
             setUploadFiles([{ name: fileName, size: total }]);
-            setIsError(false)
+            setIsError(false);
             setFiles([]);
             // setShowProgress(false);
           }
@@ -112,10 +112,12 @@ function Only({
         ref={inputRef}
         // onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
       />
-      <div className="w-full h-full flex flex-col items-start justify-center p-5">
+      <div className="w-full h-full flex flex-col items-start justify-center p-1">
         <div
-          className={`flex justify-start items-center w-full h-full p-5 z-10 ${
-            imageSrc.length ? "text-white" : "text-gray-500"
+          className={`flex flex-col justify-start items-center w-full h-full p-9 z-10 rounded-lg ${
+            imageSrc.length && !showProgress
+              ? "text-white bg-black bg-opacity-50"
+              : "text-gray-500 "
           }`}
         >
           <div className="ml-2">
@@ -152,14 +154,14 @@ function Only({
               )}
             </div>
           </div>
+          {showProgress && (
+            <div className="h-full w-full fcc bg-gray-200 rounded-lg z-10 mt-5">
+              {files.map((file, i) => (
+                <ProgressBar key={i} progress={file.loading} />
+              ))}
+            </div>
+          )}
         </div>
-        {showProgress && (
-          <div className="h-full w-full fcc bg-gray-200 rounded-lg z-10">
-            {files.map((file, i) => (
-              <ProgressBar key={i} progress={file.loading} />
-            ))}
-          </div>
-        )}
 
         {!!imageSrc.length && (
           <div className="h-full w-full fcc rounded-lg absolute top-0 right-0">

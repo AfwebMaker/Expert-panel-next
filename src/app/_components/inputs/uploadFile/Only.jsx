@@ -40,7 +40,6 @@ function Only({
   }, []);
 
   useEffect(() => {
-    console.log("imageSrc", imageSrc);
     if (imageSrc) {
       const imageSelect = imageSrc.map((item) => {
         return item;
@@ -110,7 +109,7 @@ function Only({
         onChange={inputFileHandler}
         disabled={disabled}
         ref={inputRef}
-        // onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
+        onBlur={(e) => {onBlur(e)}}
       />
       <div className="w-full h-full flex flex-col items-start justify-center p-1">
         <div

@@ -5,6 +5,7 @@ import {
   HiCheckCircle,
   HiOutlineTrash,
   HiOutlinePlusSm,
+  HiXCircle,
 } from "react-icons/hi";
 // axios
 import axios from "axios";
@@ -28,8 +29,22 @@ function MultipleContainingUploads({
   const [srcImages, setSrcImages] = useState([]);
   const fileInputRef = useRef();
 
+  const shortText = (text, value) => {
+    if (String(text) && String(text).length > value) {
+      return `${String(text).slice(0, value - 1) + " ..."}`;
+    } else {
+      return String(text);
+    }
+  };
+
   useEffect(() => {
     setUploadFiles(formik.values[name]);
+    formik.values[name].forEach((item) => {
+      setSrcImages((pre) => [
+        ...pre,
+        { id: shortText(item.name, 12), url: item.url },
+      ]);
+    });
   }, []);
 
   //set formik value
@@ -37,9 +52,9 @@ function MultipleContainingUploads({
     let passArray = [];
     uploadFiles.find((item) => {
       if (item.status === "error") {
-        return passArray = []
+        return (passArray = []);
       } else {
-        passArray.push(item)
+        passArray.push(item);
       }
     });
 
@@ -96,10 +111,8 @@ function MultipleContainingUploads({
           },
         })
         .then((res) => {
-          const fileName =
-            res.data.data.name.length > 12
-              ? `${res.data.data.name.slice(0, 12 - 1) + " ..."}`
-              : res.data.data.name;
+          console.log(res);
+          const fileName = shortText(res.data.data.name, 12);
           setSrcImages((pre) => [
             ...pre,
             { id: fileName, url: res.data.data.url },
@@ -110,7 +123,11 @@ function MultipleContainingUploads({
 
           setUploadFiles((pre) => {
             const newUploadFiles = [...pre];
-            newUploadFiles[(uploadFiles.length ? uploadFiles.length - 1 : uploadFiles.length) + i].status = "error";
+            newUploadFiles[
+              (uploadFiles.length
+                ? uploadFiles.length - 1
+                : uploadFiles.length) + i
+            ].status = "error";
             return newUploadFiles;
           });
         });
@@ -128,7 +145,6 @@ function MultipleContainingUploads({
 
   const openImage = (id) => {
     const foundItem = srcImages.find((item) => item.id === id);
-
     if (foundItem) {
       window.open(foundItem.url);
     }
@@ -172,9 +188,7 @@ function MultipleContainingUploads({
                 >
                   <div className="w-full h-full absolute top-0 right-0">
                     <p className="text-cf-300 text-xs h-full fcc">
-                      {file.name && file.name.length > 12
-                        ? file.name.slice(0, 12 - 1) + " ..."
-                        : file.name}
+                      {shortText(file.name, 12)}
                     </p>
                   </div>
                   <div
@@ -188,24 +202,26 @@ function MultipleContainingUploads({
           )}
         </ul>
 
-        <ul className="uploading-area flex flex-wrap gap-2">
+        <ul className="uploading-area flex flex-wrap gap-x-2 gap-y-4">
           {uploadFiles.map((file, i) => (
             <li
               key={i}
               className={`h-[41px] w-[165px] fcc rounded-lg ${
                 !file.status || file.status === "ok"
                   ? "bg-gray-200"
-                  : "bg-red-200"
+                  : "bg-red-200 relative"
               }`}
-              onClick={() => openImage(`${file.name}`)}
+              onClick={() => openImage(`${shortText(file.name, 12)}`)}
             >
               <div className="h-full w-[20%] fcc">
-                <HiCheckCircle className="text-primary-500 text-lg" />
+                {!file.status || file.status === "ok" ? (
+                  <HiCheckCircle className="text-primary-500 text-lg" />
+                ) : (
+                  <HiXCircle className="text-red-500 text-lg" />
+                )}
               </div>
               <p className="text-cf-300 text-xs h-full w-[55%] fcc">
-                {file.name && file.name.length > 12
-                  ? file.name.slice(0, 12 - 1) + " ..."
-                  : file.name}
+                {shortText(file.name, 12)}
               </p>
               {!disabled && (
                 <div className="h-full w-[25%] fcc">
@@ -215,6 +231,13 @@ function MultipleContainingUploads({
                   >
                     <HiOutlineTrash className="text-red-500 font-light text-lg" />
                   </div>
+                </div>
+              )}
+              {!file.status || file.status === "ok" ? (
+                ""
+              ) : (
+                <div className="flex absolute right-1 -bottom-3.5 text-error font-bold text-[9px]">
+                  <div>فایل مورد نظر آپلود نشد</div>
                 </div>
               )}
             </li>

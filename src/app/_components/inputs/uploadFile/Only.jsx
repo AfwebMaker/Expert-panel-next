@@ -25,9 +25,18 @@ function Only({
   const [uploadFiles, setUploadFiles] = useState([]);
   const [showProgress, setShowProgress] = useState(false);
   const [imageSrc, setImageSrc] = useState([]);
+
+  const shortText = (text, value) => {
+    if (String(text) && String(text).length > value) {
+      return `${String(text).slice(0, value - 1) + " ..."}`;
+    } else {
+      return String(text);
+    }
+  };
+
   useEffect(() => {
-    console.log(value);
-    setImageSrc(value);
+    console.log(formik.values[name]);
+    setImageSrc(formik.values[name]);
   }, []);
 
   useEffect(() => {
@@ -42,56 +51,45 @@ function Only({
 
   const inputFileHandler = (e) => {
     setImageSrc([]);
-    // setShowProgress(true);
-    const files = Array.from(e.target.files);
-    console.log(files);
-    if (!files.length) return;
-    const fileName =
-      files[0].name.length > 12
-        ? `${files[0].name.slice(0, 12 - 1) + " ..."}`
-        : files[0].name;
 
+    const files = Array.from(e.target.files);
+
+    if (!files.length) return;
+
+    const fileName = shortText(files[0].name, 12);
     const formData = new FormData();
+    
     formData.append("file", files[0]);
 
     setFiles([{ name: fileName, loading: 0 }]);
     setShowProgress(true);
 
     axios
-      .post(
-        `${process.env.NEXT_PUBLIC_file_kg_local}/uploadFile`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie("TOKEN")}`,
-          },
-          onUploadProgress: ({ loaded, total }) => {
-            console.log(total);
-            setFiles((pre) => {
-              const newFiles = [...pre];
-              newFiles[newFiles.length - 1].loading = Math.floor(
-                (loaded / total) * 100
-              );
-              return newFiles;
-            });
-            if (loaded == total) {
-              const sizeFile =
-                total < 1024
-                  ? `${total} KB`
-                  : `${(loaded / (1024 * 1024)).toFixed(2)} MB`;
-              setUploadFiles([{ name: fileName, size: sizeFile }]);
-              setFiles([]);
-              // setShowProgress(false);
-            }
-          },
-        }
-      )
+      .post(`${process.env.NEXT_PUBLIC_file_kg_local}/uploadFile`, formData, {
+        headers: {
+          Authorization: `Bearer ${getCookie("TOKEN")}`,
+        },
+        onUploadProgress: ({ loaded, total }) => {
+          setFiles((pre) => {
+            const newFiles = [...pre];
+            newFiles[newFiles.length - 1].loading = Math.floor(
+              (loaded / total) * 100
+            );
+            return newFiles;
+          });
+          if (loaded == total) {
+            setUploadFiles([{ name: fileName, size: total }]);
+            setFiles([]);
+            // setShowProgress(false);
+          }
+        },
+      })
       .then((res) => {
-        console.log(formData.values);
         setImageSrc([res.data.data]);
       })
       .catch(console.error);
   };
+
   return (
     <div
       className={`w-full h-auto rounded-lg border-cf-400 relative overflow-hidden fcc ${
@@ -162,7 +160,7 @@ function Only({
                   onLoad={() => setShowProgress(false)}
                   quality={50}
                   className="brightness-75 fcc w-[98%] h-[95%] absolute object-cover rounded-lg"
-                  src={item}
+                  src={item.url}
                   alt="doc"
                 />
               );

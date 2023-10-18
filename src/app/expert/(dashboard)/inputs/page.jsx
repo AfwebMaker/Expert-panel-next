@@ -148,14 +148,29 @@ function Page() {
       test: "",
       checkBoxMultipleInput: [],
       inputTextarea: "",
-      uploadFile: [],
+      uploadFile: [
+        {
+          id: 3,
+          name: "Theme=Lighttttttttttttttttt",
+          size: 23801,
+          type: "image/jpg",
+          url: "https://cdn.kargosha.com/kg-category/image/png_20231018060225687_abacus.png",
+        }
+      ],
       uploadFile_multiple: [
         {
           id: 3,
           name: "Theme=Lighttttttttttttttttt",
           size: 23801,
           type: "image/jpg",
-          url: "",
+          url: "https://cdn.kargosha.com/kg-category/image/png_20231018060225687_abacus.png",
+        },
+        {
+          id: 4,
+          name: "abacus",
+          size: 32801,
+          type: "image/jpg",
+          url: "https://cdn.kargosha.com/kg-category/image/png_20231018062543277_aboutImage_2.png",
         },
       ],
     },

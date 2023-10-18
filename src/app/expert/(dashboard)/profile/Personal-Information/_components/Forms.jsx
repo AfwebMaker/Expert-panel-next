@@ -9,10 +9,14 @@ import { HiOutlineFingerPrint } from 'react-icons/hi'
 //components
 import InformationForm from './InformationForm'
 import LegalForm from './LegalForm'
-import UploadFile from './UploadFile'
 import Button from '@/app/_components/Button'
+// functions
+import getExpertInfo from '@/services/person_kg_local/getExpertInfo'
+import updateExpertInfo from '@/services/person_kg_local/updateExpertInfo'
+import toast from 'react-hot-toast';
+import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
 
-function Forms() {
+function Forms({ setAvatar, avatar }) {
     const [legalFormIsActive, setLegalFormIsActive] = useState(false);
     const [validation, setValidation] = useState(false);
     const baseValidation = {
@@ -39,7 +43,6 @@ function Forms() {
         birthday: Yup.string()
             .required('لطفا تاریخ تولد خود را وارد کنید.'),
     }
-
     const legalValidation = {
         componyName: Yup.string()
             .required('لطفا نام شرکت خود را وارد کنید.')
@@ -69,6 +72,34 @@ function Forms() {
             setValidation({ ...baseValidation, ...legalValidation })
     }, [legalFormIsActive])
 
+    //get initial data from server
+    useEffect(() => {
+        getExpertInfo()
+            .then(res => {
+                res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
+                formik.setValues({
+                    firstName: res.data.data.mainDataInfo.firstName,
+                    lastName: res.data.data.mainDataInfo.lastName,
+                    fatherName: res.data.data.mainDataInfo.fatherName,
+                    nationalCode: res.data.data.mainDataInfo.nationalCode,
+                    mobile: '0' + res.data.data.mainDataInfo.personUser_Child.mobile,
+                    birthday: res.data.data.mainDataInfo.birthday,
+                    birthPlace: res.data.data.mainDataInfo.birthPlace,
+                    email: res.data.data.mainDataInfo.email,
+                    componyName: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.componyName : null,
+                    nationalCodeCompony: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.nationalCodeCompony : null,
+                    activitySubject: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.activitySubject : null,
+                    companyType: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.companyType : null,
+                    dateEstablishment: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.dateEstablishment : null,
+                    registrationNumber: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.registrationNumber : null,
+                    backgroundURL:res.data.data.mainDataCompany ? res.data.data.mainDataCompany.backgroundURL : []
+                })
+            })
+            .catch(() => {
+
+            })
+    }, [])
+
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -84,11 +115,76 @@ function Forms() {
             activitySubject: '',
             companyType: '',
             dateEstablishment: '',
-            registrationNumber: ''
+            registrationNumber: '',
+            backgroundURL: [],
         },
         validationSchema,
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            const data = {
+                "mainDataInfo": {
+                    "id": 0,
+                    "firstName": values.firstName,
+                    "lastName": values.lastName,
+                    "nationalCode": values.nationalCode,
+                    "email": values.email,
+                    "fatherName": values.fatherName,
+                    "gender": 0,
+                    "birthday": values.birthday,
+                    "birthPlace": values.birthPlace,
+                    "job": "string",
+                    "education": 0,
+                    "avatar_url": avatar,
+                    "date_Create": "2023-10-18T07:28:41.638Z",
+                    "date_Update": "2023-10-18T07:28:41.638Z",
+                    "idExpert": 0,
+                    "idUser": 0,
+                    "personUser_Child": {
+                        "id": 0,
+                        "id_PersonInfo": 0,
+                        "mobile": values.mobile,
+                        "username": "string",
+                        "pass": "string",
+                        "accountState": 0
+                    },
+                    "lst_Address_Child": [
+                        {
+                            "id": 0,
+                            "province": "string",
+                            "city": "string",
+                            "address": "string",
+                            "number": "string",
+                            "unit": "string",
+                            "telephoneNumber": "string",
+                            "zipCode": "string",
+                            "addressType": 0,
+                            "maoLocation": "string",
+                            "date_Create": "2023-10-18T07:28:41.638Z",
+                            "date_Update": "2023-10-18T07:28:41.638Z"
+                        }
+                    ]
+                },
+                "mainDataCompany": {
+                    "id": 0,
+                    "id_expert": 0,
+                    "name": values.componyName,
+                    "nationalCode": values.nationalCode,
+                    "activitySubject": values.activitySubject,
+                    "companyType": values.companyType,
+                    "dateEstablishment": values.dateEstablishment,
+                    "registrationNumber": values.registrationNumber
+                },
+                "backgroundURL": "string"
+            }
+
+            updateExpertInfo(data)
+                .then(res => {
+                    console.log(res)
+                })
+                .catch((err) => {
+                    if (err.response.status === 400) {
+                        toast.error(err.response.data.message)
+                    }
+                })
         },
     });
 
@@ -96,7 +192,17 @@ function Forms() {
         <form onSubmit={formik.handleSubmit}>
             <InformationForm formik={formik} />
             <LegalForm legalFormIsActive={legalFormIsActive} setLegalFormIsActive={setLegalFormIsActive} formik={formik} />
-            <UploadFile />
+            <DynamicInputs
+                id="backgroundURL"
+                name="backgroundURL"
+                inputType="uploadFile"
+                title="آپلود فایل"
+                required={true}
+                placeholder="به طور مثال : سلام روز بخیر .."
+                className={'mb-4'}
+                state="Low"
+                formik={formik}
+            />
             <Button type='submit' icon={<HiOutlineFingerPrint size={20} />} title='ثبت و احراز هویت' />
         </form>
     )

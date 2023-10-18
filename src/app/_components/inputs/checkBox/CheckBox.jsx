@@ -123,7 +123,7 @@ function CheckBox({ state, title, placeholder, className, name, required, formik
         <div ref={parentElem} className={`${className}`}>
             <div onClick={clickHandler} className={`transition-all duration-200 min-h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
 
-                <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(formik.values[name] !== '' || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
+                <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(!!formik.values[name] || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
                     {title}
                 </div>
 
@@ -137,7 +137,7 @@ function CheckBox({ state, title, placeholder, className, name, required, formik
                         activeInput={!activeInputCondition}
                         inputRef={inputRef}
                         buttonRef={buttonRef}
-                        className={(formik.values[name] !== '' || focus) ? 'opacity-100' : 'opacity-0'}
+                        className={(!!formik.values[name] || focus) ? 'opacity-100' : 'opacity-0'}
                         value={formik.values[name]}
                         placeholder={placeholder}
                         onChange={formik.handleChange}
@@ -151,7 +151,7 @@ function CheckBox({ state, title, placeholder, className, name, required, formik
                         activeInput={!activeInputCondition}
                         inputRef={inputRef}
                         buttonRef={buttonRef}
-                        className={(formik.values[name] !== '' || focus) ? 'opacity-100' : 'opacity-0'}
+                        className={(!!formik.values[name] || focus) ? 'opacity-100' : 'opacity-0'}
                         value={formik.values[name]}
                         placeholder={placeholder}
                         onChange={formik.handleChange}

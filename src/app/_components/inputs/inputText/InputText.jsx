@@ -74,7 +74,7 @@ function InputText({ state, title, placeholder, className, id, name, required, f
         <div className={className}>
             <div onClick={clickHandler} className={`transition-all duration-200 h-[60px] relative fcc flex-col rounded-md overflow-hidden ${getRingStyle()} ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'} ${activeInputCondition ? 'bg-white' : 'bg-gray-100'}`}>
 
-                <div className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(formik.values[name] !== '' || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
+                <div className={`flex items-center justify-between absolute right-4 text-cf-300 font-medium text-base ${getIconColor()} ${(!!formik.values[name] || focus) ? 'top-2 text-sm font-normal transition-all duration-200' : ''}`}>
                     {title}
                 </div>
 
@@ -82,13 +82,13 @@ function InputText({ state, title, placeholder, className, id, name, required, f
                     {getRequiredIcon()}
                 </div>
 
-                {(formik.values[name] !== '' || focus) &&
+                {(!!formik.values[name] || focus) &&
                     <input
                         id={id}
                         disabled={!activeInputCondition}
                         name={name}
                         ref={inputRef}
-                        value={formik.values[name]}
+                        value={formik.values[name] ? formik.values[name] : ''}
                         type={'text'}
                         placeholder={placeholder}
                         onChange={formik.handleChange}

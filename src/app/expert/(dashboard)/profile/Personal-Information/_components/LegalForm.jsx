@@ -7,14 +7,6 @@ function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
 
     const inputData = [
         {
-            id: "firstName",
-            name: "firstName",
-            inputType: "text",
-            title: "نام",
-            required: true,
-            placeholder: 'به طور مثال : محمد',
-        },
-        {
             id: 'componyName',
             name: 'componyName',
             inputType: "text",
@@ -29,7 +21,7 @@ function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
             title: 'شناسه ملی',
             required: true,
             placeholder: 'به طور مثال : ۸٤٦۹۷۰۲۸۷'
-        },
+        }, 
         {
             id: 'activitySubject',
             name: 'activitySubject',

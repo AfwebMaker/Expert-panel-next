@@ -55,7 +55,6 @@ function MultipleContainingUploads({
     });
 
     formik.setFieldValue(name, passArray);
-    console.log(passArray);
   }, [uploadFiles]);
 
   const handleAddFileClick = () => {
@@ -89,9 +88,6 @@ function MultipleContainingUploads({
             });
 
             if (loaded === total) {
-              console.log("hello world!");
-              console.log(fileName);
-              console.log(item.name);
               setUploadFiles((pre) => [
                 ...pre,
                 { id: i, name: item.name, size: total, status: "ok" },
@@ -106,7 +102,6 @@ function MultipleContainingUploads({
           },
         })
         .then((res) => {
-          console.log(res);
           const fileName = shortText(res.data.data.name, 12);
           setSrcImages((pre) => [
             ...pre,
@@ -126,11 +121,7 @@ function MultipleContainingUploads({
     });
   };
 
-  console.log(srcImages);
-  console.log(uploadFiles);
-
   const handleDeleteItem = (id, event) => {
-    console.log(id)
     event.stopPropagation();
     const newUploadFiles = [...uploadFiles];
     newUploadFiles.splice(id, 1);

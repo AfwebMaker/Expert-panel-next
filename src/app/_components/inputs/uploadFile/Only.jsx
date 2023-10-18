@@ -40,7 +40,6 @@ function Only({
   }, []);
 
   useEffect(() => {
-    console.log("imageSrc", imageSrc);
     if (imageSrc) {
       const imageSelect = imageSrc.map((item) => {
         return item;

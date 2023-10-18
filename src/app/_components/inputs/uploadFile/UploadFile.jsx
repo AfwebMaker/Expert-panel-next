@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // react Icons
 import { HiExclamation, HiBadgeCheck } from "react-icons/hi";
 // components
@@ -23,11 +23,21 @@ function UploadFile({
   //   const inputRef = useRef(null);
   const [focus, setFocus] = useState(false);
   const [selfState, setSelfState] = useState(state);
+  const parentElem = useRef(null);
 
-  //when click on custom component focus on html input
-  // useEffect(() => {
-  //     focus && inputRef.current.focus()
-  // }, [focus])
+    //get click out side of element
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (parentElem.current && !parentElem.current.contains(event.target)) {
+          setFocus(false);
+        }
+      };
+  
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
 
   //click on custom input body
   const clickHandler = () => {
@@ -57,37 +67,8 @@ function UploadFile({
     return "uploadBorder";
   };
 
-  const getIconColor = () => {
-    if (formik.values[name].length && !focus) {
-      if (errorCondition) return "text-error";
-      switch (selfState) {
-        case "Medium":
-          return "text-warning";
-        case "High":
-          return "text-error";
-        default:
-          return "text-primary-500";
-      }
-    }
-    return "text-cf-300";
-  };
-
-  const getRequiredIcon = () => {
-    if (!required) return "اختیاری";
-    switch (selfState) {
-      case "None":
-        return <HiBadgeCheck className="text-primary-500" size={20} />;
-      case "Medium":
-        return <div className="text-warning">در انتظار تایید</div>;
-      case "High":
-        return <HiExclamation className="text-error" size={20} />;
-      default:
-        return required === undefined ? "" : "اجباری";
-    }
-  };
-
   return (
-    <div className={className}>
+    <div ref={parentElem} className={className}>
       <div
         onClick={clickHandler}
         className={`transition-all duration-200 min-h-[150px] relative fcc flex-col rounded-md overflow-hidden ${getRingStyle()} ${
@@ -127,7 +108,6 @@ function UploadFile({
             formik={formik}
             onChange={formik.handleChange}
             onBlur={(e) => {
-              setFocus(false);
               formik.handleBlur(e);
             }}
             className={`w-full absolute bottom-0 fcc px-4 pb-2 pl-16 font-medium text-sm ${

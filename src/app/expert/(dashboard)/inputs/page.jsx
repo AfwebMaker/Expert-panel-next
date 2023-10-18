@@ -36,7 +36,10 @@ function Page() {
       .test(
         "fileSize",
         "حجم فایل بیش از حد مجاز است (1MB)",
-        (value) => value && (!value.size ? true : 23001 <= 1024 * 1024)
+        (value) => {
+          console.log(value)
+          value && (!value.size ? true : 23001 <= 1024 * 1024)
+        }
       )
       .test(
         "fileFormat",
@@ -48,11 +51,17 @@ function Page() {
             ? true
             : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
       ),
-    uploadFile_multiple: Yup.array().test(
-      "required",
-      "لطفا یک فایل را انتخاب کنید",
-      (value) => value && value.length
-    ),
+    uploadFile_multiple: Yup.array()
+      .test(
+        "required",
+        "لطفا یک فایل را انتخاب کنید",
+        (value) => {value && value.length}
+      )
+      .test(
+        "errorFile",
+        "حجم فایل بیش از حد مجاز است یا فرمت فایل پشتیبانی نمی‌شود",
+        (value) => value && value[0] !== undefined
+      ),
   });
 
   const inputObjects = [
@@ -155,23 +164,23 @@ function Page() {
           size: 23801,
           type: "image/jpg",
           url: "https://cdn.kargosha.com/kg-category/image/png_20231018060225687_abacus.png",
-        }
+        },
       ],
       uploadFile_multiple: [
-        {
-          id: 3,
-          name: "Theme=Lighttttttttttttttttt",
-          size: 23801,
-          type: "image/jpg",
-          url: "https://cdn.kargosha.com/kg-category/image/png_20231018060225687_abacus.png",
-        },
-        {
-          id: 4,
-          name: "abacus",
-          size: 32801,
-          type: "image/jpg",
-          url: "https://cdn.kargosha.com/kg-category/image/png_20231018062543277_aboutImage_2.png",
-        },
+        // {
+        //   id: 3,
+        //   name: "Theme=Lighttttttttttttttttt",
+        //   size: 23801,
+        //   type: "image/jpg",
+        //   url: "https://cdn.kargosha.com/kg-category/image/png_20231018060225687_abacus.png",
+        // },
+        // {
+        //   id: 4,
+        //   name: "abacus",
+        //   size: 32801,
+        //   type: "image/jpg",
+        //   url: "https://cdn.kargosha.com/kg-category/image/png_20231018062543277_aboutImage_2.png",
+        // },
       ],
     },
     validationSchema,

@@ -1,63 +1,65 @@
-import React, { useState } from 'react'
+import React from 'react'
 //components
-import Input from '@/app/_components/Input'
 import SwitchInput from '@/app/_components/SwitchInput'
+import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
 
 function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
 
     const inputData = [
         {
+            id: "firstName",
+            name: "firstName",
+            inputType: "text",
+            title: "نام",
+            required: true,
+            placeholder: 'به طور مثال : محمد',
+        },
+        {
             id: 'componyName',
             name: 'componyName',
+            inputType: "text",
             title: 'نام شرکت',
-            state: 'required',
-            confirmed: false,
-            type: 'text',
+            required: true,
             placeholder: 'به طور مثال : مهراز گستر'
         },
         {
             id: 'nationalCodeCompony',
             name: 'nationalCodeCompony',
+            inputType: "text",
             title: 'شناسه ملی',
-            state: 'required',
-            confirmed: false,
-            type: 'text',
+            required: true,
             placeholder: 'به طور مثال : ۸٤٦۹۷۰۲۸۷'
         },
         {
             id: 'activitySubject',
             name: 'activitySubject',
+            inputType: "text",
             title: 'موضوع فعالیت',
-            state: 'required',
-            confirmed: false,
-            type: 'text',
+            required: true,
             placeholder: 'به طور مثال : پیمانکارا خدمات بازسازی'
         },
         {
             id: 'companyType',
             name: 'companyType',
+            inputType: "dropDown",
             title: 'نوع شرکت',
-            state: 'required',
-            confirmed: false,
-            type: 'text',
+            required: true,
             placeholder: ''
         },
         {
             id: 'dateEstablishment',
             name: 'dateEstablishment',
+            inputType: "datePicker",
             title: 'تاریخ تاسیس',
-            state: 'required',
-            confirmed: false,
-            type: 'text',
+            required: true,
             placeholder: 'به طور مثال : ۱۳۷۱/۰۲/۱٥'
         },
         {
             id: 'registrationNumber',
             name: 'registrationNumber',
+            inputType: "text",
             title: 'شماره ثبت',
-            state: 'required',
-            confirmed: false,
-            type: 'text',
+            required: true,
             placeholder: 'به طور مثال : ۱۱۳۷۲۱٥'
         }
     ]
@@ -74,21 +76,17 @@ function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
                 <div className='flex flex-wrap justify-between'>
                     {legalFormIsActive &&
                         inputData.map(item => (
-                            <Input
+                            <DynamicInputs
                                 key={item.id}
+                                inputType={item.inputType}
                                 title={item.title}
-                                state={item.state}
-                                confirmed={item.confirmed}
-                                type={item.type}
-                                className={`${item.className} w-full my-2 lg:w-[49%]`}
+                                state="Low"
+                                required={item.required}
+                                className="my-2 w-full lg:w-[49%]"
                                 placeholder={item.placeholder}
                                 id={item.id}
                                 name={item.name}
-                                value={formik.values[item.name]}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.errors[item.name]}
-                                touched={formik.touched[item.name]}
+                                formik={formik}
                             />
                         ))
                     }

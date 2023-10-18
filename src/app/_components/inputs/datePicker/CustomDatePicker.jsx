@@ -24,7 +24,6 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
             dateInput[0].blur()
         }, 0);
 
-        console.log(newValue)
         const gregorianFormat = moment(newValue.startDate, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
         formik.setFieldValue(name, gregorianFormat);
         setValue(newValue);

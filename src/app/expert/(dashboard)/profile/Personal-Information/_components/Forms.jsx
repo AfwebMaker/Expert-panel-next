@@ -42,6 +42,18 @@ function Forms({ setAvatar, avatar }) {
             .max(11, 'شماره تلفن باید شامل 11 رقم باشد.'),
         birthday: Yup.string()
             .required('لطفا تاریخ تولد خود را وارد کنید.'),
+        backgroundURL: Yup.array()
+            .test("required", "لطفا یک فایل را انتخاب کنید", (value) => value && value.length)
+            .test(
+                "fileSize",
+                "حجم فایل بیش از حد مجاز است (1MB)",
+                (value) => value[0] && (!value[0].size ? true : value[0].size <= 10240 * 1024)
+            )
+            .test(
+                "fileFormat",
+                "فرمت فایل پشتیبانی نمی‌شود",
+                (value) => value[0] && (!value.type ? true : value[0].type.includes("image/jpg"))
+            ),
     }
     const legalValidation = {
         componyName: Yup.string()
@@ -77,6 +89,7 @@ function Forms({ setAvatar, avatar }) {
         getExpertInfo()
             .then(res => {
                 res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
+                res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
                 formik.setValues({
                     firstName: res.data.data.mainDataInfo.firstName,
                     lastName: res.data.data.mainDataInfo.lastName,
@@ -92,7 +105,7 @@ function Forms({ setAvatar, avatar }) {
                     companyType: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.companyType : null,
                     dateEstablishment: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.dateEstablishment : null,
                     registrationNumber: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.registrationNumber : null,
-                    backgroundURL:res.data.data.mainDataCompany ? res.data.data.mainDataCompany.backgroundURL : []
+                    backgroundURL: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.backgroundURL : []
                 })
             })
             .catch(() => {
@@ -163,7 +176,7 @@ function Forms({ setAvatar, avatar }) {
                         }
                     ]
                 },
-                "mainDataCompany": {
+                "mainDataCompany": legalFormIsActive ? {
                     "id": 0,
                     "id_expert": 0,
                     "name": values.componyName,
@@ -172,8 +185,8 @@ function Forms({ setAvatar, avatar }) {
                     "companyType": values.companyType,
                     "dateEstablishment": values.dateEstablishment,
                     "registrationNumber": values.registrationNumber
-                },
-                "backgroundURL": "string"
+                } : null,
+                "backgroundURL": values.backgroundURL
             }
 
             updateExpertInfo(data)
@@ -198,7 +211,6 @@ function Forms({ setAvatar, avatar }) {
                 inputType="uploadFile"
                 title="آپلود فایل"
                 required={true}
-                placeholder="به طور مثال : سلام روز بخیر .."
                 className={'mb-4'}
                 state="Low"
                 formik={formik}

@@ -1,11 +1,45 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Link from 'next/link'
 //react icon
 import { HiPencilAlt, HiOutlineChevronRight } from 'react-icons/hi'
 //components
 import Forms from './_components/Forms'
+import Image from 'next/image'
+// function
+import getCookie from '@/src/functions/getCookie'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 function page() {
+  const [avatar, setAvatar] = useState(null);
+  const fileInputHandler = (e) => {
+    const files = Array.from(e.target.files);
+    const formData = new FormData();
+    formData.append("file", files[0]);
+
+    axios.post(
+      `${process.env.NEXT_PUBLIC_file_kg_local}/uploadFile`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${getCookie("TOKEN")}`,
+        },
+      }
+    )
+      .then(res => {
+        setAvatar(res.data.data.url)
+      })
+      .catch(err => {
+        console.log(err)
+        if (err.response.status === 413) {
+          console.log(err)
+          toast.error('حجم فایل بیش از حد مجاز  است.')
+        }
+      });
+  }
+
   return (
     <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full'>
       <div className='flex items-center justify-between mb-10 lg:hidden'>
@@ -15,18 +49,24 @@ function page() {
         </Link>
       </div>
       <div className='w-full fcc flex-col mb-10'>
-        <div className='bg-black w-[150px] h-[150px] rounded-full mb-5'>
-
+        <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
+          <Image
+            src={avatar ? avatar : 'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'}
+            alt='avatar'
+            className='object-cover w-full h-full'
+            fill
+          />
         </div>
         <div className='fcc text-primary-500'>
           <div className='ml-1'>
             <HiPencilAlt />
           </div>
-          <div className='font-medium text-sm'>ویرایش عکس پروفایل</div>
+          <label className='cursor-pointer' htmlFor="upload_avatar">ویرایش عکس پروفایل</label>
+          <input onChange={fileInputHandler} className='hidden' id='upload_avatar' type="file" />
         </div>
       </div>
 
-      <Forms />
+      <Forms setAvatar={setAvatar} avatar={avatar} />
 
     </div>
   )

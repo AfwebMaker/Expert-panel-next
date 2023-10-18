@@ -51,6 +51,7 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
     useEffect(() => {
         if (focus) {
             container[0] && (container[0].children[2].children[0].style.display = 'none')
+            container[0] && (container[0].style.zIndex  = '20')
             container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[0].style.direction = 'ltr')
             container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[0].children[1].style.direction = 'rtl')
             container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[1].children[0].style.display = 'none')

@@ -3,7 +3,7 @@ import Image from "next/image";
 // components
 // import Upload from "@/app/_components/Upload"
 //react icons
-import { HiOutlineCloudUpload, HiCheckCircle } from "react-icons/hi";
+import { HiOutlineCloudUpload, HiCheckCircle, HiXCircle } from "react-icons/hi";
 // functions
 import getCookie from "@/src/functions/getCookie";
 // axios
@@ -25,6 +25,7 @@ function Only({
   const [uploadFiles, setUploadFiles] = useState([]);
   const [showProgress, setShowProgress] = useState(false);
   const [imageSrc, setImageSrc] = useState([]);
+  const [isError, setIsError] = useState(false);
 
   const shortText = (text, value) => {
     if (String(text) && String(text).length > value) {
@@ -35,11 +36,11 @@ function Only({
   };
 
   useEffect(() => {
-    console.log(formik.values[name]);
     setImageSrc(formik.values[name]);
   }, []);
 
   useEffect(() => {
+    console.log("imageSrc",imageSrc)
     if (imageSrc) {
       const imageSelect = imageSrc.map((item) => {
         return item;
@@ -58,7 +59,7 @@ function Only({
 
     const fileName = shortText(files[0].name, 12);
     const formData = new FormData();
-    
+
     formData.append("file", files[0]);
 
     setFiles([{ name: fileName, loading: 0 }]);
@@ -79,6 +80,7 @@ function Only({
           });
           if (loaded == total) {
             setUploadFiles([{ name: fileName, size: total }]);
+            setIsError(false)
             setFiles([]);
             // setShowProgress(false);
           }
@@ -87,7 +89,9 @@ function Only({
       .then((res) => {
         setImageSrc([res.data.data]);
       })
-      .catch(console.error);
+      .catch(() => {
+        setIsError(true);
+      });
   };
 
   return (
@@ -120,7 +124,9 @@ function Only({
               size={70}
               className={`${
                 showProgress
-                  ? "text-primary-500"
+                  ? isError
+                    ? "text-red-500"
+                    : "text-primary-500"
                   : imageSrc.length
                   ? "text-white"
                   : "text-gray-500"
@@ -130,10 +136,17 @@ function Only({
           <div>
             <div className="font-bold text-sm flex items-center gap-x-1">
               {showProgress ? (
-                <>
-                  <span className="text-primary-500">فایل بارگذاری شد.</span>
-                  <HiCheckCircle className="text-primary-500 text-lg" />
-                </>
+                isError ? (
+                  <>
+                    <span className="text-red-500">فایل بارگذاری نشد.</span>
+                    <HiXCircle className="text-red-500 text-lg" />
+                  </>
+                ) : (
+                  <>
+                    <span className="text-primary-500">فایل بارگذاری شد.</span>
+                    <HiCheckCircle className="text-primary-500 text-lg" />
+                  </>
+                )
               ) : (
                 <span>آپلود کردن عکس</span>
               )}
@@ -151,7 +164,6 @@ function Only({
         {!!imageSrc.length && (
           <div className="h-full w-full fcc rounded-lg absolute top-0 right-0">
             {imageSrc.map((item, i) => {
-              console.log(item);
               return (
                 <Image
                   key={i}

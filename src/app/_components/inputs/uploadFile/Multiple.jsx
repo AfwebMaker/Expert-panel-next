@@ -52,7 +52,8 @@ function MultipleContainingUploads({
     let passArray = [];
     uploadFiles.find((item) => {
       if (item.status === "error") {
-        return (passArray = []);
+        formik.setFieldTouched(name)
+        return (passArray = [undefined]);
       } else {
         passArray.push(item);
       }
@@ -72,11 +73,7 @@ function MultipleContainingUploads({
 
     //create files
     filesVar.forEach((item, i) => {
-      const fileName =
-        item.name.length > 12
-          ? `${item.name.slice(0, 12 - 1) + " ..."}`
-          : item.name;
-
+      const fileName = shortText(item.name, 12);
       const formData = new FormData();
       formData.append("file", item);
       setFiles((pre) => [...pre, { name: fileName, loading: 0 }]);
@@ -96,10 +93,13 @@ function MultipleContainingUploads({
               return newFiles;
             });
 
-            if (loaded == total) {
+            if (loaded === total) {
+              console.log("hello world!");
+              console.log(fileName);
+              console.log(item.name);
               setUploadFiles((pre) => [
                 ...pre,
-                { name: fileName, size: total, status: "ok" },
+                { id: i, name: item.name, size: total, status: "ok" },
               ]);
 
               setShowProgress((pre) => {
@@ -120,14 +120,11 @@ function MultipleContainingUploads({
         })
         .catch(() => {
           setSrcImages((pre) => [...pre, {}]);
-
           setUploadFiles((pre) => {
             const newUploadFiles = [...pre];
-            newUploadFiles[
-              (uploadFiles.length
-                ? uploadFiles.length - 1
-                : uploadFiles.length) + i
-            ].status = "error";
+            newUploadFiles.forEach((it) => {
+              if (it.name === item.name) it.status = "error";
+            });
             return newUploadFiles;
           });
         });
@@ -137,7 +134,9 @@ function MultipleContainingUploads({
   console.log(srcImages);
   console.log(uploadFiles);
 
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = (id, event) => {
+    console.log(id)
+    event.stopPropagation();
     const newUploadFiles = [...uploadFiles];
     newUploadFiles.splice(id, 1);
     setUploadFiles(newUploadFiles);
@@ -167,6 +166,7 @@ function MultipleContainingUploads({
         multiple={true}
         accept={accept}
         disabled={disabled}
+        onBlur={(e) => {onBlur(e)}}
       />
       <div className="w-full h-full flex flex-col items-start justify-center p-5">
         <div className="flex justify-start items-center w-full h-full p-5 text-gray-500">
@@ -202,7 +202,7 @@ function MultipleContainingUploads({
           )}
         </ul>
 
-        <ul className="uploading-area flex flex-wrap gap-x-2 gap-y-4">
+        <ul className="uploading-area flex flex-wrap gap-2">
           {uploadFiles.map((file, i) => (
             <li
               key={i}
@@ -226,20 +226,20 @@ function MultipleContainingUploads({
               {!disabled && (
                 <div className="h-full w-[25%] fcc">
                   <div
-                    onClick={() => handleDeleteItem(i)}
+                    onClick={(event) => handleDeleteItem(i, event)}
                     className="hover:bg-red-200 p-1.5 rounded-md transition-all duration-300"
                   >
                     <HiOutlineTrash className="text-red-500 font-light text-lg" />
                   </div>
                 </div>
               )}
-              {!file.status || file.status === "ok" ? (
+              {/* {!file.status || file.status === "ok" ? (
                 ""
               ) : (
                 <div className="flex absolute right-1 -bottom-3.5 text-error font-bold text-[9px]">
                   <div>فایل مورد نظر آپلود نشد</div>
                 </div>
-              )}
+              )} */}
             </li>
           ))}
         </ul>

@@ -25,19 +25,19 @@ function UploadFile({
   const [selfState, setSelfState] = useState(state);
   const parentElem = useRef(null);
 
-    //get click out side of element
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (parentElem.current && !parentElem.current.contains(event.target)) {
-          setFocus(false);
-        }
-      };
-  
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, []);
+  //get click out side of element
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (parentElem.current && !parentElem.current.contains(event.target)) {
+        setFocus(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   //click on custom input body
   const clickHandler = () => {
@@ -88,7 +88,6 @@ function UploadFile({
             formik={formik}
             onChange={formik.handleChange}
             onBlur={(e) => {
-              setFocus(false);
               formik.handleBlur(e);
             }}
             className={`w-full absolute bottom-0 fcc px-4 pb-2 pl-16 font-medium text-sm ${

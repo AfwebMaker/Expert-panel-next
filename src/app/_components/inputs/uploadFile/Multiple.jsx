@@ -15,12 +15,7 @@ function MultipleContainingUploads({
   name,
   onBlur,
   disabled,
-  inputRef,
   formik,
-  focus,
-  value,
-  state,
-  id,
   accept,
 }) {
   const [files, setFiles] = useState([]);

@@ -3,6 +3,8 @@
 import React from "react";
 //redux
 import { useSelector } from "react-redux";
+//components
+import Loading from '@/app/_components/Loading'
 
 function Main({ children }) {
     //redux
@@ -10,7 +12,7 @@ function Main({ children }) {
 
     return (
         <div className="w-full flex">
-            {isLoading && <div className="w-[100vw] h-screen bg-pink-300 top-0 left-0 fixed z-[100] fcc">loading...</div>}
+            {isLoading && <Loading />}
             {children}
         </div>
     );

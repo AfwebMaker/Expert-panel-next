@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 189.452 189.458">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #45B649;
+      }
+
+      .cls-2 {
+        fill: #45B649;
+      }
+      .c1{
+        animation: kargosha-animation 3s infinite;
+        -webkit-animation: kargosha-animation 3s infinite;
+        animation-direction: alternate-reverse;
+        animation-delay:100ms;
+      }
+      .c2{
+          animation: kargosha-animation 3s infinite;
+          -webkit-animation: kargosha-animation 3s infinite;
+        animation-direction: alternate-reverse;
+        animation-delay:200ms;
+      }
+      .c3{
+          animation: kargosha-animation 3s infinite;
+          -webkit-animation: kargosha-animation 3s infinite;
+        animation-direction: alternate-reverse;
+        animation-delay:300ms;
+      }
+      .c4{
+          animation: kargosha-animation 3s infinite;
+          -webkit-animation: kargosha-animation 3s infinite;
+        animation-direction: alternate-reverse;
+        animation-delay:400ms;
+      }
+      .c5{
+          animation: kargosha-animation 3s infinite;
+          -webkit-animation: kargosha-animation 3s infinite;
+        animation-direction: alternate-reverse;
+        animation-delay:500ms;
+      }
+      @keyframes kargosha-animation {
+        0% {
+            fill: #45B649;
+            opacity: 0;
+          }
+          50% {
+              fill: #45B649;
+          opacity: 1;
+        }
+        100% {
+          fill: #45B649;
+          opacity: 0;
+        }
+      }
+    </style>
+  </defs>
+<g transform="translate(-651.59 -13.917)">
+    <path class="c1" d="M944.089,384.218H911.2l8.274-11.438a8.15,8.15,0,0,1,12.337-.963Z" transform="translate(-132.059 -180.847)" fill="#45B649"/>
+    <path class="c2" d="M784.545,231.546v20.645c0,23.711-14.042,44.7-38.5,57.558-.4.216-.806.4-1.238.619H712.42c10.377-5.272,20.115-10.17,26.963-13.575,19.4-10.229,30.589-26.5,30.589-44.607V231.541a7.286,7.286,0,0,1,14.573,0" transform="translate(-30.943 -106.998)" fill="#45B649"/>
+    <path class="c3" d="M782.772,201.351v23.436c0,19.8-8.062,39.271-21.947,55.391H740.214C756.27,266.386,768.2,247.2,768.2,224.787V201.351a21.866,21.866,0,1,0-43.732,0v18.13a37.746,37.746,0,0,1-20.395,33.012L651.6,278.9V262.564l45.933-23.092A22.845,22.845,0,0,0,709.9,219.48v-18.13a36.436,36.436,0,1,1,72.872,0" transform="translate(-0.005 -76.802)" fill="#45B649"/>
+    <path class="c4" d="M871.273,232.086v12.086h-8.524l-24.237-24.487A37.562,37.562,0,0,1,827.6,193.119V141.855a6.454,6.454,0,0,0-2.854-5.36l-34.22-23.529a24.822,24.822,0,0,0-27.863,0L728.408,136.5a6.5,6.5,0,0,0-2.815,5.36v39.183a11.752,11.752,0,0,1-6.48,10.475l-8.092,4.058V141.855a21.084,21.084,0,0,1,9.143-17.388l34.255-23.495a39.389,39.389,0,0,1,44.351,0l34.22,23.495a21.112,21.112,0,0,1,9.173,17.388v51.269a23.121,23.121,0,0,0,6.7,16.307Z" transform="translate(-30.231 -40.807)" fill="#45B649"/>
+    <path class="c5" d="M666.089,82.457l77.373-53.111a5.076,5.076,0,0,1,5.7,0l77.3,52.984v72.862a6.123,6.123,0,0,0,1.764,4.289l12.809,12.941V82.33a14.424,14.424,0,0,0-6.254-11.88L757.41,17.333a19.723,19.723,0,0,0-22.188,0L657.844,70.45a14.411,14.411,0,0,0-6.254,11.88v87.125l14.572-7.33Z" transform="translate(0 0)" fill="#45B649"/>
+</g>
+</svg>

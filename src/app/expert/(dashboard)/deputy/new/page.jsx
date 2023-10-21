@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { HiOutlineChevronRight, HiOutlineUserAdd } from "react-icons/hi";
 //components
 import SwitchInput from "@/app/_components/SwitchInput";
-import NotPrefer from "./_components/NotPrefer";
+import NotPrefer from "./_components/notPrefer/NotPrefer";
 import Prefer from "./_components/Prefer";
 
 function page() {
@@ -20,10 +20,7 @@ function page() {
               className="flex md:hidden items-center justify-start text-cf-300 text-sm font-bold"
             >
               <HiOutlineChevronRight className="ml-1 text-base" />
-              <h1>تیکت های من</h1>
-            </Link>
-            <Link href="" role="button" className="text-primary-500 text-sm">
-              ویرایش
+              <h1>نماینده من</h1>
             </Link>
           </div>
           <div className="w-full fcc md:hidden gap-x-2 mb-10 text-primary-500 mt-10">

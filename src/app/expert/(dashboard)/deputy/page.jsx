@@ -6,11 +6,15 @@ import MyActiveDeputy from "./_components/MyActiveDeputy";
 import MyFormerDeputy from "./_components/MyFormerDeputy";
 // services
 import expertData from "@/src/services/deputy_kg_local/expertData";
+//redux
+import { useDispatch } from "react-redux";
 // react icons
 import { HiOutlineIdentification } from "react-icons/hi";
 
 function Page() {
   const [dataExpertData, setDataExpertData] = useState("");
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     expertData()
@@ -20,7 +24,10 @@ function Page() {
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
+      .finally(() => {
+        dispatch()
+      })
   }, []);
 
   return (

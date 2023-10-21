@@ -99,6 +99,7 @@ function Only({
         disabled ? "cursor-not-allowed" : "cursor-pointer"
       }`}
     >
+      {/* <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_upload_button">بارگذاری فایل</label> */}
       <input
         id={id}
         type="file"

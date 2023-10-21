@@ -16,9 +16,10 @@ function Page() {
     dropDown: Yup.string().required(
       "لطفا نام خانوادگی خود را به درستی وارد کنید."
     ),
-    dropDown_Icon: Yup.string().required(
-      "لطفا نام خانوادگی خود را به درستی وارد کنید."
-    ),
+    dropDown_Icon: Yup.string()
+      .required(
+        "لطفا نام خانوادگی خود را به درستی وارد کنید."
+      ),
     checkBoxMultipleInput: Yup.array().min(
       1,
       "لطفا حداقل یک گزینه را انتخاب کنید."
@@ -195,7 +196,7 @@ function Page() {
             key={item.id}
             inputType={item.inputType}
             title={item.title}
-            state="Low"
+            state="None"
             required={item.required}
             className="my-2 w-full lg:w-[49%]"
             placeholder={item.placeholder}

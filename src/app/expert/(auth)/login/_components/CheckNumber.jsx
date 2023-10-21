@@ -11,6 +11,9 @@ import searchNumber from '@/services/person_kg_local/search'
 import sendOtp from '@/services/register_kg_local/phoneNumber'
 //functions
 import setCookie from '@/src/functions/setCookie'
+//redux loading
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 //validation
 const validationSchema = Yup.object().shape({
@@ -21,6 +24,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function CheckNumber({ setPhoneNumber, setPageState }) {
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -30,6 +34,7 @@ function CheckNumber({ setPhoneNumber, setPageState }) {
         onSubmit: values => {
             setPhoneNumber(values.phoneNumber)
             //check number exists 
+            dispatch(loadingHandler(true))
             searchNumber(values.phoneNumber)
                 .then(() => {
                     setPageState('checkPassword')
@@ -43,10 +48,15 @@ function CheckNumber({ setPhoneNumber, setPageState }) {
                                 setCookie('guid', res.data.data)
                                 setPageState('checkOtp')
                             })
-                            .catch(err => {
-                                console.log(err)
+                            .catch(() => {
+                            })
+                            .finally(() => {
+                                dispatch(loadingHandler(false))
                             })
                     }
+                })
+                .finally(() => {
+                    dispatch(loadingHandler(false))
                 })
         },
     });

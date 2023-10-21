@@ -10,7 +10,6 @@ function Providers({ children }) {
     <>
       <Toaster />
       <Provider store={store}>{children}</Provider>
-
     </>
   )
 }

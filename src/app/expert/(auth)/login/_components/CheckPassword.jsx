@@ -14,6 +14,9 @@ import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
 import setCookie from '@/src/functions/setCookie';
 //toast
 import toast from 'react-hot-toast';
+//redux loading
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 //validation
 const validationSchema = Yup.object().shape({
@@ -27,6 +30,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
+    const dispatch = useDispatch()
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
     const [rememberMe, setRememberMe] = useState(false)
     const router = useRouter()
@@ -37,6 +41,7 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
         },
         validationSchema,
         onSubmit: values => {
+            dispatch(loadingHandler(true))
             auth({ "mobile": phoneNumber, "pass": values.password, "appRequest": "expert" })
                 .then((res) => {
                     console.log(res)
@@ -48,10 +53,14 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
                         toast.error('شماره تلفن یا رمز عبور اشتباه است.')
                     }
                 })
+                .finally(() => {
+                    dispatch(loadingHandler(false))
+                })
         },
     });
 
     const checkOtpHandler = () => {
+        dispatch(loadingHandler(true))
         forgetPhoneNumber(phoneNumber)
             .then(res => {
                 console.log(res)
@@ -60,6 +69,9 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
             })
             .catch(() => {
 
+            })
+            .finally(() => {
+                dispatch(loadingHandler(false))
             })
     }
 

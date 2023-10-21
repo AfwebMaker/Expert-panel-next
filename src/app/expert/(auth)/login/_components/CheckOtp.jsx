@@ -9,14 +9,19 @@ import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
 //functions
 import setCookie from '@/src/functions/setCookie'
 import toast from 'react-hot-toast';
+//redux loading
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
+    const dispatch = useDispatch()
     const [otp, setOtp] = useState('');
     const router = useRouter()
 
     //otp submit
     const otpSubmitHandler = () => {
         if (otp.length === 4) {
+            dispatch(loadingHandler(true))
             if (forgetPassword) {
                 forgetCheckOtp({ phoneNumber: phoneNumber, otp: otp })
                     .then((res) => {
@@ -29,6 +34,9 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
                             toast.error('کد پیامکی اشتباه است.')
                         }
                     })
+                    .finally(() => {
+                        dispatch(loadingHandler(false))
+                    })
 
             } else {
                 checkOtp(otp)
@@ -40,19 +48,25 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
                             toast.error('کد پیامکی اشتباه است.')
                         }
                     })
+                    .finally(() => {
+                        dispatch(loadingHandler(false))
+                    })
             }
 
         }
     }
 
     const resendOtp = () => {
+        dispatch(loadingHandler(true))
         if (forgetPassword) {
             forgetPhoneNumber(phoneNumber)
                 .then(res => {
                     console.log(res)
                 })
-                .catch(() => {
-
+                .catch(() => { 
+                })
+                .finally(() => {
+                    dispatch(loadingHandler(false))
                 })
         } else {
             sendOtp(phoneNumber)
@@ -60,8 +74,10 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
                     console.log(res)
                     setCookie('guid', res.data.data)
                 })
-                .catch(err => {
-                    console.log(err)
+                .catch(() => {
+                })
+                .finally(() => {
+                    dispatch(loadingHandler(false))
                 })
         }
 

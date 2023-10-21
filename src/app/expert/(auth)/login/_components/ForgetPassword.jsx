@@ -11,6 +11,9 @@ import Key from '@/public/icons/Key.svg'
 import forgetChangePassword from '@/services/register_kg_local/forgetChangePassword'
 //toast
 import customToast from '@/src/functions/customToast';
+//redux loading
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 //validation
 const validationSchema = Yup.object().shape({
@@ -28,6 +31,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function ForgetPassword({ setPageState }) {
+    const dispatch = useDispatch()
     const [isPasswordVisible1, setIsPAsswordVisible1] = useState(false)
     const [isPasswordVisible2, setIsPAsswordVisible2] = useState(false)
     const router = useRouter()
@@ -40,6 +44,7 @@ function ForgetPassword({ setPageState }) {
         },
         validationSchema,
         onSubmit: values => {
+            dispatch(loadingHandler(true))
             forgetChangePassword(values.password)
                 .then((res) => {
                     console.log(res)
@@ -48,6 +53,9 @@ function ForgetPassword({ setPageState }) {
                 })
                 .catch(() => {
 
+                })
+                .finally(() => {
+                    dispatch(loadingHandler(false))
                 })
         }
     });

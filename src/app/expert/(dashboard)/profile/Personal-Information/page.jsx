@@ -11,14 +11,19 @@ import Image from 'next/image'
 import getCookie from '@/src/functions/getCookie'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+//loading redux
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 function page() {
+  const dispatch = useDispatch()
   const [avatar, setAvatar] = useState(null);
   const fileInputHandler = (e) => {
     const files = Array.from(e.target.files);
     const formData = new FormData();
     formData.append("file", files[0]);
 
+    dispatch(loadingHandler(true))
     axios.post(
       `${process.env.NEXT_PUBLIC_file_kg_local}/uploadFile`,
       formData,
@@ -29,10 +34,11 @@ function page() {
       }
     )
       .then(res => {
+        dispatch(loadingHandler(false))
         setAvatar(res.data.data.url)
       })
       .catch(err => {
-        console.log(err)
+        dispatch(loadingHandler(false))
         if (err.response.status === 413) {
           console.log(err)
           toast.error('حجم فایل بیش از حد مجاز  است.')

@@ -1,8 +1,10 @@
 import "../../globals.css";
 // font
 import iranYekanFont from "@/constants/localFonts";
-//toast
-import { Toaster } from "react-hot-toast";
+//components
+import Main from './_layout/Main'
+//redux
+import Providers from "@/src/redux/Providers";
 
 export const metadata = {
   title: "login",
@@ -16,8 +18,9 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning={true}
         className={`${iranYekanFont.variable} font-sans`}
       >
-        <Toaster />
-        {children}
+        <Providers>
+          <Main>{children}</Main>
+        </Providers>
       </body>
     </html>
   );

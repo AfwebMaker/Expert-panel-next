@@ -15,8 +15,13 @@ import getExpertInfo from '@/services/person_kg_local/getExpertInfo'
 import updateExpertInfo from '@/services/person_kg_local/updateExpertInfo'
 import toast from 'react-hot-toast';
 import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
+//loading redux
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 function Forms({ setAvatar, avatar }) {
+    const dispatch = useDispatch()
+    loadingHandler
     const [legalFormIsActive, setLegalFormIsActive] = useState(false);
     const [validation, setValidation] = useState(false);
     const baseValidation = {
@@ -86,8 +91,10 @@ function Forms({ setAvatar, avatar }) {
 
     //get initial data from server
     useEffect(() => {
+        dispatch(loadingHandler(true))
         getExpertInfo()
             .then(res => {
+                dispatch(loadingHandler(false))
                 res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
                 res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
                 formik.setValues({
@@ -109,7 +116,7 @@ function Forms({ setAvatar, avatar }) {
                 })
             })
             .catch(() => {
-
+                dispatch(loadingHandler(false))
             })
     }, [])
 
@@ -189,11 +196,14 @@ function Forms({ setAvatar, avatar }) {
                 "backgroundURL": values.backgroundURL
             }
 
+            dispatch(loadingHandler(true))
             updateExpertInfo(data)
                 .then(res => {
+                    dispatch(loadingHandler(false))
                     console.log(res)
                 })
                 .catch((err) => {
+                    dispatch(loadingHandler(false))
                     if (err.response.status === 400) {
                         toast.error(err.response.data.message)
                     }

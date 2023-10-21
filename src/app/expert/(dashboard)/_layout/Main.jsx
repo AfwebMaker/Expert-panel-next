@@ -13,14 +13,24 @@ import { fetchUserHandler } from "@/src/redux/features/profileBase/profileBaseSl
 import operatorInfoProfileBase from '@/src/services/person_kg_local/operatorInfoProfileBase'
 
 function Main({ children }) {
-  //redux
-  const toggleSidebar = useSelector(
-    (state) => state.layoutConfig.toggleSidebar
-  );
+  const toggleSidebar = useSelector(state => state.layoutConfig.toggleSidebar)
+  const isLoading = useSelector(state => state.layoutConfig.isLoading)
+  const dispatch = useDispatch();
+
+  //Get Data User
+  useEffect(() => {
+    operatorInfoProfileBase()
+      .then(res => {
+        dispatch(fetchUserHandler(res.data.data))
+      })
+      .catch(error => {
+        console.log("Get Data User", error)
+      })
+  }, [])
 
   return (
     <div className="w-full flex">
-      {isLoading  && <div className="w-[100vw] h-screen bg-pink-300 top-0 left-0 fixed z-[100] fcc">loading...</div>}
+      {isLoading && <div className="w-[100vw] h-screen bg-pink-300 top-0 left-0 fixed z-[100] fcc">loading...</div>}
       <SideBar />
       <div
         className={`h-full lg:h-screen w-full transition-all duration-300 ${toggleSidebar ? "layout_dashboard_open" : "layout_dashboard_close"

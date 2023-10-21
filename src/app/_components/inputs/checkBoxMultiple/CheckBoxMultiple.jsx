@@ -130,17 +130,15 @@ function CheckBox({
     <div ref={parentElem} className={className}>
       <div
         onClick={clickHandler}
-        className={`transition-all duration-200 min-h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${
-          activeInputCondition ? "cursor-pointer" : "cursor-not-allowed"
-        } ${activeInputCondition ? "bg-white" : "bg-gray-100"}`}
+        className={`transition-all duration-200 min-h-[60px] relative fcc flex-col rounded-md ${getRingStyle()} ${activeInputCondition ? "cursor-pointer" : "cursor-not-allowed"
+          } ${activeInputCondition ? "bg-white" : "bg-gray-100"}`}
       >
         <div
-        // formik.values[name].length !== "" ||
-          className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${
-            focus || forceOpenInput
+          // formik.values[name].length !== "" ||
+          className={`flex items-center justify-between absolute z-10 right-4 text-cf-300 font-medium text-base ${getIconColor()} ${focus || forceOpenInput
               ? "top-2 text-sm font-normal transition-all duration-200"
               : ""
-          }`}
+            }`}
         >
           {title}
         </div>

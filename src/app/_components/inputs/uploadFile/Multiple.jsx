@@ -137,22 +137,20 @@ function MultipleContainingUploads({
 
   return (
     <div
-      className={`w-full h-auto rounded-lg border-cf-400 relative overflow-hidden fcc ${
-        disabled ? "cursor-not-allowed" : "cursor-pointer"
-      }`}
+      className={`w-full h-auto rounded-lg border-cf-400 relative overflow-hidden fcc ${disabled ? "cursor-not-allowed" : "cursor-pointer"
+        }`}
     >
       <input
         ref={fileInputRef}
         onChange={inputFileHandler}
-        className={`absolute w-full h-full max-h-[140px] opacity-0 top-0 right-0 ${
-          disabled ? "cursor-not-allowed -z-20" : "cursor-pointer"
-        }`}
+        className={`absolute w-full h-full max-h-[140px] opacity-0 top-0 right-0 ${disabled ? "cursor-not-allowed -z-20" : "cursor-pointer"
+          }`}
         type="file"
         name="file"
         multiple={true}
         accept={accept}
         disabled={disabled}
-        onBlur={(e) => {onBlur(e)}}
+        onBlur={(e) => { onBlur(e) }}
       />
       <div className="w-full h-full flex flex-col items-start justify-center p-5">
         <div className="flex justify-start items-center w-full h-full p-5 text-gray-500">
@@ -178,9 +176,8 @@ function MultipleContainingUploads({
                     </p>
                   </div>
                   <div
-                    className={`h-full fcc ${
-                      file.loading === 100 ? "bg-green-500" : "bg-secondary-300"
-                    }`}
+                    className={`h-full fcc ${file.loading === 100 ? "bg-green-500" : "bg-secondary-300"
+                      }`}
                     style={{ width: `${file.loading}%` }}
                   />
                 </li>
@@ -192,11 +189,10 @@ function MultipleContainingUploads({
           {uploadFiles.map((file, i) => (
             <li
               key={i}
-              className={`h-[41px] w-[165px] fcc rounded-lg ${
-                !file.status || file.status === "ok"
+              className={`h-[41px] w-[165px] fcc rounded-lg ${!file.status || file.status === "ok"
                   ? "bg-gray-200"
                   : "bg-red-200 relative"
-              }`}
+                }`}
               onClick={() => openImage(`${shortText(file.name, 12)}`)}
             >
               <div className="h-full w-[20%] fcc">

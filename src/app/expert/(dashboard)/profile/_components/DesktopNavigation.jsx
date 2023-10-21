@@ -14,8 +14,10 @@ import {
 } from "react-icons/hi";
 //services
 import profileBase from '@/src/services/person_kg_local/profileBase'
+import Loading from '@/src/app/_components/Loading';
 
 function DesktopNavigation() {
+  const [loadingPage, setLoadingPage] = useState(true)
   const [data, setData] = useState({})
   const pathName = usePathname()
 
@@ -26,8 +28,10 @@ function DesktopNavigation() {
         console.log(res.data.data)
         setData(res.data.data)
       })
-      .catch(error => {
-        // console.log(error)
+      .catch(() => {
+      })
+      .finally(() => {
+        setLoadingPage(false)
       })
   }, [])
 
@@ -68,6 +72,7 @@ function DesktopNavigation() {
 
   return (
     <div className='hidden lg:block ml-5 xl:w-[350px] py-5 xl:py-0'>
+      {loadingPage && <Loading />}
       <nav>
         <ul className='font-medium text-lg flex flex-wrap justify-between'>
           {navigation_data.map((item, index) => (
@@ -85,8 +90,9 @@ function DesktopNavigation() {
                 <div className='flex items-center'>
                   <div className='ml-2'>
                     {
-                      item.warning ? <HiExclamationCircle size={20} className='text-warning' /> :
-                        item.warning === 0 ? <HiBadgeCheck size={20} className='text-primary-500' /> : ''
+                      item.warning ?
+                        <HiExclamationCircle size={20} className='text-warning' /> :
+                        <HiBadgeCheck size={20} className='text-primary-500' />
                     }
                   </div>
                 </div>

@@ -34,7 +34,6 @@ function page() {
       }
     )
       .then(res => {
-        dispatch(loadingHandler(false))
         setAvatar(res.data.data.url)
       })
       .catch(err => {
@@ -43,11 +42,11 @@ function page() {
           console.log(err)
           toast.error('حجم فایل بیش از حد مجاز  است.')
         }
-      });
+      })
   }
 
   return (
-    <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-[80px] lg:pb-0'>
+    <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-[80px] lg:pb-5'>
       <div className='flex items-center justify-between mb-10 lg:hidden'>
         <Link href='/expert/profile/' className='fcc'>
           <HiOutlineChevronRight className='text-cf-400' />
@@ -57,6 +56,7 @@ function page() {
       <div className='w-full fcc flex-col mb-10'>
         <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
           <Image
+            onLoad={() => {dispatch(loadingHandler(false))}}
             src={avatar ? avatar : 'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'}
             alt='avatar'
             className='object-cover w-full h-full'

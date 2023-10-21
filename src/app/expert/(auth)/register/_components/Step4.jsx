@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import StepController from './StepController'
 //services
 import stepInformation from '@/services/register_kg_local/stepInformation'
+import Loading from '@/src/app/_components/Loading'
 
 function Step4({ currentStep, setCurrentStep }) {
+    const [loadingPage, setLoadingPage] = useState(true)
     const [data, setData] = useState({})
 
     //get initial data
@@ -14,7 +16,9 @@ function Step4({ currentStep, setCurrentStep }) {
                 setData(res.data.data)
             })
             .catch(() => {
-
+            })
+            .finally(() => {
+                setLoadingPage(false)
             })
     }, [])
 
@@ -24,6 +28,7 @@ function Step4({ currentStep, setCurrentStep }) {
 
     return (
         <div className='w-full'>
+            {loadingPage && <Loading />}
             <div className=' sm:px-8 font-medium'>
                 <div className='mb-4 flex flex-col'>
                     <span className='flex text-secondary-500 mb-4 text-sm sm:text-base'>اطلاعات اولیه :</span>

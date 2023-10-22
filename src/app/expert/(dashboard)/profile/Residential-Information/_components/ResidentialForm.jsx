@@ -7,9 +7,7 @@ import * as Yup from 'yup';
 //react icons
 import { HiHome } from 'react-icons/hi'
 //components
-import Input from '@/app/_components/Input'
 import Button from '@/app/_components/Button'
-import UploadFile from './UploadFile'
 import Loading from '@/src/app/_components/Loading';
 import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
 //services
@@ -21,17 +19,7 @@ const validationSchema = Yup.object().shape({
         .required('لطفا آدرس خود را وارد کنید.'),
     zipCode: Yup.string()
         .required('لطفا کد پستی خود را وارد کنید.'),
-    addressDocumentationURL: Yup.mixed()
-        .test(
-            "required",
-            "لطفا یک فایل را انتخاب کنید",
-            (value) => value && value.length
-        )
-        .test(
-            "fileSize",
-            "حجم فایل بیش از حد مجاز است (1MB)",
-            (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
-        )
+
 });
 
 function ResidentialForm() {
@@ -40,7 +28,6 @@ function ResidentialForm() {
     useEffect(() => {
         addressGet()
             .then(res => {
-                console.log(res.data.data.address)
                 formik.setValues({
                     address: res.data.data.address,
                     zipCode: res.data.data.address,

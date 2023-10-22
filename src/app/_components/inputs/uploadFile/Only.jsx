@@ -55,7 +55,7 @@ function Only({
     const files = Array.from(e.target.files);
 
     if (!files.length) return;
-
+ 
     const fileName = shortText(files[0].name, 12);
     const formData = new FormData();
 

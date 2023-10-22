@@ -32,22 +32,21 @@ function Page() {
       .test(
         "required",
         "لطفا یک فایل را انتخاب کنید",
-        (value) => value && value.length
+        (value) => value ? true : false
       )
       .test(
         "fileSize",
         "حجم فایل بیش از حد مجاز است (1MB)",
-        (value) => value && (!value.size ? true : 23001 <= 1024 * 1024)
+        (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
       )
       .test(
         "fileFormat",
-
         "فرمت فایل پشتیبانی نمی‌شود",
         (value) =>
           value &&
           (!value.type
             ? true
-            : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
+            : ["image/jpg", "image/jpeg", "image/png"].includes(value.type))
       ),
     uploadFile_multiple: Yup.array()
       .test(
@@ -155,15 +154,7 @@ function Page() {
       test: "",
       checkBoxMultipleInput: [],
       inputTextarea: "",
-      uploadFile: [
-        {
-          id: 3,
-          name: "Theme=Lighttttttttttttttttt",
-          size: 23801,
-          type: "image/jpg",
-          url: "https://cdn.kargosha.com/kg-category/image/png_20231018060225687_abacus.png",
-        },
-      ],
+      uploadFile: '',
       uploadFile_multiple: [
         // {
         //   id: 3,
@@ -196,7 +187,7 @@ function Page() {
             key={item.id}
             inputType={item.inputType}
             title={item.title}
-            state="None"
+            state="Low"
             required={item.required}
             className="my-2 w-full lg:w-[49%]"
             placeholder={item.placeholder}

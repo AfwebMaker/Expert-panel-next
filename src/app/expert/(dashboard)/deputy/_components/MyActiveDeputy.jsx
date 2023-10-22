@@ -25,6 +25,7 @@ function MyActiveDeputy({ activeData, newData }) {
       <div className="flex flex-wrap md:grid md:grid-cols-12 w-full gap-5">
         {activeData && (
           <DeputyCard
+            activeData={activeData}  
             status={"active"}
             phone={activeData.mobile}
             name={activeData.nameFamily}

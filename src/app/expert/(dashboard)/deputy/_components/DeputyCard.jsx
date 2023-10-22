@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 // react icons
 import {
@@ -12,7 +13,16 @@ import {
   HiPencil,
 } from "react-icons/hi";
 
-function DeputyCard({ status, phone, name, src }) {
+function DeputyCard({ status, phone, name, src, activeData }) {
+
+  const router = useRouter()
+
+  const editHandler = () => {
+    router.push({
+      pathname: '/deputy/edit',
+      query: { data: activeData },
+    })
+  }
   return (
     <div className="bg-white md:col-span-6 xl:col-span-4 w-full rounded-lg p-3 sm:p-5 flex flex-col border border-gray-200">
       <div className="w-full flex md:flex-col">
@@ -69,13 +79,13 @@ function DeputyCard({ status, phone, name, src }) {
             role="button"
             className="flex cursor-pointer w-full fcc h-full gap-x-3"
           >
-            <Link
-              href={"#"}
+            <div
+              onClick={editHandler}
               className="rounded-lg bg-blue-500 fcc w-full h-full gap-x-1"
             >
               <HiPencil className="text-xl" />
               <span className="text-xs sm:text-sm">ویرایش نماینده</span>
-            </Link>
+            </div>
             <Link
               href={"#"}
               className="rounded-lg bg-red-500 fcc w-full h-full gap-x-1"

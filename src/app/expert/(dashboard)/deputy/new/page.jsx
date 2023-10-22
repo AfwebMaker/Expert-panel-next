@@ -23,11 +23,11 @@ function page() {
               <h1>نماینده من</h1>
             </Link>
           </div>
-          <div className="w-full fcc md:hidden gap-x-2 mb-10 text-primary-500 mt-10">
+          <div className="w-full fcc gap-x-2 mb-10 text-primary-500 mt-10">
             <h1>اضافه کردن نماینده جدید</h1>
             <HiOutlineUserAdd className="text-xl" />
           </div>
-          <div>
+          <div className="w-full">
             <p className="text-xs leading-5 w-full text-cf-300">
               در صورتی که تمایل دارید که خودتان با شماره ای دیگر به عنوان
               نماینده تان مشغول به کار شوید گزینه تمایل دارم را روشن و شماره

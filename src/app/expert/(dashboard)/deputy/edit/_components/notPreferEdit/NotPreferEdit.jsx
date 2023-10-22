@@ -5,7 +5,6 @@ import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
 import InformationForm from "./InformationForm"
 import LegalForm from "./LegalForm"
 import Button from "@/app/_components/Button"
-
 //formik
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -14,7 +13,7 @@ import { useSelector } from "react-redux";
 //react Icons
 import { HiOutlineFingerPrint } from "react-icons/hi";
 
-function NotPrefer() {
+function NotPreferEdit() {
 
   const [validation, setValidation] = useState(false);
   const { idUser } = useSelector(state => state.profileBase.user)
@@ -130,11 +129,10 @@ function NotPrefer() {
   });
 
   return (
-    <div className="w-full mt-5 flex flex-col">
-      <p className="text-xs leading-5 w-full text-cf-300 mb-5">
-        در اصورتی که شخص دیگری را برای نماینده خودتان در نظر دارید پس از وارد
-        کردن مشخصات نماینده تان منتظر احراز هویت از سمت ادمین بمانید.
-      </p>
+    <div className="w-full flex flex-col">
+      <span className="text-xs leading-5 w-full text-cf-300 mb-5">
+        مشخصات نماینده شما
+      </span>
       <form onSubmit={formik.handleSubmit}>
         <InformationForm formik={formik} />
         {
@@ -172,11 +170,10 @@ function NotPrefer() {
             formik={formik}
           />
         </div>
-
-        <Button type='submit' icon={<HiOutlineFingerPrint size={20} />} title='ثبت و احراز هویت' />
+        <Button type='submit' disable={true} icon={<HiOutlineFingerPrint size={20} />} title='ثبت تغییرات' />
       </form>
     </div>
   );
 }
 
-export default NotPrefer;
+export default NotPreferEdit;

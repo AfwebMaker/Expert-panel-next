@@ -8,7 +8,7 @@ import * as Yup from "yup";
 // react icons
 import { HiOutlineFingerPrint } from 'react-icons/hi';
 
-function Prefer() {
+function PreferEdit() {
 
   const baseValidation = {
     mobile: Yup.string()
@@ -32,6 +32,9 @@ function Prefer() {
 
   return (
     <div className="w-full mt-5 flex flex-col">
+      <span className="text-xs leading-5 w-full text-cf-300 mb-5">
+        شما شماره تلفن دیگرتان را برای فعالیت های خود انتخاب کردید و شماره دیگر شما به عنوان نماینده شما فعال شده است.
+      </span>
       <form className='gap-y-10' onSubmit={formik.handleSubmit}>
         <DynamicInputs
           key={"mobile"}
@@ -46,10 +49,10 @@ function Prefer() {
           formik={formik}
         />
         <br />
-        <Button type='submit' icon={<HiOutlineFingerPrint size={20} />} title='ثبت و احراز هویت' />
+        <Button disable={true} type='submit' icon={<HiOutlineFingerPrint size={20} />} title='ثبت تغییرات' />
       </form>
     </div>
   )
 }
 
-export default Prefer
+export default PreferEdit;

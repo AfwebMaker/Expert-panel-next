@@ -10,7 +10,7 @@ import PreferEdit from "./_components/PreferEdit";
 
 function Page() {
     const [enabled, setEnabled] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
 
     // const { activeData } = router.query.data
     // console.log(activeData)

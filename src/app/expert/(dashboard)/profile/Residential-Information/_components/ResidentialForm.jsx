@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 //formik
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -10,62 +10,118 @@ import { HiHome } from 'react-icons/hi'
 import Input from '@/app/_components/Input'
 import Button from '@/app/_components/Button'
 import UploadFile from './UploadFile'
+import Loading from '@/src/app/_components/Loading';
+import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
+//services
+import addressAdd from '@/services/person_kg_local/addressAdd';
+import addressGet from '@/services/person_kg_local/addressGet';
+
+const validationSchema = Yup.object().shape({
+    address: Yup.string()
+        .required('لطفا آدرس خود را وارد کنید.'),
+    zipCode: Yup.string()
+        .required('لطفا کد پستی خود را وارد کنید.'),
+    addressDocumentationURL: Yup.mixed()
+        .test(
+            "required",
+            "لطفا یک فایل را انتخاب کنید",
+            (value) => value && value.length
+        )
+        .test(
+            "fileSize",
+            "حجم فایل بیش از حد مجاز است (1MB)",
+            (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
+        )
+});
 
 function ResidentialForm() {
-    const validationSchema = Yup.object().shape({
-        address: Yup.string()
-            .required('لطفا آدرس خود را وارد کنید.'),
-        postId: Yup.string()
-            .required('لطفا کد پستی خود را وارد کنید.'),
-    });
+    const [loadingPage, setLoadingPage] = useState(true)
+
+    useEffect(() => {
+        addressGet()
+            .then(res => {
+                console.log(res.data.data.address)
+                formik.setValues({
+                    address: res.data.data.address,
+                    zipCode: res.data.data.address,
+                    addressDocumentationURL: res.data.data.addressDocumentationURL
+                })
+            })
+            .catch(() => {
+            })
+            .finally(() => {
+                setLoadingPage(false)
+            })
+    }, [])
 
     const formik = useFormik({
         initialValues: {
             address: '',
-            postId: ''
+            zipCode: '',
+            addressDocumentationURL: ''
         },
         validationSchema,
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            addressAdd(values)
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(() => {
+                })
+                .finally(() => {
+                    setLoadingPage(false)
+                })
         },
     });
 
     return (
         <form onSubmit={formik.handleSubmit} className='mt-5'>
+            {loadingPage && <Loading />}
             <div className='flex flex-wrap justify-between mb-10'>
-                <Input
-                    title='آدرس'
-                    state='required'
-                    confirmed={false}
-                    type='text'
-                    placeholder='به طور مثال : تهران، پونک، خیابان لاله..'
-                    className='my-2 w-full lg:w-[49%]'
+                <DynamicInputs
                     id='address'
                     name='address'
-                    value={formik.values.address}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.errors.address}
-                    touched={formik.touched.address}
+                    title='آدرس'
+                    state='Low'
+                    required={true}
+                    inputType="text"
+                    placeholder='به طور مثال : تهران، پونک، خیابان لاله..'
+                    className='my-2 w-full lg:w-[49%]'
+                    formik={formik}
                 />
 
-                <Input
-                    active={true}
+                <DynamicInputs
+                    id='zipCode'
+                    name='zipCode'
                     title='کد پستی'
-                    state='required'
-                    type='text'
+                    state="Low"
+                    required={true}
+                    inputType="text"
                     placeholder='به طور مثال : ۱۱٥۸۷۹٦۸٤۲'
                     className='my-2 w-full lg:w-[49%]'
-                    id='postId'
-                    name='postId'
-                    value={formik.values.postId}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.errors.postId}
-                    touched={formik.touched.postId}
+                    formik={formik}
                 />
             </div>
-            <UploadFile />
+
+            <div className='font-medium text-sm text-cf-300 mb-10'>
+                <div>
+                    <div className='text-cf-500 mb-5'>مدارک سکونتی</div>
+                    <div className='mb-5'>تصویر سند خانه یا اجاره نامه</div>
+                    <div className='mb-5 font-normal text-xs'>
+                        مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.
+                    </div>
+                </div>
+
+                <DynamicInputs
+                    id='addressDocumentationURL'
+                    name='addressDocumentationURL'
+                    state="Low"
+                    required={true}
+                    inputType="uploadFile"
+                    className='my-2 w-full mb-5'
+                    formik={formik}
+                />
+            </div>
             <Button type='submit' disable={false} icon={<HiHome size={20} />} title='احراز اطلاعات سکونتی' />
         </form>
     )

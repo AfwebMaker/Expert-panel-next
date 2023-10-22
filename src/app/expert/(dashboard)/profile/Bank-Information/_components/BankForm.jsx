@@ -9,19 +9,22 @@ import { HiLibrary } from 'react-icons/hi'
 //components
 import Button from '@/app/_components/Button'
 import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
-import { useDispatch } from 'react-redux';
+import Loading from '@/src/app/_components/Loading';
 //services
 import bankAdd from '@/services/person_kg_local/bankAdd'
 import bankGet from '@/services/person_kg_local/bankGet'
-import Loading from '@/src/app/_components/Loading';
+//redux
 import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { useDispatch } from 'react-redux';
+//toast
+import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object().shape({
-    cart: Yup.string()
+    BankID: Yup.string()
         .required('لطفا شماره شبا خود را وارد کنید.')
         .matches(/^[0-9]*$/, 'شماره شبا فقط باید شامل اعداد باشد!')
-        .min(26, 'به نظر می رسد شماره شبا وارده از ۲٦ کارکتر کمتر می باشد!')
-        .max(26, 'به نظر می رسد شماره شبا وارده از ۲٦ کارکتر بیشتر می باشد!'),
+        .min(24, 'به نظر می رسد شماره شبا وارده از 24 کارکتر کمتر می باشد!')
+        .max(24, 'به نظر می رسد شماره شبا وارده از 24 کارکتر بیشتر می باشد!'),
 });
 
 function BankForm() {
@@ -32,7 +35,7 @@ function BankForm() {
         bankGet()
             .then(res => {
                 formik.setValues({
-                    cart: res.data.data
+                    BankID: res.data.data.BankID
                 })
             })
             .catch(() => {
@@ -44,19 +47,19 @@ function BankForm() {
 
     const formik = useFormik({
         initialValues: {
-            cart: ''
+            BankID: ''
         },
         validationSchema,
         onSubmit: values => {
             dispatch(loadingHandler(true))
-            bankAdd()
+            bankAdd(values)
                 .then(res => {
                     console.log(res)
-                    formik.values({
-                        cart: values.cart
-                    })
                 })
-                .catch(() => {
+                .catch(err => {
+                    if (err.response.status === 400) {
+                        toast.error(err.response.data.message)
+                    }
                 })
                 .finally(() => {
                     dispatch(loadingHandler(false))
@@ -68,8 +71,8 @@ function BankForm() {
         <form onSubmit={formik.handleSubmit} className='mt-5'>
             {loadingPage && <Loading />}
             <DynamicInputs
-                id='cart'
-                name='cart'
+                id='BankID'
+                name='BankID'
                 title='شماره شبا'
                 state="Low"
                 required={true}

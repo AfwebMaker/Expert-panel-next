@@ -13,6 +13,9 @@ import addActivity from '@/services/register_kg_local/addActivity'
 import stepInformation from '@/services/register_kg_local/stepInformation'
 //functions
 import getCookie from '@/src/functions/getCookie'
+import Loading from '@/src/app/_components/Loading'
+import { useDispatch } from 'react-redux'
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice'
 
 const services = [
     { id: 1, name: 'ممد' },
@@ -39,6 +42,8 @@ function classNames2(...classes) {
 }
 
 export default function Step2({ currentStep, setCurrentStep }) {
+    const dispatch = useDispatch()
+    const [loadingPage, setLoadingPage] = useState(true)
     const [query1, setQuery1] = useState('')
     const [query2, setQuery2] = useState('')
     const [selectedService, setSelectedService] = useState('')
@@ -52,7 +57,9 @@ export default function Step2({ currentStep, setCurrentStep }) {
                 setSelectedItems(res.data.data.activities)
             })
             .catch(() => {
-
+            })
+            .finally(() => {
+                setLoadingPage(false)
             })
     }, [])
 
@@ -88,6 +95,7 @@ export default function Step2({ currentStep, setCurrentStep }) {
             activities: selectedItems
         }
 
+        dispatch(loadingHandler(true))
         addActivity(data)
             .then((res) => {
                 console.log(res)
@@ -96,10 +104,14 @@ export default function Step2({ currentStep, setCurrentStep }) {
             .catch(() => {
 
             })
+            .finally(() => {
+                dispatch(loadingHandler(false))
+            })
     }
 
     return (
         <div>
+            {loadingPage && <Loading />}
             <div className='flex flex-col items-end'>
                 <div className='flex flex-col lg:flex-row items-end w-full mb-4'>
                     <Combobox as="div" value={selectedService} onChange={setSelectedService} className='lg:w-1/2 w-full ml-[5px]' >

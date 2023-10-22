@@ -8,6 +8,7 @@ function Loading() {
     return (
         <div className='w-screen h-screen bg-white/50 backdrop-blur-md inset-0 fixed z-[100] fcc flex-col gap-5'>
             <Image
+                alt='loading'
                 src={loadingIcon}
                 width={80}
             />

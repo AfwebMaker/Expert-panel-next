@@ -16,6 +16,9 @@ import information from '@/services/register_kg_local/information'
 import stepInformation from '@/services/register_kg_local/stepInformation'
 //functions
 import getCookie from '@/src/functions/getCookie'
+import Loading from '@/src/app/_components/Loading';
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 //validation
 const validationSchema = Yup.object().shape({
@@ -41,9 +44,11 @@ const validationSchema = Yup.object().shape({
 });
 
 function Step1({ currentStep, setCurrentStep }) {
+    const dispatch = useDispatch()
+    const [loadingPage, setLoadingPage] = useState(true)
     const [passwordVisible, setPasswordVisible] = useState('')
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState('')
-    
+
     //get initial data
     useEffect(() => {
         stepInformation(0)
@@ -53,6 +58,9 @@ function Step1({ currentStep, setCurrentStep }) {
             })
             .catch(() => {
 
+            })
+            .finally(() => {
+                setLoadingPage(false)
             })
     }, [])
 
@@ -74,18 +82,22 @@ function Step1({ currentStep, setCurrentStep }) {
                 pass2: values.confirmPassword
             }
 
+            dispatch(loadingHandler(true))
             information(data)
-                .then(res => {
+                .then(() => {
                     setCurrentStep(currentStep + 1)
                 })
                 .catch(() => {
-
+                })
+                .finally(() => {
+                    dispatch(loadingHandler(false))
                 })
         },
     });
 
     return (
         <div className='w-full'>
+            {loadingPage && <Loading />}
             <form className='flex flex-col'>
                 <div className='flex flex-col sm:flex-row mb-2'>
                     <div className='w-full sm:w-1/2 font-medium ml-1 mb-2 sm:mb-0'>

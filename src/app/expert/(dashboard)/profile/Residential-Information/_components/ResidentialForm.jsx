@@ -31,7 +31,7 @@ function ResidentialForm() {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit} className='my-5'>
+        <form onSubmit={formik.handleSubmit} className='mt-5'>
             <div className='flex flex-wrap justify-between mb-10'>
                 <Input
                     title='آدرس'

@@ -18,10 +18,11 @@ import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
 //loading redux
 import { useDispatch } from 'react-redux';
 import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import Loading from '@/src/app/_components/Loading';
 
 function Forms({ setAvatar, avatar }) {
     const dispatch = useDispatch()
-    loadingHandler
+    const [loadingPage, setLoadingPage] = useState(true)
     const [legalFormIsActive, setLegalFormIsActive] = useState(false);
     const [validation, setValidation] = useState(false);
     const baseValidation = {
@@ -91,10 +92,8 @@ function Forms({ setAvatar, avatar }) {
 
     //get initial data from server
     useEffect(() => {
-        dispatch(loadingHandler(true))
         getExpertInfo()
             .then(res => {
-                dispatch(loadingHandler(false))
                 res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
                 res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
                 formik.setValues({
@@ -116,7 +115,9 @@ function Forms({ setAvatar, avatar }) {
                 })
             })
             .catch(() => {
-                dispatch(loadingHandler(false))
+            })
+            .finally(() => {
+                setLoadingPage(false)
             })
     }, [])
 
@@ -199,34 +200,38 @@ function Forms({ setAvatar, avatar }) {
             dispatch(loadingHandler(true))
             updateExpertInfo(data)
                 .then(res => {
-                    dispatch(loadingHandler(false))
                     console.log(res)
                 })
                 .catch((err) => {
-                    dispatch(loadingHandler(false))
                     if (err.response.status === 400) {
-                        toast.error(err.response.data.message)
+                        err.response.data.message ? toast.error(err.response.data.message) : toast.error('!')
                     }
+                })
+                .finally(() => {
+                    dispatch(loadingHandler(false))
                 })
         },
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <InformationForm formik={formik} />
-            <LegalForm legalFormIsActive={legalFormIsActive} setLegalFormIsActive={setLegalFormIsActive} formik={formik} />
-            <DynamicInputs
-                id="backgroundURL"
-                name="backgroundURL"
-                inputType="uploadFile"
-                title="آپلود فایل"
-                required={true}
-                className={'mb-4'}
-                state="Low"
-                formik={formik}
-            />
-            <Button type='submit' icon={<HiOutlineFingerPrint size={20} />} title='ثبت و احراز هویت' />
-        </form>
+        <>
+            {loadingPage && <Loading />}
+            <form onSubmit={formik.handleSubmit}>
+                <InformationForm formik={formik} />
+                <LegalForm legalFormIsActive={legalFormIsActive} setLegalFormIsActive={setLegalFormIsActive} formik={formik} />
+                <DynamicInputs
+                    id="backgroundURL"
+                    name="backgroundURL"
+                    inputType="uploadFile"
+                    title="آپلود فایل"
+                    required={true}
+                    className={'mb-4'}
+                    state="Low"
+                    formik={formik}
+                />
+                <Button type='submit' icon={<HiOutlineFingerPrint size={20} />} title='ثبت و احراز هویت' />
+            </form>
+        </>
     )
 }
 

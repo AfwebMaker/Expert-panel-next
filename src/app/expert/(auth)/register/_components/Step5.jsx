@@ -8,18 +8,24 @@ import StepController from './StepController'
 import confirm from '@/services/register_kg_local/confirm'
 //functions
 import setCookie from '@/src/functions/setCookie'
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 function Step5({ currentStep, setCurrentStep }) {
+    const dispatch = useDispatch()
     const router = useRouter();
 
     const submitHandler = () => {
+        dispatch(loadingHandler(true))
         confirm()
             .then((res) => {
                 setCookie('TOKEN', res.data.data)
                 router.push('/expert/home/')
             })
             .catch(() => {
-
+            })
+            .finally(() => {
+                dispatch(loadingHandler(false))
             })
     }
 

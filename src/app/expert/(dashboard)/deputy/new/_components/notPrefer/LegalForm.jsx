@@ -7,40 +7,31 @@ function LegalForm({ formik }) {
 
     const inputData = [
         {
-            id: "nameFamily",
-            name: "nameFamily",
+            id: "company_OrganizationLevel",
+            name: "company_OrganizationLevel",
             inputType: "text",
             title: "سمت سازمانی",
             required: true,
             type: "text",
-            placeholder: "به طور مثال : محمد",
+            placeholder: "به طور مثال : معاون",
         },
         {
-            id: "mobile",
-            name: "mobile",
-            inputType: "text",
+            id: "company_LastEducationalCertificate",
+            name: "company_LastEducationalCertificate",
+            inputType: "dropDown",
             title: "آخرین مدرک تحصیلی",
             required: true,
             type: "text",
-            placeholder: "به طور مثال : محمد",
+            placeholder: "به طور مثال : لیسانس",
         },
         {
-            id: "nationalCode",
-            name: "nationalCode",
-            inputType: "text",
+            id: "company_Resume",
+            name: "company_Resume",
+            inputType: "inputTextarea",
             title: "سوابق کاری نمایندتان را شرح دهید.",
             required: true,
             type: "text",
-            placeholder: "به طور مثال : محمد",
-        },
-        {
-            id: "zipCode",
-            name: "zipCode",
-            inputType: "text",
-            title: "تکست",
-            required: true,
-            type: "text",
-            placeholder: "به طور مثال : محمد",
+            placeholder: "به طور مثال : سلام روز بخیر ..",
         },
     ]
 
@@ -58,7 +49,7 @@ function LegalForm({ formik }) {
                             title={item.title}
                             state="Low"
                             required={item.required}
-                            className="my-2 w-full lg:w-[49%]"
+                            className={item.id === "company_Resume" ? "my-2 w-full" : "my-2 w-full lg:w-[49%]"}
                             placeholder={item.placeholder}
                             id={item.id}
                             name={item.name}

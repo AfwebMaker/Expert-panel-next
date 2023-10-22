@@ -20,9 +20,9 @@ function NotPrefer() {
 
   const baseValidation = {
     nameFamily: Yup.string()
-      .required('لطفا نام خود را وارد کنید.')
-      .matches(/^[\u0600-\u06FF\s]+$/, 'نام باید با حروف فارسی نوشته شود.')
-      .min(3, 'لطفا نام خود را به درستی وارد کنید.'),
+      .required('لطفا نام‌و‌نام‌خانوادگی خود را وارد کنید.')
+      .matches(/^[\u0600-\u06FF\s]+$/, 'نام‌و‌نام‌خانوادگی باید با حروف فارسی نوشته شود.')
+      .min(3, 'لطفا نام‌و‌نام‌خانوادگی خود را به درستی وارد کنید.'),
     mobile: Yup.string()
       .required('لطفا شماره تلفن خود را وارد کنید.')
       .min(11, 'شماره تلفن باید شامل 11 رقم باشد.')
@@ -32,11 +32,11 @@ function NotPrefer() {
       .min(10, 'کد ملی باید شامل 10 رقم باشد.')
       .max(10, 'کد ملی باید شامل 10 رقم باشد.'),
     zipCode: Yup.string()
-      .required('لطفا کد ملی خود را وارد کنید.')
+      .required('لطفا کد پستی خود را وارد کنید.')
       .min(10, 'کد ملی باید شامل 10 رقم باشد.')
       .max(10, 'کد ملی باید شامل 10 رقم باشد.'),
     description: Yup.string()
-      .required("لطفا این فیلد را پر کنید")
+      .required("لطفا  فیلد توضیحات را پر کنید")
       .min(5, "توضیحات باید حداقل 5 کاراکتر باشد")
       .max(500, "توضیحات نمی‌تواند بیش از 500 کاراکتر باشد"),
     avatarURL: Yup.mixed()
@@ -48,32 +48,30 @@ function NotPrefer() {
       .test(
         "fileSize",
         "حجم فایل بیش از حد مجاز است (1MB)",
-        (value) => value && (!value.size ? true : 23001 <= 1024 * 1024)
+        (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
       )
       .test(
         "fileFormat",
-
         "فرمت فایل پشتیبانی نمی‌شود",
         (value) =>
           value &&
           (!value.type
             ? true
-            : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
+            : ["image/jpg", "image/jpeg", "image/png"].includes(value.type))
       ),
 
   }
   const legalValidation = {
     company_OrganizationLevel: Yup.string()
-      .required('لطفا نام شرکت خود را وارد کنید.')
-      .matches(/^[\u0600-\u06FF\s]+$/, 'نام شرکت باید با حروف فارسی نوشته شود.')
-      .min(3, 'لطفا نام شرکت خود را به درستی وارد کنید.'),
+      .required('لطفا سمت سازمانی خود را وارد کنید.')
+      .matches(/^[\u0600-\u06FF\s]+$/, 'سمت سازمانی باید با حروف فارسی نوشته شود.')
+      .min(3, 'لطفا سمت سازمانی خود را به درستی وارد کنید.'),
     company_LastEducationalCertificate: Yup.string()
-      .required('لطفا شناسه ملی خود را وارد کنید.')
-      .min(11, 'شناسه ملی باید شامل 11 رقم باشد.')
-      .max(11, 'شناسه ملی باید شامل 11 رقم باشد.'),
+      .required('لطفا آخرین مدرک تحصیلی خود را انتخاب کنید.'),
     company_Resume: Yup.string()
-      .required('لطفا موضوع فعالیت خود را وارد کنید.')
-      .matches(/^[\u0600-\u06FF\s]+$/, 'موضوع فعالیت باید با حروف فارسی نوشته شود.'),
+      .required("لطفا  فیلد سوابق کاری را پر کنید")
+      .min(5, "توضیحات باید حداقل 5 کاراکتر باشد")
+      .max(500, "توضیحات نمی‌تواند بیش از 500 کاراکتر باشد"),
     company_ResumeURL: Yup.mixed()
       .test(
         "required",
@@ -83,7 +81,7 @@ function NotPrefer() {
       .test(
         "fileSize",
         "حجم فایل بیش از حد مجاز است (1MB)",
-        (value) => value && (!value.size ? true : 23001 <= 1024 * 1024)
+        (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
       )
       .test(
         "fileFormat",
@@ -93,7 +91,7 @@ function NotPrefer() {
           value &&
           (!value.type
             ? true
-            : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
+            : ["image/jpg", "image/jpeg", "image/png"].includes(value.type))
       ),
   }
 
@@ -105,6 +103,9 @@ function NotPrefer() {
       setValidation({ ...baseValidation, ...legalValidation })
   }, [idUser])
 
+  console.log("validation", validation)
+  console.log("idUser", idUser)
+
   const formik = useFormik({
     initialValues: {
       nameFamily: "",
@@ -112,27 +113,11 @@ function NotPrefer() {
       nationalCode: "",
       zipCode: "",
       description: "",
-      avatarURL: [
-        {
-          id: 3,
-          name: "Theme=Lighttttttttttttttttt",
-          size: 23801,
-          type: "image/jpg",
-          url: "https://cdn.kargosha.com/kg-category/image/png_20231018060225687_abacus.png",
-        },
-      ],
+      avatarURL: [],
       company_OrganizationLevel: "",
       company_LastEducationalCertificate: "",
       company_Resume: "",
-      company_ResumeURL: [
-        {
-          id: 3,
-          name: "Theme=Lighttttttttttttttttt",
-          size: 23801,
-          type: "image/jpg",
-          url: "https://cdn.kargosha.com/kg-category/image/png_20231018060225687_abacus.png",
-        },
-      ],
+      company_ResumeURL: [],
     },
     validationSchema,
     onSubmit: (values) => {

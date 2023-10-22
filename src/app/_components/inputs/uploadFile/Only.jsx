@@ -44,8 +44,7 @@ function Only({
       const imageSelect = imageSrc.map((item) => {
         return item;
       });
-
-      formik.setFieldValue(name, imageSelect);
+      formik.setFieldValue(name, imageSelect[0]);
     }
   }, [imageSrc]);
 

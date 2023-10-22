@@ -15,7 +15,7 @@ function MyActiveDeputy({ activeData, newData }) {
       <div className="w-full flex items-center justify-between md:justify-start mb-5">
         <div className="text-cf-300 md:text-primary-500 flex gap-x-1 items-center justify-start">
           <HiOutlineBadgeCheck className="text-lg" />
-          <span className="text-xs md:text-sm">نماینده های فعال من</span>
+          <span className="text-xs md:text-sm">نماینده های فعال</span>
         </div>
         <Link href="deputy/new" className="text-primary-500 flex md:hidden gap-x-1 items-center justify-start">
           <span className="text-xs md:text-sm">اضافه کردن نماینده جدید</span>

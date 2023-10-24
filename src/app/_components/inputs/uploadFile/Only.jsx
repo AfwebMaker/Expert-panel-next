@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-// components
-// import Upload from "@/app/_components/Upload"
 //react icons
 import { HiOutlineCloudUpload, HiCheckCircle, HiXCircle } from "react-icons/hi";
 // functions
 import getCookie from "@/src/functions/getCookie";
 // axios
 import axios from "axios";
+// components
 import ProgressBar from "./ProgressBar";
 
 function Only({
@@ -33,7 +32,6 @@ function Only({
   };
 
   useEffect(() => {
-    console.log(formik)
     setImageSrc([formik.values[name]]);
   }, []);
 
@@ -78,7 +76,7 @@ function Only({
           if (loaded == total) {
             setUploadFiles([{ name: fileName, size: total }]);
             setIsError(false);
-            setFiles([]);
+            // setFiles([]);
             // setShowProgress(false);
           }
         },
@@ -96,7 +94,6 @@ function Only({
       className={`w-full h-auto rounded-lg border-cf-400 relative overflow-hidden fcc ${disabled ? "cursor-not-allowed" : "cursor-pointer"
         }`}
     >
-      {/* <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_upload_button">بارگذاری فایل</label> */}
       <input
         id={id}
         type="file"
@@ -111,8 +108,8 @@ function Only({
       <div className="w-full h-full flex flex-col items-start justify-center p-1">
         <div
           className={`flex flex-col justify-start items-center w-full h-full p-9 z-10 rounded-lg ${imageSrc.length && !showProgress
-              ? "text-white bg-black bg-opacity-50"
-              : "text-gray-500 "
+            ? "text-white bg-black bg-opacity-50"
+            : "text-gray-500 "
             }`}
         >
           <div className="ml-2">
@@ -120,12 +117,12 @@ function Only({
               strokeWidth={1}
               size={70}
               className={`${showProgress
-                  ? isError
-                    ? "text-red-500"
-                    : "text-primary-500"
-                  : imageSrc.length
-                    ? "text-white"
-                    : "text-gray-500"
+                ? isError
+                  ? "text-red-500"
+                  : "text-primary-500"
+                : imageSrc.length
+                  ? "text-white"
+                  : "text-gray-500"
                 }`}
             />
           </div>
@@ -150,29 +147,22 @@ function Only({
           </div>
           {showProgress && (
             <div className="h-full w-full fcc bg-gray-200 rounded-lg z-10 mt-5">
-              {files.map((file, i) => (
-                <ProgressBar key={i} progress={file.loading} />
-              ))}
+              <ProgressBar progress={files[0].loading} />
             </div>
           )}
         </div>
 
-        {!!imageSrc.length && (
+        {formik.values[name] && formik.values[name].url && (
           <div className="h-full w-full fcc rounded-lg absolute top-0 right-0">
-            {imageSrc.map((item, i) => {
-              return (
-                <Image
-                  key={i}
-                  width={150}
-                  height={150}
-                  onLoad={() => setShowProgress(false)}
-                  quality={50}
-                  className="brightness-75 fcc w-[98%] h-[95%] absolute object-cover rounded-lg"
-                  src={item.url}
-                  alt="doc"
-                />
-              );
-            })}
+            <Image
+              width={150}
+              height={150}
+              onLoad={() => setShowProgress(false)}
+              quality={50}
+              className="brightness-75 fcc w-[98%] h-[95%] absolute object-cover rounded-lg"
+              src={formik.values[name].url}
+              alt="doc"
+            />
           </div>
         )}
       </div>

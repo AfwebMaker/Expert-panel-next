@@ -103,6 +103,7 @@ function Forms({ setAvatar, avatar }) {
     useEffect(() => {
         getExpertInfo()
             .then(res => {
+                console.log(res)
                 console.log(res.data.data.backgroundURL)
                 res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
                 res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)

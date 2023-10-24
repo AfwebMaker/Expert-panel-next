@@ -56,7 +56,7 @@ function NavigationBar() {
   const pathname = usePathname();
 
   return (
-    <div className="lg:hidden">
+    <div className="lg:hidden z-50">
       {/* <div className="h-14"></div> */}
       <nav
         style={{ boxShadow: "0px -3px 15px rgba(38, 38, 38, 0.1)" }}

@@ -28,9 +28,10 @@ function ResidentialForm() {
     useEffect(() => {
         addressGet()
             .then(res => {
+                console.log(res)
                 formik.setValues({
-                    address: res.data.data.address,
-                    zipCode: res.data.data.address,
+                    address: res.data.data.addressRawText,
+                    zipCode: res.data.data.zipCode,
                     addressDocumentationURL: res.data.data.addressDocumentationURL
                 })
             })

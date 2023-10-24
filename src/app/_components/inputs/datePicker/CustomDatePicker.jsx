@@ -12,13 +12,9 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
     const parentElem = useRef(null)
     const [focus, setFocus] = useState(false);
     const [selfState, setSelfState] = useState(state);
-    const [value, setValue] = useState({
-        startDate: formik.values[name] && moment(formik.values[name], 'YYYY/MM/DD').format('jYYYY/jMM/jDD'),
-        endDate: formik.values[name] && moment(formik.values[name], 'YYYY/MM/DD').format('jYYYY/jMM/jDD')
-    });
 
     //change date input handler
-    const handleValueChange = (newValue) => {
+    const handleValueChange = (newValue) => { 
         setTimeout(() => {
             setFocus(false)
             dateInput[0].blur()
@@ -26,7 +22,6 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
 
         const gregorianFormat = moment(newValue.startDate, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
         formik.setFieldValue(name, gregorianFormat);
-        setValue(newValue);
     }
 
     //get input element
@@ -153,7 +148,10 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
                             toggleClassName="hidden"
                             inputClassName={`${name} pr-4 w-full relative text-cf-400 flex flex ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
                             containerClassName={`${name}-contain relative z-10 font-bold text-sm `}
-                            value={value ? value : {}}
+                            value={{
+                                startDate: formik.values[name] && moment(formik.values[name], 'YYYY-MM-DD').format('jYYYY/jMM/jDD'),
+                                endDate: formik.values[name] && moment(formik.values[name], 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
+                            }}
                             onChange={handleValueChange}
                             asSingle={true}
                             useRange={false}

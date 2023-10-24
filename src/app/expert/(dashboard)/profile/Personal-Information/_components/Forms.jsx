@@ -49,26 +49,11 @@ function Forms({ setAvatar, avatar }) {
         birthday: Yup.string()
             .required('لطفا تاریخ تولد خود را وارد کنید.'),
         backgroundURL: Yup.mixed()
-            // .test(
-            //     "required",
-            //     "لطفا یک فایل را انتخاب کنید",
-            //     (value) => value && value.length
-            // )
-            // .test(
-            //     "fileSize",
-            //     "حجم فایل بیش از حد مجاز است (1MB)",
-            //     (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
-            // )
-            // .test(
-            //     "fileFormat",
-
-            //     "فرمت فایل پشتیبانی نمی‌شود",
-            //     (value) =>
-            //         value &&
-            //         (!value.type
-            //             ? true
-            //             : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
-            // ),
+            .test(
+                "required",
+                "لطفا یک فایل را انتخاب کنید",
+                (value) => value && Object.keys(value).length
+            )
     }
     const legalValidation = {
         componyName: Yup.string()
@@ -103,8 +88,8 @@ function Forms({ setAvatar, avatar }) {
     useEffect(() => {
         getExpertInfo()
             .then(res => {
-                console.log(res)
-                console.log(res.data.data.backgroundURL)
+                console.log(res.data.data)
+                console.log(res.data.data.mainDataInfo.birthday)
                 res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
                 res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
                 formik.setValues({
@@ -113,7 +98,7 @@ function Forms({ setAvatar, avatar }) {
                     fatherName: res.data.data.mainDataInfo.fatherName,
                     nationalCode: res.data.data.mainDataInfo.nationalCode,
                     mobile: '0' + res.data.data.mainDataInfo.personUser_Child.mobile,
-                    birthday: res.data.data.mainDataInfo.birthday,
+                    birthday: res.data.data.mainDataInfo.birthday ? res.data.data.mainDataInfo.birthday : '',
                     birthPlace: res.data.data.mainDataInfo.birthPlace,
                     email: res.data.data.mainDataInfo.email,
                     componyName: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.componyName : null,
@@ -165,7 +150,7 @@ function Forms({ setAvatar, avatar }) {
                     "birthPlace": values.birthPlace,
                     "job": "string",
                     "education": 0,
-                    "avatar_url": avatar,
+                    "avatar_url": { url: avatar },
                     "date_Create": "2023-10-18T07:28:41.638Z",
                     "date_Update": "2023-10-18T07:28:41.638Z",
                     "idExpert": 0,

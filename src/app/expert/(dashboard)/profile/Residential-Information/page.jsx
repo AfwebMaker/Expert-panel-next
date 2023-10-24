@@ -7,9 +7,9 @@ import ResidentialForm from './_components/ResidentialForm'
 
 function page() {
   return (
-    <div className="w-full min-h-[400px] h-[calc(100vh-138px)] px-5 lg:px-0 lg:h-[calc(100vh-99px)] xl:h-[calc(100vh-88px)] rounded-lg bg-[#F8F9F9] flex flex-col items-center justify-start relative">
-      <div className="overflow-y-scroll hideScroll w-full h-full flex flex-col scroll-smooth">
-        <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-[80px] lg:pb-5'>
+    <div className="w-full h-[calc(100vh-138px)] lg:h-auto xl:h-[calc(100vh-110px)] rounded-lg bg-[#F8F9F9] flex flex-col items-center justify-start relative">
+      <div className="overflow-y-scroll hideScroll w-full h-full flex flex-col scroll-smooth px-5 lg:px-0">
+        <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-5 lg:mb-5'>
           <div className='flex items-center justify-between mb-10 lg:hidden'>
             <Link href='/expert/profile/' className='fcc'>
               <HiOutlineChevronRight className='text-cf-400' />

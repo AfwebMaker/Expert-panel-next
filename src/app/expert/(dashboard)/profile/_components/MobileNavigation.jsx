@@ -53,7 +53,7 @@ function mobileNavigation({ data }) {
 
   return (
     <>
-      <div className='block lg:hidden pb-[80px]'>
+      <div className='block lg:hidden px-5 h-[calc(100vh-138px)]'>
         <div className='w-full fcc flex-col'>
           <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
             <Image
@@ -89,7 +89,7 @@ function mobileNavigation({ data }) {
         </div>
 
         <nav>
-          <ul className='font-medium text-lg'>
+          <ul className='font-medium text-lg pb-5'>
             {navigation_data.map((item, index) => (
               <li key={item.id} className='w-full'>
                 <Link className='flex justify-between items-center py-2 my-2 px-2' href={item.link} >

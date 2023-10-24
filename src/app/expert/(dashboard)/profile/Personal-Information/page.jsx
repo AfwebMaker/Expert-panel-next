@@ -46,34 +46,37 @@ function page() {
   }
 
   return (
-    <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-[80px] lg:pb-5'>
-      <div className='flex items-center justify-between mb-10 lg:hidden'>
-        <Link href='/expert/profile/' className='fcc'>
-          <HiOutlineChevronRight className='text-cf-400' />
-          <div className='mr-1 text-cf-300 font-medium'>تنظیمات</div>
-        </Link>
-      </div>
-      <div className='w-full fcc flex-col mb-10'>
-        <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
-          <Image
-            onLoad={() => {dispatch(loadingHandler(false))}}
-            src={avatar ? avatar : 'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'}
-            alt='avatar'
-            className='object-cover w-full h-full'
-            fill
-          />
-        </div>
-        <div className='fcc text-primary-500'>
-          <div className='ml-1'>
-            <HiPencilAlt />
+    <div className="w-full h-[calc(100vh-138px)] lg:h-auto xl:h-[calc(100vh-110px)] rounded-lg bg-[#F8F9F9] flex flex-col items-center justify-start relative">
+      <div className="overflow-y-scroll hideScroll w-full h-full flex flex-col scroll-smooth px-5 lg:px-0">
+        <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-5 lg:mb-5'>
+          <div className='flex items-center justify-between mb-10 lg:hidden'>
+            <Link href='/expert/profile/' className='fcc'>
+              <HiOutlineChevronRight className='text-cf-400' />
+              <div className='mr-1 text-cf-300 font-medium'>تنظیمات</div>
+            </Link>
           </div>
-          <label className='cursor-pointer' htmlFor="upload_avatar">ویرایش عکس پروفایل</label>
-          <input onChange={fileInputHandler} className='hidden' id='upload_avatar' type="file" />
+          <div className='w-full fcc flex-col mb-10'>
+            <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
+              <Image
+                onLoad={() => { dispatch(loadingHandler(false)) }}
+                src={avatar ? avatar : 'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'}
+                alt='avatar'
+                className='object-cover w-full h-full'
+                fill
+              />
+            </div>
+            <div className='fcc text-primary-500'>
+              <div className='ml-1'>
+                <HiPencilAlt />
+              </div>
+              <label className='cursor-pointer' htmlFor="upload_avatar">ویرایش عکس پروفایل</label>
+              <input onChange={fileInputHandler} className='hidden' id='upload_avatar' type="file" />
+            </div>
+          </div>
+
+          <Forms setAvatar={setAvatar} avatar={avatar} />
         </div>
       </div>
-
-      <Forms setAvatar={setAvatar} avatar={avatar} />
-
     </div>
   )
 }

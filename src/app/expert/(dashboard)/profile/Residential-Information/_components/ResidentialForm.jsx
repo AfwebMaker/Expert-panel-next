@@ -13,6 +13,8 @@ import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
 //services
 import addressAdd from '@/services/person_kg_local/addressAdd';
 import addressGet from '@/services/person_kg_local/addressGet';
+//toast
+import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object().shape({
     address: Yup.string()
@@ -54,7 +56,10 @@ function ResidentialForm() {
                 .then(res => {
                     console.log(res)
                 })
-                .catch(() => {
+                .catch((err) => {
+                    if (err.response.status === 400) {
+                        toast.error(err.response.data.message)
+                    }
                 })
                 .finally(() => {
                     setLoadingPage(false)

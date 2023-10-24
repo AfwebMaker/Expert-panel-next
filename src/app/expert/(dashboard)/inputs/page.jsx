@@ -32,7 +32,7 @@ function Page() {
       .test(
         "required",
         "لطفا یک فایل را انتخاب کنید",
-        (value) => value ? true : false
+        (value) => value && Object.keys(value).length
       )
       .test(
         "fileSize",

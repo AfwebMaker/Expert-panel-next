@@ -100,9 +100,10 @@ function NotPreferEdit() {
   const validationSchema = Yup.object().shape(validation);
 
   useEffect(() => {
-    !idUser ?
-      setValidation(baseValidation) :
-      setValidation({ ...baseValidation, ...legalValidation })
+    idUser === null ?
+      setValidation({ ...baseValidation, ...legalValidation }) :
+      setValidation(baseValidation)
+
   }, [idUser])
 
   console.log("validation", validation)
@@ -135,9 +136,7 @@ function NotPreferEdit() {
       </span>
       <form onSubmit={formik.handleSubmit}>
         <InformationForm formik={formik} />
-        {
-          <LegalForm formik={formik} />
-        }
+        {idUser === null && <LegalForm formik={formik} />}
         <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
           <h2 className="text-cf-300 text-sm">عکس نماینده</h2>
           <p className="text-cf-300 text-xs">مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.</p>
@@ -153,23 +152,27 @@ function NotPreferEdit() {
             formik={formik}
           />
         </div>
-        <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
-          <h2 className="text-cf-300 text-sm">عکس آخرین مدرک تحصیلی نماینده تان</h2>
-          <p className="text-cf-300 text-xs">
-            مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.
-          </p>
-          <DynamicInputs
-            inputType={"uploadFile"}
-            title={"آپلود فایل"}
-            state="Low"
-            required={true}
-            className="my-2 w-full"
-            placeholder={"به طور مثال : سلام روز بخیر .."}
-            id={"company_ResumeURL"}
-            name={"company_ResumeURL"}
-            formik={formik}
-          />
-        </div>
+        {
+          idUser === null && (
+            <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
+              <h2 className="text-cf-300 text-sm">عکس آخرین مدرک تحصیلی نماینده تان</h2>
+              <p className="text-cf-300 text-xs">
+                مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.
+              </p>
+              <DynamicInputs
+                inputType={"uploadFile"}
+                title={"آپلود فایل"}
+                state="Low"
+                required={true}
+                className="my-2 w-full"
+                placeholder={"به طور مثال : سلام روز بخیر .."}
+                id={"company_ResumeURL"}
+                name={"company_ResumeURL"}
+                formik={formik}
+              />
+            </div>
+          )
+        }
         <Button type='submit' disable={true} icon={<HiOutlineFingerPrint size={20} />} title='ثبت تغییرات' />
       </form>
     </div>

@@ -20,7 +20,6 @@ export const dynamicApiCall = async (options) => {
         return await axios(config);
 
     } catch (error) {
-        console.log(error)
         // Handle error here or propagate it
         if (error.response.status === 500) {
             toast.error('خطایی در ارتباط با سرور.')

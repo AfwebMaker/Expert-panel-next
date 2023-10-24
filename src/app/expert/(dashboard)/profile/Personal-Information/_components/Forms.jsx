@@ -48,17 +48,26 @@ function Forms({ setAvatar, avatar }) {
             .max(11, 'شماره تلفن باید شامل 11 رقم باشد.'),
         birthday: Yup.string()
             .required('لطفا تاریخ تولد خود را وارد کنید.'),
-        backgroundURL: Yup.array()
-            .test("required", "لطفا یک فایل را انتخاب کنید", (value) => value && value.length)
+        backgroundURL: Yup.mixed()
+            .test(
+                "required",
+                "لطفا یک فایل را انتخاب کنید",
+                (value) => value && value.length
+            )
             .test(
                 "fileSize",
                 "حجم فایل بیش از حد مجاز است (1MB)",
-                (value) => value[0] && (!value[0].size ? true : value[0].size <= 10240 * 1024)
+                (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
             )
             .test(
                 "fileFormat",
+
                 "فرمت فایل پشتیبانی نمی‌شود",
-                (value) => value[0] && (!value.type ? true : value[0].type.includes("image/jpg"))
+                (value) =>
+                    value &&
+                    (!value.type
+                        ? true
+                        : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
             ),
     }
     const legalValidation = {
@@ -219,16 +228,25 @@ function Forms({ setAvatar, avatar }) {
             <form onSubmit={formik.handleSubmit}>
                 <InformationForm formik={formik} />
                 <LegalForm legalFormIsActive={legalFormIsActive} setLegalFormIsActive={setLegalFormIsActive} formik={formik} />
-                <DynamicInputs
-                    id="backgroundURL"
-                    name="backgroundURL"
-                    inputType="uploadFile"
-                    title="آپلود فایل"
-                    required={true}
-                    className={'mb-4'}
-                    state="Low"
-                    formik={formik}
-                />
+                <div className='font-medium text-sm text-cf-300 mb-10'>
+                    <div>
+                        <div className='text-cf-500 mb-5'>مدارک سکونتی</div>
+                        <div className='mb-5'>تصویر گواهی عدم سو پیشینه</div>
+                        <div className='mb-5 font-normal text-xs'>
+                            مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.
+                        </div>
+                    </div>
+                    <DynamicInputs
+                        id="backgroundURL"
+                        name="backgroundURL"
+                        inputType="uploadFile"
+                        title="آپلود فایل"
+                        required={true}
+                        className={'mb-4'}
+                        state="Low"
+                        formik={formik}
+                    />
+                </div>
                 <Button type='submit' icon={<HiOutlineFingerPrint size={20} />} title='ثبت و احراز هویت' />
             </form>
         </>

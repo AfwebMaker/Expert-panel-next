@@ -15,26 +15,10 @@ import {
 } from "react-icons/hi";
 //components
 import Stars from '@/app/_components/Stars'
-//services
-import profileBase from '@/src/services/person_kg_local/profileBase'
+//components
 import Loading from '@/src/app/_components/Loading';
 
-function mobileNavigation() {
-  const [loadingPage, setLoadingPage] = useState(true)
-  const [data, setData] = useState({})
-
-  //get data
-  useEffect(() => {
-    profileBase()
-      .then(res => {
-        setData(res.data.data)
-      })
-      .catch(() => {
-      })
-      .finally(() => {
-        setLoadingPage(false)
-      })
-  }, [])
+function mobileNavigation({ data }) {
 
   const navigation_data = [
     {
@@ -70,7 +54,6 @@ function mobileNavigation() {
   return (
     <>
       <div className='block lg:hidden pb-[80px]'>
-        {loadingPage && <Loading />}
         <div className='w-full fcc flex-col'>
           <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
             <Image

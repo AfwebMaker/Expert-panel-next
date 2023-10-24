@@ -16,9 +16,6 @@ function Only({
   disabled,
   inputRef,
   formik,
-  focus,
-  value,
-  state,
   id,
 }) {
   const [files, setFiles] = useState([]);
@@ -36,7 +33,8 @@ function Only({
   };
 
   useEffect(() => {
-    setImageSrc(formik.values[name]);
+    console.log(formik)
+    setImageSrc([formik.values[name]]);
   }, []);
 
   useEffect(() => {
@@ -44,7 +42,7 @@ function Only({
       const imageSelect = imageSrc.map((item) => {
         return item;
       });
-      
+
       formik.setFieldValue(name, imageSelect[0]);
     }
   }, [imageSrc]);
@@ -55,7 +53,7 @@ function Only({
     const files = Array.from(e.target.files);
 
     if (!files.length) return;
- 
+
     const fileName = shortText(files[0].name, 12);
     const formData = new FormData();
 
@@ -95,44 +93,40 @@ function Only({
 
   return (
     <div
-      className={`w-full h-auto rounded-lg border-cf-400 relative overflow-hidden fcc ${
-        disabled ? "cursor-not-allowed" : "cursor-pointer"
-      }`}
+      className={`w-full h-auto rounded-lg border-cf-400 relative overflow-hidden fcc ${disabled ? "cursor-not-allowed" : "cursor-pointer"
+        }`}
     >
       {/* <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_upload_button">بارگذاری فایل</label> */}
       <input
         id={id}
         type="file"
         name={name}
-        className={`absolute w-full h-full opacity-0  right-0 z-20 ${
-          disabled ? "cursor-not-allowed -z-20" : "cursor-pointer"
-        }`}
+        className={`absolute w-full h-full opacity-0  right-0 z-20 ${disabled ? "cursor-not-allowed -z-20" : "cursor-pointer"
+          }`}
         onChange={inputFileHandler}
         disabled={disabled}
         ref={inputRef}
-        onBlur={(e) => {onBlur(e)}}
+        onBlur={(e) => { onBlur(e) }}
       />
       <div className="w-full h-full flex flex-col items-start justify-center p-1">
         <div
-          className={`flex flex-col justify-start items-center w-full h-full p-9 z-10 rounded-lg ${
-            imageSrc.length && !showProgress
+          className={`flex flex-col justify-start items-center w-full h-full p-9 z-10 rounded-lg ${imageSrc.length && !showProgress
               ? "text-white bg-black bg-opacity-50"
               : "text-gray-500 "
-          }`}
+            }`}
         >
           <div className="ml-2">
             <HiOutlineCloudUpload
               strokeWidth={1}
               size={70}
-              className={`${
-                showProgress
+              className={`${showProgress
                   ? isError
                     ? "text-red-500"
                     : "text-primary-500"
                   : imageSrc.length
-                  ? "text-white"
-                  : "text-gray-500"
-              }`}
+                    ? "text-white"
+                    : "text-gray-500"
+                }`}
             />
           </div>
           <div>

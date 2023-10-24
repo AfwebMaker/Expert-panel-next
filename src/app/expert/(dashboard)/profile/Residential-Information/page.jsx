@@ -7,27 +7,31 @@ import ResidentialForm from './_components/ResidentialForm'
 
 function page() {
   return (
-    <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-[80px] lg:pb-5'>
-      <div className='flex items-center justify-between mb-10 lg:hidden'>
-        <Link href='/expert/profile/' className='fcc'>
-          <HiOutlineChevronRight className='text-cf-400' />
-          <div className='mr-1 text-cf-300 font-medium'>اطلاعات سکونتی</div>
-        </Link>
-      </div>
-      <div>
-        <div className='mb-5 font-medium text-sm text-cf-500 flex items-center justify-between'>
+    <div className="w-full min-h-[400px] h-[calc(100vh-138px)] px-5 lg:px-0 lg:h-[calc(100vh-99px)] xl:h-[calc(100vh-88px)] rounded-lg bg-[#F8F9F9] flex flex-col items-center justify-start relative">
+      <div className="overflow-y-scroll hideScroll w-full h-full flex flex-col scroll-smooth">
+        <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-[80px] lg:pb-5'>
+          <div className='flex items-center justify-between mb-10 lg:hidden'>
+            <Link href='/expert/profile/' className='fcc'>
+              <HiOutlineChevronRight className='text-cf-400' />
+              <div className='mr-1 text-cf-300 font-medium'>اطلاعات سکونتی</div>
+            </Link>
+          </div>
           <div>
-            اطلاعات پایه سکونتی
+            <div className='mb-5 font-medium text-sm text-cf-500 flex items-center justify-between'>
+              <div>
+                اطلاعات پایه سکونتی
+              </div>
+              <div className='text-primary-500 cursor-pointer text-base font-bold'>
+                ویرایش
+              </div>
+            </div>
+            <div className='font-normal text-xs text-cf-300'>
+              اطلاعات سکونتی صرفا برای احراز هویت می باشد.
+            </div>
           </div>
-          <div className='text-primary-500 cursor-pointer text-base font-bold'>
-            ویرایش
-          </div>
-        </div>
-        <div className='font-normal text-xs text-cf-300'>
-          اطلاعات سکونتی صرفا برای احراز هویت می باشد.
+          <ResidentialForm />
         </div>
       </div>
-      <ResidentialForm />
     </div>
   )
 }

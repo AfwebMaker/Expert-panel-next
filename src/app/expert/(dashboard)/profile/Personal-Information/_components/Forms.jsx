@@ -49,26 +49,26 @@ function Forms({ setAvatar, avatar }) {
         birthday: Yup.string()
             .required('لطفا تاریخ تولد خود را وارد کنید.'),
         backgroundURL: Yup.mixed()
-            .test(
-                "required",
-                "لطفا یک فایل را انتخاب کنید",
-                (value) => value && value.length
-            )
-            .test(
-                "fileSize",
-                "حجم فایل بیش از حد مجاز است (1MB)",
-                (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
-            )
-            .test(
-                "fileFormat",
+            // .test(
+            //     "required",
+            //     "لطفا یک فایل را انتخاب کنید",
+            //     (value) => value && value.length
+            // )
+            // .test(
+            //     "fileSize",
+            //     "حجم فایل بیش از حد مجاز است (1MB)",
+            //     (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
+            // )
+            // .test(
+            //     "fileFormat",
 
-                "فرمت فایل پشتیبانی نمی‌شود",
-                (value) =>
-                    value &&
-                    (!value.type
-                        ? true
-                        : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
-            ),
+            //     "فرمت فایل پشتیبانی نمی‌شود",
+            //     (value) =>
+            //         value &&
+            //         (!value.type
+            //             ? true
+            //             : ["image/jpg", "image/jpeg", "image/png"].includes("image/jpg"))
+            // ),
     }
     const legalValidation = {
         componyName: Yup.string()
@@ -103,6 +103,7 @@ function Forms({ setAvatar, avatar }) {
     useEffect(() => {
         getExpertInfo()
             .then(res => {
+                console.log(res.data.data.backgroundURL)
                 res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
                 res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
                 formik.setValues({
@@ -120,7 +121,7 @@ function Forms({ setAvatar, avatar }) {
                     companyType: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.companyType : null,
                     dateEstablishment: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.dateEstablishment : null,
                     registrationNumber: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.registrationNumber : null,
-                    backgroundURL: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.backgroundURL : []
+                    backgroundURL: res.data.data.backgroundURL ? res.data.data.backgroundURL : {}
                 })
             })
             .catch(() => {
@@ -146,7 +147,7 @@ function Forms({ setAvatar, avatar }) {
             companyType: '',
             dateEstablishment: '',
             registrationNumber: '',
-            backgroundURL: [],
+            backgroundURL: {},
         },
         validationSchema,
         onSubmit: values => {

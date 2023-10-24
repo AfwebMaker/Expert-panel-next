@@ -8,46 +8,57 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 // components
 import InfoCard from "@/app/_components/InfoCard";
-import Input from "@/app/_components/Input";
-import MultipleContainingUploads from "@/app/_components/inputs/uploadFile/MultipleContainingUploads.jsx";
-import Multiple from "@/app/_components/inputs/uploadFile/Multiple";
+import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
+import Button from "@/app/_components/Button"
 
 function Page() {
+
   const validationSchema = Yup.object().shape({
-    oldPassword: Yup.string().required("لطفا رمز عبور قدیمی خود را وارد کنید"),
-    newPassword: Yup.string()
-      .required("لطفا رمز عبور جدید خود را وارد کنید")
-      .min(8, "رمز عبور باید حداقل شامل ۸ کاراکتر باشد")
-      .matches(/[A-Z]/, "رمز عبور باید شامل حداقل یک حرف بزرگ باشد")
-      .matches(/[a-z]/, "رمز عبور باید شامل حداقل یک حرف کوچک باشد")
-      .matches(/[0-9]/, "رمز عبور باید شامل حداقل یک عدد باشد")
-      .matches(
-        /[@$!%*?&]/,
-        "رمز عبور باید شامل کاراکترهای خاص (!@#$%...) باشد"
-      ),
-    confirmNewPassword: Yup.string()
-      .required("لطفا تکرار رمز عبور خود را وارد کنید")
-      .oneOf(
-        [Yup.ref("newPassword"), null],
-        "رمز عبور با تکرار آن مطابقت ندارد"
+    departmentId: Yup.string().required(
+      "لطفا نام خانوادگی خود را به درستی وارد کنید."
+    ),
+    subjectId: Yup.string().required(
+      "لطفا نام خانوادگی خود را به درستی وارد کنید."
+    ),
+    content: Yup.string()
+      .required("لطفا این فیلد را پر کنید")
+      .min(5, "توضیحات باید حداقل 5 کاراکتر باشد")
+      .max(500, "توضیحات نمی‌تواند بیش از 500 کاراکتر باشد"),
+    media: Yup.mixed()
+      .test(
+        "required",
+        "لطفا یک فایل را انتخاب کنید",
+        (value) => value && value.length
+      )
+      .test(
+        "fileSize",
+        "حجم فایل بیش از حد مجاز است (1MB)",
+        (value) => value && (!value.size ? true : value.size <= 1024 * 1024)
+      )
+      .test(
+        "fileFormat",
+
+        "فرمت فایل پشتیبانی نمی‌شود",
+        (value) =>
+          value &&
+          (!value.type
+            ? true
+            : ["image/jpg", "image/jpeg", "image/png"].includes(value.type))
       ),
   });
 
   const formik = useFormik({
     initialValues: {
-      oldPassword: "",
-      newPassword: "",
-      confirmNewPassword: "",
+      departmentId: "",
+      subjectId: "",
+      content: "",
+      media: [],
     },
     validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
   });
-
-  const SendTicket = () => {
-    console.log("Send ticket ==> create ticket new");
-  };
 
   return (
     <div className="w-[100%] h-[calc(100vh-135px)] md:h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start py-10 px-5 overflow-y-scroll hideScroll">
@@ -66,43 +77,35 @@ function Page() {
           خود دست نیافتید می‌توانید از طریق ارسال تیکت به دپارتمان مربوطه با
           کارشناسان کارگشا در ارتباط باشید.
         </InfoCard>
-        <form className="mt-10 w-full">
+        <form onSubmit={formik.handleSubmit} className="mt-10 w-full">
           <div>
             <h2 className="text-xs leading-6 sm:text-sm sm:leading-6 text-cf-300">
               در این قسمت میتوانید موضوع مشکل خود را از بین یکی از دسته بندی های
               زیر اتخاب کنید و سپس از زیر دسته آن به راحتی به دپارتمان مورد
               نطرتان وصل شوید.
             </h2>
-            <div className="flex flex-col md:flex-row w-full items-center justify-around gap-x-3 mt-3">
-              <Input
-                active={true}
-                title="تکرار رمز عبور جدید"
-                state="required"
-                type="text"
-                placeholder="••••••••••••"
-                className="my-2 w-full"
-                id="confirmNewPassword"
-                name="confirmNewPassword"
-                value={formik.values.confirmNewPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.errors.confirmNewPassword}
-                touched={formik.touched.confirmNewPassword}
+            <div className="flex w-full items-start justify-around gap-x-3 mt-3">
+              <DynamicInputs
+                inputType={"dropDown"}
+                title={"دسته بندی (دپارتمان مورد نظر)"}
+                state="Low"
+                required={true}
+                className="my-2 w-full lg:w-[49%]"
+                placeholder={"به طور مثال : جواد زاده"}
+                id={"departmentId"}
+                name={"departmentId"}
+                formik={formik}
               />
-              <Input
-                active={true}
-                title="تکرار رمز عبور جدید"
-                state="required"
-                type="text"
-                placeholder="••••••••••••"
-                className="my-2 w-full"
-                id="confirmNewPassword"
-                name="confirmNewPassword"
-                value={formik.values.confirmNewPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.errors.confirmNewPassword}
-                touched={formik.touched.confirmNewPassword}
+              <DynamicInputs
+                inputType={"dropDown"}
+                title={"مشکل در ثبت سفارشات"}
+                state="Low"
+                required={true}
+                className="my-2 w-full lg:w-[49%]"
+                placeholder={"به طور مثال : جواد زاده"}
+                id={"subjectId"}
+                name={"subjectId"}
+                formik={formik}
               />
             </div>
           </div>
@@ -111,40 +114,38 @@ function Page() {
               در این قسمت با توضیحات بیشتر در مورد مشکلات همکاران مارا در
               راهنمایی بهتر و رفع سریع تر مشکل شما یاری کنید.
             </h2>
-            <Input
-              active={true}
-              title="مشکل خود را در این قسمت بنویسید"
-              state="required"
-              type="text"
-              placeholder="مشکل خود را در این قسمت بنویسید"
+            <DynamicInputs
+              inputType={"inputTextarea"}
+              title={"مشکل خود را در این قسمت بنویسید"}
+              state="Low"
+              required={true}
               className="my-2 w-full"
-              id="confirmNewPassword"
-              name="confirmNewPassword"
-              value={formik.values.confirmNewPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.errors.confirmNewPassword}
-              touched={formik.touched.confirmNewPassword}
+              placeholder={"به طور مثال : جواد زاده"}
+              id={"content"}
+              name={"content"}
+              formik={formik}
             />
           </div>
-          <div className="w-full items-center justify-around gap-x-3 mt-10">
-            <h2 className="text-sm text-cf-400 leading-6 mb-4">
+          <div className="w-full items-center justify-around gap-x-3 mt-10 mb-5">
+            <h2 className="text-sm text-cf-400 leading-6">
               اسناد و فایل‌ها
             </h2>
-            <p className="text-xs leading-6 sm:text-sm sm:leading-6 text-cf-300 mb-3">
+            <p className="text-xs leading-6  sm:leading-6 text-cf-300 my-3">
               مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از
               فرمت های JPG , JPEG , PNG آپلود کنید.
             </p>
-            <MultipleContainingUploads multiple={true} />
-            <Multiple />
+            <DynamicInputs
+              inputType={"uploadFile_multiple"}
+              title={"آپلود فایل"}
+              state="Low"
+              required={true}
+              className="my-2 w-full"
+              id={"media"}
+              name={"media"}
+              formik={formik}
+            />
           </div>
-          <div
-            onClick={SendTicket}
-            className="cursor-pointer bg-primary-500 rounded-lg text-white fcc h-12 mt-10"
-          >
-            <HiTicket className="ml-1 text-xl" />
-            <span>ارسال تیکت</span>
-          </div>
+          <Button type='submit' icon={<HiTicket size={20} />} title='ارسال تیکت' />
         </form>
       </div>
     </div>

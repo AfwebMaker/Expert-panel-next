@@ -8,6 +8,8 @@ import SendNewTicketBtn from "./SendNewTicketBtn";
 import MasterTicket from "./MasterTicket";
 // react icons
 import { HiOutlineChat } from "react-icons/hi";
+//scroll
+import ScrollContainer from 'react-indiana-drag-scroll'
 
 function DesktopNavigation() {
   const pathName = usePathname();
@@ -69,12 +71,14 @@ function DesktopNavigation() {
           </div>
         </div>
         <div className="overflow-x-scroll xl:overflow-y-scroll hideScroll xl:h-[calc(100vh-210px)]">
-          <ul className="h-auto xl:h-full font-medium text-lg flex flex-nowrap gap-x-3 xl:flex-wrap xl:gap-x-0 justify-between ">
-            <MasterTicket
-              navigationData={navigation_data}
-              SendNewTicketHandler={SendNewTicketHandler}
-            />
-          </ul>
+          <ScrollContainer className='scroll-container whitespace-nowrap' >
+            <ul className="h-auto xl:h-full font-medium text-lg flex flex-nowrap gap-x-3 xl:flex-wrap xl:gap-x-0 justify-between ">
+              <MasterTicket
+                navigationData={navigation_data}
+                SendNewTicketHandler={SendNewTicketHandler}
+              />
+            </ul>
+          </ScrollContainer>
         </div>
       </div>
     </div>

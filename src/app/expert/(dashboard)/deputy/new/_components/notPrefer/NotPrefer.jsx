@@ -5,14 +5,21 @@ import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
 import InformationForm from "./InformationForm"
 import LegalForm from "./LegalForm"
 import Button from "@/app/_components/Button"
-
 //formik
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 //react Icons
 import { HiOutlineFingerPrint } from "react-icons/hi";
+// services
+import add from "@/services/deputy_kg_local/add"
+// toast
+import toast from 'react-hot-toast';
+
+
+
 
 function NotPrefer() {
 
@@ -20,7 +27,7 @@ function NotPrefer() {
   const { idUser } = useSelector(state => state.profileBase.user)
   const data = useSelector(state => state.profileBase.user)
   const router = useRouter()
-  console.log(idUser)
+  const dispatch = useDispatch()
 
   const baseValidation = {
     nameFamily: Yup.string()
@@ -48,7 +55,7 @@ function NotPrefer() {
         "required",
         "لطفا یک فایل را انتخاب کنید",
         (value) => value && Object.keys(value).length
-        
+
       )
       .test(
         "fileSize",
@@ -109,9 +116,9 @@ function NotPrefer() {
 
   }, [idUser])
 
-  console.log("validation", validation)
-  console.log("idUser", !idUser)
-  console.log("data", data)
+  // console.log("validation", validation)
+  // console.log("idUser", !idUser)
+  // console.log("data", data)
 
   const formik = useFormik({
     initialValues: {
@@ -129,7 +136,36 @@ function NotPrefer() {
     validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      router.replace("deputy")
+      //===================================================
+      const data = {
+        "id": 0,
+        "nameFamily": values.nameFamily,
+        "avatarURL": values.avatarURL,
+        "isMyself": true,
+        "mobile": values.mobile,
+        "nationalCode": values.nationalCode,
+        "zipCode": values.zipCode,
+        "description": null,//داخل api طاهری نیست
+        "company_OrganizationLevel": values.company_OrganizationLevel,
+        "company_LastEducationalCertificate": values.company_LastEducationalCertificate,
+        "company_Resume": values.company_Resume,
+        "companyResumeURL": values.company_ResumeURL
+      }
+
+      dispatch(loadingHandler(true))
+      add(data)
+        .then(res => {
+          console.log(res)
+          router.replace("/expert/deputy/")
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            err.response.data.message ? toast.error(err.response.data.message) : toast.error('!')
+          }
+        })
+        .finally(() => {
+          dispatch(loadingHandler(false))
+        })
     },
   });
 

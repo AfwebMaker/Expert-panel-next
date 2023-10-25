@@ -9,17 +9,20 @@ import Button from "@/app/_components/Button"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 //react Icons
 import { HiOutlineFingerPrint } from "react-icons/hi";
+// services
+import add from "@/services/deputy_kg_local/add"
 
-function NotPreferEdit() {
+function NotPreferEdit({ stateForm, setStateForm }) {
 
   const [validation, setValidation] = useState(false);
-  const [status, setStatus] = useState(false);
   const { mainDataCompany } = useSelector(state => state.getExpertInfo.user)
   const activeDataLocal = useSelector(state => state.getExpertInfo.activeData)
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const baseValidation = {
     nameFamily: Yup.string()
@@ -46,7 +49,7 @@ function NotPreferEdit() {
       .test(
         "required",
         "لطفا یک فایل را انتخاب کنید",
-        (value) => value && value.length
+        (value) => value && Object.keys(value).length
       )
       .test(
         "fileSize",
@@ -106,6 +109,7 @@ function NotPreferEdit() {
   }, [mainDataCompany])
 
   useEffect(() => {
+    console.log(activeDataLocal)
     if (activeDataLocal === null) {
       router.replace('/expert/deputy')
     }
@@ -114,21 +118,52 @@ function NotPreferEdit() {
 
   const formik = useFormik({
     initialValues: {
-      nameFamily: activeDataLocal.nameFamily,
-      mobile: "0" + activeDataLocal.mobile,
-      nationalCode: activeDataLocal.nationalCode,
-      zipCode: activeDataLocal.zipCode,
-      description: activeDataLocal.description ? activeDataLocal.description : "",
+      nameFamily: activeDataLocal ? activeDataLocal.nameFamily : "",
+      mobile: activeDataLocal ? "0" + activeDataLocal.mobile : "",
+      nationalCode: activeDataLocal ? activeDataLocal.nationalCode : "",
+      zipCode: activeDataLocal ? activeDataLocal.zipCode : "",
+      description: activeDataLocal && activeDataLocal.description ? activeDataLocal.description : "",
       avatarURL: activeDataLocal ? activeDataLocal.avatarURL : {},
-      company_OrganizationLevel: activeDataLocal.company_OrganizationLevel ? activeDataLocal.company_OrganizationLevel : null,
-      company_LastEducationalCertificate: activeDataLocal.company_LastEducationalCertificate ? activeDataLocal.company_LastEducationalCertificate : null,
-      company_Resume: activeDataLocal.company_Resume ? activeDataLocal.company_Resume : "",
-      company_ResumeURL: activeDataLocal.company_ResumeURL ? activeDataLocal.company_ResumeURL : {},
+      company_OrganizationLevel: activeDataLocal && activeDataLocal.company_OrganizationLevel ? activeDataLocal.company_OrganizationLevel : null,
+      company_LastEducationalCertificate: activeDataLocal && activeDataLocal.company_LastEducationalCertificate ? activeDataLocal.company_LastEducationalCertificate : null,
+      company_Resume: activeDataLocal && activeDataLocal.company_Resume ? activeDataLocal.company_Resume : "",
+      company_ResumeURL: activeDataLocal && activeDataLocal.company_ResumeURL ? activeDataLocal.company_ResumeURL : {},
     },
     validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      router.replace("deputy")
+      const dataUser = {
+        "id": activeDataLocal.id,
+        "nameFamily": values.nameFamily,
+        "avatarURL": values.avatarURL,
+        "isMyself": false,
+        "mobile": values.mobile,
+        "nationalCode": values.nationalCode,
+        "zipCode": values.zipCode,
+        "description": values.description,
+      }
+
+      const dataExpert = {
+        "company_OrganizationLevel": values.company_OrganizationLevel,
+        "company_LastEducationalCertificate": values.company_LastEducationalCertificate,
+        "company_Resume": values.company_Resume,
+        "companyResumeURL": values.company_ResumeURL
+      }
+
+      const data = mainDataCompany !== null ? Object.assign(dataUser, dataExpert) : Object.assign(dataUser);
+
+      dispatch(loadingHandler(true))
+      add(data)
+        .then(res => {
+          console.log(res)
+          router.replace("/expert/deputy/")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        .finally(() => {
+          dispatch(loadingHandler(false))
+        })
     },
   });
 
@@ -176,7 +211,7 @@ function NotPreferEdit() {
             </div>
           )
         }
-        <Button type='submit' disable={true} icon={<HiOutlineFingerPrint size={20} />} title='ثبت تغییرات' />
+        <Button type='submit' disable={!stateForm} icon={<HiOutlineFingerPrint size={20} />} title='ثبت تغییرات' />
       </form>
     </div>
   );

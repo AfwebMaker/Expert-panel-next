@@ -15,10 +15,6 @@ import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 import { HiOutlineFingerPrint } from "react-icons/hi";
 // services
 import add from "@/services/deputy_kg_local/add"
-// toast
-import toast from 'react-hot-toast';
-
-
 
 
 function NotPrefer() {
@@ -28,7 +24,6 @@ function NotPrefer() {
   const { mainDataCompany } = useSelector(state => state.getExpertInfo.user)
   const router = useRouter()
   const dispatch = useDispatch()
-  console.log(mainDataCompany)
 
   const baseValidation = {
     nameFamily: Yup.string()
@@ -117,10 +112,6 @@ function NotPrefer() {
 
   }, [mainDataCompany])
 
-  // console.log("validation", validation)
-  // console.log("mainDataCompany", !mainDataCompany)
-  // console.log("data", data)
-
   const formik = useFormik({
     initialValues: {
       nameFamily: "",
@@ -136,8 +127,6 @@ function NotPrefer() {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      //===================================================
       const dataUser = {
         "id": 0,
         "nameFamily": values.nameFamily,
@@ -166,9 +155,6 @@ function NotPrefer() {
         })
         .catch((err) => {
           console.log(err)
-          if (err.response.status === 400) {
-            err.response.data.message ? toast.error(err.response.data.message) : toast.error('!')
-          }
         })
         .finally(() => {
           dispatch(loadingHandler(false))

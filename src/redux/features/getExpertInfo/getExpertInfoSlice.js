@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     user: {},
-    activeData: JSON.parse(localStorage.getItem('activeData')) ? JSON.parse(localStorage.getItem('activeData')) : {}
+    activeData: JSON.parse(localStorage.getItem('activeData')) ? JSON.parse(localStorage.getItem('activeData')) : null
 }
 
 const getExpertInfoSlice = createSlice({

@@ -10,6 +10,7 @@ import PreferEdit from "./_components/PreferEdit";
 
 function Page() {
     const [enabled, setEnabled] = useState(false);
+    const [stateForm, setStateForm] = useState(false);
     const router = useRouter();
 
     // const { activeData } = router.query.data
@@ -37,12 +38,12 @@ function Page() {
                             <h1>نماینده من</h1>
                             <HiOutlineUser className="text-xl" />
                         </div>
-                        <div className="cursor-pointer" role="button" onClick={() => console.log(1)}>
+                        <div className="cursor-pointer" role="button" onClick={() => setStateForm(true)}>
                             ویرایش
                         </div>
                     </div>
                     <div className="w-full">
-                        {enabled ? <PreferEdit /> : <NotPreferEdit />}
+                        {enabled ? <PreferEdit /> : <NotPreferEdit stateForm={stateForm} setStateForm={setStateForm} />}
                     </div>
                 </div>
             </div>

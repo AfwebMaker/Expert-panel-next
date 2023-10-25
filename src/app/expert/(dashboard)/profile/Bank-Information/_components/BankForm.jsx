@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useEffect, useState } from 'react'
 //formik
 import { useFormik } from 'formik';
@@ -16,8 +14,6 @@ import bankGet from '@/services/person_kg_local/bankGet'
 //redux
 import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 import { useDispatch } from 'react-redux';
-//toast
-import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object().shape({
     BankID: Yup.string()
@@ -27,15 +23,16 @@ const validationSchema = Yup.object().shape({
         .max(24, 'به نظر می رسد شماره شبا وارده از 24 کارکتر بیشتر می باشد!'),
 });
 
-function BankForm() {
+function BankForm({ formState, setFormState }) {
     const dispatch = useDispatch()
     const [loadingPage, setLoadingPage] = useState(true)
 
     useEffect(() => {
+        //get initial bank data
         bankGet()
             .then(res => {
                 formik.setValues({
-                    BankID: res.data.data.BankID
+                    BankID: res.data.data.slice(2)
                 })
             })
             .catch(() => {
@@ -52,14 +49,11 @@ function BankForm() {
         validationSchema,
         onSubmit: values => {
             dispatch(loadingHandler(true))
-            bankAdd(values)
-                .then(res => {
-                    console.log(res)
+            bankAdd({ BankID: `IR${values.BankID}` })
+                .then(() => {
+                    setFormState(3)
                 })
-                .catch(err => {
-                    if (err.response.status === 400) {
-                        toast.error(err.response.data.message)
-                    }
+                .catch(() => {
                 })
                 .finally(() => {
                     dispatch(loadingHandler(false))
@@ -74,7 +68,7 @@ function BankForm() {
                 id='BankID'
                 name='BankID'
                 title='شماره شبا'
-                state="Low"
+                state={formState}
                 required={true}
                 inputType="text"
                 placeholder='به طور مثال : ۱۲٦٥٤۸۷۹۸٦٥۳۲۳۳۳۱۰۰۰۰۱۰۲۳٥۱'
@@ -82,7 +76,7 @@ function BankForm() {
                 formik={formik}
             />
 
-            <Button type='submit' disable={false} icon={<HiLibrary size={20} />} title='احراز حساب بانکی' />
+            <Button type='submit' disable={(formState === 0 || formState === 3)} icon={<HiLibrary size={20} />} title='احراز حساب بانکی' />
         </form>
     )
 }

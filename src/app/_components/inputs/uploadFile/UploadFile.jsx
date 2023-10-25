@@ -22,8 +22,12 @@ function UploadFile({
     (required && state !== "None" && state !== "Medium") || !required;
   //   const inputRef = useRef(null);
   const [focus, setFocus] = useState(false);
-  const [selfState, setSelfState] = useState(state);
-  const parentElem = useRef(null);
+  const [selfState, setSelfState] = useState('Low');
+  const parentElem = useRef(null)
+
+  useEffect(() => {
+    setSelfState(state)
+  }, [state])
 
   //get click out side of element
   useEffect(() => {

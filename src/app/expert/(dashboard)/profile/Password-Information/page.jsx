@@ -5,7 +5,7 @@ import { HiOutlineChevronRight } from 'react-icons/hi'
 //components
 import PasswordForm from './_components/PasswordForm'
 
-function page() {
+function Page() {
   return (
     <div className="w-full h-[calc(100vh-138px)] lg:h-auto xl:h-[calc(100vh-110px)] rounded-lg bg-[#F8F9F9] flex flex-col items-center justify-start relative">
       <div className="overflow-y-scroll hideScroll w-full h-full flex flex-col scroll-smooth px-5 lg:px-0">
@@ -41,4 +41,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

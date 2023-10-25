@@ -1,11 +1,27 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 //react icon
 import { HiOutlineChevronRight } from 'react-icons/hi'
 //components
 import ResidentialForm from './_components/ResidentialForm'
+//services
+import profileBase from '@/src/services/person_kg_local/profileBase'
 
-function page() {
+function Page() {
+  const [formState, setFormState] = useState(1)
+
+  //get data
+  useEffect(() => {
+    profileBase()
+      .then(res => {
+        setFormState(res.data.data.livingLocation)
+      })
+      .catch(() => {
+      })
+  }, [])
+
   return (
     <div className="w-full h-[calc(100vh-138px)] lg:h-auto xl:h-[calc(100vh-110px)] rounded-lg bg-[#F8F9F9] flex flex-col items-center justify-start relative">
       <div className="overflow-y-scroll hideScroll w-full h-full flex flex-col scroll-smooth px-5 lg:px-0">
@@ -21,7 +37,10 @@ function page() {
               <div>
                 اطلاعات پایه سکونتی
               </div>
-              <div className='text-primary-500 cursor-pointer text-base font-bold'>
+              <div
+                onClick={() => { (formState === 0 || formState === 3) && setFormState(1) }}
+                className={`${(formState === 0 || formState === 3) ? 'text-primary-500 cursor-pointer' : 'text-cf-300'} text-base font-bold`}
+              >
                 ویرایش
               </div>
             </div>
@@ -29,11 +48,11 @@ function page() {
               اطلاعات سکونتی صرفا برای احراز هویت می باشد.
             </div>
           </div>
-          <ResidentialForm />
+          <ResidentialForm formState={formState} setFormState={setFormState} />
         </div>
       </div>
     </div>
   )
 }
 
-export default page
+export default Page

@@ -1,7 +1,7 @@
 "use client";
 
 //react
-import React from "react";
+import React, { useEffect } from "react";
 //components
 import InputText from "@/app/_components/inputs/inputText/InputText";
 import DatePicker from "@/app/_components/inputs/datePicker/CustomDatePicker";
@@ -35,8 +35,6 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
     }
     return status;
   }
-
-  console.log(determiningStatus(0))
 
   return (
     <>

@@ -22,7 +22,7 @@ function CheckBox({
   const buttonRef = useRef(null);
   const parentElem = useRef(null);
   const [focus, setFocus] = useState(false);
-  const [selfState, setSelfState] = useState(state);
+  const [selfState, setSelfState] = useState('Low');
   const [selected, setSelected] = useState([]);
   const [forceOpenInput, setForceOpenInput] = useState(forceOpen);
 
@@ -36,6 +36,10 @@ function CheckBox({
       { id: 6, text: "سیستان" },
     ],
   };
+
+  useEffect(() => {
+    setSelfState(state)
+}, [state])
 
   //focus handler
   useEffect(() => {

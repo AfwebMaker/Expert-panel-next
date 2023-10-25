@@ -14,6 +14,7 @@ import profileBase from '@/src/services/person_kg_local/profileBase'
 function page() {
   const [loadingPage, setLoadingPage] = useState(true)
   const [data, setData] = useState({})
+  
   //get data
   useEffect(() => {
     profileBase()

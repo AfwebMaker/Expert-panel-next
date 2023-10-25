@@ -20,7 +20,7 @@ import { useDispatch } from 'react-redux';
 import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 import Loading from '@/src/app/_components/Loading';
 
-function Forms({ setAvatar, avatar }) {
+function Forms({ setAvatar, avatar, formState }) {
     const dispatch = useDispatch()
     const [loadingPage, setLoadingPage] = useState(true)
     const [legalFormIsActive, setLegalFormIsActive] = useState(false);
@@ -88,8 +88,6 @@ function Forms({ setAvatar, avatar }) {
     useEffect(() => {
         getExpertInfo()
             .then(res => {
-                console.log(res.data.data)
-                console.log(res.data.data.mainDataInfo.birthday)
                 res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
                 res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
                 formik.setValues({
@@ -150,7 +148,7 @@ function Forms({ setAvatar, avatar }) {
                     "birthPlace": values.birthPlace,
                     "job": "string",
                     "education": 0,
-                    "avatar_url": { url: avatar },
+                    "avatar_url": { id: 0, url: avatar, size: 0, type: '' },
                     "date_Create": "2023-10-18T07:28:41.638Z",
                     "date_Update": "2023-10-18T07:28:41.638Z",
                     "idExpert": 0,
@@ -213,8 +211,15 @@ function Forms({ setAvatar, avatar }) {
         <>
             {loadingPage && <Loading />}
             <form onSubmit={formik.handleSubmit}>
-                <InformationForm formik={formik} />
-                <LegalForm legalFormIsActive={legalFormIsActive} setLegalFormIsActive={setLegalFormIsActive} formik={formik} />
+                <InformationForm formik={formik} formState={formState} />
+
+                <LegalForm
+                    legalFormIsActive={legalFormIsActive}
+                    setLegalFormIsActive={setLegalFormIsActive}
+                    formState={formState}
+                    formik={formik}
+                />
+
                 <div className='font-medium text-sm text-cf-300 mb-10'>
                     <div>
                         <div className='text-cf-500 mb-5'>مدارک سکونتی</div>
@@ -230,11 +235,11 @@ function Forms({ setAvatar, avatar }) {
                         title="آپلود فایل"
                         required={true}
                         className={'mb-4'}
-                        state="Low"
+                        state={formState}
                         formik={formik}
                     />
                 </div>
-                <Button type='submit' icon={<HiOutlineFingerPrint size={20} />} title='ثبت و احراز هویت' />
+                <Button type='submit' disable={(formState === 0 || formState === 3)} icon={<HiOutlineFingerPrint size={20} />} title='ثبت و احراز هویت' />
             </form>
         </>
     )

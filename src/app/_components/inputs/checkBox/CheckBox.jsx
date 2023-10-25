@@ -13,7 +13,7 @@ function CheckBox({ state, title, placeholder, className, name, required, formik
     const buttonRef = useRef(null)
     const parentElem = useRef(null)
     const [focus, setFocus] = useState(false);
-    const [selfState, setSelfState] = useState(state);
+    const [selfState, setSelfState] = useState('Low');
 
     const data1 = {
         list: [
@@ -36,6 +36,10 @@ function CheckBox({ state, title, placeholder, className, name, required, formik
         ],
         active: '5'
     }
+
+    useEffect(() => {
+        setSelfState(state)
+    }, [state])
 
     //edit input format
     const cartNumberFormat = (cartNum) => {

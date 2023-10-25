@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 //react icon
 import { HiPencilAlt, HiOutlineChevronRight } from 'react-icons/hi'
@@ -14,10 +14,25 @@ import toast from 'react-hot-toast'
 //loading redux
 import { useDispatch } from 'react-redux';
 import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+//services
+import profileBase from '@/src/services/person_kg_local/profileBase'
 
-function page() {
+function Page() {
   const dispatch = useDispatch()
   const [avatar, setAvatar] = useState(null);
+  const [formState, setFormState] = useState(1)
+
+  //get form state
+  useEffect(() => {
+    profileBase()
+      .then(res => {
+        setFormState(res.data.data.background)
+      })
+      .catch(() => {
+      })
+  }, [])
+
+  //avatar edit
   const fileInputHandler = (e) => {
     const files = Array.from(e.target.files);
     const formData = new FormData();
@@ -65,20 +80,22 @@ function page() {
                 fill
               />
             </div>
-            <div className='fcc text-primary-500'>
-              <div className='ml-1'>
-                <HiPencilAlt />
+            {!(formState === 0 || formState === 3) &&
+              <div className='fcc text-primary-500'>
+                <div className='ml-1'>
+                  <HiPencilAlt />
+                </div>
+                <label className='cursor-pointer' htmlFor="upload_avatar">ویرایش عکس پروفایل</label>
+                <input onChange={fileInputHandler} className='hidden' id='upload_avatar' type="file" />
               </div>
-              <label className='cursor-pointer' htmlFor="upload_avatar">ویرایش عکس پروفایل</label>
-              <input onChange={fileInputHandler} className='hidden' id='upload_avatar' type="file" />
-            </div>
+            }
           </div>
 
-          <Forms setAvatar={setAvatar} avatar={avatar} />
+          <Forms formState={formState} setAvatar={setAvatar} avatar={avatar} />
         </div>
       </div>
     </div>
   )
 }
 
-export default page
+export default Page

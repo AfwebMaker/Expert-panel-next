@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useEffect, useState } from 'react'
 //formik
 import { useFormik } from 'formik';
@@ -13,26 +11,26 @@ import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
 //services
 import addressAdd from '@/services/person_kg_local/addressAdd';
 import addressGet from '@/services/person_kg_local/addressGet';
-//toast
-import toast from 'react-hot-toast';
+//redux
+import { useDispatch } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 const validationSchema = Yup.object().shape({
-    address: Yup.string()
-        .required('لطفا آدرس خود را وارد کنید.'),
     zipCode: Yup.string()
-        .required('لطفا کد پستی خود را وارد کنید.'),
+        .required('لطفا کد پستی خود را وارد کنید.')
+        .min(10, 'کد پستی باید شامل 10 رقم باشد.')
+        .max(10, 'کد پستی باید شامل 10 رقم باشد.'),
 
 });
 
-function ResidentialForm() {
+function ResidentialForm({ formState, setFormState }) {
+    const dispatch = useDispatch()
     const [loadingPage, setLoadingPage] = useState(true)
 
     useEffect(() => {
         addressGet()
             .then(res => {
-                console.log(res)
                 formik.setValues({
-                    address: res.data.data.addressRawText,
                     zipCode: res.data.data.zipCode,
                     addressDocumentationURL: res.data.data.addressDocumentationURL
                 })
@@ -46,23 +44,20 @@ function ResidentialForm() {
 
     const formik = useFormik({
         initialValues: {
-            address: '',
             zipCode: '',
             addressDocumentationURL: ''
         },
         validationSchema,
         onSubmit: values => {
+            dispatch(loadingHandler(true))
             addressAdd(values)
-                .then(res => {
-                    console.log(res)
+                .then(() => {
+                    setFormState(3)
                 })
-                .catch((err) => {
-                    if (err.response.status === 400) {
-                        toast.error(err.response.data.message)
-                    }
+                .catch(() => {
                 })
                 .finally(() => {
-                    setLoadingPage(false)
+                    dispatch(loadingHandler(false))
                 })
         },
     });
@@ -72,26 +67,14 @@ function ResidentialForm() {
             {loadingPage && <Loading />}
             <div className='flex flex-wrap justify-between mb-10'>
                 <DynamicInputs
-                    id='address'
-                    name='address'
-                    title='آدرس'
-                    state='Low'
-                    required={true}
-                    inputType="text"
-                    placeholder='به طور مثال : تهران، پونک، خیابان لاله..'
-                    className='my-2 w-full lg:w-[49%]'
-                    formik={formik}
-                />
-
-                <DynamicInputs
                     id='zipCode'
                     name='zipCode'
                     title='کد پستی'
-                    state="Low"
+                    state={formState}
                     required={true}
                     inputType="text"
                     placeholder='به طور مثال : ۱۱٥۸۷۹٦۸٤۲'
-                    className='my-2 w-full lg:w-[49%]'
+                    className='my-2 w-full'
                     formik={formik}
                 />
             </div>
@@ -108,14 +91,14 @@ function ResidentialForm() {
                 <DynamicInputs
                     id='addressDocumentationURL'
                     name='addressDocumentationURL'
-                    state="Low"
+                    state={formState}
                     required={true}
                     inputType="uploadFile"
                     className='my-2 w-full mb-5'
                     formik={formik}
                 />
             </div>
-            <Button type='submit' disable={false} icon={<HiHome size={20} />} title='احراز اطلاعات سکونتی' />
+            <Button type='submit' disable={(formState === 0 || formState === 3)} icon={<HiHome size={20} />} title='احراز اطلاعات سکونتی' />
         </form>
     )
 }

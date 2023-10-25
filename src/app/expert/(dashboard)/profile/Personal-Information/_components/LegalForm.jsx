@@ -3,7 +3,7 @@ import React from 'react'
 import SwitchInput from '@/app/_components/SwitchInput'
 import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
 
-function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
+function LegalForm({ formik, formState, legalFormIsActive, setLegalFormIsActive }) {
 
     const inputData = [
         {
@@ -21,7 +21,7 @@ function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
             title: 'شناسه ملی',
             required: true,
             placeholder: 'به طور مثال : ۸٤٦۹۷۰۲۸۷'
-        }, 
+        },
         {
             id: 'activitySubject',
             name: 'activitySubject',
@@ -72,7 +72,7 @@ function LegalForm({ formik, legalFormIsActive, setLegalFormIsActive }) {
                                 key={item.id}
                                 inputType={item.inputType}
                                 title={item.title}
-                                state="Low"
+                                state={formState}
                                 required={item.required}
                                 className="my-2 w-full lg:w-[49%]"
                                 placeholder={item.placeholder}

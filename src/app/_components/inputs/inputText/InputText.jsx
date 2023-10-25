@@ -6,7 +6,11 @@ function InputText({ state, title, placeholder, className, id, name, required, f
     const activeInputCondition = (required && (state !== 'None' && state !== 'Medium') || !required);
     const inputRef = useRef(null)
     const [focus, setFocus] = useState(false);
-    const [selfState, setSelfState] = useState(state);
+    const [selfState, setSelfState] = useState('Low');
+
+    useEffect(() => {
+        setSelfState(state)
+    }, [state])
 
     //when click on custom component focus on html input
     useEffect(() => {

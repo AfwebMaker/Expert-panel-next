@@ -11,7 +11,11 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
     const [container, setContainer] = useState({})
     const parentElem = useRef(null)
     const [focus, setFocus] = useState(false);
-    const [selfState, setSelfState] = useState(state);
+    const [selfState, setSelfState] = useState('Low');
+
+    useEffect(() => {
+        setSelfState(state)
+    }, [state])
 
     //change date input handler
     const handleValueChange = (newValue) => { 

@@ -11,7 +11,7 @@ function MyFormerDeputy({ dataExpertData }) {
         <HiOutlineUserGroup className="text-lg" />
         <span className="text-xs md:text-sm">نماینده های پیشین من</span>
       </div>
-      <div className="flex flex-wrap md:grid md:grid-cols-12 w-full gap-5">
+      <div className="flex flex-wrap md:grid md:grid-cols-12 w-full gap-5 mb-5">
         {dataExpertData &&
           dataExpertData.map((item) => (
             <DeputyCard
@@ -19,6 +19,7 @@ function MyFormerDeputy({ dataExpertData }) {
               status={"deactivate"}
               phone={item.mobile}
               name={item.nameFamily}
+              avatarURL={dataExpertData && item.avatarURL.url}
             />
           ))}
       </div>

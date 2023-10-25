@@ -25,10 +25,11 @@ function MyActiveDeputy({ activeData, newData }) {
       <div className="flex flex-wrap md:grid md:grid-cols-12 w-full gap-5">
         {activeData && (
           <DeputyCard
-            activeData={activeData}  
+            activeData={activeData}
             status={"active"}
             phone={activeData.mobile}
             name={activeData.nameFamily}
+            avatarURL={activeData && activeData.avatarURL.url}
           />
         )}
         {newData && (
@@ -36,6 +37,7 @@ function MyActiveDeputy({ activeData, newData }) {
             status={"pending"}
             phone={newData.mobile}
             name={newData.nameFamily}
+            avatarURL={newData && newData.avatarURL.url}
           />
         )}
         <div className="hidden md:flex bg-white md:col-span-6 xl:col-span-4 w-full rounded-lg p-5 flex-col items-center uploadBorder_active">

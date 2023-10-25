@@ -1,7 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+//services
+import reActive from "@/src/services/deputy_kg_local/reActive"
+import deActive from "@/src/services/deputy_kg_local/deActive"
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 // react icons
 import {
   HiOutlineXCircle,
@@ -13,18 +19,50 @@ import {
   HiPencil,
 } from "react-icons/hi";
 
-function DeputyCard({ status, phone, name, src, activeData }) {
+function DeputyCard({ status, phone, name, src, activeData, avatarURL }) {
 
-  const router = useRouter()
+  const router = useRouter();
 
+  const cancellationHandler = () => {
+    const data = {
+      "nationalCode": "",
+    }
+    dispatch(loadingHandler(true))
+    deActive(data)
+      .then(res => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        dispatch(loadingHandler(false))
+      })
+  }
 
+  const activationHandler = () => {
+    const data = {
+      "nationalCode": "",
+    }
+    dispatch(loadingHandler(true))
+    reActive(data)
+      .then(res => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        dispatch(loadingHandler(false))
+      })
+  }
 
   return (
     <div className="bg-white md:col-span-6 xl:col-span-4 w-full rounded-lg p-3 sm:p-5 flex flex-col border border-gray-200">
       <div className="w-full flex md:flex-col">
         <section className="md:w-full fcc">
-          <div className="bg-black h-14 w-14 md:h-24 md:w-24 rounded-full fcc">
-            {/* <Image src={src} width={100} height={100} alt=""/> */}
+          <div className="h-14 w-14 md:h-24 md:w-24 rounded-full fcc overflow-hidden border border-gray-300">
+            <Image src={avatarURL} width={60} height={60} alt="" />
           </div>
         </section>
         <section className="md:w-full flex-col mt-5 mr-3 md:mr-0 truncate">
@@ -62,14 +100,14 @@ function DeputyCard({ status, phone, name, src, activeData }) {
 
       <section className="w-full h-[36px] fcc flex-col mt-5 text-white">
         {status === "pending" ? (
-          <Link
-            href={"#"}
+          <div
+            // onClick={}
             role="button"
             className="flex cursor-pointer w-full bg-orange-500 fcc px-2 gap-x-1 rounded-lg h-full"
           >
             <HiOutlineX className="text-xl" />
             <span className="text-xs sm:text-sm">لغو احراز حویت و حذف نماینده</span>
-          </Link>
+          </div>
         ) : status === "active" ? (
           <div
             role="button"
@@ -82,23 +120,24 @@ function DeputyCard({ status, phone, name, src, activeData }) {
               <HiPencil className="text-xl" />
               <span className="text-xs sm:text-sm">ویرایش نماینده</span>
             </Link>
-            <Link
+            <div
+              onClick={cancellationHandler}
               href={"#"}
               className="rounded-lg bg-red-500 fcc w-full h-full gap-x-1"
             >
               <HiTrash className="text-xl" />
               <span className="text-xs sm:text-sm">حذف نماینده</span>
-            </Link>
+            </div>
           </div>
         ) : (
-          <Link
-            href={"#"}
+          <div
+            onClick={activationHandler}
             role="button"
             className="flex fcc cursor-pointer w-full bg-secondary-500 px-2 rounded-lg gap-x-2 h-full"
           >
             <HiOutlineRefresh className="text-xl" />
             <span className="text-xs sm:text-sm">فعال سازی مجدد نماینده</span>
-          </Link>
+          </div>
         )}
       </section>
     </div>

@@ -196,10 +196,7 @@ function Forms({ setAvatar, avatar, formState }) {
                 .then(res => {
                     console.log(res)
                 })
-                .catch((err) => {
-                    if (err.response.status === 400) {
-                        err.response.data.message ? toast.error(err.response.data.message) : toast.error('!')
-                    }
+                .catch(() => {
                 })
                 .finally(() => {
                     dispatch(loadingHandler(false))

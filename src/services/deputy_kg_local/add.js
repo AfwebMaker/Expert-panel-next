@@ -1,9 +1,9 @@
 import { dynamicApiCall } from "../dynamicApiCall";
-import { person_kg_local } from '../APIRepositories'
+import { deputy_kg_local } from '../APIRepositories'
 
 const add = async (data) => {
     const option = {
-        axios: person_kg_local,
+        axios: deputy_kg_local,
         method: 'POST',
         endpoint: '/EpertDeputy/Add',
         data: data

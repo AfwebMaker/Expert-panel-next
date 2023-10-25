@@ -17,12 +17,8 @@ function DeputyCard({ status, phone, name, src, activeData }) {
 
   const router = useRouter()
 
-  const editHandler = () => {
-    router.push({
-      pathname: '/deputy/edit',
-      query: { data: activeData },
-    })
-  }
+
+
   return (
     <div className="bg-white md:col-span-6 xl:col-span-4 w-full rounded-lg p-3 sm:p-5 flex flex-col border border-gray-200">
       <div className="w-full flex md:flex-col">
@@ -79,13 +75,13 @@ function DeputyCard({ status, phone, name, src, activeData }) {
             role="button"
             className="flex cursor-pointer w-full fcc h-full gap-x-3"
           >
-            <div
-              onClick={editHandler}
+            <Link
+              href={'deputy/edit'}
               className="rounded-lg bg-blue-500 fcc w-full h-full gap-x-1"
             >
               <HiPencil className="text-xl" />
               <span className="text-xs sm:text-sm">ویرایش نماینده</span>
-            </div>
+            </Link>
             <Link
               href={"#"}
               className="rounded-lg bg-red-500 fcc w-full h-full gap-x-1"

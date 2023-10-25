@@ -9,9 +9,9 @@ import NavigationBar from "./navigatorInterface/_components/NavigationBar";
 import SideBar from "./navigatorInterface/_components/SideBar";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUserHandler } from "@/src/redux/features/profileBase/profileBaseSlice";
+import { fetchUserHandler } from "@/src/redux/features/getExpertInfo/getExpertInfoSlice";
 //services
-import operatorInfoProfileBase from '@/src/services/person_kg_local/operatorInfoProfileBase'
+import getExpertInfo from '@/src/services/person_kg_local/getExpertInfo'
 
 function Main({ children }) {
   const toggleSidebar = useSelector(state => state.layoutConfig.toggleSidebar)
@@ -20,7 +20,7 @@ function Main({ children }) {
 
   //Get Data User
   useEffect(() => {
-    operatorInfoProfileBase()
+    getExpertInfo()
       .then(res => {
         dispatch(fetchUserHandler(res.data.data))
       })

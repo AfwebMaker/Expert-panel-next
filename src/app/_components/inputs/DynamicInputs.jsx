@@ -11,13 +11,40 @@ import InputTextarea from "@/app/_components/inputs/inputTextarea/InputTextarea"
 import UploadFile from "@/app/_components/inputs/uploadFile/UploadFile";
 
 function DynamicInputs({ state, title, placeholder, className, id, name, required, inputType, formik }) {
+
+  function determiningStatus(number) {
+    let status;
+    switch (number) {
+      case 0:
+        status = "None";
+        break;
+      case 1:
+        status = "Low";
+        break;
+      case 2:
+        status = "High";
+        break;
+      case 3:
+        status = "Medium";
+        break;
+      case 4:
+        status = "High";
+        break;
+      default:
+        status = "Low"
+    }
+    return status;
+  }
+
+  console.log(determiningStatus(0))
+
   return (
     <>
       {inputType === "text" && (
         <InputText
           inputType={inputType}
           title={title}
-          state={state}
+          state={determiningStatus(state)}
           required={required}
           className={className}
           placeholder={placeholder}
@@ -31,7 +58,7 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
         <CheckBox
           inputType={inputType}
           title={title}
-          state={state}
+          state={determiningStatus(state)}
           required={required}
           className={className}
           placeholder={placeholder}
@@ -44,7 +71,7 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
         <CheckBoxMultiple
           inputType={inputType}
           title={title}
-          state={state}
+          state={determiningStatus(state)}
           required={required}
           className={className}
           placeholder={placeholder}
@@ -59,7 +86,7 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
         <InputTextarea
           inputType={inputType}
           title={title}
-          state={state}
+          state={determiningStatus(state)}
           required={required}
           className={className}
           placeholder={placeholder}
@@ -72,7 +99,7 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
       {inputType === "datePicker" && (
         <DatePicker
           title={title}
-          state={state}
+          state={determiningStatus(state)}
           required={required}
           className={className}
           placeholder={placeholder}
@@ -84,7 +111,7 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
         <UploadFile
           inputType={inputType}
           title={title}
-          state={state}
+          state={determiningStatus(state)}
           required={required}
           className={className}
           placeholder={placeholder}

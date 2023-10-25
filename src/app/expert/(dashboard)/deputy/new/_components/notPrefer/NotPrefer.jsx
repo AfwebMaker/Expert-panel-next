@@ -24,10 +24,11 @@ import toast from 'react-hot-toast';
 function NotPrefer() {
 
   const [validation, setValidation] = useState(false);
-  const { idUser } = useSelector(state => state.profileBase.user)
-  const data = useSelector(state => state.profileBase.user)
+  // const { mainDataCompany } = useSelector(state => state.profileBase.user)
+  const { mainDataCompany } = useSelector(state => state.getExpertInfo.user)
   const router = useRouter()
   const dispatch = useDispatch()
+  console.log(mainDataCompany)
 
   const baseValidation = {
     nameFamily: Yup.string()
@@ -110,14 +111,14 @@ function NotPrefer() {
   const validationSchema = Yup.object().shape(validation);
 
   useEffect(() => {
-    idUser === null ?
+    mainDataCompany !== null ?
       setValidation({ ...baseValidation, ...legalValidation }) :
       setValidation(baseValidation)
 
-  }, [idUser])
+  }, [mainDataCompany])
 
   // console.log("validation", validation)
-  // console.log("idUser", !idUser)
+  // console.log("mainDataCompany", !mainDataCompany)
   // console.log("data", data)
 
   const formik = useFormik({
@@ -137,20 +138,25 @@ function NotPrefer() {
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
       //===================================================
-      const data = {
+      const dataUser = {
         "id": 0,
         "nameFamily": values.nameFamily,
         "avatarURL": values.avatarURL,
-        "isMyself": true,
+        "isMyself": false,
         "mobile": values.mobile,
         "nationalCode": values.nationalCode,
         "zipCode": values.zipCode,
-        "description": null,//داخل api طاهری نیست
+        "description": values.description,
+      }
+
+      const dataExpert = {
         "company_OrganizationLevel": values.company_OrganizationLevel,
         "company_LastEducationalCertificate": values.company_LastEducationalCertificate,
         "company_Resume": values.company_Resume,
         "companyResumeURL": values.company_ResumeURL
       }
+
+      const data = mainDataCompany !== null ? Object.assign(dataUser, dataExpert) : Object.assign(dataUser);
 
       dispatch(loadingHandler(true))
       add(data)
@@ -159,6 +165,7 @@ function NotPrefer() {
           router.replace("/expert/deputy/")
         })
         .catch((err) => {
+          console.log(err)
           if (err.response.status === 400) {
             err.response.data.message ? toast.error(err.response.data.message) : toast.error('!')
           }
@@ -177,7 +184,7 @@ function NotPrefer() {
       </p>
       <form onSubmit={formik.handleSubmit}>
         <InformationForm formik={formik} />
-        {idUser === null && <LegalForm formik={formik} />}
+        {mainDataCompany !== null && <LegalForm formik={formik} />}
         <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
           <h2 className="text-cf-300 text-sm">عکس نماینده</h2>
           <p className="text-cf-300 text-xs">مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.</p>
@@ -194,7 +201,7 @@ function NotPrefer() {
           />
         </div>
         {
-          idUser === null && (
+          mainDataCompany !== null && (
             <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
               <h2 className="text-cf-300 text-sm">عکس آخرین مدرک تحصیلی نماینده تان</h2>
               <p className="text-cf-300 text-xs">

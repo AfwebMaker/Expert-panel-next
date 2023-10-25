@@ -10,16 +10,21 @@ import Loading from "@/app/_components/Loading"
 import expertData from "@/src/services/deputy_kg_local/expertData";
 // react icons
 import { HiOutlineIdentification, HiOutlineUserAdd } from "react-icons/hi";
+// redux
+import { useDispatch } from "react-redux";
+import { fetchActiveDataHandler } from "@/src/redux/features/getExpertInfo/getExpertInfoSlice";
 
 function Page() {
   const [dataExpertData, setDataExpertData] = useState("");
   const [loadingPage, setLoadingPage] = useState(true);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     expertData()
       .then((res) => {
-        console.log(res.data.data);
         setDataExpertData(res.data.data);
+        localStorage.setItem("activeData",JSON.stringify(res.data.data.activeData));
+        dispatch(fetchActiveDataHandler(res.data.data.activeData))
       })
       .catch((error) => {
         console.log(error);
@@ -28,6 +33,7 @@ function Page() {
         setLoadingPage(false)
       })
   }, []);
+  
 
   return (
     <>

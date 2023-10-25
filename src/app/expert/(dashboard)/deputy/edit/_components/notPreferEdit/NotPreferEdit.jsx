@@ -16,9 +16,10 @@ import { HiOutlineFingerPrint } from "react-icons/hi";
 function NotPreferEdit() {
 
   const [validation, setValidation] = useState(false);
-  const { idUser } = useSelector(state => state.profileBase.user)
+  const [status, setStatus] = useState(false);
+  const { mainDataCompany } = useSelector(state => state.getExpertInfo.user)
+  const activeDataLocal = useSelector(state => state.getExpertInfo.activeData)
   const router = useRouter()
-  console.log(idUser)
 
   const baseValidation = {
     nameFamily: Yup.string()
@@ -78,7 +79,7 @@ function NotPreferEdit() {
       .test(
         "required",
         "لطفا یک فایل را انتخاب کنید",
-        (value) => value && value.length
+        (value) => value && Object.keys(value).length
       )
       .test(
         "fileSize",
@@ -87,7 +88,6 @@ function NotPreferEdit() {
       )
       .test(
         "fileFormat",
-
         "فرمت فایل پشتیبانی نمی‌شود",
         (value) =>
           value &&
@@ -100,27 +100,30 @@ function NotPreferEdit() {
   const validationSchema = Yup.object().shape(validation);
 
   useEffect(() => {
-    idUser === null ?
+    mainDataCompany !== null ?
       setValidation({ ...baseValidation, ...legalValidation }) :
       setValidation(baseValidation)
+  }, [mainDataCompany])
 
-  }, [idUser])
+  useEffect(() => {
+    if (activeDataLocal === null) {
+      router.replace('/expert/deputy')
+    }
+  }, [])
 
-  console.log("validation", validation)
-  console.log("idUser", idUser)
 
   const formik = useFormik({
     initialValues: {
-      nameFamily: "",
-      mobile: "",
-      nationalCode: "",
-      zipCode: "",
-      description: "",
-      avatarURL: [],
-      company_OrganizationLevel: "",
-      company_LastEducationalCertificate: "",
-      company_Resume: "",
-      company_ResumeURL: [],
+      nameFamily: activeDataLocal.nameFamily,
+      mobile: "0" + activeDataLocal.mobile,
+      nationalCode: activeDataLocal.nationalCode,
+      zipCode: activeDataLocal.zipCode,
+      description: activeDataLocal.description ? activeDataLocal.description : "",
+      avatarURL: activeDataLocal ? activeDataLocal.avatarURL : {},
+      company_OrganizationLevel: activeDataLocal.company_OrganizationLevel ? activeDataLocal.company_OrganizationLevel : null,
+      company_LastEducationalCertificate: activeDataLocal.company_LastEducationalCertificate ? activeDataLocal.company_LastEducationalCertificate : null,
+      company_Resume: activeDataLocal.company_Resume ? activeDataLocal.company_Resume : "",
+      company_ResumeURL: activeDataLocal.company_ResumeURL ? activeDataLocal.company_ResumeURL : {},
     },
     validationSchema,
     onSubmit: (values) => {
@@ -136,14 +139,14 @@ function NotPreferEdit() {
       </span>
       <form onSubmit={formik.handleSubmit}>
         <InformationForm formik={formik} />
-        {idUser === null && <LegalForm formik={formik} />}
+        {mainDataCompany !== null && <LegalForm formik={formik} />}
         <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
           <h2 className="text-cf-300 text-sm">عکس نماینده</h2>
           <p className="text-cf-300 text-xs">مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.</p>
           <DynamicInputs
             inputType={"uploadFile"}
             title={"آپلود فایل"}
-            state="Low"
+            state={0}
             required={true}
             className="my-2 w-full"
             placeholder={"به طور مثال : سلام روز بخیر .."}
@@ -153,7 +156,7 @@ function NotPreferEdit() {
           />
         </div>
         {
-          idUser === null && (
+          mainDataCompany !== null && (
             <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
               <h2 className="text-cf-300 text-sm">عکس آخرین مدرک تحصیلی نماینده تان</h2>
               <p className="text-cf-300 text-xs">
@@ -162,7 +165,7 @@ function NotPreferEdit() {
               <DynamicInputs
                 inputType={"uploadFile"}
                 title={"آپلود فایل"}
-                state="Low"
+                state={0}
                 required={true}
                 className="my-2 w-full"
                 placeholder={"به طور مثال : سلام روز بخیر .."}

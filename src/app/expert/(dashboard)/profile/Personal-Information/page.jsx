@@ -26,7 +26,7 @@ function Page() {
   useEffect(() => {
     profileBase()
       .then(res => {
-        setFormState(res.data.data.background)
+        setFormState(1)
       })
       .catch(() => {
       })
@@ -49,7 +49,7 @@ function Page() {
       }
     )
       .then(res => {
-        setAvatar(res.data.data.url)
+        setAvatar(res.data.data)
       })
       .catch(err => {
         dispatch(loadingHandler(false))
@@ -74,7 +74,7 @@ function Page() {
             <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
               <Image
                 onLoad={() => { dispatch(loadingHandler(false)) }}
-                src={avatar ? avatar : 'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'}
+                src={avatar ? avatar.url : 'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'}
                 alt='avatar'
                 className='object-cover w-full h-full'
                 fill

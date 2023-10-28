@@ -88,7 +88,7 @@ function Forms({ setAvatar, avatar, formState }) {
     useEffect(() => {
         getExpertInfo()
             .then(res => {
-                res.data.data.mainDataInfo.avatar_url && setAvatar(res.data.data.mainDataInfo.avatar_url)
+                res.data.data.mainDataInfo.avatarURL && setAvatar(res.data.data.mainDataInfo.avatarURL)
                 res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
                 formik.setValues({
                     firstName: res.data.data.mainDataInfo.firstName,
@@ -148,7 +148,7 @@ function Forms({ setAvatar, avatar, formState }) {
                     "birthPlace": values.birthPlace,
                     "job": "string",
                     "education": 0,
-                    "avatar_url": { id: 0, url: avatar, size: 0, type: '' },
+                    "avatarURL": avatar,
                     "date_Create": "2023-10-18T07:28:41.638Z",
                     "date_Update": "2023-10-18T07:28:41.638Z",
                     "idExpert": 0,

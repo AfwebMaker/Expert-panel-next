@@ -26,7 +26,7 @@ function Page() {
   useEffect(() => {
     profileBase()
       .then(res => {
-        setFormState(1)
+        setFormState(res.data.data.background)
       })
       .catch(() => {
       })

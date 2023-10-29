@@ -44,7 +44,7 @@ function ProfileDropDown(props) {
               <Menu.Item>
                 {({ active }) => (
                   <Link
-                    href="#"
+                    href="/expert/profile/"
                     className={`${
                       active ? "bg-color-3 text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}

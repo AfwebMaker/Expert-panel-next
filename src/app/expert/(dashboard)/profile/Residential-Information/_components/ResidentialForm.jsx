@@ -27,21 +27,6 @@ function ResidentialForm({ formState, setFormState }) {
     const dispatch = useDispatch()
     const [loadingPage, setLoadingPage] = useState(true)
 
-    useEffect(() => {
-        addressGet()
-            .then(res => {
-                formik.setValues({
-                    zipCode: res.data.data.zipCode,
-                    addressDocumentationURL: res.data.data.addressDocumentationURL
-                })
-            })
-            .catch(() => {
-            })
-            .finally(() => {
-                setLoadingPage(false)
-            })
-    }, [])
-
     const formik = useFormik({
         initialValues: {
             zipCode: '',
@@ -61,6 +46,22 @@ function ResidentialForm({ formState, setFormState }) {
                 })
         },
     });
+
+    useEffect(() => {
+        addressGet()
+            .then(res => {
+                formik.setValues({
+                    zipCode: res.data.data.zipCode,
+                    addressDocumentationURL: res.data.data.addressDocumentationURL
+                })
+            })
+            .catch(() => {
+            })
+            .finally(() => {
+                setLoadingPage(false)
+            })
+    }, [])
+
 
     return (
         <form onSubmit={formik.handleSubmit} className='mt-5'>

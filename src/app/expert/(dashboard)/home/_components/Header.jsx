@@ -6,29 +6,31 @@ import { HiCheckCircle, HiXCircle, HiArchive, HiExclamationCircle } from "react-
 import Stars from '@/src/app/_components/Stars'
 
 function Header({ profileData }) {
-    
+
     return (
         <div className='flex justify-between w-full h-[70px]'>
             <div className='flex'>
-                <div className='flex w-[70px] h-[70px] flex-shrink-0 fcc rounded-full overflow-hidden ml-5 relative'>
-                    <Image
-                        className='w-full h-full object-cover'
-                        src={profileData.avatarURL.url}
-                        fill
-                    />
+                <div className='flex w-[70px] h-[70px] flex-shrink-0 fcc rounded-full overflow-hidden ml-5 relative bg-black'>
+                    {profileData.avatarURL &&
+                        <Image
+                            className='w-full h-full object-cover'
+                            src={profileData.avatarURL.url}
+                            fill
+                        />
+                    }
                 </div>
                 <div className='flex flex-col'>
-                    <div className='font-bold'>{profileData.firstName} {profileData.lastName}</div>
+                    <div className='font-bold'>{profileData.name} {profileData.family}</div>
                     <div className='flex'>
                         <div className='font-bold text-xs text-primary-500 my-1'>امتیاز متخصص : </div>
-                        <Stars point={1} />
+                        <Stars point={profileData.score} />
                     </div>
                     <div className='flex'>
                         <div className='text-primary-500 font-bold text-xs'>وضعیت : </div>
                         <div className='text-cf-300 font-medium text-sm fcc'>
-                            <div className='font-bold text- mx-1'>{true ? 'فعال' : 'غیر فعال'}</div>
+                            <div className='font-bold text- mx-1'>{profileData.isActive ? 'فعال' : 'غیر فعال'}</div>
                             <div>
-                                {true ?
+                                {profileData.isActive ?
                                     <HiCheckCircle size={16} className='text-primary-500' /> :
                                     <HiXCircle size={16} className='text-warning' />
                                 }

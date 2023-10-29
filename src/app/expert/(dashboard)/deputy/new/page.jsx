@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import React, { useState } from "react";
 // react icons
@@ -8,7 +9,7 @@ import SwitchInput from "@/app/_components/SwitchInput";
 import NotPrefer from "./_components/notPrefer/NotPrefer";
 import Prefer from "./_components/Prefer";
 
-function page() {
+function Page() {
   const [enabled, setEnabled] = useState(false);
   return (
     <div className="flex w-full flex-col pb-5">
@@ -45,4 +46,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

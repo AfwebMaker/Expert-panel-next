@@ -18,19 +18,20 @@ import { useDispatch } from 'react-redux'
 import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice'
 
 const services = [
-    { id: 1, name: 'ممد' },
-    { id: 2, name: 'قلی' },
-    { id: 3, name: 'کاووس' },
-    { id: 4, name: 'ثریا' },
-    // More users...
+    { id: 1, name: 'نیروی فنی و آیتمی' },
+    { id: 2, name: 'نیروی روز مزد' },
+    { id: 2, name: 'نیروی خدمات فوری' },
+    { id: 3, name: 'نیروی خرده کار' },
+    { id: 4, name: 'نیروی پیمانکار' },
+    { id: 4, name: 'باز سازی' }
 ]
 
 const parts = [
-    { id: 1, name: 'ممد' },
-    { id: 2, name: 'قلی' },
-    { id: 3, name: 'کاووس' },
-    { id: 4, name: 'ثریا' },
-    // More users...
+    { id: 1, name: 'نقاشی' },
+    { id: 2, name: 'شیرآلات' },
+    { id: 3, name: 'در و پنجره' },
+    { id: 4, name: 'کچ کاری' },
+    { id: 4, name: 'سیستم برق' }
 ]
 
 function classNames1(...classes) {

@@ -11,7 +11,7 @@ import Stars from '@/src/app/_components/Stars';
 //services
 import profileBase from '@/src/services/person_kg_local/profileBase'
 
-function page() {
+function Page() {
   const [loadingPage, setLoadingPage] = useState(true)
   const [data, setData] = useState({})
   
@@ -90,4 +90,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

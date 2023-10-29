@@ -9,7 +9,7 @@ import BankForm from './_components/BankForm'
 //services
 import profileBase from '@/src/services/person_kg_local/profileBase'
 
-function page() {
+function Page() {
   const [formState, setFormState] = useState(1)
 
   //get form state
@@ -57,4 +57,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

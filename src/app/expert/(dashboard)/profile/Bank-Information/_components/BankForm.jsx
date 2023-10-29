@@ -27,21 +27,6 @@ function BankForm({ formState, setFormState }) {
     const dispatch = useDispatch()
     const [loadingPage, setLoadingPage] = useState(true)
 
-    useEffect(() => {
-        //get initial bank data
-        bankGet()
-            .then(res => {
-                formik.setValues({
-                    BankID: res.data.data.slice(2)
-                })
-            })
-            .catch(() => {
-            })
-            .finally(() => {
-                setLoadingPage(false)
-            })
-    }, [])
-
     const formik = useFormik({
         initialValues: {
             BankID: ''
@@ -60,6 +45,21 @@ function BankForm({ formState, setFormState }) {
                 })
         },
     });
+
+    useEffect(() => {
+        //get initial bank data
+        bankGet()
+            .then(res => {
+                formik.setValues({
+                    BankID: res.data.data.slice(2)
+                })
+            })
+            .catch(() => {
+            })
+            .finally(() => {
+                setLoadingPage(false)
+            })
+    }, [])
 
     return (
         <form onSubmit={formik.handleSubmit} className='mt-5'>

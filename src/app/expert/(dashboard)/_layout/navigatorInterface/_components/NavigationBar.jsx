@@ -19,7 +19,7 @@ const dataNavigationBar = [
   {
     id: 1,
     title: "اعلان ها",
-    href: "/expert/notifications",
+    href: "/expert/notification/orders",
     icon_outline: <HiOutlineBell className={styleIconOutline} />,
     icon_normal: <HiBell className={styleIconNormal} />,
   },
@@ -60,7 +60,7 @@ function NavigationBar() {
       {/* <div className="h-14"></div> */}
       <nav
         style={{ boxShadow: "0px -3px 15px rgba(38, 38, 38, 0.1)" }}
-        className="fixed z-10 bottom-0 right-0 w-full h-20 flex items-center px-4 justify-start transition-all duration-500 delay-[30ms] bg-white"
+        className="fixed z-50 bottom-0 right-0 w-full h-20 flex items-center px-4 justify-start transition-all duration-500 delay-[30ms] bg-white"
       >
         <ul className="flex items-center justify-between w-full h-full">
           {dataNavigationBar &&

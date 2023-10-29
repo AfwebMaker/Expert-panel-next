@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -11,35 +9,36 @@ import {
   HiOutlineTicket,
 } from "react-icons/hi";
 
-function DesktopNavigation() {
+function DesktopNavigation({ notificationNumber }) {
   const pathName = usePathname();
+
   const navigation_data = [
     {
       id: 0,
       icon: <HiOutlineClipboardList size={24} />,
       title: "سفارشات",
-      notification: 9,
+      notification: notificationNumber.orders,
       link: "/expert/notification/orders",
     },
     {
       id: 1,
       icon: <HiOutlineAdjustments size={24} />,
       title: "سیستمی",
-      notification: 8,
+      notification: notificationNumber.messages,
       link: "/expert/notification/systemic",
     },
     {
       id: 2,
       icon: <HiOutlineCreditCard size={24} />,
       title: "مالی",
-      notification: 25,
+      notification: notificationNumber.finance,
       link: "/expert/notification/financial",
     },
     {
       id: 3,
       icon: <HiOutlineTicket size={24} />,
       title: "تیکت‌ها",
-      notification: 3,
+      notification: notificationNumber.tickets,
       link: "/expert/notification/tickets",
     },
   ];

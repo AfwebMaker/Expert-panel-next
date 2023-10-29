@@ -77,44 +77,6 @@ function Forms({ setAvatar, avatar, formState }) {
 
     const validationSchema = Yup.object().shape(validation);
 
-    //validation field control
-    useEffect(() => {
-        !legalFormIsActive ?
-            setValidation(baseValidation) :
-            setValidation({ ...baseValidation, ...legalValidation })
-    }, [legalFormIsActive])
-
-    //get initial data from server
-    useEffect(() => {
-        getExpertInfo()
-            .then(res => {
-                res.data.data.mainDataInfo.avatarURL && setAvatar(res.data.data.mainDataInfo.avatarURL)
-                res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
-                formik.setValues({
-                    firstName: res.data.data.mainDataInfo.firstName,
-                    lastName: res.data.data.mainDataInfo.lastName,
-                    fatherName: res.data.data.mainDataInfo.fatherName,
-                    nationalCode: res.data.data.mainDataInfo.nationalCode,
-                    mobile: '0' + res.data.data.mainDataInfo.personUser_Child.mobile,
-                    birthday: res.data.data.mainDataInfo.birthday ? res.data.data.mainDataInfo.birthday : '',
-                    birthPlace: res.data.data.mainDataInfo.birthPlace,
-                    email: res.data.data.mainDataInfo.email,
-                    componyName: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.componyName : null,
-                    nationalCodeCompony: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.nationalCodeCompony : null,
-                    activitySubject: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.activitySubject : null,
-                    companyType: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.companyType : null,
-                    dateEstablishment: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.dateEstablishment : null,
-                    registrationNumber: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.registrationNumber : null,
-                    backgroundURL: res.data.data.backgroundURL ? res.data.data.backgroundURL : {}
-                })
-            })
-            .catch(() => {
-            })
-            .finally(() => {
-                setLoadingPage(false)
-            })
-    }, [])
-
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -203,6 +165,44 @@ function Forms({ setAvatar, avatar, formState }) {
                 })
         },
     });
+
+    //validation field control
+    useEffect(() => {
+        !legalFormIsActive ?
+            setValidation(baseValidation) :
+            setValidation({ ...baseValidation, ...legalValidation })
+    }, [legalFormIsActive])
+
+    //get initial data from server
+    useEffect(() => {
+        getExpertInfo()
+            .then(res => {
+                res.data.data.mainDataInfo.avatarURL && setAvatar(res.data.data.mainDataInfo.avatarURL)
+                res.data.data.mainDataCompany ? setLegalFormIsActive(true) : setLegalFormIsActive(false)
+                formik.setValues({
+                    firstName: res.data.data.mainDataInfo.firstName,
+                    lastName: res.data.data.mainDataInfo.lastName,
+                    fatherName: res.data.data.mainDataInfo.fatherName,
+                    nationalCode: res.data.data.mainDataInfo.nationalCode,
+                    mobile: '0' + res.data.data.mainDataInfo.personUser_Child.mobile,
+                    birthday: res.data.data.mainDataInfo.birthday ? res.data.data.mainDataInfo.birthday : '',
+                    birthPlace: res.data.data.mainDataInfo.birthPlace,
+                    email: res.data.data.mainDataInfo.email,
+                    componyName: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.componyName : null,
+                    nationalCodeCompony: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.nationalCodeCompony : null,
+                    activitySubject: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.activitySubject : null,
+                    companyType: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.companyType : null,
+                    dateEstablishment: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.dateEstablishment : null,
+                    registrationNumber: res.data.data.mainDataCompany ? res.data.data.mainDataCompany.registrationNumber : null,
+                    backgroundURL: res.data.data.backgroundURL ? res.data.data.backgroundURL : {}
+                })
+            })
+            .catch(() => {
+            })
+            .finally(() => {
+                setLoadingPage(false)
+            })
+    }, [])
 
     return (
         <>

@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 // headlessUi
 import { Combobox, Transition } from '@headlessui/react'
 
-export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRef, formik, className, activeInput, data, focus }) {
+export default function CustomComboBox({ name, placeholder, onBlur, inputRef, buttonRef, formik, className, activeInput, data, focus }) {
     const [items] = useState(data.list)
     const [selected, setSelected] = useState({})
     const [query, setQuery] = useState('')
@@ -61,7 +61,7 @@ export default function ComboBox({ name, placeholder, onBlur, inputRef, buttonRe
                             leaveTo="opacity-0"
                             afterLeave={() => setQuery('')}
                         >
-                            <Combobox.Options className="z-20 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <Combobox.Options className="z-10 scroll_custom py-1 absolute mt-2 max-h-60 w-full overflow-auto rounded-lg bg-white text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                 {filteredItems.length === 0 && query !== '' ? (
                                     <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                                         اطلاعات مورد نظر پیدا نشد.

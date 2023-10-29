@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 //react icons
 import { HiOutlineChevronDown, HiBadgeCheck } from "react-icons/hi";
 // component
-import ComboBox from "./ComboBox"
+import CustomComboBox from "./CustomComboBox"
 import ComboBoxIcon from "./ComboBoxIcon"
 
 function CheckBox({ state, title, placeholder, className, name, required, formik, inputType }) {
@@ -136,7 +136,7 @@ function CheckBox({ state, title, placeholder, className, name, required, formik
                 </div>
 
                 {inputType === 'dropDown' ?
-                    <ComboBox
+                    <CustomComboBox
                         name={name}
                         activeInput={!activeInputCondition}
                         inputRef={inputRef}

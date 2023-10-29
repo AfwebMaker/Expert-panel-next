@@ -48,9 +48,9 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
 
     //change style of ready component
     useEffect(() => {
-        if (focus) {
+        if (focus , container[0]) {
             container[0] && (container[0].children[2].children[0].style.display = 'none')
-            container[0] && (container[0].style.zIndex  = '20')
+            container[0] && (container[0].children[2].style.zIndex  = '20')
             container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[0].style.direction = 'ltr')
             container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[0].children[1].style.direction = 'rtl')
             container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[1].children[0].style.display = 'none')
@@ -150,7 +150,7 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
                             primaryColor='green'
                             placeholder={placeholder}
                             toggleClassName="hidden"
-                            inputClassName={`${name} pr-4 w-full relative text-cf-400 flex flex ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                            inputClassName={`${name} z-10 pr-4 w-full relative text-cf-400 flex flex ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
                             containerClassName={`${name}-contain relative z-10 font-bold text-sm `}
                             value={{
                                 startDate: formik.values[name] && moment(formik.values[name], 'YYYY-MM-DD').format('jYYYY/jMM/jDD'),

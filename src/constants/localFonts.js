@@ -13,11 +13,6 @@ const iranYekanFont = localFont({
             weight: "100",
             style: "normal"
         },
-        {
-            path: "../../public/fonts/eot/iranyekanwebthinfanum.eot",
-            weight: "100",
-            style: "normal"
-        },
         // Light
         {
             path: "../../public/fonts/woff/iranyekanweblightfanum.woff",
@@ -26,11 +21,6 @@ const iranYekanFont = localFont({
         },
         {
             path: "../../public/fonts/ttf/iranyekanweblightfanum.ttf",
-            weight: "300",
-            style: "normal"
-        },
-        {
-            path: "../../public/fonts/eot/iranyekanweblightfanum.eot",
             weight: "300",
             style: "normal"
         },
@@ -45,11 +35,6 @@ const iranYekanFont = localFont({
             weight: "400",
             style: "normal"
         },
-        {
-            path: "../../public/fonts/eot/iranyekanwebregularfanum.eot",
-            weight: "400",
-            style: "normal"
-        },
         // Medium
         {
             path: "../../public/fonts/woff/iranyekanwebmediumfanum.woff",
@@ -58,11 +43,6 @@ const iranYekanFont = localFont({
         },
         {
             path: "../../public/fonts/ttf/iranyekanwebmediumfanum.ttf",
-            weight: "500",
-            style: "normal"
-        },
-        {
-            path: "../../public/fonts/eot/iranyekanwebmediumfanum.eot",
             weight: "500",
             style: "normal"
         },
@@ -77,11 +57,6 @@ const iranYekanFont = localFont({
             weight: "700",
             style: "normal"
         },
-        {
-            path: "../../public/fonts/eot/iranyekanwebboldfanum.eot",
-            weight: "700",
-            style: "normal"
-        },
         // ExtraBold
         {
             path: "../../public/fonts/woff/iranyekanwebextraboldfanum.woff",
@@ -93,11 +68,6 @@ const iranYekanFont = localFont({
             weight: "800",
             style: "normal"
         },
-        {
-            path: "../../public/fonts/eot/iranyekanwebextraboldfanum.eot",
-            weight: "800",
-            style: "normal"
-        },
         //Black
         {
             path: "../../public/fonts/woff/iranyekanwebblackfanum.woff",
@@ -106,11 +76,6 @@ const iranYekanFont = localFont({
         },
         {
             path: "../../public/fonts/ttf/iranyekanwebblackfanum.ttf",
-            weight: "900",
-            style: "normal"
-        },
-        {
-            path: "../../public/fonts/eot/iranyekanwebblackfanum.eot",
             weight: "900",
             style: "normal"
         },

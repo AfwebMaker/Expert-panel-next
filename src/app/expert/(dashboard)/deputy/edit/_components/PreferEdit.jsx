@@ -33,7 +33,6 @@ function PreferEdit({ stateForm }) {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       const data = {
         "id": activeDataLocal.id,
         "nameFamily": values.nameFamily,

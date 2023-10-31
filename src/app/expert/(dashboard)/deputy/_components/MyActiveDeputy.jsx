@@ -37,6 +37,7 @@ function MyActiveDeputy({ activeData, newData }) {
             status={"pending"}
             phone={newData.mobile}
             name={newData.nameFamily}
+            nationalCode={newData.nationalCode}
             avatarURL={newData && newData.avatarURL.url}
           />
         )}

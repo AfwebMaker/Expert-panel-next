@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 //services
 import reActive from "@/src/services/deputy_kg_local/reActive"
 import deActive from "@/src/services/deputy_kg_local/deActive"
+import cancel from "@/src/services/deputy_kg_local/cancel"
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
@@ -19,7 +20,7 @@ import {
   HiPencil,
 } from "react-icons/hi";
 
-function DeputyCard({ status, phone, name, src, activeData, avatarURL, deActiveData, nationalCode }) {
+function DeputyCard({ status, phone, name, activeData, avatarURL, deActiveData, nationalCode }) {
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -54,6 +55,25 @@ function DeputyCard({ status, phone, name, src, activeData, avatarURL, deActiveD
     }
     dispatch(loadingHandler(true))
     reActive(data)
+      .then(res => {
+        router.replace("/expert/deputy/")
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        dispatch(loadingHandler(false))
+      })
+  }
+
+  const cancelHandler = (e) => {
+    console.log(e.target.id)
+    const data = {
+      "nationalCode": e.target.id,
+    }
+    dispatch(loadingHandler(true))
+    cancel(data)
       .then(res => {
         router.replace("/expert/deputy/")
         console.log(res)
@@ -110,12 +130,13 @@ function DeputyCard({ status, phone, name, src, activeData, avatarURL, deActiveD
       <section className="w-full h-[36px] fcc flex-col mt-5 text-white">
         {status === "pending" ? (
           <div
-            // onClick={}
+            onClick={cancelHandler}
             role="button"
+            id={nationalCode}
             className="flex cursor-pointer w-full bg-orange-500 fcc px-2 gap-x-1 rounded-lg h-full"
           >
-            <HiOutlineX className="text-xl" />
-            <span className="text-xs sm:text-sm">لغو احراز حویت و حذف نماینده</span>
+            <HiOutlineX id={nationalCode} className="text-xl" />
+            <span id={nationalCode} className="text-xs sm:text-sm">لغو احراز حویت و حذف نماینده</span>
           </div>
         ) : status === "active" ? (
           <div

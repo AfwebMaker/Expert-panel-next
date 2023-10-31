@@ -131,7 +131,6 @@ function NotPreferEdit({ stateForm, setStateForm }) {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       const dataUser = {
         "id": activeDataLocal.id,
         "nameFamily": values.nameFamily,

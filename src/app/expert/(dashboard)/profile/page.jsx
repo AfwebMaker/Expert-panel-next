@@ -14,11 +14,12 @@ import profileBase from '@/src/services/person_kg_local/profileBase'
 function Page() {
   const [loadingPage, setLoadingPage] = useState(true)
   const [data, setData] = useState({})
-  
+
   //get data
   useEffect(() => {
     profileBase()
       .then(res => {
+        console.log(res)
         setData(res.data.data)
       })
       .catch(() => {
@@ -37,12 +38,13 @@ function Page() {
           <div className='py-5 lg:px-5 lg:bg-white rounded-lg flex flex-col w-full pb-5 lg:mb-5'>
             <div className='w-full fcc flex-col mb-12'>
               <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
-                <Image
-                  src={data.avatar ? data.avatar : "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"}
-                  alt="sample image"
-                  fill
-                  className='object-cover'
-                />
+                {data.avatarURL &&
+                  <Image
+                    src={data.avatarURL.url}
+                    alt="sample image"
+                    fill
+                    className='object-cover'
+                  />}
               </div>
               <div className='font-bold flex-col fcc'>
                 <div className='text-lg mb-2'>{data.name} {data.family}</div>

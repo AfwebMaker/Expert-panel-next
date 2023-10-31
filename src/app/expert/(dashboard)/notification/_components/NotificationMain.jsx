@@ -19,7 +19,8 @@ function NotificationMain({ readAll, newNotifications, oldNotifications, oldEmpt
           <Notification
             key={item.id}
             title={item.title}
-            icon={item.icon}
+            icon={'HiPaperAirplane'}
+            style={item.style}
             body={item.body}
             action={item.action}
             resources={item.resources}
@@ -34,7 +35,8 @@ function NotificationMain({ readAll, newNotifications, oldNotifications, oldEmpt
           <Notification
             key={item.id}
             title={item.title}
-            icon={item.icon}
+            icon={'HiPaperAirplane'}
+            style={item.style}
             body={item.body}
             action={item.action}
             resources={item.resources}

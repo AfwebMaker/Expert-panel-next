@@ -156,8 +156,12 @@ input[type="number"] {
 }
 
 /* prevent blue color of auto fill */
-input:-webkit-autofill {
+.autofillWhite:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.autofillGray:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(243 244 246) inset;
 }
 
 

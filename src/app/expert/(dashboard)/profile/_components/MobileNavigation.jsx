@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 //react icons
 import {
   HiOutlineUser,
@@ -15,8 +15,6 @@ import {
 } from "react-icons/hi";
 //components
 import Stars from '@/app/_components/Stars'
-//components
-import Loading from '@/src/app/_components/Loading';
 
 function mobileNavigation({ data }) {
 
@@ -51,17 +49,21 @@ function mobileNavigation({ data }) {
     }
   ]
 
+  console.log(data)
+
   return (
     <>
       <div className='block lg:hidden px-5 h-[calc(100vh-138px)]'>
         <div className='w-full fcc flex-col'>
-          <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
-            <Image
-              src={data.avatar ? data.avatar : "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"}
-              alt="sample image"
-              fill
-              className='object-cover'
-            />
+          <div className='w-[150px] h-[150px] rounded-full mb-5 mt-10 overflow-hidden relative'>
+            {data.avatarURL &&
+              <Image
+                src={data.avatarURL.url}
+                alt="sample image"
+                fill
+                className='object-cover'
+              />
+            }
           </div>
           <div className='font-bold flex-col fcc'>
             <div className='text-lg mb-2'>{data.name} {data.family}</div>

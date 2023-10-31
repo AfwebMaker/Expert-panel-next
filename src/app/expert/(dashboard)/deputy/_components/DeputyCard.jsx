@@ -20,14 +20,10 @@ import {
   HiPencil,
 } from "react-icons/hi";
 
-function DeputyCard({ status, phone, name, activeData, avatarURL, deActiveData, nationalCode }) {
+function DeputyCard({ status, phone, name, activeData, avatarURL, nationalCode }) {
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const a = useSelector(state => state.getExpertInfo)
-  console.log(a)
-  console.log(deActiveData)
-
 
   const cancellationHandler = () => {
     console.log("first")

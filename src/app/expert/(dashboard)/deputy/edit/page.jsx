@@ -7,14 +7,13 @@ import { HiOutlineChevronRight, HiOutlineUser } from "react-icons/hi";
 //components
 import NotPreferEdit from "./_components/notPreferEdit/NotPreferEdit";
 import PreferEdit from "./_components/PreferEdit";
+//redux
+import { useSelector } from "react-redux";
 
 function Page() {
-    const [enabled, setEnabled] = useState(false);
     const [stateForm, setStateForm] = useState(false);
     const router = useRouter();
-
-    // const { activeData } = router.query.data
-    // console.log(activeData)
+    const activeDataLocal = useSelector(state => state.getExpertInfo.activeData)
 
     return (
         <div className="flex w-full flex-col pb-5">
@@ -38,12 +37,17 @@ function Page() {
                             <h1>نماینده من</h1>
                             <HiOutlineUser className="text-xl" />
                         </div>
-                        <div className="cursor-pointer" role="button" onClick={() => setStateForm(true)}>
+                        <div className={`${stateForm ? "text-cf-300 cursor-not-allowed" : "text-primary-500 cursor-pointer"}`} role="button" onClick={() => setStateForm(true)}>
                             ویرایش
                         </div>
                     </div>
                     <div className="w-full">
-                        {enabled ? <PreferEdit /> : <NotPreferEdit stateForm={stateForm} setStateForm={setStateForm} />}
+                        {
+                            activeDataLocal && activeDataLocal.isMyself ?
+                                <PreferEdit stateForm={stateForm} />
+                                :
+                                <NotPreferEdit stateForm={stateForm} setStateForm={setStateForm} />
+                        }
                     </div>
                 </div>
             </div>

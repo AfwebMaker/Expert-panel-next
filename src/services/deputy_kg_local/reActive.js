@@ -1,11 +1,12 @@
 import { dynamicApiCall } from "../dynamicApiCall";
 import { deputy_kg_local } from '../APIRepositories'
 
-const add = async (data) => {
+const reActive = async (data) => {
+    console.log("reActive",data)
     const option = {
         axios: deputy_kg_local,
         method: 'POST',
-        endpoint: '/EpertDeputy/ReActive',
+        endpoint: `/EpertDeputy/ReActive/${data.nationalCode}`,
         data: data
     }
 
@@ -17,4 +18,4 @@ const add = async (data) => {
     }
 };
 
-export default add;
+export default reActive;

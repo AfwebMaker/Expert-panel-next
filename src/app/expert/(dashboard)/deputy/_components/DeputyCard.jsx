@@ -19,17 +19,24 @@ import {
   HiPencil,
 } from "react-icons/hi";
 
-function DeputyCard({ status, phone, name, src, activeData, avatarURL }) {
+function DeputyCard({ status, phone, name, src, activeData, avatarURL, deActiveData, nationalCode }) {
 
   const router = useRouter();
+  const dispatch = useDispatch();
+  const a = useSelector(state => state.getExpertInfo)
+  console.log(a)
+  console.log(deActiveData)
+
 
   const cancellationHandler = () => {
+    console.log("first")
     const data = {
-      "nationalCode": "",
+      "nationalCode": activeData ? activeData.nationalCode : "",
     }
     dispatch(loadingHandler(true))
     deActive(data)
       .then(res => {
+        router.replace("/expert/deputy/")
         console.log(res)
       })
       .catch((err) => {
@@ -40,13 +47,15 @@ function DeputyCard({ status, phone, name, src, activeData, avatarURL }) {
       })
   }
 
-  const activationHandler = () => {
+  const activationHandler = (e) => {
+    console.log(e.target.id)
     const data = {
-      "nationalCode": "",
+      "nationalCode": e.target.id,
     }
     dispatch(loadingHandler(true))
     reActive(data)
       .then(res => {
+        router.replace("/expert/deputy/")
         console.log(res)
       })
       .catch((err) => {
@@ -93,7 +102,7 @@ function DeputyCard({ status, phone, name, src, activeData, avatarURL }) {
           </div>
           <div className="w-full md:fcc text-xs sm:text-sm gap-x-1">
             <span className="text-cf-500 font-bold">شماره تماس :</span>
-            <span className="text-cf-300 mr-1">{phone}</span>
+            <span className="text-cf-300 mr-1">{"0" + phone}</span>
           </div>
         </section>
       </div>
@@ -133,10 +142,11 @@ function DeputyCard({ status, phone, name, src, activeData, avatarURL }) {
           <div
             onClick={activationHandler}
             role="button"
+            id={nationalCode}
             className="flex fcc cursor-pointer w-full bg-secondary-500 px-2 rounded-lg gap-x-2 h-full"
           >
-            <HiOutlineRefresh className="text-xl" />
-            <span className="text-xs sm:text-sm">فعال سازی مجدد نماینده</span>
+            <HiOutlineRefresh id={nationalCode} className="text-xl" />
+            <span id={nationalCode} className="text-xs sm:text-sm">فعال سازی مجدد نماینده</span>
           </div>
         )}
       </section>

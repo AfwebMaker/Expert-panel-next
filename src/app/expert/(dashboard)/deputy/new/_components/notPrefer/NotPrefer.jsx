@@ -177,7 +177,7 @@ function NotPrefer() {
           <DynamicInputs
             inputType={"uploadFile"}
             title={"آپلود فایل"}
-            state="Low"
+            state={1}
             required={true}
             className="my-2 w-full"
             placeholder={"به طور مثال : سلام روز بخیر .."}
@@ -196,7 +196,7 @@ function NotPrefer() {
               <DynamicInputs
                 inputType={"uploadFile"}
                 title={"آپلود فایل"}
-                state="Low"
+                state={1}
                 required={true}
                 className="my-2 w-full"
                 placeholder={"به طور مثال : سلام روز بخیر .."}

@@ -173,15 +173,15 @@ function NotPreferEdit({ stateForm, setStateForm }) {
         مشخصات نماینده شما
       </span>
       <form onSubmit={formik.handleSubmit}>
-        <InformationForm formik={formik} />
-        {mainDataCompany !== null && <LegalForm formik={formik} />}
+        <InformationForm stateForm={stateForm} formik={formik} />
+        {mainDataCompany !== null && <LegalForm stateForm={stateForm} formik={formik} />}
         <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
           <h2 className="text-cf-300 text-sm">عکس نماینده</h2>
           <p className="text-cf-300 text-xs">مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.</p>
           <DynamicInputs
             inputType={"uploadFile"}
             title={"آپلود فایل"}
-            state={0}
+            state={stateForm ? 1 : 0}
             required={true}
             className="my-2 w-full"
             placeholder={"به طور مثال : سلام روز بخیر .."}
@@ -200,7 +200,7 @@ function NotPreferEdit({ stateForm, setStateForm }) {
               <DynamicInputs
                 inputType={"uploadFile"}
                 title={"آپلود فایل"}
-                state={0}
+                state={stateForm ? 1 : 0}
                 required={true}
                 className="my-2 w-full"
                 placeholder={"به طور مثال : سلام روز بخیر .."}

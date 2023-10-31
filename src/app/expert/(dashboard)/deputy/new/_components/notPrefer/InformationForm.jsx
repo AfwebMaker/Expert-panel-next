@@ -58,7 +58,7 @@ function InformationForm({ formik }) {
                     key={item.id}
                     inputType={item.inputType}
                     title={item.title}
-                    state="Low"
+                    state={1}
                     required={item.required}
                     className={item.id === "description" ? "my-2 w-full" : "my-2 w-full lg:w-[49%]"}
                     placeholder={item.placeholder}

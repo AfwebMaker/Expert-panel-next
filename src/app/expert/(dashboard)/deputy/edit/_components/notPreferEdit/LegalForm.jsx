@@ -3,7 +3,7 @@ import React from 'react'
 import SwitchInput from '@/app/_components/SwitchInput'
 import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
 
-function LegalForm({ formik }) {
+function LegalForm({ formik, stateForm }) {
 
     const inputData = [
         {
@@ -47,7 +47,7 @@ function LegalForm({ formik }) {
                             key={item.id}
                             inputType={item.inputType}
                             title={item.title}
-                            state={0}
+                            state={stateForm ? 1 : 0}
                             required={item.required}
                             className={item.id === "company_Resume" ? "my-2 w-full" : "my-2 w-full lg:w-[49%]"}
                             placeholder={item.placeholder}

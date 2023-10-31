@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/navigation';
 // components
 import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
 import Button from "@/app/_components/Button"
@@ -7,8 +8,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 // react icons
 import { HiOutlineFingerPrint } from 'react-icons/hi';
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
 function Prefer() {
+  const router = useRouter()
+  const dispatch = useDispatch()
 
   const baseValidation = {
     mobile: Yup.string()
@@ -25,8 +31,22 @@ function Prefer() {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      router.replace("deputy")
+      const data = {
+        "mobile": values.mobile,
+      }
+
+      dispatch(loadingHandler(true))
+      add(data)
+        .then(res => {
+          console.log(res)
+          router.replace("/expert/deputy/")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        .finally(() => {
+          dispatch(loadingHandler(false))
+        })
     },
   });
 
@@ -37,7 +57,7 @@ function Prefer() {
           key={"mobile"}
           inputType={"text"}
           title={"شماره تلفن نماینده"}
-          state="Low"
+          state={1}
           required={true}
           className={"my-2 w-full"}
           placeholder={"به طور مثال : 09102186156"}

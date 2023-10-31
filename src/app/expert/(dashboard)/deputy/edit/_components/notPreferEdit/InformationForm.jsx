@@ -2,7 +2,7 @@ import React from 'react'
 //components
 import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
 
-function InformationForm({ formik }) {
+function InformationForm({ formik, stateForm }) {
     const inputData = [
         {
             id: "nameFamily",
@@ -58,7 +58,7 @@ function InformationForm({ formik }) {
                     key={item.id}
                     inputType={item.inputType}
                     title={item.title}
-                    state={0}
+                    state={stateForm ? 1 : 0}
                     required={item.required}
                     className={item.id === "description" ? "my-2 w-full" : "my-2 w-full lg:w-[49%]"}
                     placeholder={item.placeholder}

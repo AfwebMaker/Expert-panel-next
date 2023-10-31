@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/navigation';
 // components
 import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
 import Button from "@/app/_components/Button"
@@ -7,8 +8,15 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 // react icons
 import { HiOutlineFingerPrint } from 'react-icons/hi';
+//redux
+import { useDispatch, useSelector } from 'react-redux';
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
-function PreferEdit() {
+function PreferEdit({ stateForm }) {
+  const { mainDataCompany } = useSelector(state => state.getExpertInfo.user)
+  const activeDataLocal = useSelector(state => state.getExpertInfo.activeData)
+  const router = useRouter()
+  const dispatch = useDispatch()
 
   const baseValidation = {
     mobile: Yup.string()
@@ -21,12 +29,34 @@ function PreferEdit() {
 
   const formik = useFormik({
     initialValues: {
-      mobile: "",
+      mobile: activeDataLocal ? "0" + activeDataLocal.mobile : "",
     },
     validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      router.replace("deputy")
+      const data = {
+        "id": activeDataLocal.id,
+        "nameFamily": values.nameFamily,
+        "avatarURL": values.avatarURL,
+        "isMyself": true,
+        "mobile": values.mobile,
+        "nationalCode": values.nationalCode,
+        "zipCode": values.zipCode,
+        "description": values.description,
+      }
+
+      dispatch(loadingHandler(true))
+      add(data)
+        .then(res => {
+          console.log(res)
+          router.replace("/expert/deputy/")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        .finally(() => {
+          dispatch(loadingHandler(false))
+        })
     },
   });
 
@@ -40,7 +70,7 @@ function PreferEdit() {
           key={"mobile"}
           inputType={"text"}
           title={"شماره تلفن نماینده"}
-          state="Low"
+          state={stateForm ? 1 : 0}
           required={true}
           className={"my-2 w-full"}
           placeholder={"به طور مثال : 09102186156"}

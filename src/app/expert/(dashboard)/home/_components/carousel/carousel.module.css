@@ -1,0 +1,38 @@
+div.homeExpertSlider > div.splide {
+    /* width: 100%; */
+    /* height: 100%; */
+    border-radius: 0px;
+    overflow: hidden;
+    padding: 0;
+    background-color: brown;
+  }  
+
+  div.homeExpertSlider > div.splide > div.splide__track > ul.splide__list li.splide__slide {
+    display: flex;
+    align-items: center;
+    /* justify-content: start; */
+  }
+  
+  div.homeExpertSlider > div.splide > ul.splide__pagination {
+    bottom: 6px;
+  }
+  
+  div.homeExpertSlider > div.splide > ul.splide__pagination li > button.splide__pagination__page {
+    width: 7px;
+    height: 7px;
+    margin: 0 3px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.401) !important;
+    outline: none;
+  }
+  
+  div.homeExpertSlider > div.splide > ul.splide__pagination li > button.is-active {
+    width: 15px;
+    height: 7px;
+    margin: 0 5px;
+    border-radius: 25px;
+    background-color: white !important;
+    opacity: 1;
+    outline: none;
+  }
+  

@@ -1,3 +1,4 @@
+@import url('expert/\(dashboard\)/home/_components/carousel/carousel.module.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -159,5 +160,3 @@ input[type="number"] {
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
-
-

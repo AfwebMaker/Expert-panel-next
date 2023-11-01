@@ -13,6 +13,7 @@
     "@heroicons/react": "^2.0.18",
     "@ijavad805/react-datepicker": "^2.1.17",
     "@reduxjs/toolkit": "^1.9.5",
+    "@splidejs/react-splide": "^0.7.12",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",

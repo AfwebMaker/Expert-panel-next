@@ -1,6 +1,8 @@
 import "../../globals.css";
 // font
 import iranYekanFont from "@/constants/localFonts";
+// components
+import Footer from "./_layout/footer/Footer"
 
 
 export const metadata = {
@@ -17,7 +19,7 @@ export default function RootLayout({ children }) {
       >
         <header>header landing</header>
         {children}
-        <footer>footer landing</footer>
+        <Footer/>
       </body>
     </html>
   );

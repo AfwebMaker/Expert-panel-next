@@ -42,14 +42,14 @@ function SideBar() {
       id: 2,
       title: "احراز هویت",
       icon: <HiOutlineFingerPrint />,
-      href: "",
+      href: "/expert/profile/",
       notifications: 7,
     },
     {
       id: 3,
       title: "احراز صلاحیت",
       icon: <HiOutlineBadgeCheck />,
-      href: "",
+      href: "/expert/qualification/general/",
       notifications: 0,
     },
     {
@@ -78,7 +78,7 @@ function SideBar() {
       id: 6,
       title: "نماینده من",
       icon: <HiOutlineIdentification />,
-      href: "",
+      href: "/expert/deputy/",
       notifications: 2,
     },
     {

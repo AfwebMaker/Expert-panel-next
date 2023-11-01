@@ -95,9 +95,10 @@ function InputText({ state, title, placeholder, className, id, name, required, f
                         value={formik.values[name] ? formik.values[name] : ''}
                         type={'text'}
                         placeholder={placeholder}
+                        autoComplete='name'
                         onChange={formik.handleChange}
                         onBlur={(e) => { setFocus(false); formik.handleBlur(e) }}
-                        className={`w-full absolute bottom-0 fcc px-4 pb-2 pl-16 font-medium text-sm ${activeInputCondition ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                        className={`w-full absolute bottom-0 fcc px-4 pb-2 pl-16 font-medium text-sm ${activeInputCondition ? 'cursor-pointer autofillWhite' : 'cursor-not-allowed autofillGray'}`}
                     />
                 }
 

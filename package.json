@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "@ijavad805/react-datepicker": "^2.1.17",
+    "@loadable/component": "^5.15.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@splidejs/react-splide": "^0.7.12",
     "@types/node": "20.4.1",

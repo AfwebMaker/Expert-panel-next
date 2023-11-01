@@ -40,7 +40,7 @@ function Page() {
 
     dispatch(loadingHandler(true))
     axios.post(
-      `${process.env.NEXT_PUBLIC_file_kg_local}/uploadFile`,
+      `${process.env.NEXT_PUBLIC_FILE_KG_LOCAL}/uploadFile`,
       formData,
       {
         headers: {
@@ -72,13 +72,15 @@ function Page() {
           </div>
           <div className='w-full fcc flex-col mb-10'>
             <div className='w-[150px] h-[150px] rounded-full mb-5 overflow-hidden relative'>
-              <Image
-                onLoad={() => { dispatch(loadingHandler(false)) }}
-                src={avatar ? avatar.url : 'https://iconape.com/wp-content/png_logo_vector/bank-mellat-logo.png'}
-                alt='avatar'
-                className='object-cover w-full h-full'
-                fill
-              />
+              {avatar && avatar.url &&
+                <Image
+                  onLoad={() => { dispatch(loadingHandler(false)) }}
+                  src={avatar.url}
+                  alt='avatar'
+                  className='object-cover w-full h-full'
+                  fill
+                />
+              }
             </div>
             {!(formState === 0 || formState === 3) &&
               <div className='fcc text-primary-500'>

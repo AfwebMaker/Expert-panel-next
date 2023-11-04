@@ -12,7 +12,7 @@ import SindbadMedium from "@/public/images/public/brands/Sindbad Medium.svg";
 function Brands(props) {
   const { title, colorTitle } = props
   return (
-    <div className="text-center flex items-center flex-col mb-10">
+    <div className="text-center flex items-center flex-col">
       <div className="maxLayout px-3 md:px-[32px] w-full flex flex-col items-center justify-center">
         <span className={`${colorTitle} font-bold text-lg md:text-xl mb-8`}>
           {title}

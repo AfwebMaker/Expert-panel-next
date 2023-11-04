@@ -9,7 +9,7 @@ import CheckOtp from './_components/CheckOtp'
 import CheckPassword from './_components/CheckPassword'
 import ForgetPassword from './_components/ForgetPassword'
 //assets
-import Kargosha_Logo from '@/public/images/public/Kargosha_Logo.png'
+import Kargosha_Logo from '@/public/images/public/logo/Kargosha_Logo.png'
 import Arrow_right from '@/public/icons/Arrow_right.svg'
 import backGround from '@/public/images/login/backGround.png'
 

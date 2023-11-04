@@ -1,7 +1,7 @@
 import { dynamicApiCall } from "../dynamicApiCall";
 import { ticket_kg_local } from '../APIRepositories'
 
-const add = async (data) => {
+const sendMessage = async (data) => {
     const option = {
         axios: ticket_kg_local,
         method: 'POST',
@@ -17,4 +17,4 @@ const add = async (data) => {
     }
 };
 
-export default add;
+export default sendMessage;

@@ -74,7 +74,7 @@ function MultipleContainingUploads({
       setShowProgress((pre) => [...pre, true]);
 
       axios
-        .post(`${process.env.NEXT_PUBLIC_file_kg_local}/uploadFile`, formData, {
+        .post(`${process.env.NEXT_PUBLIC_FILE_KG_LOCAL}/uploadFile`, formData, {
           headers: {
             Authorization: `Bearer ${getCookie("TOKEN")}`,
           },

@@ -1,12 +1,12 @@
 import { dynamicApiCall } from "../dynamicApiCall";
-import { ticketRequestAPI } from '../APIRepositories'
+import { ticket_kg_local } from '../APIRepositories'
 
-const sendMessage = async (data) => {
+const add = async (data) => {
     const option = {
-        axios: ticketRequestAPI,
+        axios: ticket_kg_local,
         method: 'POST',
-        endpoint: '/users',
-        data: data,
+        endpoint: '/Api/V1/User/Ticket',
+        data: data
     }
 
     const response = await dynamicApiCall(option)
@@ -17,4 +17,4 @@ const sendMessage = async (data) => {
     }
 };
 
-export default sendMessage;
+export default add;

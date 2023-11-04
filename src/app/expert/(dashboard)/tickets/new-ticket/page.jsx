@@ -10,8 +10,16 @@ import * as Yup from "yup";
 import InfoCard from "@/app/_components/InfoCard";
 import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
 import Button from "@/app/_components/Button"
+// redux
+import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { useDispatch } from "react-redux";
+// services
+import sendMessage from "@/services/ticket_kg_local/sendMessage"
+import { useRouter } from "next/navigation";
 
 function Page() {
+  const dispatch = useDispatch();
+  const router = useRouter()
 
   const validationSchema = Yup.object().shape({
     departmentId: Yup.string().required(
@@ -56,7 +64,25 @@ function Page() {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      console.log("tickets",values)
+      const data = {
+        "departmentId": values.departmentId,
+        "subjectId": values.subjectId,
+        "content": values.content,
+        "media": values.media,
+      }
+      dispatch(loadingHandler(true))
+      sendMessage(data)
+        .then(res => {
+          console.log(res)
+          router.replace("/expert/tickets/")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        .finally(() => {
+          dispatch(loadingHandler(false))
+        })
     },
   });
 

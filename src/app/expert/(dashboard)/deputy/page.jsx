@@ -34,7 +34,6 @@ function Page() {
       })
   }, []);
   
-
   return (
     <>
       {loadingPage && <Loading />}

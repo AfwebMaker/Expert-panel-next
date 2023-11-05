@@ -7,13 +7,14 @@ import Brands from "./_components/Brands"
 import phone from "@/public/images/landing/phone.jpg"
 import desktop from "@/public/images/landing/desktop.jpg"
 // react icons
-import { HiOutlineLockClosed, HiOutlineShieldCheck, HiOutlineDocumentText } from 'react-icons/hi';
+import { HiOutlineFingerPrint, HiOutlineShieldCheck, HiOutlineDocumentText, HiIdentification, HiOutlineClipboardCopy } from 'react-icons/hi';
+import Link from 'next/link'
 
 const primaryFeatures = [
   {
     name: 'احراز هویت و صلاحیت',
     description: 'با پاسخ دادن به چند سوال احراز هویت و صلاحیت آنلاین انجام دهید.',
-    icon: <HiOutlineLockClosed size={24} />,
+    icon: <HiOutlineFingerPrint size={24} />,
   },
   {
     name: 'رتبه بندی و تایید نهایی',
@@ -23,7 +24,7 @@ const primaryFeatures = [
   {
     name: 'ارجاع درخواست',
     description: 'با توجه به تخصص و رتبه خود منتظر درخواست باشید.',
-    icon: <HiOutlineDocumentText size={24} />,
+    icon: <HiOutlineClipboardCopy size={24} />,
   },
 ]
 
@@ -127,7 +128,7 @@ function Page() {
     <div className="bg-white">
       <main>
         {/* Hero section */}
-        <div className="relative isolate mb-5">
+        <div className="relative isolate mb-14">
           <svg
             className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
             aria-hidden="true"
@@ -152,27 +153,31 @@ function Page() {
             </svg>
             <rect width="100%" height="100%" strokeWidth={0} fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)" />
           </svg>
-          <div className="mx-auto max-w-7xl px-6 py-10 sm:py-24 lg:flex lg:items-center lg:gap-x-10 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-              <h1 className="mt-10 max-w-lg text-xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-                کارگشا آغازگر تحول در ارائه خدمات فنی و مهندسی ساختمان
-                به موقع و به درستی
-              </h1>
-              <p className="mt-5 text-base sm:text-lg leading-7 text-gray-600">
-                فعالیت حرفه ای خود را به عنوان متخصص در سامانه خدمات کارگشا با پشت سر گذاشتن مراحل ثبت نام آغاز کنید. با مشتریان بیشتری در ارتباط باشید و درآمد بیشتری کسب کنید.
-              </p>
-              <div className="mt-10 flex items-center gap-x-6">
-                <a
-                  href="#"
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  همین حالا متخصص شو 
-                </a>
+          <div className="mx-auto max-w-7xl px-6 py-10 lg:flex lg:items-center lg:gap-x-10 lg:px-8">
+            <div className='w-full fcc'>
+              <div className="max-w-2xl flex flex-col items-center justify-center lg:items-start">
+                <h1 className="mt-10 max-w-lg text-xl sm:text-4xl font-extrabold tracking-tight text-center lg:text-right text-gray-900">
+                  کارگشا آغازگر تحول در ارائه خدمات فنی و مهندسی ساختمان
+                  به موقع و به درستی
+                </h1>
+                <p className="mt-10 text-base sm:text-lg leading-7 text-gray-600 text-center lg:text-right">
+                  فعالیت حرفه ای خود را به عنوان متخصص در سامانه خدمات کارگشا با پشت سر گذاشتن مراحل ثبت نام آغاز کنید. با مشتریان بیشتری در ارتباط باشید و درآمد بیشتری کسب کنید.
+                </p>
+                <div className="mt-20 flex items-center gap-x-6">
+                  <Link
+                    href="#"
+                    className="fcc gap-x-2 rounded-md bg-primary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:text-primary-500 hover:bg-primary-200 transition-all duration-300"
+                  >
+                    ورود | ثبت‌ نام متخصصین
+                    <HiIdentification size={20} />
+                  </Link>
+                </div>
               </div>
             </div>
+
+
             <div className="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0 lg:flex-grow">
-              <svg viewBox="0 0 366 729" role="img" className="mx-auto w-[22.875rem] max-w-full drop-shadow-xl">
-                <title>App screenshot</title>
+              <svg viewBox="0 0 366 729" role="img" className="mx-auto w-[19.875rem] max-w-full drop-shadow-xl">
                 <defs>
                   <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
                     <rect width={316} height={684} rx={36} />
@@ -203,15 +208,15 @@ function Page() {
         <Brands title="یک پلتفرم، برای تمامی نیاز ها" colorTitle="text-primary-500" />
 
         {/* Feature section */}
-        <div className="mx-auto mt-10 sm:mt-32 max-w-7xl sm:px-6 lg:px-8">
+        <div className="mx-auto mt-10 sm:mt-20 max-w-7xl sm:px-6 lg:px-8">
           <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-16 sm:rounded-3xl sm:px-10 sm:py-24 xl:px-24">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-0">
               <div className="lg:row-start-2 lg:max-w-md">
                 <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
-                  اپلیکیشن متخصصین
+                  پلتفرم متخصصین
                 </h2>
                 <p className="mt-6 sm:text-lg leading-7 text-gray-300">
-                  با دانلود اپلیکیشن متخصصین کار در دستان شماست.
+                  با ثبت نام در پلتفرم متخصصین کار در دستان شماست.
                 </p>
               </div>
               <Image

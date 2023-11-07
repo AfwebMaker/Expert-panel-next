@@ -10,7 +10,7 @@ function Page() {
   const [data, setData] = useState(true);
 
   return (
-    <div className="w-[100%] h-[calc(100vh-135px)] md:h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start p-5 overflow-y-scroll hideScroll">
+    <div className="w-[100%] h-[calc(100vh-135px)] md:h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start p-3 sm:p-5  overflow-y-scroll hideScroll">
       <div className="w-full h-auto flex flex-col items-center justify-center">
         {
           !data ?

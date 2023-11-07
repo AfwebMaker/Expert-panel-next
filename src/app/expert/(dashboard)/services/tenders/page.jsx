@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 // components
 import NoContent from "../_components/NoContent"
+import Tenders from "./_components/Tenders"
 // react icons
 import { HiOutlineClipboardList, HiOutlineClipboardCopy } from 'react-icons/hi'
 
@@ -12,7 +13,7 @@ function Page() {
     <div className="w-[100%] h-[calc(100vh-135px)] md:h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start py-10 px-5 overflow-y-scroll hideScroll">
       <div className="w-full h-auto flex flex-col items-center justify-start">
         {
-          data ?
+          !data ?
             (<NoContent
               icon={<HiOutlineClipboardList className="text-5xl" />}
               title={"شما در هیچ مناقصه ای شرکت نکردید!"}
@@ -22,7 +23,7 @@ function Page() {
               href={"#"}
             />)
             :
-            ("component & page")
+            (<Tenders />)
         }
       </div>
     </div>

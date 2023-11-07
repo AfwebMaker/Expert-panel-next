@@ -2,7 +2,6 @@ import React from 'react'
 // components
 import InfoCard from "@/app/_components/InfoCard"
 import InputFilter from "./InputFilter"
-import TimerDown from "./TimerDown"
 import ServicesCard from "../../_components/ServicesCard"
 
 function NewOrders() {
@@ -12,8 +11,9 @@ function NewOrders() {
                 از دکمه فیلتر از سمت چب در نوار جستجو برای فیلتر در نسخه دسکتاپ استفاده کنید.
             </InfoCard>
             <InputFilter />
-            {/* <TimerDown time={2 * 24 * 60 * 60 * 1000} /> */}
-            <ServicesCard />
+            <ul className='w-full grid grid-cols-12 gap-3 mt-10'>
+                <ServicesCard state={"New"} title={"نصب و اجرای شیشه دو جداره"} serviceType={"خدمات فوری"}/>
+            </ul>
         </div>
     )
 }

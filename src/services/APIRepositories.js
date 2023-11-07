@@ -40,6 +40,14 @@ export const notification_kg_local = axios.create({
     }
 })
 
+export const category_kg_local = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_CATEGORY_KG_LOCAL,
+    timeout: 20000,
+    headers: {
+        "Accept": "application/json"
+    }
+})
+
 export const ticket_kg_local = axios.create({
     baseURL: process.env.NEXT_PUBLIC_TICKET_KG_LOCAL,
     timeout: 20000,

@@ -3,6 +3,7 @@ import "../../globals.css";
 import iranYekanFont from "@/constants/localFonts";
 // components
 import Footer from "./_layout/footer/Footer"
+import Header from "./_layout/header/Header";
 
 
 export const metadata = {
@@ -17,9 +18,9 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning={true}
         className={`${iranYekanFont.variable} font-sans`}
       >
-        <header>header landing</header>
+        <Header />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

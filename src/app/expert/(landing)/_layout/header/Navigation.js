@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link';
 //assets
 import { HiFolder, HiUsers, HiPresentationChartLine, HiTrendingUp, HiTrendingDown } from 'react-icons/hi'
@@ -7,11 +7,6 @@ import SubNavigation from './SubNavigation'
 
 function Navigation(props) {
     const [subNavIsActive, setSunNavIsActive] = useState(false);
-
-    //detect subNav active for add header padding 
-    useEffect(() => {
-        props.onActiveSubNav(subNavIsActive)
-    }, [props, subNavIsActive])
 
     // //disable body scroll when hamburger menu active
     // const body = document.getElementsByTagName('body')[0]
@@ -36,11 +31,11 @@ function Navigation(props) {
                     {props.subMenuData && props.subMenuData.topMenu && props.subMenuData.topMenu.map((item) => (
                         <li key={item.id} className='fcc px-4 cursor-pointer'>
                             <Link href={`/categories/${item.slug}`}>
-                            {item.name}
+                                {item.name}
                             </Link>
                         </li>
                     ))
-}
+                    }
 
                     <div className='h-3 w-px bg-gray-700 mx-5 rounded-full'></div>
 

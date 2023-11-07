@@ -28,7 +28,6 @@ function Header() {
   const [loadingPage, setLoadingPage] = useState(true)
   const [hamburgerMenuIsActive, setHamburgerMenuIsActive] = useState(false);
   const [menuIsActive, setMenuIsActive] = useState(false);
-  const [subNavIsActive, setSubNavIsActive] = useState(false);
   const [profileMobileActive, setProfileMobileActive] = useState(false)
 
 
@@ -65,9 +64,9 @@ function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [menuIsActive]);
 
-  const onActiveSubNav = (state) => {
-    setSubNavIsActive(state)
-  }
+  // const onActiveSubNav = (state) => {
+  //   setSubNavIsActive(state)
+  // }
 
   // //disable body scroll when hamburger menu active
   // const root = document.getElementsByTagName('body')[0]
@@ -80,7 +79,7 @@ function Header() {
   // }, [hamburgerMenuIsActive, root.style])
 
   return (
-    <header className={`${subNavIsActive ? 'pr-2' : 'pr-0'} w-full flex justify-start items-center fixed z-50 bg-white flex-col lg:h-[100px] h-auto ${menuIsActive ? 'shadow-xl' : 'shadow-xl lg:shadow-none'}`} >
+    <header className={`w-full flex justify-start items-center fixed z-50 bg-white flex-col lg:h-[100px] h-auto ${menuIsActive ? 'shadow-xl' : 'shadow-xl lg:shadow-none'}`} >
       {loadingPage && <Loading />}
       <div className={`relative maxLayout flex justify-between items-center w-full z-50 transition-all bg-white ${menuIsActive ? 'lg:h-[60px] h-full' : 'h-full'}`}>
         <div className={`relative maxLayout flex justify-between items-center w-full px-5 z-50 bg-white h-[60px] lg:h-full`}>
@@ -139,7 +138,6 @@ function Header() {
 
         <Navigation
           subMenuData={subMenuData}
-          onActiveSubNav={onActiveSubNav}
         />
 
         <MobileNavigation

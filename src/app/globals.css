@@ -10,6 +10,10 @@
     justify-content: center;
   }
 
+  .maxLayout {
+    max-width: 1300px;
+  }
+
   /* Hide scrollbar */
   .hideScroll::-webkit-scrollbar {
     display: none;

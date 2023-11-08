@@ -4,7 +4,7 @@ import Carousel from "./Carousel"
 
 function MasterCarousel() {
     return (
-        <div className='w-full bg-white rounded-lg h-[370px] p-5'>
+        <div className='w-full bg-white rounded-lg min-h-[370px] p-5'>
             
                 <Carousel />
             

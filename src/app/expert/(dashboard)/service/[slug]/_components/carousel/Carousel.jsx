@@ -38,7 +38,7 @@ function Carousel() {
           <Splide
             options={{
               type: "loop",
-              autoplay: false,
+              autoplay: true,
               pagination: false,
               interval: 3240,
               arrows: true,
@@ -59,8 +59,8 @@ function Carousel() {
           </Splide>
         </div>
       </div>
-      <div>
-        <div>
+      <div className="w-full rounded-xl overflow-hidden mt-5">
+        <div className="serviceExpertSliderStrip h-full">
         <Splide
             options={{
               type: "slide",
@@ -70,7 +70,7 @@ function Carousel() {
               isNavigation: true,
               gap: 10,
               arrows: false,
-              focus: 'center',
+              focus: 'right',
               direction: "rtl",
               pagination: false,
               cover: true,

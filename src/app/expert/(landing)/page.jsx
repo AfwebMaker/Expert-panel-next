@@ -125,7 +125,7 @@ function classNames(...classes) {
 function Page() {
 
   return (
-    <div className="bg-white">
+    <div className="bg-white pt-[136px] lg:pt-[100px]">
       <main>
         {/* Hero section */}
         <div className="relative isolate mb-14">

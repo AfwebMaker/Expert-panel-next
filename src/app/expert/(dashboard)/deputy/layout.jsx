@@ -3,7 +3,7 @@
 import React from "react";
 
 function RootLayout({ children }) {
-  
+
   return (
     <div className="lg:px-5 lg:pt-5">
       <div className="w-full h-[30px] hidden md:fcc mb-5">

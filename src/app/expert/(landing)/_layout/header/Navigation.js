@@ -40,29 +40,33 @@ function Navigation(props) {
                     <div className='h-3 w-px bg-gray-700 mx-5 rounded-full'></div>
 
                     <div className='w-[2px] h-3 bg-color-2'></div>
-                    <li className='fcc px-4 cursor-pointer'>
-                        <HiFolder size={20} className='ml-4' />
-                        <span>فروشگاه فایل</span>
+                    <li>
+                        <Link href='https://shop.kargosha.com/' className='fcc px-4 cursor-pointer'>
+                            <HiFolder size={20} className='ml-4' />
+                            <span>فروشگاه فایل</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='https://profile.kargosha.com/' className='fcc px-4 cursor-pointer'>
+                            <HiUsers size={20} className='ml-4' />
+                            <span>دیده شو</span>
+                        </Link>
                     </li>
                     <li className='fcc px-4 cursor-pointer relative group'>
-                        <HiUsers size={20} className='ml-4' />
-                        <span>دیده شو</span>
-                        <div className='absolute top-[100%] right-0 pt-5 hidden group-hover:flex'>
-                            <div className='bg-white font-medium text-sm px-2 py-2 flex-col rounded-md shadow-xl border border-gray-200'>
-                                <div className='hover:bg-primary-100 w-full px-6 py-2 rounded-md flex items-center'>
-                                    <HiTrendingUp size={20} className='text-primary-500 ml-3' />
-                                    <span className='whitespace-nowrap'>قیمت مصالح</span>
-                                </div>
-                                <div className='hover:bg-primary-100 w-full px-6 py-2 rounded-md flex items-center'>
-                                    <HiTrendingDown size={20} className='text-red-500 ml-3' />
-                                    <span className='whitespace-nowrap'>قیمت دستمزد</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li className='fcc px-4 cursor-pointer'>
                         <HiPresentationChartLine size={20} className='ml-4' />
                         <span>قیمت های روز</span>
+                        <div className='absolute top-[100%] right-0 pt-5 hidden group-hover:flex'>
+                            <div className='bg-white font-medium text-sm px-2 py-2 flex-col rounded-md shadow-xl border border-gray-200'>
+                                <Link href='https://kargosha.com/material' className='hover:bg-primary-100 w-full px-6 py-2 rounded-md flex items-center'>
+                                    <HiTrendingUp size={20} className='text-primary-500 ml-3' />
+                                    <span className='whitespace-nowrap'>قیمت مصالح</span>
+                                </Link>
+                                <Link href='https://kargosha.com/wage' className='hover:bg-primary-100 w-full px-6 py-2 rounded-md flex items-center'>
+                                    <HiTrendingDown size={20} className='text-red-500 ml-3' />
+                                    <span className='whitespace-nowrap'>قیمت دستمزد</span>
+                                </Link>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </nav>

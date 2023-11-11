@@ -18,7 +18,7 @@ import Loading from '@/src/app/_components/Loading';
 //function
 import getCookie from '@/src/functions/getCookie'
 //services
-import operatorInfoProfileBase from '@/src/services/person_kg_local/operatorInfoProfileBase'
+import profileBase from '@/src/services/person_kg_local/profileBase'
 import openClose from '@/src/services/category_kg_local/openClose'
 
 function Header() {
@@ -32,7 +32,7 @@ function Header() {
 
 
   useEffect(() => {
-    operatorInfoProfileBase()
+    profileBase()
       .then((res) => {
         setData(res.data.data)
       })
@@ -102,10 +102,14 @@ function Header() {
                 }
               </div>
               <div className='hidden lg:fcc'>
-                <Link href='' className='fcc'>
-                  <HiOutlineMail className='ml-5 text-cf-300 cursor-pointer' size={24} />
-                  <HiOutlineBell className='text-cf-300 cursor-pointer' size={24} />
-                </Link>
+                <div className='fcc'>
+                  <Link href='/expert/tickets'>
+                    <HiOutlineMail className='ml-5 text-cf-300 cursor-pointer' size={24} />
+                  </Link>
+                  <Link href='/expert/notification/orders'>
+                    <HiOutlineBell className='text-cf-300 cursor-pointer' size={24} />
+                  </Link>
+                </div>
                 <span className='w-[2px] h-7 rounded-full bg-gray-300 block mx-4'></span>
                 <ProfileDropdown data={data} />
               </div>
@@ -113,7 +117,7 @@ function Header() {
             :
             <div className='text-sm flex justify-center items-center text-cf-400'>
               <div className='fcc lg:hidden'>
-                <Link href='/user/login/'>
+                <Link href='/expert/login'>
                   <HiOutlineUserCircle className='cursor-pointer' size={24} />
                 </Link>
                 <div className='w-[2px] bg-cf-400 h-4 mx-4'></div>
@@ -125,9 +129,9 @@ function Header() {
               <div className='hidden lg:fcc'>
                 <Link href='' className='fcc ml-4'>
                   <Image src={helmet} alt='helmet' size={24} className='ml-2' />
-                  <div>متخصص هستم</div>
+                  <div>کاربری هستم</div>
                 </Link>
-                <Link href='/user/login/' className='bg-primary-500 rounded-md text-white w-[115px] h-[38px] fcc'>
+                <Link href='/expert/login' className='bg-primary-500 rounded-md text-white w-[115px] h-[38px] fcc'>
                   عضویت یا ورود
                 </Link>
               </div>

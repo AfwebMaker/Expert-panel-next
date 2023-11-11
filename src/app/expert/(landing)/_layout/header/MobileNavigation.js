@@ -63,17 +63,23 @@ function MobileNavigation(props) {
 
                 <span className='w-[90%] h-px bg-gray-300 flex m-auto my-4 font-medium text-sm'></span>
                 <ul className='w-full flex items-start justify-center flex-col bg-white text-sm py-4'>
-                    <li className='px-4 flex justify-start items-center h-[45px] cursor-pointer w-full relative'>
-                        <HiUsers size={20} className='ml-4' />
-                        دیده شو
+                    <li>
+                        <Link href='https://profile.kargosha.com/' className='px-4 flex justify-start items-center h-[45px] cursor-pointer w-full relative'>
+                            <HiUsers size={20} className='ml-4' />
+                            دیده شو
+                        </Link>
                     </li>
-                    <li className='px-4 flex justify-start items-center h-[45px] cursor-pointer w-full relative'>
-                        <HiFolder size={20} className='ml-4' />
-                        فروشگاه فایل
+                    <li>
+                        <Link href='https://shop.kargosha.com/' className='px-4 flex justify-start items-center h-[45px] cursor-pointer w-full relative'>
+                            <HiFolder size={20} className='ml-4' />
+                            فروشگاه فایل
+                        </Link>
                     </li>
-                    <li className='px-4 flex justify-start items-center h-[45px] cursor-pointer w-full relative'>
-                        <HiPresentationChartLine size={20} className='ml-4' />
-                        قیمت های روز
+                    <li>
+                        <Link href='https://kargosha.com/material' className='px-4 flex justify-start items-center h-[45px] cursor-pointer w-full relative'>
+                            <HiPresentationChartLine size={20} className='ml-4' />
+                            قیمت های روز
+                        </Link>
                     </li>
                 </ul>
 

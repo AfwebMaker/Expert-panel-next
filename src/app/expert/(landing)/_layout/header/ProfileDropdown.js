@@ -3,10 +3,14 @@ import { Fragment } from 'react'
 import { RiArrowDownSLine } from 'react-icons/ri';
 // react router dom
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 //react icons
-import { HiClipboardList, HiUserCircle, HiLogin, HiPresentationChartLine, HiReceiptTax } from 'react-icons/hi'
+import { HiClipboardList, HiUserCircle, HiLogin, HiPresentationChartLine } from 'react-icons/hi'
+import Cookies from 'js-cookie'
 
 function ProfileDropDown({ data }) {
+    const router = useRouter()
+    console.log(data)
     return (
         <div className="w-auto text-right">
             <Menu as="div" className="relative inline-block text-left">
@@ -14,13 +18,13 @@ function ProfileDropDown({ data }) {
                     <Menu.Button className="flex items-center justify-around w-full text-sm font-medium focus:outline-none focus-visible:ring-2 hover:hover:text-color-font-3">
                         <div className='bg-black w-10 h-10 rounded-full overflow-hidden'>
                             <img
-                                className="inline-block h-9 w-h-9 rounded-full"
+                                className="inline-block h-full w-full object-cover rounded-full"
                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                 alt=""
                             />
                         </div>
                         <span className='mx-2 text-sm text-color-font-1 hover:text-color-font-3'>
-                            {data.firstName} {data.lastName}
+                            {data.name} {data.family}
                         </span>
                         <RiArrowDownSLine
                             className="h-5 w-5 text-color-font-2 hover:text-color-font-3"
@@ -41,7 +45,7 @@ function ProfileDropDown({ data }) {
                         <div className="px-1 py-1">
                             <Menu.Item>
                                 {({ active }) => (
-                                    <Link href="#"
+                                    <Link href="/expert/profile"
                                         className={`${active ? 'text-primary-500' : 'text-gray-900'
                                             } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                                     >
@@ -88,25 +92,9 @@ function ProfileDropDown({ data }) {
                             </Menu.Item>
                             <Menu.Item>
                                 {({ active }) => (
-                                    <Link
-                                        href="#"
-                                        className={`${active ? 'text-primary-500' : 'text-color-font-1'
-                                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                    >
-                                        {active ? (
-                                            <HiReceiptTax size={18} className='ml-2 text-primary-500' />
-                                        ) : (
-                                            <HiReceiptTax size={18} className='ml-2 text-gray-700' />
-                                        )}
-                                        لیزینگ
-                                    </Link>
-                                )}
-                            </Menu.Item>
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <Link
-                                        href="#"
-                                        className={`${active ? 'text-red-500' : 'text-color-font-1'
+                                    <button
+                                        onClick={() => { Cookies.remove('TOKEN'); router.push('/expert/login/') }}
+                                        className={`cursor-pointer ${active ? 'text-red-500' : 'text-color-font-1'
                                             } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                                     >
                                         {active ? (
@@ -115,7 +103,7 @@ function ProfileDropDown({ data }) {
                                             <HiLogin size={18} className='ml-2 text-red-500' />
                                         )}
                                         خروج از حساب
-                                    </Link>
+                                    </button>
                                 )}
                             </Menu.Item>
                         </div>

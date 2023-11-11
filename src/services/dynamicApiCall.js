@@ -1,9 +1,5 @@
-//redux
-// import {store} from "../features/store";
-// import {logoutHandler} from "../features/authentication/auth";
-// import customToast from '@/src/functions/customToast'
 //functions
-import getCookie from '@/src/functions/getCookie'
+import Cookies from 'js-cookie'
 import toast from 'react-hot-toast';
 import customToast from '../functions/customToast';
 
@@ -16,7 +12,7 @@ export const dynamicApiCall = async (options) => {
             headers: headers
         }
 
-        getCookie('TOKEN') && (axios.defaults.headers.common['Authorization'] = 'Bearer ' + getCookie('TOKEN'));
+        Cookies.get('TOKEN') && (axios.defaults.headers.common['Authorization'] = 'Bearer ' + Cookies.get('TOKEN'));
         method === "GET" ? config.params = data : config.data = data
 
         const res = await axios(config);
@@ -38,7 +34,7 @@ export const dynamicApiCall = async (options) => {
         } else if (error.response.status === 404) {
             throw error
         } else if (error.response.status === 401) {
-            // store.dispatch(logoutHandler())
+            Cookies.remove('TOKEN')
             throw error
         } else if (error.response.status === 400) {
             error.response.data.message && toast.error(error.response.data.message)

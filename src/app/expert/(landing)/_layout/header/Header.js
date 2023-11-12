@@ -4,16 +4,13 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 //react icons
-import { HiOutlineUserCircle, HiOutlineMenuAlt4, HiOutlineX, HiOutlineBell, HiOutlineMail, HiUserCircle } from 'react-icons/hi'
+import { HiOutlineUserCircle, HiOutlineMenuAlt4, HiOutlineX, HiOutlineBell, HiOutlineMail, HiUserCircle, HiOutlineUser } from 'react-icons/hi'
 //assets
 import Kargosha_Logo from '@/public/images/public/logo/Kargosha_Logo.svg'
-import helmet from '@/public/icons/helmet.svg'
 //components
-import Navigation from './Navigation'
 import MobileNavigation from './MobileNavigation'
 import ProfileDropdown from "./ProfileDropdown"
 import ProfileMobile from './ProfileMobile'
-import SearchBox from './SearchBox'
 import Loading from '@/src/app/_components/Loading';
 //function
 import getCookie from '@/src/functions/getCookie'
@@ -64,31 +61,16 @@ function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [menuIsActive]);
 
-  // const onActiveSubNav = (state) => {
-  //   setSubNavIsActive(state)
-  // }
-
-  // //disable body scroll when hamburger menu active
-  // const root = document.getElementsByTagName('body')[0]
-  // useEffect(() => {
-  //   if (hamburgerMenuIsActive) {
-  //     root.style.overflowY = "hidden"
-  //   } else {
-  //     root.style.overflowY = "auto"
-  //   }
-  // }, [hamburgerMenuIsActive, root.style])
-
   return (
-    <header className={`w-full flex justify-start items-center fixed z-50 bg-white flex-col lg:h-[100px] h-auto ${menuIsActive ? 'shadow-xl' : 'shadow-xl lg:shadow-none'}`} >
+    <header className={`w-full flex justify-start items-center fixed z-50 bg-white flex-col lg:h-[60px] h-auto ${menuIsActive ? 'shadow-xl' : 'shadow-xl lg:shadow-none'}`} >
       {loadingPage && <Loading />}
       <div className={`relative maxLayout flex justify-between items-center w-full z-50 transition-all bg-white ${menuIsActive ? 'lg:h-[60px] h-full' : 'h-full'}`}>
-        <div className={`relative maxLayout flex justify-between items-center w-full px-5 z-50 bg-white h-[60px] lg:h-full`}>
+        <div className={`${menuIsActive ? "shadow-lg" : "shadow-none"} relative maxLayout flex justify-between items-center w-full px-5 z-50 bg-white h-[60px] lg:h-full`}>
           <div className='h-full flex items-center lg:justify-center justify-between'>
             <Image src={Kargosha_Logo} height={35} alt='kargosha logo' className='ml-4' />
-            {menuIsActive && <SearchBox mobile={false} />}
           </div>
 
-          {isLogin ?
+          {!isLogin ?
             <div className='text-sm flex justify-center items-center text-cf-400'>
               <div className='fcc lg:hidden'>
                 {!profileMobileActive ?
@@ -102,7 +84,7 @@ function Header() {
                 }
               </div>
               <div className='hidden lg:fcc'>
-                <div className='fcc'>
+                {/* <div className='fcc'>
                   <Link href='/expert/tickets'>
                     <HiOutlineMail className='ml-5 text-cf-300 cursor-pointer' size={24} />
                   </Link>
@@ -110,7 +92,7 @@ function Header() {
                     <HiOutlineBell className='text-cf-300 cursor-pointer' size={24} />
                   </Link>
                 </div>
-                <span className='w-[2px] h-7 rounded-full bg-gray-300 block mx-4'></span>
+                <span className='w-[2px] h-7 rounded-full bg-gray-300 block mx-4'></span> */}
                 <ProfileDropdown data={data} />
               </div>
             </div>
@@ -127,8 +109,8 @@ function Header() {
                 }
               </div>
               <div className='hidden lg:fcc'>
-                <Link href='' className='fcc ml-4'>
-                  <Image src={helmet} alt='helmet' size={24} className='ml-2' />
+                <Link href='https://kargosha.com' className='fcc ml-4'>
+                  <HiOutlineUser size={18} className='ml-1' />
                   <div>کاربری هستم</div>
                 </Link>
                 <Link href='/expert/login' className='bg-primary-500 rounded-md text-white w-[115px] h-[38px] fcc'>
@@ -138,11 +120,6 @@ function Header() {
             </div>
           }
         </div>
-
-
-        <Navigation
-          subMenuData={subMenuData}
-        />
 
         <MobileNavigation
           subMenuData={subMenuData}
@@ -156,7 +133,6 @@ function Header() {
         />
       </div>
 
-      <SearchBox mobile={true} />
     </header>
   )
 }

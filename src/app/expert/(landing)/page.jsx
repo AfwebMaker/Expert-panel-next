@@ -125,7 +125,7 @@ function classNames(...classes) {
 function Page() {
 
   return (
-    <div className="bg-white pt-[136px] lg:pt-[100px]">
+    <div className="bg-white pt-[60px]">
       <main>
         {/* Hero section */}
         <div className="relative isolate mb-14">
@@ -174,7 +174,6 @@ function Page() {
                 </div>
               </div>
             </div>
-
 
             <div className="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0 lg:flex-grow">
               <svg viewBox="0 0 366 729" role="img" className="mx-auto w-[19.875rem] max-w-full drop-shadow-xl">

@@ -9,7 +9,21 @@ function MasterTicket({ SendNewTicketHandler, navigationData }) {
   const pathName = usePathname();
   return (
     <>
-      <Ticket
+      {
+        navigationData && navigationData.map((item) => (
+          <Ticket
+            key={item.id}
+            id={item.id}
+            title={"مشکل در پذیرش سفارش"}
+            status={item.status}
+            description={"مشکل در پذیرش سفارش در بخش سفارشات جدید ..."}
+            createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
+            ticketNumber={item.id}
+            pathName={pathName}
+          />
+        ))
+      }
+      {/* <Ticket
         id={1}
         title={"مشکل در پذیرش سفارش"}
         status={"1"}
@@ -17,70 +31,7 @@ function MasterTicket({ SendNewTicketHandler, navigationData }) {
         createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
         ticketNumber={454831}
         pathName={pathName}
-      />
-      <Ticket
-        id={451}
-        title={"مشکل در پذیرش سفارش"}
-        status={"pending"}
-        description={"مشکل در پذیرش سفارش در بخش سفارشات جدید ..."}
-        createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
-        ticketNumber={454831}
-        pathName={pathName}
-      />
-      <Ticket
-        id={454831}
-        title={"مشکل در پذیرش سفارش"}
-        status={"answered"}
-        description={"مشکل در پذیرش سفارش در بخش سفارشات جدید ..."}
-        createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
-        ticketNumber={454831}
-        pathName={pathName}
-      />
-      <Ticket
-        id={20}
-        title={"مشکل در پذیرش سفارش"}
-        status={"1"}
-        description={"مشکل در پذیرش سفارش در بخش سفارشات جدید ..."}
-        createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
-        ticketNumber={454831}
-        pathName={pathName}
-      />
-      <Ticket
-        id={20}
-        title={"مشکل در پذیرش سفارش"}
-        status={"1"}
-        description={"مشکل در پذیرش سفارش در بخش سفارشات جدید ..."}
-        createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
-        ticketNumber={454831}
-        pathName={pathName}
-      />
-      <Ticket
-        id={20}
-        title={"مشکل در پذیرش سفارش"}
-        status={"1"}
-        description={"مشکل در پذیرش سفارش در بخش سفارشات جدید ..."}
-        createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
-        ticketNumber={454831}
-        pathName={pathName}
-      />
-      <Ticket
-        id={1}
-        title={"مشکل در پذیرش سفارش"}
-        status={"1"}
-        description={"مشکل در پذیرش سفارش در بخش سفارشات جدید ..."}
-        createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
-        ticketNumber={454831}
-        pathName={pathName}
-      />
-      <Ticket
-        id={454831}
-        title={"مشکل در پذیرش سفارش"}
-        status={"answered"}
-        description={"مشکل در پذیرش سفارش در بخش سفارشات جدید ..."}
-        createdAt={"۲۸ شهریور ۱۴۰۱ ساعت ۱۸:۵۵"}
-        ticketNumber={454831}
-        pathName={pathName}
-      />
+      /> */}
       <div className="hidden xl:flex w-[49%] min-w-[390px] justify-between xl:w-[390px] h-[100px] mt-3"></div>
       <div className="hidden xl:flex z-50 w-[390px] h-10 fixed bottom-10 fcc">
         <SendNewTicketBtn SendNewTicketHandler={SendNewTicketHandler} />

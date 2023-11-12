@@ -15,7 +15,7 @@ function Page() {
         <HiOutlineChat className="ml-1 text-base" />
         <h2>تیکت های من</h2>
       </div>
-      <div className="h-[calc(100vh-210px)] w-full flex md:hidden">
+      <div className="h-[calc(100vh-280px)] w-full flex md:hidden">
         <ul className="h-full w-full overflow-y-scroll hideScroll font-medium text-lg flex flex-col items-center px-[3%] md:px-0">
           <MobileTickets />
         </ul>

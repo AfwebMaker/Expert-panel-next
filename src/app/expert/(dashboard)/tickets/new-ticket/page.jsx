@@ -71,6 +71,7 @@ function Page() {
         "content": values.content,
         "media": values.media,
       }
+      console.log(data)
       dispatch(loadingHandler(true))
       sendMessage(data)
         .then(res => {
@@ -110,7 +111,7 @@ function Page() {
               زیر اتخاب کنید و سپس از زیر دسته آن به راحتی به دپارتمان مورد
               نطرتان وصل شوید.
             </h2>
-            <div className="flex w-full items-start justify-around gap-x-3 mt-3">
+            <div className="flex flex-col md:flex-row w-full items-start justify-around gap-x-3 mt-3">
               <DynamicInputs
                 inputType={"dropDown"}
                 title={"دسته بندی (دپارتمان مورد نظر)"}

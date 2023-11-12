@@ -8,6 +8,7 @@ import {
   HiOutlineDotsCircleHorizontal,
 } from "react-icons/hi";
 
+
 function Ticket({ title, status, description, createdAt, ticketNumber, id, pathName }) {
 
   let str = pathName;
@@ -18,13 +19,13 @@ function Ticket({ title, status, description, createdAt, ticketNumber, id, pathN
       <Link className="w-full h-full fcc items-center" href={`/expert/tickets/${id}`}>
         <div className="w-full h-full flex flex-col items-center justify-between pt-4 pb-1 px-4 sm:px-6">
           <div className="w-full h-[30%] flex items-center justify-between">
-            <h2 className={`text-sm  ${slug === String(id) ? "text-primary-500 font-bold" : "text-cf-500"}`}>
+            <h2 className={`text-sm ${slug === String(id) ? "text-primary-500 font-bold" : "text-cf-500"}`}>
               {title.length > 20
                 ? title.slice(0, 20 - 1) + " ..."
                 : title}
             </h2>
             {/* status */}
-            {status === "pending" ? (
+            {status === "Pending" ? (
               <div className="flex bg-amber-100 text-warning fcc px-1 sm:px-2 rounded-full h-7 sm:h-8">
                 <span className="text-[10px] sm:text-xs">در انتظار پاسخ</span>
                 <HiOutlineDotsCircleHorizontal className="mr-1" />

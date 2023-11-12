@@ -1,14 +1,14 @@
 "use client"
+import React from 'react'
 import Image from 'next/image'
-import { useState } from 'react'
+import Link from 'next/link'
 // components
 import Brands from "./_components/Brands"
 // images
 import phone from "@/public/images/landing/phone.jpg"
 import desktop from "@/public/images/landing/desktop.jpg"
 // react icons
-import { HiOutlineFingerPrint, HiOutlineShieldCheck, HiOutlineDocumentText, HiIdentification, HiOutlineClipboardCopy } from 'react-icons/hi';
-import Link from 'next/link'
+import { HiOutlineFingerPrint, HiOutlineShieldCheck, HiOutlineStar, HiIdentification, HiOutlineClipboardCopy } from 'react-icons/hi';
 
 const primaryFeatures = [
   {
@@ -33,31 +33,31 @@ const secondaryFeatures = [
     name: 'سرویس خدمات فوری',
     description: "این سرویس مخصوص امور اورژانسی ساختمان مانند: ترکیدگی لوله و رفع نشتی آب، تخلیه و رفع گرفتگی چاه، رفع اتصال یا قطع برق، تعمیر موتورخانه و قفل و کلید است. بعد از ثبت درخواست متخصص در کمترین زمان می بایست پاسخگوی مشتری باشد.",
     href: '#',
-    icon: <HiOutlineDocumentText size={24} />,
+    icon: <HiOutlineStar size={24} />,
   },
   {
     name: 'سرویس خرده کاری',
     description: "این سرویس به منظور رفع ایرادات، نواقص و تغییرات جزیی در ساختمان از قبیل: دریل کاری(نصب پرده، رگال، تابلو و غیره)، نصب کلید و پریز و تعویض لامپ، تعویض و نصب لوستر و چراغ سقفی، لکه گیری گچ- سیمان- سنگ- سرامیک- کاشی و رنگ است.",
     href: '#',
-    icon: <HiOutlineDocumentText size={24} />,
+    icon: <HiOutlineStar size={24} />,
   },
   {
     name: 'تامین نیروی فنی و اجرایی',
     description: "در این سرویس 0 تا 100 خدمات ساختمانی قابل ارائه است. متخصص این سرویس به 2 صورت روزمزد و آیتمی(اعلام قیمت بر اساس مترمربع، مترطول، عدد و غیره) می تواند پاسخگوی درخواست های مشتری باشد. ",
     href: '#',
-    icon: <HiOutlineDocumentText size={24} />,
+    icon: <HiOutlineStar size={24} />,
   },
   {
     name: 'پیمانکاران ساخت',
     description: "در این سرویس خدمات ساختمانی در قالب پیمانکاری ارائه می شود. متخصصان این سرویس افراد حقیقی و حقوقی هستند که امکان گرفتن پروژه به صورت پیمانکاری را دارند. ",
     href: '#',
-    icon: <HiOutlineDocumentText size={24} />,
+    icon: <HiOutlineStar size={24} />,
   },
   {
     name: 'تعمیرات اساسی(بازسازی)',
     description: "در این سرویس خدمات بازسازی ساختمان قابل ارائه است. متخصصانی که تیم‌های مختلف انجام امور ساختمانی مانند: متخصصان تاسیسات الکتریکی و مکانیکی، مجریان روف‌گاردن و فضای سبز و محوطه و غیره دارند، به منظور رفع نیاز مشتری می توانند در این سرویس قرار بگیرند.",
     href: '#',
-    icon: <HiOutlineDocumentText size={24} />,
+    icon: <HiOutlineStar size={24} />,
   },
 ]
 
@@ -196,7 +196,7 @@ function Page() {
                   transform="translate(24 24)"
                   clipPath="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
                 >
-                  <Image src={phone} alt="" />
+                  <Image src={phone} alt="" priority />
                 </foreignObject>
               </svg>
             </div>
@@ -283,11 +283,11 @@ function Page() {
                   </dt>
                   <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
                     <p className="flex-auto">{feature.description}</p>
-                    <p className="mt-6">
+                    {/* <p className="mt-6">
                       <a href={feature.href} className="text-sm font-semibold leading-6 text-primary-500">
                         بیشتر <span aria-hidden="true">...</span>
                       </a>
-                    </p>
+                    </p> */}
                   </dd>
                 </div>
               ))}

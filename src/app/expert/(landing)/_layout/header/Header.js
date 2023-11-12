@@ -66,9 +66,9 @@ function Header() {
       {loadingPage && <Loading />}
       <div className={`relative maxLayout flex justify-between items-center w-full z-50 transition-all bg-white ${menuIsActive ? 'lg:h-[60px] h-full' : 'h-full'}`}>
         <div className={`${menuIsActive ? "shadow-lg" : "shadow-none"} relative maxLayout flex justify-between items-center w-full px-5 z-50 bg-white h-[60px] lg:h-full`}>
-          <div className='h-full flex items-center lg:justify-center justify-between'>
+          <Link href="https://kargosha.com/" className='h-full flex items-center lg:justify-center justify-between'>
             <Image src={Kargosha_Logo} height={35} alt='kargosha logo' className='ml-4' />
-          </div>
+          </Link>
 
           {!isLogin ?
             <div className='text-sm flex justify-center items-center text-cf-400'>

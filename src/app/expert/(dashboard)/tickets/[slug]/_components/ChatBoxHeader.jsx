@@ -1,50 +1,33 @@
 "use client";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 // react icons
-import {
-  HiOutlineXCircle,
-  HiOutlineCheckCircle,
-  HiOutlineDotsCircleHorizontal,
-  HiOutlineChevronRight,
-} from "react-icons/hi";
+import { HiOutlineChevronLeft } from "react-icons/hi";
+// components
+import Dropdown from "./Dropdown"
 
 function ChatBoxHeader({ name, problem, ticketNumber, status }) {
-  // status = answered, pending, *
+  const router = useRouter();
 
   const removeTicketHandler = () => {
+    router.replace("/expert/tickets")
     console.log("removeTicketHandler");
   };
 
   return (
-    <div className="w-full h-[140px] flex items-center justify-start px-5 md:px-10 py-5 mt-5">
-      <div className="bg-black h-16 w-16 md:h-24 md:w-24 rounded-full fcc"></div>
-      <div className="h-full flex flex-col justify-center md:justify-between mr-5 md:mr-8">
-        <h2 className="font-bold text-sm md:text-base my-2 md:my-0">{name}</h2>
-        <span className="text-xs md:text-base">
-          {problem} - {ticketNumber}
-        </span>
-        <div className="text-xs md:text-sm flex items-center">
-          وضعیت تیکت :
-          {status === "pending" ? (
-            <div className="flex text-warning fcc px-2 h-8 text-sm">
-              <span>در انتظار پاسخ</span>
-              <HiOutlineDotsCircleHorizontal className="mr-1" />
-            </div>
-          ) : status === "answered" ? (
-            <div className="flex text-success fcc px-2 h-8">
-              <span>پاسخ داده شده</span>
-              <HiOutlineCheckCircle className="mr-1" />
-            </div>
-          ) : (
-            <div className="flex text-error fcc px-2 h-8">
-              <span>بسته شده</span>
-              <HiOutlineXCircle className="mr-1" />
-            </div>
-          )}
+    <div className="w-full flex items-center justify-start p-2">
+      <div className="bg-black h-10 w-10 rounded-full fcc"></div>
+      <div className="h-full flex items-center w-[calc(100%-52px)] justify-between mr-3">
+        <h2 className="font-bold text-xs sm:text-base h-full fcc">{name}</h2>
+        <div className="fcc gap-x-1">
+          <Dropdown status={status} Problem={problem} number={ticketNumber} removeTicketHandler={removeTicketHandler} />
+          <Link href={"/expert/tickets"} title="بازگشت" className="w-5 h-5 sm:w-9 sm:h-9 fcc rounded-md hover:bg-gray-200 transition-all duration-300 text-cf-300 font-extrabold cursor-pointer relative">
+            <HiOutlineChevronLeft className="text-lg font-bold" />
+          </Link>
         </div>
       </div>
-      <div className="flex items-center justify-between md:justify-end absolute top-0 md:top-3 right-0 w-full px-[3%] md:px-3">
+      {/* <div className="flex items-center justify-between md:justify-end absolute top-0 md:top-3 right-0 w-full px-[3%] md:px-3">
         <Link
           href={"#"}
           className="flex md:hidden items-center justify-start text-cf-300 text-sm font-bold"
@@ -52,15 +35,7 @@ function ChatBoxHeader({ name, problem, ticketNumber, status }) {
           <HiOutlineChevronRight className="ml-1 text-base" />
           <h1>تیکت های من</h1>
         </Link>
-        <div
-          onClick={removeTicketHandler}
-          role="button"
-          className="hover:bg-red-500 h-full gap-x-1 hover:text-white cursor-pointer rounded-full px-3 py-2 left-3 text-red-500 fcc text-sm transition-all duration-300"
-        >
-          <span className="flex ">بستن تیکت</span>
-          <HiOutlineXCircle />
-        </div>
-      </div>
+      </div> */}
     </div>
   );
 }

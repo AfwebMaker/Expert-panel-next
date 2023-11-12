@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 // services
-import  fetchMessages  from "@/src/services/ChatBoxTickets/fetchMessages";
-import  sendMessage  from "@/src/services/ChatBoxTickets/sendMessage";
-import  fetchNewMessages  from "@/src/services/ChatBoxTickets/fetchNewMessages";
+import  fetchMessages  from "@/src/services/ticket_kg_local/fetchMessages";
+import  sendMessage  from "@/src/services/ticket_kg_local/sendMessage";
+import  fetchNewMessages  from "@/src/services/ticket_kg_local/fetchNewMessages";
 // components
 import ChatBoxHeader from "./_components/ChatBoxHeader";
 import ChatBoxMain from "./_components/ChatBoxMain";
@@ -56,12 +56,12 @@ function Page() {
   };
 
   return (
-    <div className="w-[100%] mb-16 xl:mb-0 h-[calc(100vh-150px)] md:h-[calc(100vh-220px)] lg:h-[calc(100vh-190px)] rounded-lg mt-5 md:mt-0  flex flex-col items-center justify-start relative">
+    <div className="w-[100%] mb-16 xl:mb-0 h-[calc(100vh-120px)] md:h-[calc(100vh-20px)] lg:h-[calc(100vh-190px)] rounded-lg flex flex-col items-center justify-start relative">
       <ChatBoxHeader
         name={"سید میثاق حمزه زاده موسوی"}
         problem={"مشکل در پذیرش سفارش"}
         ticketNumber={485731}
-        status={"answered"}
+        status={"pending"}
       />
       <ChatBoxMain messages={messages} />
       <ChatBoxFooter sendMessageHandler={sendMessageHandler} />

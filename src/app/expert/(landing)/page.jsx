@@ -7,6 +7,14 @@ import Brands from "./_components/Brands"
 // images
 import phone from "@/public/images/landing/phone.jpg"
 import desktop from "@/public/images/landing/desktop.jpg"
+// avatar
+import user_1 from '@/public/images/landing/commentsAvatar/user_1.jpg'
+import user_2 from '@/public/images/landing/commentsAvatar/user_2.jpg'
+import user_3 from '@/public/images/landing/commentsAvatar/user_3.jpg'
+import user_4 from '@/public/images/landing/commentsAvatar/user_4.jpg'
+import user_5 from '@/public/images/landing/commentsAvatar/user_5.jpg'
+import user_6 from '@/public/images/landing/commentsAvatar/user_6.jpg'
+import user_7 from '@/public/images/landing/commentsAvatar/user_7.jpg'
 // react icons
 import { HiOutlineFingerPrint, HiOutlineShieldCheck, HiOutlineStar, HiIdentification, HiOutlineClipboardCopy } from 'react-icons/hi';
 
@@ -66,7 +74,7 @@ const featuredTestimonial = {
   author: {
     name: 'مارال جلالی',
     imageUrl: "",
-    logoUrl: '',
+    logoUrl: user_1,
   },
 }
 
@@ -76,15 +84,15 @@ const testimonials = [
       {
         body: 'من برای اجرای روف گاردن از متخصصان کارگشا استفاده کردم به موقع کار انجام شد.سقفی که برای الاچیق درست کردند رو دوست نداشتم بدون هیچ بحثی سقف دیگه ای با نظر خودم اجرا کردند.',
         author: {
-          name: 'امیرحسن لشگری',
-          imageUrl: "",
+          name: 'امیررضا اعتصام',
+          imageUrl: user_3,
         },
       },
       {
         body: 'از طریق وب سایت شما درخواست تعویض ایزوگام ثبت کردم آقای قهرمانی به بنده معرفی شدند و در کمترین زمان با بهترین قیمت این کار انجام شد و بسیار تمیز کار را اجرا کردند.',
         author: {
           name: 'آناهیتا دل آویز',
-          imageUrl: "",
+          imageUrl: user_2,
         },
       },
     ],
@@ -93,7 +101,7 @@ const testimonials = [
         body: 'نقاشی خونه رو آقای محمدی انجام دادن که خیلی خوش قول و خوش اخلاق بودند.خیلی تمیز کار انجام شد قیمت هم بد نبود در کل راضی بودم.',
         author: {
           name: 'حمیدرضا خاکساری',
-          imageUrl: "",
+          imageUrl: user_5,
         },
       },
     ],
@@ -103,8 +111,8 @@ const testimonials = [
       {
         body: 'تغییرکاشی و سرامیک سرویس ها را با آقای سمندرنژاد انجام دادم خوب بود با اینکه خونه قدیمی بود و مشکل داشت اما ایشون و همکارانشون به خوبی از پس کار بر اومدند. فقط یه ذره کار طول کشید که اشکالی نداشت.',
         author: {
-          name: 'اکبر دولابی',
-          imageUrl: "",
+          name: 'سعیدرضا طاهری',
+          imageUrl: user_7,
         },
       },
     ],
@@ -113,14 +121,14 @@ const testimonials = [
         body: 'اقای احمدی برای ما موتورخونه رو حذف کردند و به جای اون پکیج گذاشتند چون منزل قدیمی بود کسی این کارو برای ما انجام نمی داد اما این آقا تونستند واسمون به بهترین شکل انجام بدند و با قیمت مناسب کارو انجام دادند.',
         author: {
           name: 'سیاوش عزیز زاده',
-          imageUrl: "",
+          imageUrl: user_4,
         },
       },
       {
         body: 'من برای پروژه ای از برنامه شما چند تا گچ کار گرفتم که همشون خوب بودن ولی یکیشون یه ذره اروم گچ کاری می کرد که بعد از تذکر مشکل حل شد.',
         author: {
           name: 'آیدا بهرامی',
-          imageUrl: "",
+          imageUrl: user_6,
         },
       },
     ],
@@ -366,15 +374,10 @@ function Page() {
               <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
                 <figure className="col-span-2 hidden sm:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
                   <figcaption className="flex items-center gap-x-4 border-b border-gray-900/10 px-6 py-4">
-                    <Image
-                      className="h-10 w-10 flex-none rounded-full bg-gray-50"
-                      src={featuredTestimonial.author.imageUrl}
-                      alt=""
-                    />
+                    <Image className="h-10 w-10 flex-none rounded-full" src={featuredTestimonial.author.logoUrl} alt="" />
                     <div className="flex-auto">
                       <div className="font-semibold">{featuredTestimonial.author.name}</div>
                     </div>
-                    <Image className="h-10 w-auto flex-none" src={featuredTestimonial.author.logoUrl} alt="" />
                   </figcaption>
                   <blockquote className="p-12 text-xl font-semibold leading-8 tracking-tight text-gray-900">
                     <p>{`“${featuredTestimonial.body}”`}</p>
@@ -398,7 +401,7 @@ function Page() {
                             key={testimonial.author.handle}
                             className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5"
                           >
-                            
+
                             <figcaption className="flex items-center gap-x-4">
                               <Image
                                 className="h-10 w-10 rounded-full bg-gray-50"

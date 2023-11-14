@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+
 //react icons
 import { HiOutlineClipboardList, HiHome, HiOutlineChevronLeft } from 'react-icons/hi'
 //components
@@ -15,6 +17,7 @@ function RootLayout({ children }) {
         tenders: 0,
         activeOrders: 0,
     })
+    const pathname = usePathname()
 
     //get notifications number
     useEffect(() => {
@@ -59,13 +62,19 @@ function RootLayout({ children }) {
             </div>
 
             <div className='flex flex-col xl:flex-row xl:justify-center max-w-[1605px] w-full lg:px-5 xl:items-start'>
-                <div className='bg-white py-10 lg:hidden fcc text-primary-500 font-medium text-lg'>
-                    <div className='ml-2'>سفارشات</div>
-                    <HiOutlineClipboardList size={24} />
-                </div>
-                
-                <MobileNavigation notificationNumber={notificationNumber} />
-                <DesktopNavigation notificationNumber={notificationNumber} />
+                {
+                    ["/expert/services/new-orders", "/expert/services/tenders", "/expert/services/active-orders"].includes(pathname) && (
+                        <>
+                            <div className='bg-white py-10 lg:hidden fcc text-primary-500 font-medium text-lg'>
+                                <div className='ml-2'>سفارشات</div>
+                                <HiOutlineClipboardList size={24} />
+                            </div>
+
+                            <MobileNavigation notificationNumber={notificationNumber} />
+                            <DesktopNavigation notificationNumber={notificationNumber} />
+                        </>
+                    )
+                }
                 {children}
             </div>
         </div>

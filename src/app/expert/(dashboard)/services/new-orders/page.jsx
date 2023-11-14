@@ -17,7 +17,7 @@ function Page() {
   useEffect(() => {
     fetchServices()
       .then((res) => {
-        console.log("amir", res.data.data)
+        // console.log("amir", res.data.data)
         setData(res.data.data);
       })
       .catch((error) => {

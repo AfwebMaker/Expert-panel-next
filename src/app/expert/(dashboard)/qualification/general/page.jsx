@@ -2,7 +2,7 @@
 
 import React from 'react'
 //components
-import Cart from '../_components/Cart'
+import Cart from '../_components/forms'
 import MainMobileNavigation from '../_components/MainMobileNavigation'
 //react icons
 import { HiOutlineCollection } from 'react-icons/hi'

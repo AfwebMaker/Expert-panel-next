@@ -12,10 +12,11 @@ import fetchServices from "@/src/services/core_kg_local/fetchServices";
 function Page() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  const [searchInput, setSearchInput] = useState("-");
   const [loadingPage, setLoadingPage] = useState(true);
 
   useEffect(() => {
-    fetchServices()
+    fetchServices(page, 10, 1, "-")
       .then((res) => {
         console.log("amir", res.data.data)
         setData(res.data.data);
@@ -35,6 +36,8 @@ function Page() {
         <div className="w-full h-auto flex flex-col items-center justify-center">
           {
             data && data.lstData && data.lstData.length ?
+              (<NewOrders data={data.lstData} />)
+              :
               (<NoContent
                 icon={<HiOutlineClipboardCopy className="text-5xl" />}
                 title={"متاسفانه هیچ سفارش جدید یافت نشد!"}
@@ -43,8 +46,6 @@ function Page() {
                 iconBtn={<HiBadgeCheck className="text-lg" />}
                 href={"#"}
               />)
-              :
-              (<NewOrders />)
           }
         </div>
       </div>

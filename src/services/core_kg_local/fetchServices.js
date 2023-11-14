@@ -6,7 +6,7 @@ const fetchServices = async (pageIndex, pageSize, type, value) => {
     const option = {
         axios: core_kg_local,
         method: 'GET',
-        endpoint: `/Expert/GetData/1/10/1/-`,
+        endpoint: `/Expert/GetData/${pageIndex}/${pageSize}/${type}/${value}`,
     }
 
     try {

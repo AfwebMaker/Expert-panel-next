@@ -55,3 +55,11 @@ export const ticket_kg_local = axios.create({
         "Accept": "application/json"
     }
 })
+
+export const core_kg_local = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_CORE_KG_LOCAL,
+    timeout: 20000,
+    headers: {
+        "Accept": "application/json"
+    }
+})

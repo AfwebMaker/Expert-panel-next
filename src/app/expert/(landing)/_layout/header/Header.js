@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { HiOutlineUserCircle, HiOutlineMenuAlt4, HiOutlineX, HiOutlineBell, HiOutlineMail, HiUserCircle, HiOutlineUser } from 'react-icons/hi'
 //assets
 import Kargosha_Logo from '@/public/images/public/logo/Kargosha_Logo.svg'
+import user from '@/public/icons/user_landing.svg'
 //components
 import MobileNavigation from './MobileNavigation'
 import ProfileDropdown from "./ProfileDropdown"
@@ -62,10 +63,10 @@ function Header() {
   }, [menuIsActive]);
 
   return (
-    <header className={`w-full flex justify-start items-center fixed z-50 bg-white flex-col lg:h-[60px] h-auto ${menuIsActive ? 'shadow-xl' : 'shadow-xl lg:shadow-none'}`} >
+    <header className={`w-full flex justify-start items-center fixed z-50 bg-white flex-col lg:h-[80px] h-auto ${menuIsActive ? 'shadow-xl' : 'shadow-xl lg:shadow-none'}`} >
       {loadingPage && <Loading />}
-      <div className={`relative maxLayout flex justify-between items-center w-full z-50 transition-all bg-white ${menuIsActive ? 'lg:h-[60px] h-full' : 'h-full'}`}>
-        <div className={`${menuIsActive ? "shadow-lg" : "shadow-none"} relative maxLayout flex justify-between items-center w-full px-5 z-50 bg-white h-[60px] lg:h-full`}>
+      <div className={`relative maxLayout flex justify-between items-center w-full z-50 transition-all bg-white ${menuIsActive ? 'lg:h-[80px] h-full' : 'h-full'}`}>
+        <div className={`${menuIsActive ? "" : "shadow-none"} relative maxLayout flex justify-between items-center w-full px-5 z-50 bg-white h-[60px] lg:h-full`}>
           <Link href="https://kargosha.com/" className='h-full flex items-center lg:justify-center justify-between'>
             <Image src={Kargosha_Logo} height={35} alt='kargosha logo' className='ml-4' />
           </Link>
@@ -109,9 +110,9 @@ function Header() {
                 }
               </div>
               <div className='hidden lg:fcc'>
-                <Link href='https://kargosha.com' className='fcc ml-4'>
-                  <HiOutlineUser size={18} className='ml-1' />
-                  <div>کاربری هستم</div>
+                <Link href='https://kargosha.com' className='fcc ml-6'>
+                  <Image src={user} alt='helmet' size={10} className='ml-1 w-6 h-6' />
+                  <div>کاربر هستم</div>
                 </Link>
                 <Link href='/expert/login' className='bg-primary-500 rounded-md text-white w-[115px] h-[38px] fcc'>
                   عضویت یا ورود

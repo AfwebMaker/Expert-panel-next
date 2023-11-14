@@ -27,7 +27,7 @@ function DetailsCardTenders({ address, price, time, totalTime }) {
         </div>
         {
           !endTime && (
-            <div className='bg-primary-200 text-primary-500 text-xs rounded-full p-2 sm:px-3 sm:py-1 fcc'>
+            <div className='bg-primary-100 text-primary-500 text-xs rounded-full p-2 sm:px-3 sm:py-1 fcc'>
               درحال برگزاری
             </div>
           )

@@ -1,6 +1,6 @@
 import React from 'react'
 //components
-import Steps from './Steps'
+import Steps from '../../../_components/Steps'
 //react icons
 import { HiOutlineCollection } from 'react-icons/hi'
 

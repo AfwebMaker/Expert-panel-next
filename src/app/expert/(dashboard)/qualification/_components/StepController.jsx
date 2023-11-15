@@ -2,7 +2,7 @@ import React from 'react'
 //react icons
 import { HiCheckCircle } from 'react-icons/hi'
 
-function StepController({ currentStep, setCurrentStep, onsubmit, allSteps }) {
+function StepController({ currentStep, setCurrentStep, onsubmit, allSteps, lastStepTitle }) {
   const prePageHandler = () => {
     currentStep !== 0 && setCurrentStep(currentStep - 1)
   }
@@ -20,7 +20,7 @@ function StepController({ currentStep, setCurrentStep, onsubmit, allSteps }) {
         </>
         :
         <button type='submit' onClick={onsubmit} className='m-auto fcc w-[209px] font-medium text-sm bg-primary-100 py-2 rounded-md cursor-pointer text-primary-500'>
-          اتمام احراز صلاحیت عمومی
+          {lastStepTitle}
           <HiCheckCircle size={20} className='mr-2' />
         </button>
       }

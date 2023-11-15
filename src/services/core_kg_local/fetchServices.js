@@ -1,6 +1,5 @@
 import { dynamicApiCall } from "../dynamicApiCall";
 import { core_kg_local } from '../APIRepositories'
-import { zeroPad } from "react-countdown";
 
 const fetchServices = async (pageIndex, pageSize, type, value) => {
     const option = {

@@ -7,7 +7,8 @@ import React, { useEffect, useState } from 'react'
 import {
   HiOutlineUser,
   HiOutlineCreditCard,
-  HiOutlineOfficeBuilding
+  HiOutlineOfficeBuilding,
+  HiPlus
 } from "react-icons/hi";
 
 function DesktopNavigation() {
@@ -42,6 +43,13 @@ function DesktopNavigation() {
       description: 'سرویس های در انتظار تایید از سمت ادمین می باشند.',
       link: '/expert/qualification/waiting/',
       slug: 'waiting'
+    },
+    {
+      id: 3,
+      icon: <HiOutlineOfficeBuilding size={24} />,
+      title: 'اضافه کردن سرویس جدید',
+      link: '/expert/qualification/add-service/',
+      slug: 'add-service'
     }
   ]
 
@@ -49,41 +57,59 @@ function DesktopNavigation() {
     <div className="hidden md:block xl:ml-5 xl:w-[350px] px-5 lg:px-0 py-5 xl:py-0">
       <nav>
         <ul className="font-medium text-lg flex flex-wrap justify-between">
-          {navigation_data.map((item) => (
-            <li
-              key={item.id}
-              className={`w-[49%] justify-between xl:w-[340px] flex items-center mb-2 h-[85px] rounded-lg ${linkParts.includes(item.slug) ? "bg-white" : ""
-                }`}
-            >
-              <Link
-                className={`w-full flex justify-between items-center py-2 px-2 h-full ${!(linkParts.includes('first-time') || linkParts.includes('steps')) ? '' : 'cursor-default'}`}
-                href={!(linkParts.includes('first-time') || linkParts.includes('steps')) ? item.link : '#'}
+          {navigation_data.map((item, i) => (
+            (navigation_data.length - 1 > i) ?
+              <li
+                key={item.id}
+                className={`w-[49%] justify-between xl:w-[340px] flex items-center mb-2 h-[85px] rounded-lg ${linkParts.includes(item.slug) ? "bg-white" : ""
+                  }`}
               >
-                <div className="flex items-center">
-                  <div
-                    className={`w-16 h-16 ml-5 flex flex-shrink-0 ${linkParts.includes(item.slug)
-                      ? "bg-[#F8F9F9] text-primary-500"
-                      : (linkParts.includes('first-time') || linkParts.includes('steps'))
-                        ? "bg-gray-100 text-cf-200"
-                        : "bg-white"
-                      } rounded-lg fcc`}
-                  >
-                    {item.icon}
+                <Link
+                  className={`w-full flex justify-between items-center py-2 px-2 h-full ${!(linkParts.includes('first-time') || linkParts.includes('steps')) ? '' : 'cursor-default'}`}
+                  href={!(linkParts.includes('first-time') || linkParts.includes('steps')) ? item.link : '#'}
+                >
+                  <div className="flex items-center">
+                    <div
+                      className={`w-16 h-16 ml-5 flex flex-shrink-0 ${linkParts.includes(item.slug)
+                        ? "bg-[#F8F9F9] text-primary-500"
+                        : (linkParts.includes('first-time') || linkParts.includes('steps'))
+                          ? "bg-gray-100 text-cf-200"
+                          : "bg-white"
+                        } rounded-lg fcc`}
+                    >
+                      {item.icon}
+                    </div>
+                    <div
+                      className={`${linkParts.includes(item.slug)
+                        ? "text-primary-500"
+                        : (linkParts.includes('first-time') || linkParts.includes('steps'))
+                          ? "text-cf-300"
+                          : "text-cf-400"
+                        }`}
+                    >
+                      <div className='text-sm'>{item.title}</div>
+                      <div className={`text-xs font-normal mt-1 ${linkParts.includes(item.slug) ? '' : 'text-cf-300'}`}>{item.description}</div>
+                    </div>
                   </div>
-                  <div
-                    className={`${linkParts.includes(item.slug)
-                      ? "text-primary-500"
-                      : (linkParts.includes('first-time') || linkParts.includes('steps'))
-                        ? "text-cf-300"
-                        : "text-cf-400"
-                      }`}
-                  >
-                    <div className='text-sm'>{item.title}</div>
-                    <div className={`text-xs font-normal mt-1 ${linkParts.includes(item.slug) ? '' : 'text-cf-300'}`}>{item.description}</div>
+                </Link>
+              </li> :
+              <li
+                key={item.id}
+                className={`w-[49%] fcc xl:w-[340px] flex items-center mb-2 h-[85px] rounded-lg ${!(linkParts.includes('first-time') || linkParts.includes('steps')) ? '' : 'hidden'}`}
+              >
+                <Link
+                  className={`w-[65%] rounded-full fcc py-2 px-2 h-[40%] ${linkParts.includes(item.slug) ? "bg-gray-200" : "bg-primary-100"
+                    }`}
+                  href={!(linkParts.includes(item.slug)) ? item.link : '#'}
+                >
+                  <div className="flex items-center">
+                    <div className={`fcc ${linkParts.includes(item.slug) ? "text-gray-500" : "text-primary-500"}`} >
+                      <div className='text-sm'>{item.title}</div>
+                      <HiPlus size={20} className='mr-2' />
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </li>
+                </Link>
+              </li>
           ))}
         </ul>
       </nav>

@@ -1,11 +1,11 @@
 import { dynamicApiCall } from "../dynamicApiCall";
-import { category_kg_local } from '../APIRepositories'
+import { core_kg_local } from '../APIRepositories'
 
-const slider = async () => {
+const getRequestsJob = async (data) => {
     const option = {
-        axios: category_kg_local,
+        axios: core_kg_local,
         method: 'GET',
-        endpoint: '/mainPage/slider'
+        endpoint: `/SubmitARequest/GetRequestsJob/${data}`
     }
 
     const response = await dynamicApiCall(option)
@@ -16,4 +16,4 @@ const slider = async () => {
     }
 };
 
-export default slider;
+export default getRequestsJob;

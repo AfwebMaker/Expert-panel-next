@@ -3,36 +3,19 @@ import React from 'react'
 import InfoCard from "@/app/_components/InfoCard"
 import InputFilter from "./InputFilter"
 import ServicesCard from "../../_components/ServicesCard"
+//redux
+import { useSelector } from "react-redux";
+
 
 function NewOrders({ data }) {
     console.log("NewOrder", data)
+    const type_job = useSelector(state => state.staticVariable.type_job)
 
-    function serviceType(number) {
-        let status;
-        switch (number) {
-            case 1:
-                status = "فنی و آیتمی";
-                break;
-            case 2:
-                status = "روز مزد";
-                break;
-            case 3:
-                status = "خدمات فوری";
-                break;
-            case 4:
-                status = "خرده کار";
-                break;
-            case 5:
-                status = "پیمان کار";
-                break;
-            case 6:
-                status = "بازسازی";
-                break;
-            default:
-                status = "نا معلوم"
-        }
-        return status;
+    const type = (requestType) => {
+        const result = type_job.find((item) => item.id === requestType)
+        return result.text;
     }
+
     return (
         <div className='w-full'>
             <InfoCard styleCustom="text-blue-600 w-full">
@@ -45,9 +28,9 @@ function NewOrders({ data }) {
                         <ServicesCard
                             key={item.id}
                             state={"New"}
-                            src={item.job_minimal ? item.job_minimal : item.job_mainPicture }
+                            src={item.job_minimal ? item.job_minimal : item.job_mainPicture}
                             title={item.job_name}
-                            serviceType={serviceType(item.requestType)}
+                            serviceType={type(item.requestType)}
                             address={item.address}
                             meterage={item.area}
                             description={item.description}
@@ -56,6 +39,7 @@ function NewOrders({ data }) {
                     ))
                 }
             </ul>
+
         </div>
     )
 }

@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import layoutConfigReducer from "./features/layout/layoutConfigSlice";
 import getExpertInfoReducer from "./features/getExpertInfo/getExpertInfoSlice";
+import staticVariableReducer from "./features/staticVariable/staticVariableSlice";
 
 
 export const store = configureStore({
   reducer: {
     layoutConfig: layoutConfigReducer,
-    getExpertInfo: getExpertInfoReducer
+    getExpertInfo: getExpertInfoReducer,
+    staticVariable: staticVariableReducer,
   },
 });
 

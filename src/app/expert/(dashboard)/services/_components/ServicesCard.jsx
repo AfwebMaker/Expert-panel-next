@@ -9,6 +9,7 @@ import Link from 'next/link'
 
 
 function ServicesCard({ state, src, slug, title, serviceType, address, meterage, description, price, time, totalTime, avatar, name, startDate, startTime }) {
+    console.log("startTime",startTime)
 
     return (
         <li className='col-span-12 w-full h-[410px] sm:h-[170px] rounded-lg border border-gray-200 bg-white shadow-lg fcc overflow-hidden'>
@@ -47,7 +48,7 @@ function ServicesCard({ state, src, slug, title, serviceType, address, meterage,
                         state === "Tenders" &&
                         <DetailsCardTenders
                             address={address}
-                            price={"۱٤،٥۰۰،۰۰۰ "}
+                            price={price}
                             time={time}
                             totalTime={""}
                         />
@@ -57,9 +58,9 @@ function ServicesCard({ state, src, slug, title, serviceType, address, meterage,
                         <DetailsCardActive
                             avatar={""}
                             name={"سید میثاق حمزه زاده موسوی"}
-                            address={"تهران، منطقه ۷، سهرودی شمالی"}
-                            startDate={"۲۰ مهر ۱٤۰۲"}
-                            startTime={"۱٤:۳۰"}
+                            address={address}
+                            startDate={startDate}
+                            startTime={startTime}
                         />
                     }
                 </div>

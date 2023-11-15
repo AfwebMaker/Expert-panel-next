@@ -16,7 +16,7 @@ function DetailsCardTenders({ address, price, time, totalTime }) {
         <HiSpeakerphone className='text-primary-500' size={20} />
         <div className='text-xs'>
           <span className='text-cf-300'>قیمت پیشنهادی شما: </span>
-          <span className='text-cf-900'>{price} تومان</span>
+          <span className='text-cf-900'>{price} ریال</span>
         </div>
       </div>
       <div className='flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-y-0 mb-3'>

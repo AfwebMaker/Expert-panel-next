@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { HiLocationMarker, HiCalendar } from "react-icons/hi";
 
 function DetailsCardActive({ avatar, name, address, startDate, startTime }) {
+  console.log("startTime",startTime)
   return (
     <div className='w-full mt-3'>
       <div className='flex items-center gap-x-2 mb-3'>

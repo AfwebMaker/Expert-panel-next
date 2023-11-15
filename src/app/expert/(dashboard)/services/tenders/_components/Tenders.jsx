@@ -2,35 +2,18 @@ import React from 'react'
 // components
 import InfoCard from "@/app/_components/InfoCard"
 import ServicesCard from "../../_components/ServicesCard"
+// redux
+import { useSelector } from 'react-redux'
+// function 
+import formatPrice from "@/src/functions/formatPrice"
 
 function Tenders({ data }) {
     console.log("Tenders", data)
+    const type_job = useSelector(state => state.staticVariable.type_job)
 
-    function serviceType(number) {
-        let status;
-        switch (number) {
-            case 1:
-                status = "فنی و آیتمی";
-                break;
-            case 2:
-                status = "روز مزد";
-                break;
-            case 3:
-                status = "خدمات فوری";
-                break;
-            case 4:
-                status = "خرده کار";
-                break;
-            case 5:
-                status = "پیمان کار";
-                break;
-            case 6:
-                status = "بازسازی";
-                break;
-            default:
-                status = "نا معلوم"
-        }
-        return status;
+    const type = (requestType) => {
+        const result = type_job.find((item) => item.id === requestType)
+        return result.text;
     }
 
     return (
@@ -46,9 +29,10 @@ function Tenders({ data }) {
                             state={"Tenders"}
                             src={item.job_minimal ? item.job_minimal : item.job_mainPicture}
                             title={item.job_name}
-                            serviceType={serviceType(item.requestType)}
+                            serviceType={type(item.requestType)}
                             address={item.address}
                             time={item.time_Reminding_Seconds_SelectExpert * 1000}
+                            price={formatPrice(item.priceExpert.priceMaterial + item.priceExpert.priceWage)}
                         />
                     ))
                 }

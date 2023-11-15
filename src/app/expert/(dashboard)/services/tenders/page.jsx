@@ -41,7 +41,7 @@ function Page() {
 
   useEffect(() => {
     dispatch({ type: 'SET_LOADING', payload: true });
-    fetchServices(state.page, 4, 1, state.searchInput)
+    fetchServices(state.page, 4, 2, state.searchInput)
       .then((res) => {
         console.log("New", res.data.data);
         dispatch({ type: 'SET_DATA', payload: res.data.data.lstData });

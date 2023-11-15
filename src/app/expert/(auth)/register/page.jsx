@@ -11,7 +11,7 @@ import Step3 from './_components/Step3'
 import Step4 from './_components/Step4'
 import Step5 from './_components/Step5'
 //assets
-import Kargosha_Logo from '@/public/images/public/Kargosha_Logo.svg'
+import Kargosha_Logo from '@/public/images/public/logo/Kargosha_Logo.svg'
 import Arrow_right from '@/public/icons/Arrow_right.svg'
 import backGround from '@/public/images/login/backGround.png'
 

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 //react icons
-import { HiOutlineUserCircle, HiOutlineMenuAlt4, HiOutlineX, HiOutlineBell, HiOutlineMail, HiUserCircle, HiOutlineUser } from 'react-icons/hi'
+import { HiOutlineUserCircle, HiOutlineMenuAlt4, HiOutlineX, HiUserCircle } from 'react-icons/hi'
 //assets
 import Kargosha_Logo from '@/public/images/public/logo/Kargosha_Logo.svg'
 import user from '@/public/icons/user_landing.svg'
@@ -17,7 +17,6 @@ import Loading from '@/src/app/_components/Loading';
 import getCookie from '@/src/functions/getCookie'
 //services
 import profileBase from '@/src/services/person_kg_local/profileBase'
-import openClose from '@/src/services/category_kg_local/openClose'
 
 function Header() {
   const isLogin = getCookie("TOKEN")
@@ -33,18 +32,6 @@ function Header() {
     profileBase()
       .then((res) => {
         setData(res.data.data)
-      })
-      .catch(() => {
-      })
-      .finally(() => {
-        setLoadingPage(false)
-      })
-  }, [])
-
-  useEffect(() => {
-    openClose()
-      .then((res) => {
-        setSubMenuData(res.data.data)
       })
       .catch(() => {
       })

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 //components
 import Header from './_components/Header'
-import StepController from './_components/StepController'
+import StepController from '../../_components/StepController'
 //react icons
 import { HiOutlineBadgeCheck } from 'react-icons/hi'
 
@@ -70,6 +70,7 @@ function Page() {
             setCurrentStep={setCurrentStep}
             onsubmit={onsubmit}
             allSteps={stepInformation.length}
+            lastStepTitle={'اتمام احراز صلاحیت عمومی'}
           />
         </div>
       </div>

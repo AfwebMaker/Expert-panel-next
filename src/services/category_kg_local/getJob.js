@@ -1,11 +1,11 @@
 import { dynamicApiCall } from "../dynamicApiCall";
 import { category_kg_local } from '../APIRepositories'
 
-const mainPageSearch = async (data) => {
+const getJob = async () => {
     const option = {
         axios: category_kg_local,
         method: 'GET',
-        endpoint: `/mainPage/Search?value=${data}`
+        endpoint: '/Job'
     }
 
     const response = await dynamicApiCall(option)
@@ -16,4 +16,4 @@ const mainPageSearch = async (data) => {
     }
 };
 
-export default mainPageSearch;
+export default getJob;

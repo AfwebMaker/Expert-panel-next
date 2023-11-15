@@ -10,7 +10,7 @@ import CheckBoxMultiple from "@/app/_components/inputs/checkBoxMultiple/CheckBox
 import InputTextarea from "@/app/_components/inputs/inputTextarea/InputTextarea";
 import UploadFile from "@/app/_components/inputs/uploadFile/UploadFile";
 
-function DynamicInputs({ state, title, placeholder, className, id, name, required, inputType, formik }) {
+function DynamicInputs({ state, title, placeholder, className, id, name, required, inputType, formik, list }) {
 
   function determiningStatus(number) {
     let status;
@@ -58,6 +58,7 @@ function DynamicInputs({ state, title, placeholder, className, id, name, require
           title={title}
           state={determiningStatus(state)}
           required={required}
+          list={list}
           className={className}
           placeholder={placeholder}
           name={name}

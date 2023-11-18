@@ -32,15 +32,15 @@ function MobileNavigation() {
         <div className='ml-2'>احراز صلاحیت</div>
         <HiOutlineBadgeCheck size={24} />
       </div>
-      <div className='w-full flex justify-between font-bold text-xs px-5 mb-5'>
+      <div className='w-full flex justify-between font-bold text-xs px-5 mb-6'>
         <div className='fcc text-cf-300'>
           <HiOutlineBriefcase size={20} className='ml-1' />
           <span>سرویس های من</span>
         </div>
-        <div className='fcc text-primary-500'>
+        <Link href='/expert/qualification/add-service' className='fcc text-primary-500'>
           <span>اضافه کردن سرویس جدید</span>
           <HiOutlinePlusCircle size={20} className='mr-1' />
-        </div>
+        </Link>
       </div>
       <ScrollContainer className='scroll-container whitespace-nowrap' >
         <ul className='fcc font-bold text-sm border-b border-gray-400 w-full min-w-[370px]'>

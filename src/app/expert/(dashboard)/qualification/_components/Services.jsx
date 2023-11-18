@@ -1,5 +1,6 @@
 //react icons
-import { HiCheckCircle, HiXCircle, HiOutlinePencilAlt, HiExclamationCircle, HiOutlineTrash } from "react-icons/hi";
+import Link from "next/link";
+import { HiCheckCircle, HiXCircle, HiOutlinePencilAlt, HiExclamationCircle, HiOutlineClipboardList } from "react-icons/hi";
 
 export default function Services({ products }) {
     return (
@@ -76,16 +77,16 @@ export default function Services({ products }) {
 
                                     <div className="mt-6 flex flex-row-reverse items-center space-x-4 divide-x divide-gray-200 border-t border-gray-200 pt-4 text-sm font-medium sm:mt-0 sm:border-none sm:pt-0">
                                         <div className="flex flex-1 justify-center">
-                                            <a href="#" className="whitespace-nowrap flex items-center text-blue-500 hover:text-blue-400">
-                                                حذف سرویس
-                                                <HiOutlineTrash size={18} className="mr-2" />
-                                            </a>
+                                            <Link href="#" className="whitespace-nowrap flex items-center text-blue-500 hover:text-blue-400">
+                                                مشاهده قرار داد
+                                                <HiOutlineClipboardList size={18} className="mr-2" />
+                                            </Link>
                                         </div>
                                         <div className="flex flex-1 justify-center">
-                                            <a href="#" className="whitespace-nowrap flex items-center text-blue-500 hover:text-blue-400">
+                                            <Link href={product.href} className="whitespace-nowrap flex items-center text-blue-500 hover:text-blue-400">
                                                 مشاهده سرویس
                                                 <HiOutlinePencilAlt size={18} className="mr-2" />
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

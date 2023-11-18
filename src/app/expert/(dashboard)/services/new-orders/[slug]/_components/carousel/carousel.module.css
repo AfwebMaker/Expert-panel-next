@@ -4,7 +4,6 @@ div.serviceExpertSlider > div.splide {
     border-radius: 0px;
     overflow: hidden;
     padding: 0;
-    /* background-color: brown; */
   }  
 
   div.serviceExpertSlider > div.splide > div.splide__track > ul.splide__list li.splide__slide {
@@ -36,6 +35,14 @@ div.serviceExpertSlider > div.splide {
     outline: none;
   }
 
+  div.serviceExpertSlider > div.splide > div.splide__arrows > button.splide__arrow {
+    color: white !important;
+    outline: none;
+    border: none;
+    width: 20px;
+    height: 20px;
+  }
+
   /* ____________________________serviceExpertSliderStrip_________________________________ */
 
   div.serviceExpertSliderStrip > div.splide {
@@ -47,15 +54,22 @@ div.serviceExpertSlider > div.splide {
     /* background-color: brown; */
   }  
 
+  div.serviceExpertSliderStrip > div.splide > div.splide__track {
+    height: 60px;
+  }
+
   div.serviceExpertSliderStrip > div.splide > div.splide__track > ul.splide__list li.splide__slide {
     display: flex;
     align-items: center;
-    border-radius: 12px;
+    border-radius: 8px;
+    height: 60px;
     /* justify-content: start; */
   }
+
   
   div.serviceExpertSliderStrip > div.splide > ul.splide__pagination {
     bottom: 6px;
+    height: 100%;
   }
   
   div.serviceExpertSliderStrip > div.splide > ul.splide__pagination li > button.splide__pagination__page {

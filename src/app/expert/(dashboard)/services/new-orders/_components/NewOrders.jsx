@@ -27,6 +27,7 @@ function NewOrders({ data }) {
                     data.map((item) => (
                         <ServicesCard
                             key={item.id}
+                            slug={item.id}
                             state={"New"}
                             src={item.job_minimal ? item.job_minimal : item.job_mainPicture}
                             title={item.job_name}

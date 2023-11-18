@@ -13,7 +13,7 @@ function Page() {
       id: 1,
       name: 'نقاشی',
       state: 0,
-      href: '#',
+      href: '/expert/qualification/services/1',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/order-history-page-03-product-01.jpg',
       imageAlt:
         'Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',
@@ -22,7 +22,7 @@ function Page() {
       id: 2,
       name: 'نقاشی',
       state: 0,
-      href: '#',
+      href: '/expert/qualification/services/2',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/order-history-page-03-product-01.jpg',
       imageAlt:
         'Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',
@@ -31,7 +31,7 @@ function Page() {
       id: 3,
       name: 'نقاشی',
       state: 0,
-      href: '#',
+      href: '/expert/qualification/services/3',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/order-history-page-03-product-01.jpg',
       imageAlt:
         'Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',
@@ -40,7 +40,7 @@ function Page() {
       id: 4,
       name: 'نقاشی',
       state: 0,
-      href: '#',
+      href: '/expert/qualification/services/4',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/order-history-page-03-product-01.jpg',
       imageAlt:
         'Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',
@@ -49,7 +49,7 @@ function Page() {
       id: 5,
       name: 'نقاشی',
       state: 0,
-      href: '#',
+      href: '/expert/qualification/services/5',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/order-history-page-03-product-01.jpg',
       imageAlt:
         'Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.',

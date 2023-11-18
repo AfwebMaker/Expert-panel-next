@@ -19,7 +19,6 @@ function Step2({ currentStep, setCurrentStep, stepInformation }) {
       city: "1"
     },
     onSubmit: (values) => {
-      console.log(values)
       setCurrentStep(currentStep + 1)
     },
   });

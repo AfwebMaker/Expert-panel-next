@@ -49,9 +49,9 @@ function Step1({ currentStep, setCurrentStep, stepInformation }) {
       requestType: ""
     },
     onSubmit: (values) => {
-      console.log(values)
+      localStorage.setItem('services', JSON.stringify({job: values.job, requestType: values.requestType}))
       setCurrentStep(currentStep + 1)
-    },
+    }
   });
 
   //get list of job
@@ -135,11 +135,11 @@ function Step1({ currentStep, setCurrentStep, stepInformation }) {
         </>
       }
 
-      {information.map((item) => (
-        <>
+      {information.map((item, i) => (
+        <div key={i}>
           <div className='font-bold text-xs md:text-sm text-primary-500 mb-2'>{item.title}</div>
           <div className='font-bold text-xs md:text-sm text-cf-300 mb-4'>{item.description}</div>
-        </>
+        </div>
       ))}
 
       <StepController
@@ -147,7 +147,6 @@ function Step1({ currentStep, setCurrentStep, stepInformation }) {
         setCurrentStep={setCurrentStep}
         onsubmit={formik.submitForm}
         allSteps={stepInformation.length}
-        lastStepTitle={'اضافه کردن سرویس'}
       />
     </div>
   )

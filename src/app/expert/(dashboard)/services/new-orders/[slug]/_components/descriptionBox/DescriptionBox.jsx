@@ -27,7 +27,7 @@ function DescriptionBox({ data }) {
                 }
             </ul>
             <div className='flex items-center justify-end w-full'>
-                <div onClick={() => setIsOpen(true)} className='h-full flex items-center text-xs text-cf-300 gap-x-1'>
+                <div onClick={() => setIsOpen(true)} className='h-full cursor-pointer flex items-center text-xs text-cf-300 hover:text-primary-500 transition-all duration-300 gap-x-1'>
                     <span>مشاهده بیشتر</span>
                     <HiOutlineChevronLeft />
                 </div>

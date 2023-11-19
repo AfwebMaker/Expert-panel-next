@@ -42,14 +42,24 @@ function Step1({ currentStep, setCurrentStep, stepInformation }) {
     }
   ]
 
+  //validation inputs
+  const validationSchema = Yup.object({
+    job: Yup.string()
+      .required(
+        "لطفا نام خانوادگی خود را به درستی وارد کنید."
+      ),
+    requestType: jobTypeList ? Yup.string().required("لطفا نام خانوادگی خود را به درستی وارد کنید.") : Yup.string(),
+  });
+
   //input handler
   const formik = useFormik({
     initialValues: {
       job: "",
       requestType: ""
     },
+    validationSchema,
     onSubmit: (values) => {
-      localStorage.setItem('services', JSON.stringify({job: values.job, requestType: values.requestType}))
+      localStorage.setItem('services', JSON.stringify({ job: values.job, requestType: values.requestType }))
       setCurrentStep(currentStep + 1)
     }
   });

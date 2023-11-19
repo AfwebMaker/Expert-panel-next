@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 //components
-import TimerDown from "../../_components/TimerDown"
+import TimerDown from "../../../../../_components/TimerDown"
 // react icons
 import { HiLocationMarker, HiSpeakerphone, HiClock } from "react-icons/hi";
 

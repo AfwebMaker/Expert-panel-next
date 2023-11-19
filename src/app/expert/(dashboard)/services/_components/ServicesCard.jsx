@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 // components
-import TimerDown from "./TimerDown"
+import TimerDown from "../../../../_components/TimerDown"
 import DetailsCardNew from '../new-orders/_components/DetailsCardNew'
 import DetailsCardTenders from '../tenders/_components/DetailsCardTenders'
 import DetailsCardActive from '../active-orders/_components/DetailsCardActive'

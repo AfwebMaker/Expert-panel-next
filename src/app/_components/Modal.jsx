@@ -25,10 +25,10 @@ function Modal({ isOpen, setIsOpen, w, h, children }) {
             <div
                 onClick={(e) => e.stopPropagation()}
                 style={{ width: w, height: h }}
-                className={`bg-white rounded-xl relative p-5 transition-all duration-300 transform ${isAnimating ? (isOpen ? 'scale-90 opacity-0' : 'scale-100 opacity-100') : 'scale-100 opacity-100'} origin-center`}>
+                className={`bg-gray-50 rounded-xl relative px-5 pb-5 pt-8 transition-all duration-300 transform ${isAnimating ? (isOpen ? 'scale-90 opacity-0' : 'scale-100 opacity-100') : 'scale-100 opacity-100'} origin-center`}>
                 {children}
                 <div
-                    className="w-6 h-6 fcc cursor-pointer rounded-full bg-red-200 text-red-500 absolute -top-1.5 -left-1.5"
+                    className="w-6 h-6 fcc cursor-pointer text-gray-500 absolute top-1.5 left-1.5"
                     onClick={handleClose}
                 >
                     <HiX />

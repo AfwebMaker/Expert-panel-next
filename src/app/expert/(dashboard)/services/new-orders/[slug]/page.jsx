@@ -6,6 +6,8 @@ import TitleBox from "./_components/TitleBox"
 import BasicDescriptionBox from "./_components/BasicDescriptionBox"
 import DescriptionBox from "./_components/descriptionBox/DescriptionBox"
 import FurtherDetailsBox from "./_components/furtherDetails/FurtherDetailsBox"
+import TenderBox from "./_components/tenderBox/TenderBox"
+import ExecutionTimeBox from "./_components/executionTimeBox/ExecutionTimeBox"
 //redux
 import { useSelector } from "react-redux";
 
@@ -16,7 +18,7 @@ const data = [
 
 const text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur asperiores quo incidunt, earum aliquam veniam cumque alias dolore amet delectus a nulla, vitae magni optio totam distinctio molestiae ea et quam natus temporibus perferendis iusto magnam illum! Commodi error explicabo eos deleniti maxime amet in eveniet nam velit ut, magni quasi. Quia eaque et eos iure. Pariatur hic quisquam accusamus tenetur maxime! Culpa, ex ratione, eaque maxime perferendis totam error ullam ipsam eos nemo architecto minus voluptatibus repellendus, dolorum neque temporibus obcaecati impedit? Architecto, facere perferendis voluptas consequuntur esse dignissimos optio alias facilis debitis, culpa quam porro ducimus, enim doloremque."
 
-function page() {
+function Page() {
     const type_job = useSelector(state => state.staticVariable.type_job)
 
     const type = (requestType) => {
@@ -35,11 +37,14 @@ function page() {
                         <DescriptionBox data={data} title={"نوع شیشه"} description={"دو جداره - سکوریت"} />
                         <FurtherDetailsBox text={text} />
                     </div>
-                    <div className='bg-fuchsia-400 col-span-12 lg:col-span-6 p-5'></div>
+                    <div className='bg-fuchsia-400 col-span-12 lg:col-span-6'>
+                        <TenderBox time={2 * 24 * 60 * 60 * 1000} minPrice={20000000} maxPrice={50000000} link={"#"} />
+                        <ExecutionTimeBox />
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
 
-export default page;
+export default Page;

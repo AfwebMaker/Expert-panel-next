@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install --legacy-peer-deps
-RUN npm i sharp
+RUN npm i sharp --legacy-peer-deps
 
 COPY . .
 

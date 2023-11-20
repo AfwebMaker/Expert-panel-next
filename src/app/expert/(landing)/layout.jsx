@@ -1,6 +1,6 @@
 import "../../globals.css";
 // font
-import iranYekanFont from "@/constants/localFonts";
+import iranYekanFont from "/src/constants/localFonts";
 // components
 import Footer from "./_layout/footer/Footer"
 import Header from "./_layout/header/Header";

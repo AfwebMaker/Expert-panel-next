@@ -7,7 +7,7 @@ import { HiOutlineChevronRight } from 'react-icons/hi'
 //components
 import BankForm from './_components/BankForm'
 //services
-import profileBase from '@/src/services/person_kg_local/profileBase'
+import profileBase from '/src/services/person_kg_local/profileBase'
 
 function Page() {
   const [formState, setFormState] = useState(1)

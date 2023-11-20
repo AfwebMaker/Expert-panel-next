@@ -3,12 +3,12 @@
 //react
 import React, { useEffect } from "react";
 //components
-import InputText from "@/app/_components/inputs/inputText/InputText";
-import DatePicker from "@/app/_components/inputs/datePicker/CustomDatePicker";
-import CheckBox from "@/app/_components/inputs/checkBox/CheckBox";
-import CheckBoxMultiple from "@/app/_components/inputs/checkBoxMultiple/CheckBoxMultiple";
-import InputTextarea from "@/app/_components/inputs/inputTextarea/InputTextarea";
-import UploadFile from "@/app/_components/inputs/uploadFile/UploadFile";
+import InputText from "/src/app/_components/inputs/inputText/InputText";
+import DatePicker from "/src/app/_components/inputs/datePicker/CustomDatePicker";
+import CheckBox from "/src/app/_components/inputs/checkBox/CheckBox";
+import CheckBoxMultiple from "/src/app/_components/inputs/checkBoxMultiple/CheckBoxMultiple";
+import InputTextarea from "/src/app/_components/inputs/inputTextarea/InputTextarea";
+import UploadFile from "/src/app/_components/inputs/uploadFile/UploadFile";
 
 function DynamicInputs({ state, title, placeholder, className, id, name, required, inputType, formik, list }) {
 

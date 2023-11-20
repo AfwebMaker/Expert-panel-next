@@ -3,7 +3,7 @@ import Image from "next/image";
 //react icons
 import { HiOutlineCloudUpload, HiCheckCircle, HiXCircle } from "react-icons/hi";
 // functions
-import getCookie from "@/src/functions/getCookie";
+import getCookie from "/src/functions/getCookie";
 // axios
 import axios from "axios";
 // components

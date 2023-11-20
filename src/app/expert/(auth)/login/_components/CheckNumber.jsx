@@ -4,16 +4,16 @@ import React from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //assets
-import X_circle from '@/public/icons/X_circle.svg'
+import X_circle from '/public/icons/X_circle.svg'
 import Link from 'next/link'
 //services
-import searchNumber from '@/services/person_kg_local/search'
-import sendOtp from '@/services/register_kg_local/phoneNumber'
+import searchNumber from '/src/services/person_kg_local/search'
+import sendOtp from '/src/services/register_kg_local/phoneNumber'
 //functions
-import setCookie from '@/src/functions/setCookie'
+import setCookie from '/src/functions/setCookie'
 //redux loading
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 //validation
 const validationSchema = Yup.object().shape({

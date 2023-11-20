@@ -2,7 +2,7 @@ import React from 'react'
 // react icons
 import { HiLocationMarker, HiArrowsExpand } from "react-icons/hi";
 // function
-import shortText from "@/src/functions/shortText"
+import shortText from "/src/functions/shortText"
 
 function DetailsCardNew({ address, meterage, description }) {
   return (

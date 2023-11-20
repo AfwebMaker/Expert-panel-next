@@ -1,7 +1,7 @@
 import React from 'react'
 //components
-import SwitchInput from '@/app/_components/SwitchInput'
-import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
+import SwitchInput from '/src/app/_components/SwitchInput'
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs'
 
 function LegalForm({ formik, formState, legalFormIsActive, setLegalFormIsActive }) {
 

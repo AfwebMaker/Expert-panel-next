@@ -6,13 +6,13 @@ import { useRouter } from "next/navigation";
 // components
 import SendNewTicketBtn from "./SendNewTicketBtn";
 import MasterTicket from "./MasterTicket";
-import Loading from "@/app/_components/Loading"
+import Loading from "/src/app/_components/Loading"
 // react icons
 import { HiOutlineChat } from "react-icons/hi";
 // scroll
 import ScrollContainer from 'react-indiana-drag-scroll'
 // services
-import fetchTickets from "@/src/services/ticket_kg_local/fetchTickets";
+import fetchTickets from "/src/services/ticket_kg_local/fetchTickets";
 
 function DesktopNavigation() {
   const [dataTickets, setDataTickets] = useState([]);

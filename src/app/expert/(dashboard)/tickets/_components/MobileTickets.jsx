@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react'
 //components
 import MasterTicket from "./MasterTicket"
-import Loading from "@/app/_components/Loading"
+import Loading from "/src/app/_components/Loading"
 // services
-import fetchTickets from "@/src/services/ticket_kg_local/fetchTickets";
+import fetchTickets from "/src/services/ticket_kg_local/fetchTickets";
 
 
 function MobileTickets() {

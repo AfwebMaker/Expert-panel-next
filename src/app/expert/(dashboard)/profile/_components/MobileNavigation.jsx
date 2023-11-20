@@ -14,7 +14,7 @@ import {
   HiOutlineLockOpen
 } from "react-icons/hi";
 //components
-import Stars from '@/app/_components/Stars'
+import Stars from '/src/app/_components/Stars'
 
 function mobileNavigation({ data }) {
 

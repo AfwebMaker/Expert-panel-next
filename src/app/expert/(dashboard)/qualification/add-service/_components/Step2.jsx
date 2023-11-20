@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 //components
-import DynamicInputs from '@/app/_components/inputs/DynamicInputs'
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs'
 import StepController from '../../_components/StepController'
 //redux
 import { useDispatch } from 'react-redux';
-// import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+// import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 function Step2({ currentStep, setCurrentStep, stepInformation }) {
   const [jobList, setJobList] = useState(true);

@@ -5,17 +5,17 @@ import Image from 'next/image'
 //components
 import StepController from './StepController'
 //assets
-import Clipboard_list from '@/public/icons/Clipboard_list.svg'
-import Clipboard_check from '@/public/icons/Clipboard_check.svg'
-import Clipboard from '@/public/icons/Clipboard.svg'
+import Clipboard_list from '/public/icons/Clipboard_list.svg'
+import Clipboard_check from '/public/icons/Clipboard_check.svg'
+import Clipboard from '/public/icons/Clipboard.svg'
 //services
-import addLocations from '@/services/register_kg_local/addLocations'
-import stepInformation from '@/services/register_kg_local/stepInformation'
+import addLocations from '/src/services/register_kg_local/addLocations'
+import stepInformation from '/src/services/register_kg_local/stepInformation'
 //functions
-import getCookie from '@/src/functions/getCookie'
+import getCookie from '/src/functions/getCookie'
 import { useDispatch } from 'react-redux'
-import Loading from '@/src/app/_components/Loading'
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice'
+import Loading from '/src/app/_components/Loading'
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice'
 
 const services = [
     {

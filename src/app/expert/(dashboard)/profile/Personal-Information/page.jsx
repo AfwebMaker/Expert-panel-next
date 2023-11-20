@@ -8,14 +8,14 @@ import { HiPencilAlt, HiOutlineChevronRight } from 'react-icons/hi'
 import Forms from './_components/Forms'
 import Image from 'next/image'
 // function
-import getCookie from '@/src/functions/getCookie'
+import getCookie from '/src/functions/getCookie'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 //loading redux
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 //services
-import profileBase from '@/src/services/person_kg_local/profileBase'
+import profileBase from '/src/services/person_kg_local/profileBase'
 
 function Page() {
   const dispatch = useDispatch()

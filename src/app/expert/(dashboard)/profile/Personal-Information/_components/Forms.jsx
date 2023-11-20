@@ -9,16 +9,16 @@ import { HiOutlineFingerPrint } from 'react-icons/hi'
 //components
 import InformationForm from './InformationForm'
 import LegalForm from './LegalForm'
-import Button from '@/app/_components/Button'
+import Button from '/src/app/_components/Button'
 // functions
-import getExpertInfo from '@/services/person_kg_local/getExpertInfo'
-import updateExpertInfo from '@/services/person_kg_local/updateExpertInfo'
+import getExpertInfo from '/src/services/person_kg_local/getExpertInfo'
+import updateExpertInfo from '/src/services/person_kg_local/updateExpertInfo'
 import toast from 'react-hot-toast';
-import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs';
 //loading redux
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
-import Loading from '@/src/app/_components/Loading';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
+import Loading from '/src/app/_components/Loading';
 
 function Forms({ setAvatar, avatar, formState }) {
     const dispatch = useDispatch()

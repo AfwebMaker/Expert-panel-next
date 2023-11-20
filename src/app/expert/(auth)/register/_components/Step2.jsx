@@ -5,17 +5,17 @@ import Image from 'next/image'
 //components
 import StepController from './StepController'
 //assets
-import Clipboard_list from '@/public/icons/Clipboard_list.svg'
-import Clipboard_check from '@/public/icons/Clipboard_check.svg'
-import Clipboard from '@/public/icons/Clipboard.svg'
+import Clipboard_list from '/public/icons/Clipboard_list.svg'
+import Clipboard_check from '/public/icons/Clipboard_check.svg'
+import Clipboard from '/public/icons/Clipboard.svg'
 //services
-import addActivity from '@/services/register_kg_local/addActivity'
-import stepInformation from '@/services/register_kg_local/stepInformation'
+import addActivity from '/src/services/register_kg_local/addActivity'
+import stepInformation from '/src/services/register_kg_local/stepInformation'
 //functions
-import getCookie from '@/src/functions/getCookie'
-import Loading from '@/src/app/_components/Loading'
+import getCookie from '/src/functions/getCookie'
+import Loading from '/src/app/_components/Loading'
 import { useDispatch } from 'react-redux'
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice'
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice'
 
 const services = [
     { id: 1, name: 'نیروی فنی و آیتمی' },

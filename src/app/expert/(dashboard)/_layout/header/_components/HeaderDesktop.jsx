@@ -4,7 +4,7 @@ import Image from "next/image";
 import { HiLogout } from "react-icons/hi";
 // redux
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSidebarHandler } from "@/src/redux/features/layout/layoutConfigSlice";
+import { toggleSidebarHandler } from "/src/redux/features/layout/layoutConfigSlice";
 // components
 import ProfileDropdown from "./ProfileDropdown"
 // react icons

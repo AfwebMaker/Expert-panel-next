@@ -1,6 +1,6 @@
 import React from 'react'
 // components
-import InfoCard from "@/app/_components/InfoCard"
+import InfoCard from "/src/app/_components/InfoCard"
 import InputFilter from "./InputFilter"
 import ServicesCard from "../../_components/ServicesCard"
 //redux

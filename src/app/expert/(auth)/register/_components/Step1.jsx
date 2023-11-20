@@ -6,19 +6,19 @@ import * as Yup from 'yup';
 //components
 import StepController from './StepController'
 //assets
-import X_circle from '@/public/icons/X_circle.svg'
-import Eye from '@/public/icons/Eye.svg'
-import User from '@/public/icons/User.svg'
-import User_group from '@/public/icons/User_group.svg'
-import Key from '@/public/icons/Key.svg'
+import X_circle from '/public/icons/X_circle.svg'
+import Eye from '/public/icons/Eye.svg'
+import User from '/public/icons/User.svg'
+import User_group from '/public/icons/User_group.svg'
+import Key from '/public/icons/Key.svg'
 //services
-import information from '@/services/register_kg_local/information'
-import stepInformation from '@/services/register_kg_local/stepInformation'
+import information from '/src/services/register_kg_local/information'
+import stepInformation from '/src/services/register_kg_local/stepInformation'
 //functions
-import getCookie from '@/src/functions/getCookie'
-import Loading from '@/src/app/_components/Loading';
+import getCookie from '/src/functions/getCookie'
+import Loading from '/src/app/_components/Loading';
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 //validation
 const validationSchema = Yup.object().shape({

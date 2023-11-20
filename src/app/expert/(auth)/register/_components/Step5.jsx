@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 //components
 import StepController from './StepController'
 //services
-import confirm from '@/services/register_kg_local/confirm'
+import confirm from '/src/services/register_kg_local/confirm'
 //functions
-import setCookie from '@/src/functions/setCookie'
+import setCookie from '/src/functions/setCookie'
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 function Step5({ currentStep, setCurrentStep }) {
     const dispatch = useDispatch()

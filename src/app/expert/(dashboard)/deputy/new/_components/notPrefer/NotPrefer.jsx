@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation'
 // components
-import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
+import DynamicInputs from "/src/app/_components/inputs/DynamicInputs";
 import InformationForm from "./InformationForm"
 import LegalForm from "./LegalForm"
-import Button from "@/app/_components/Button"
+import Button from "/src/app/_components/Button"
 //formik
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 //react Icons
 import { HiOutlineFingerPrint } from "react-icons/hi";
 // services
-import add from "@/services/deputy_kg_local/add"
+import add from "/src/services/deputy_kg_local/add"
 
 
 function NotPrefer() {

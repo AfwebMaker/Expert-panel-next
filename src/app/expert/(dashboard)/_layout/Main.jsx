@@ -3,15 +3,15 @@
 import React, { useEffect } from "react";
 // components
 import Header from "../_layout/header/Header";
-import Loading from '@/app/_components/Loading'
+import Loading from '/src/app/_components/Loading'
 // import NavigatorInterface from "../_layout/navigatorInterface/NavigatorInterface";
 import NavigationBar from "./navigatorInterface/_components/NavigationBar";
 import SideBar from "./navigatorInterface/_components/SideBar";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUserHandler } from "@/src/redux/features/getExpertInfo/getExpertInfoSlice";
+import { fetchUserHandler } from "/src/redux/features/getExpertInfo/getExpertInfoSlice";
 //services
-import getExpertInfo from '@/src/services/person_kg_local/getExpertInfo'
+import getExpertInfo from '/src/services/person_kg_local/getExpertInfo'
 
 function Main({ children }) {
   const toggleSidebar = useSelector(state => state.layoutConfig.toggleSidebar)

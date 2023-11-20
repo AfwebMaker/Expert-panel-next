@@ -3,7 +3,7 @@ import Image from 'next/image';
 //react icons
 import { HiCheckCircle, HiXCircle, HiArchive, HiExclamationCircle } from "react-icons/hi";
 //components
-import Stars from '@/src/app/_components/Stars'
+import Stars from '/src/app/_components/Stars'
 
 function Header({ profileData }) {
 

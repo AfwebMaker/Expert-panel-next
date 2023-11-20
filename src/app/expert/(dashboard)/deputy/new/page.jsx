@@ -5,7 +5,7 @@ import React, { useState } from "react";
 // react icons
 import { HiOutlineChevronRight, HiOutlineUserAdd } from "react-icons/hi";
 //components
-import SwitchInput from "@/app/_components/SwitchInput";
+import SwitchInput from "/src/app/_components/SwitchInput";
 import NotPrefer from "./_components/notPrefer/NotPrefer";
 import Prefer from "./_components/Prefer";
 

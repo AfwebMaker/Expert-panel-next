@@ -11,7 +11,7 @@ import "@splidejs/react-splide/css/sea-green";
 // or only core styles
 import "@splidejs/react-splide/css/core";
 
-import Frame2 from '@/public/images/Frame2.jpg'
+import Frame2 from '/public/images/Frame2.jpg'
 import Link from "next/link";
 
 

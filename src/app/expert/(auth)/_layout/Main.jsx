@@ -4,7 +4,7 @@ import React from "react";
 //redux
 import { useSelector } from "react-redux";
 //components
-import Loading from '@/app/_components/Loading'
+import Loading from '/src/app/_components/Loading'
 
 function Main({ children }) {
     //redux

@@ -7,14 +7,14 @@ import { HiOutlinePlusCircle, HiTicket, HiOutlineChevronRight } from "react-icon
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // components
-import InfoCard from "@/app/_components/InfoCard";
-import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
-import Button from "@/app/_components/Button"
+import InfoCard from "/src/app/_components/InfoCard";
+import DynamicInputs from "/src/app/_components/inputs/DynamicInputs";
+import Button from "/src/app/_components/Button"
 // redux
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 import { useDispatch } from "react-redux";
 // services
-import sendMessage from "@/services/ticket_kg_local/sendMessage"
+import sendMessage from "/src/services/ticket_kg_local/sendMessage"
 import { useRouter } from "next/navigation";
 
 function Page() {

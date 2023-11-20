@@ -13,8 +13,8 @@ import {
   HiOutlineLockOpen
 } from "react-icons/hi";
 //services
-import profileBase from '@/src/services/person_kg_local/profileBase'
-import Loading from '@/src/app/_components/Loading';
+import profileBase from '/src/services/person_kg_local/profileBase'
+import Loading from '/src/app/_components/Loading';
 
 function DesktopNavigation() {
   const [loadingPage, setLoadingPage] = useState(true)

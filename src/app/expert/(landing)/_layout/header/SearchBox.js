@@ -6,7 +6,7 @@ import { HiOutlineSearch, HiFire, HiOutlineChevronLeft, HiSearchCircle, HiClipbo
 //scroll
 import ScrollContainer from 'react-indiana-drag-scroll'
 //services
-import mainPageSearch from '@/services/category_kg_local/mainPageSearch'
+import mainPageSearch from '/src/services/category_kg_local/mainPageSearch'
 
 function SearchBox({ mobile }) {
     const [activeSearchBox, setActiveSearchBox] = useState(false)

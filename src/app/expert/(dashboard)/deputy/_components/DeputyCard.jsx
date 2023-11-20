@@ -3,12 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 //services
-import reActive from "@/src/services/deputy_kg_local/reActive"
-import deActive from "@/src/services/deputy_kg_local/deActive"
-import cancel from "@/src/services/deputy_kg_local/cancel"
+import reActive from "/src/services/deputy_kg_local/reActive"
+import deActive from "/src/services/deputy_kg_local/deActive"
+import cancel from "/src/services/deputy_kg_local/cancel"
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 // react icons
 import {
   HiOutlineXCircle,

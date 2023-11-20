@@ -1,6 +1,6 @@
 import React from 'react'
 //components
-import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs'
 
 function InformationForm({ formik }) {
     const inputData = [

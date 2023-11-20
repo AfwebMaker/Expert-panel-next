@@ -3,11 +3,11 @@ import Link from "next/link";
 import Image from 'next/image'
 
 //images
-import Namad_1 from "@/public/images/public/namad/1.png"
-import Namad_2 from "@/public/images/public/namad/2.png"
-import Namad_3 from "@/public/images/public/namad/3.png"
-import Namad_4 from "@/public/images/public/namad/4.png"
-import Kargosha_Logo from "@/public/images/public/logo/Kargosha_Logo.svg"
+import Namad_1 from "/public/images/public/namad/1.png"
+import Namad_2 from "/public/images/public/namad/2.png"
+import Namad_3 from "/public/images/public/namad/3.png"
+import Namad_4 from "/public/images/public/namad/4.png"
+import Kargosha_Logo from "/public/images/public/logo/Kargosha_Logo.svg"
 
 const footerContent = [
     {

@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 // react Icons
 import { HiExclamation, HiBadgeCheck } from "react-icons/hi";
 // components
-import Multiple from "@/app/_components/inputs/uploadFile/Multiple";
-import Only from "@/app/_components/inputs/uploadFile/Only";
+import Multiple from "/src/app/_components/inputs/uploadFile/Multiple";
+import Only from "/src/app/_components/inputs/uploadFile/Only";
 
 function UploadFile({
   state,

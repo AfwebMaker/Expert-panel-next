@@ -5,14 +5,14 @@ import Link from "next/link";
 import DeputyCard from "./_components/DeputyCard";
 import MyActiveDeputy from "./_components/MyActiveDeputy";
 import MyFormerDeputy from "./_components/MyFormerDeputy";
-import Loading from "@/app/_components/Loading"
+import Loading from "/src/app/_components/Loading"
 // services
-import expertData from "@/src/services/deputy_kg_local/expertData";
+import expertData from "/src/services/deputy_kg_local/expertData";
 // react icons
 import { HiOutlineIdentification, HiOutlineUserAdd } from "react-icons/hi";
 // redux
 import { useDispatch } from "react-redux";
-import { fetchActiveDataHandler } from "@/src/redux/features/getExpertInfo/getExpertInfoSlice";
+import { fetchActiveDataHandler } from "/src/redux/features/getExpertInfo/getExpertInfoSlice";
 
 function Page() {
   const [dataExpertData, setDataExpertData] = useState("");

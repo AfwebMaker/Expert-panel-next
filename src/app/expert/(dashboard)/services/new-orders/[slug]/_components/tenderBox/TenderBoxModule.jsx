@@ -5,10 +5,10 @@ import { HiOutlineSpeakerphone } from "react-icons/hi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 //components
-import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
-import Button from '@/app/_components/Button'
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs'
+import Button from '/src/app/_components/Button'
 // function 
-import formatPrice from "@/src/functions/formatPrice"
+import formatPrice from "/src/functions/formatPrice"
 
 const inputData = [
     {

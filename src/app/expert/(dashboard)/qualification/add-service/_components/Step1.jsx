@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 //components
-import DynamicInputs from '@/app/_components/inputs/DynamicInputs'
-import Loading from '@/src/app/_components/Loading';
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs'
+import Loading from '/src/app/_components/Loading';
 import StepController from '../../_components/StepController'
 //services
-import getJob from '@/services/category_kg_local/getJob'
-import getRequestsJob from '@/services/core_kg_local/getRequestsJob'
+import getJob from '/src/services/category_kg_local/getJob'
+import getRequestsJob from '/src/services/core_kg_local/getRequestsJob'
 //redux
 import { useDispatch, useSelector } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 function Step1({ currentStep, setCurrentStep, stepInformation }) {
   const [loadingPage, setLoadingPage] = useState(true);

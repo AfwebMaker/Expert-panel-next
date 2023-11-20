@@ -1,7 +1,7 @@
 import { dynamicApiCall } from "../dynamicApiCall";
 import { register_kg_local } from '../APIRepositories'
 //function
-import getCookie from '@/src/functions/getCookie'
+import getCookie from '/src/functions/getCookie'
 
 const checkOtp = async (data) => {
     const option = {

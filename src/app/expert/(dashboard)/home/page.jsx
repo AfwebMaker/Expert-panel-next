@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 //components
-import Loading from '@/src/app/_components/Loading';
+import Loading from '/src/app/_components/Loading';
 import Header from './_components/Header';
 import Services from './_components/Services';
 import Banner from './_components/Banner';
@@ -10,7 +10,7 @@ import Reports from './_components/Reports';
 //react icons
 import { HiSearch, HiOutlineAdjustments } from "react-icons/hi";
 //services
-import profileBase from '@/services/person_kg_local/profileBase'
+import profileBase from '/src/services/person_kg_local/profileBase'
 
 function Page() {
   const [data, setData] = useState({})

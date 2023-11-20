@@ -1,6 +1,6 @@
 import "../../globals.css";
 // fonts
-import iranYekanFont from "@/constants/localFonts";
+import iranYekanFont from "/src/constants/localFonts";
 // redux provider
 import Providers from "../../../redux/Providers";
 // components

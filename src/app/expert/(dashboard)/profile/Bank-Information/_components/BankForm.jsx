@@ -5,14 +5,14 @@ import * as Yup from 'yup';
 //react icons
 import { HiLibrary } from 'react-icons/hi'
 //components
-import Button from '@/app/_components/Button'
-import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
-import Loading from '@/src/app/_components/Loading';
+import Button from '/src/app/_components/Button'
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs';
+import Loading from '/src/app/_components/Loading';
 //services
-import bankAdd from '@/services/person_kg_local/bankAdd'
-import bankGet from '@/services/person_kg_local/bankGet'
+import bankAdd from '/src/services/person_kg_local/bankAdd'
+import bankGet from '/src/services/person_kg_local/bankGet'
 //redux
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 import { useDispatch } from 'react-redux';
 
 const validationSchema = Yup.object().shape({

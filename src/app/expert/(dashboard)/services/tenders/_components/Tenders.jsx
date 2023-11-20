@@ -1,11 +1,11 @@
 import React from 'react'
 // components
-import InfoCard from "@/app/_components/InfoCard"
+import InfoCard from "/src/app/_components/InfoCard"
 import ServicesCard from "../../_components/ServicesCard"
 // redux
 import { useSelector } from 'react-redux'
 // function 
-import formatPrice from "@/src/functions/formatPrice"
+import formatPrice from "/src/functions/formatPrice"
 
 function Tenders({ data }) {
     const type_job = useSelector(state => state.staticVariable.type_job)

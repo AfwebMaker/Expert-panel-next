@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 // components
-import Modal from "@/app/_components/Modal"
+import Modal from "/src/app/_components/Modal"
 import DescriptionBoxModal from "./DescriptionBoxModal"
 // react icons
 import { HiDocumentText, HiOutlineChevronLeft, HiOutlineMinusSm } from 'react-icons/hi'

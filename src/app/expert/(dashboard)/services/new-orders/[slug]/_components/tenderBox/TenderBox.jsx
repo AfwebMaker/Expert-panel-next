@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 // components
-import Modal from "@/app/_components/Modal"
+import Modal from "/src/app/_components/Modal"
 import TenderBoxModule from "./TenderBoxModule"
-import InfoCard from "@/app/_components/InfoCard"
-import TimerDown from "@/app/_components/TimerDown"
+import InfoCard from "/src/app/_components/InfoCard"
+import TimerDown from "/src/app/_components/TimerDown"
 // function
-import formatPrice from "@/src/functions/formatPrice"
+import formatPrice from "/src/functions/formatPrice"
 // react icons
 import { HiUser, HiOutlineTicket, HiOutlineMinusSm } from 'react-icons/hi'
 

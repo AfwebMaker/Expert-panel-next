@@ -6,10 +6,10 @@ import Image from 'next/image';
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 //components
 import MobileNavigation from './_components/MobileNavigation'
-import Loading from '@/src/app/_components/Loading'
-import Stars from '@/src/app/_components/Stars';
+import Loading from '/src/app/_components/Loading'
+import Stars from '/src/app/_components/Stars';
 //services
-import profileBase from '@/src/services/person_kg_local/profileBase'
+import profileBase from '/src/services/person_kg_local/profileBase'
 
 function Page() {
   const [loadingPage, setLoadingPage] = useState(true)

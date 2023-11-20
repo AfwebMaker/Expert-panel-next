@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react'
 import NotificationHeader from '../_components/NotificationHeader'
 import NotificationMain from '../_components/NotificationMain'
 //services
-import newNotification from '@/services/notification_kg_local/newNotification'
-import oldNotification from '@/services/notification_kg_local/oldNotification'
+import newNotification from '/src/services/notification_kg_local/newNotification'
+import oldNotification from '/src/services/notification_kg_local/oldNotification'
 //components
-import Loading from "@/src/app/_components/Loading";
+import Loading from "/src/app/_components/Loading";
 
 function Page() {
   const [loadingPage, setLoadingPage] = useState(true)

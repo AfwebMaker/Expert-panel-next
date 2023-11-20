@@ -1,8 +1,8 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
 // components
-import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
-import Button from "@/app/_components/Button"
+import DynamicInputs from "/src/app/_components/inputs/DynamicInputs";
+import Button from "/src/app/_components/Button"
 //formik
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import { HiOutlineFingerPrint } from 'react-icons/hi';
 //redux
 import { useDispatch, useSelector } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 function PreferEdit({ stateForm }) {
   const { mainDataCompany } = useSelector(state => state.getExpertInfo.user)

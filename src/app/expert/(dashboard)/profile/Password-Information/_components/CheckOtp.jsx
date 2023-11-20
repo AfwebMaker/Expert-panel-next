@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import OtpInput from 'react-otp-input';
 //services
-import forgetCheckOtp from '@/services/register_kg_local/forgetCheckOtp'
-import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
+import forgetCheckOtp from '/src/services/register_kg_local/forgetCheckOtp'
+import forgetPhoneNumber from '/src/services/register_kg_local/forgetPhoneNumber'
 //functions
-import setCookie from '@/src/functions/setCookie'
+import setCookie from '/src/functions/setCookie'
 import toast from 'react-hot-toast';
 //redux loading
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 function CheckOtp({ setForgetPassword, phoneNumber }) {
     const dispatch = useDispatch()

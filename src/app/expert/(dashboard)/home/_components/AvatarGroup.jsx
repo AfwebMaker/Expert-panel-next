@@ -1,6 +1,6 @@
 import Image from "next/image";
 //images
-import Avatar from '@/public/images/Avatar.png'
+import Avatar from '/public/images/Avatar.png'
 
 export default function Example() {
   return (

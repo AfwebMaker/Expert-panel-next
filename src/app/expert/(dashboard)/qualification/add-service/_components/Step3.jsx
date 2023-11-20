@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 // import * as Yup from "yup";
 //components
 import StepController from '../../_components/StepController'
-import Loading from '@/src/app/_components/Loading';
+import Loading from '/src/app/_components/Loading';
 //services
-import getJob from '@/services/category_kg_local/getJob'
+import getJob from '/src/services/category_kg_local/getJob'
 //redux
 import { useSelector } from 'react-redux';
 

@@ -9,7 +9,7 @@ import { HiOutlineClipboardList, HiHome, HiOutlineChevronLeft } from 'react-icon
 import DesktopNavigation from './_components/DesktopNavigation'
 import MobileNavigation from './_components/MobileNavigation'
 //services
-import newNotification from '@/src/services/notification_kg_local/newNotification'
+import newNotification from '/src/services/notification_kg_local/newNotification'
 
 function RootLayout({ children }) {
     const [notificationNumber, setNotificationNumber] = useState({

@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 // services
-import  fetchMessages  from "@/src/services/ticket_kg_local/fetchMessages";
-import  sendMessage  from "@/src/services/ticket_kg_local/sendMessage";
-import  fetchNewMessages  from "@/src/services/ticket_kg_local/fetchNewMessages";
+import  fetchMessages  from "/src/services/ticket_kg_local/fetchMessages";
+import  sendMessage  from "/src/services/ticket_kg_local/sendMessage";
+import  fetchNewMessages  from "/src/services/ticket_kg_local/fetchNewMessages";
 // components
 import ChatBoxHeader from "./_components/ChatBoxHeader";
 import ChatBoxMain from "./_components/ChatBoxMain";

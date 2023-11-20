@@ -4,15 +4,15 @@ import Image from 'next/image';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //assets
-import Eye from '@/public/icons/Eye.svg'
-import Key from '@/public/icons/Key.svg'
+import Eye from '/public/icons/Eye.svg'
+import Key from '/public/icons/Key.svg'
 //services
-import forgetChangePassword from '@/services/register_kg_local/forgetChangePassword'
+import forgetChangePassword from '/src/services/register_kg_local/forgetChangePassword'
 //toast
-import customToast from '@/src/functions/customToast';
+import customToast from '/src/functions/customToast';
 //redux loading
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 //validation
 const validationSchema = Yup.object().shape({

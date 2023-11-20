@@ -1,11 +1,11 @@
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 //components
-import ProgressBar from "@/app/_components/inputs/uploadFile/ProgressBar";
+import ProgressBar from "/src/app/_components/inputs/uploadFile/ProgressBar";
 //react icons
 import { HiOutlineCloudUpload, HiCheckCircle } from "react-icons/hi";
 //axios
-import getCookie from '@/src/functions/getCookie'
+import getCookie from '/src/functions/getCookie'
 import axios from "axios";
 import { headers } from "next/dist/client/components/headers";
 

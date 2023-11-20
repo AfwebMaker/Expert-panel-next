@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 //images
-import Frame2 from '@/public/images/Frame2.jpg'
+import Frame2 from '/public/images/Frame2.jpg'
 // Default theme
 import "@splidejs/react-splide/css";
 // or other themes

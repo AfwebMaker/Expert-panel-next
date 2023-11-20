@@ -5,16 +5,16 @@ import Link from 'next/link'
 // components
 import Brands from "./_components/Brands"
 // images
-import phone from "@/public/images/landing/phone.jpg"
-import desktop from "@/public/images/landing/desktop.jpg"
+import phone from "/public/images/landing/phone.jpg"
+import desktop from "/public/images/landing/desktop.jpg"
 // avatar
-import user_1 from '@/public/images/landing/commentsAvatar/user_1.jpg'
-import user_2 from '@/public/images/landing/commentsAvatar/user_2.jpg'
-import user_3 from '@/public/images/landing/commentsAvatar/user_3.jpg'
-import user_4 from '@/public/images/landing/commentsAvatar/user_4.jpg'
-import user_5 from '@/public/images/landing/commentsAvatar/user_5.jpg'
-import user_6 from '@/public/images/landing/commentsAvatar/user_6.jpg'
-import user_7 from '@/public/images/landing/commentsAvatar/user_7.jpg'
+import user_1 from '/public/images/landing/commentsAvatar/user_1.jpg'
+import user_2 from '/public/images/landing/commentsAvatar/user_2.jpg'
+import user_3 from '/public/images/landing/commentsAvatar/user_3.jpg'
+import user_4 from '/public/images/landing/commentsAvatar/user_4.jpg'
+import user_5 from '/public/images/landing/commentsAvatar/user_5.jpg'
+import user_6 from '/public/images/landing/commentsAvatar/user_6.jpg'
+import user_7 from '/public/images/landing/commentsAvatar/user_7.jpg'
 // react icons
 import { HiOutlineFingerPrint, HiOutlineShieldCheck, HiOutlineStar, HiIdentification, HiOutlineClipboardCopy } from 'react-icons/hi';
 

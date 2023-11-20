@@ -9,7 +9,7 @@ import {
 } from "react-icons/hi";
 // axios
 import axios from "axios";
-import getCookie from "@/src/functions/getCookie";
+import getCookie from "/src/functions/getCookie";
 
 function MultipleContainingUploads({
   name,

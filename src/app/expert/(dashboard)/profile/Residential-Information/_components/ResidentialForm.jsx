@@ -5,15 +5,15 @@ import * as Yup from 'yup';
 //react icons
 import { HiHome } from 'react-icons/hi'
 //components
-import Button from '@/app/_components/Button'
-import Loading from '@/src/app/_components/Loading';
-import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
+import Button from '/src/app/_components/Button'
+import Loading from '/src/app/_components/Loading';
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs';
 //services
-import addressAdd from '@/services/person_kg_local/addressAdd';
-import addressGet from '@/services/person_kg_local/addressGet';
+import addressAdd from '/src/services/person_kg_local/addressAdd';
+import addressGet from '/src/services/person_kg_local/addressGet';
 //redux
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 const validationSchema = Yup.object().shape({
     zipCode: Yup.string()

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 //assets
-import check from '@/public/icons/check.svg'
+import check from '/public/icons/check.svg'
 
 function Step({ setCurrentStep, currentStep, information }) { 
     const [checkAnimation, setCheckAnimation] = useState(true)

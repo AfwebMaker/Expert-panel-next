@@ -1,6 +1,6 @@
 import React from 'react'
 //components
-import UploadContain from '@/app/_components/UploadContain'
+import UploadContain from '/src/app/_components/UploadContain'
 
 function UploadFile() {
     return (

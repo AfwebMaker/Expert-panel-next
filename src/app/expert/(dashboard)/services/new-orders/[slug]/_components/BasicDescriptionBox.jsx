@@ -3,9 +3,9 @@ import React from 'react'
 // react icons
 import { HiDocumentText } from 'react-icons/hi'
 // assets
-import ladder_icon from "@/public/images/dashboard/services/ladder.svg"
-import meterage_icon from "@/public/images/dashboard/services/meterage.svg"
-import expert_icon from "@/public/images/dashboard/services/expert.svg"
+import ladder_icon from "/public/images/dashboard/services/ladder.svg"
+import meterage_icon from "/public/images/dashboard/services/meterage.svg"
+import expert_icon from "/public/images/dashboard/services/expert.svg"
 
 function BasicDescriptionBox({ serviceType, meterage, expertLevel }) {
     return (

@@ -1,6 +1,6 @@
 import React from 'react'
 //icons
-import { Icon } from "@/app/_components/Icon"
+import { Icon } from "/src/app/_components/Icon"
 //react icons
 import { HiCheckCircle, HiExclamationCircle, HiXCircle, HiChevronLeft } from 'react-icons/hi'
 

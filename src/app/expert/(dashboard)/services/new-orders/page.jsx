@@ -3,12 +3,12 @@ import React, { useReducer, useEffect } from 'react';
 // components
 import NoContent from "../_components/NoContent";
 import NewOrders from "./_components/NewOrders";
-import Loading from "@/app/_components/Loading";
+import Loading from "/src/app/_components/Loading";
 import ShowMoreButton from "../_components/ShowMoreButton";
 // react icons
 import { HiOutlineClipboardCopy, HiBadgeCheck } from 'react-icons/hi';
 // services
-import fetchServices from "@/services/core_kg_local/fetchServices";
+import fetchServices from "/src/services/core_kg_local/fetchServices";
 
 const initialState = {
   data: [],

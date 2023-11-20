@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 // components
-import Modal from "@/app/_components/Modal"
+import Modal from "/src/app/_components/Modal"
 import FurtherDetailsBoxModal from "./FurtherDetailsBoxModal"
-import InfoCard from "@/app/_components/InfoCard"
+import InfoCard from "/src/app/_components/InfoCard"
 // react icons
 import { HiDocumentDuplicate , HiOutlineChevronLeft } from 'react-icons/hi'
 // function 
-import shortText from "@/src/functions/shortText"
+import shortText from "/src/functions/shortText"
 
 function FurtherDetailsBox({ text }) {
     const [isOpen, setIsOpen] = useState(false);

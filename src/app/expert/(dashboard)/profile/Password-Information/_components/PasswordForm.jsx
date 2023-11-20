@@ -7,18 +7,18 @@ import * as Yup from 'yup';
 //react icons
 import { HiLockClosed } from 'react-icons/hi'
 //components
-import Button from '@/app/_components/Button'
-import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs';
+import Button from '/src/app/_components/Button'
+import DynamicInputs from '/src/app/_components/inputs/DynamicInputs';
 import ForgetPassword from './ForgetPassword';
 import CheckOtp from './CheckOtp';
 //redux
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 import { useDispatch, useSelector } from 'react-redux';
 //services
-import changePassword from '@/services/person_kg_local/changePassword';
-import forgetPhoneNumber from '@/src/services/register_kg_local/forgetPhoneNumber';
+import changePassword from '/src/services/person_kg_local/changePassword';
+import forgetPhoneNumber from '/src/services/register_kg_local/forgetPhoneNumber';
 //toast
-import customToast from '@/src/functions/customToast';
+import customToast from '/src/functions/customToast';
 
 const validationSchema = Yup.object().shape({
     oldPass: Yup.string()

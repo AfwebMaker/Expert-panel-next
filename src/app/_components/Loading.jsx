@@ -1,6 +1,6 @@
 import React from 'react'
 //loading icon
-import loadingIcon from '@/public/icons/KargoshaLoading.svg'
+import loadingIcon from '/public/icons/KargoshaLoading.svg'
 import Image from 'next/image'
 
 function Loading() {

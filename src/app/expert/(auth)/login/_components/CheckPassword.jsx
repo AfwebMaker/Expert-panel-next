@@ -5,18 +5,18 @@ import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //assets
-import Eye from '@/public/icons/Eye.svg'
-import check from '@/public/icons/check.svg'
+import Eye from '/public/icons/Eye.svg'
+import check from '/public/icons/check.svg'
 //services
-import auth from '@/services/person_kg_local/auth'
-import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
+import auth from '/src/services/person_kg_local/auth'
+import forgetPhoneNumber from '/src/services/register_kg_local/forgetPhoneNumber'
 //functions
-import setCookie from '@/src/functions/setCookie';
+import setCookie from '/src/functions/setCookie';
 //toast
 import toast from 'react-hot-toast';
 //redux loading
 import { useDispatch } from 'react-redux';
-import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
+import { loadingHandler } from '/src/redux/features/layout/layoutConfigSlice';
 
 //validation
 const validationSchema = Yup.object().shape({

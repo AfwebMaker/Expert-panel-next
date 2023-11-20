@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 //components
 import StepController from './StepController'
 //services
-import stepInformation from '@/services/register_kg_local/stepInformation'
-import Loading from '@/src/app/_components/Loading'
+import stepInformation from '/src/services/register_kg_local/stepInformation'
+import Loading from '/src/app/_components/Loading'
 
 function Step4({ currentStep, setCurrentStep }) {
     const [loadingPage, setLoadingPage] = useState(true)

@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 //redux
 import { useSelector } from "react-redux";
 // public --> images
-import kargosha_logo from "@/public/images/layout/header/kargosha_logo.svg";
-import kargosha_typo from "@/public/images/layout/header/kargosha_typo.svg";
+import kargosha_logo from "/public/images/layout/header/kargosha_logo.svg";
+import kargosha_typo from "/public/images/layout/header/kargosha_typo.svg";
 // react icons
 import {
   HiOutlineHome,

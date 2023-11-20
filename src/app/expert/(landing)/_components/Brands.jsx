@@ -3,11 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 // assets
-import AcademyMedium from "@/public/images/public/brands/Academy Medium.svg";
-import AutoSazeMedium from "@/public/images/public/brands/Auto Saze Medium.svg";
-import MekaMedium from "@/public/images/public/brands/Meka Medium.svg";
-import MetriChandMedium from "@/public/images/public/brands/Metri Chand Medium.svg";
-import SindbadMedium from "@/public/images/public/brands/Sindbad Medium.svg";
+import AcademyMedium from "/public/images/public/brands/Academy Medium.svg";
+import AutoSazeMedium from "/public/images/public/brands/Auto Saze Medium.svg";
+import MekaMedium from "/public/images/public/brands/Meka Medium.svg";
+import MetriChandMedium from "/public/images/public/brands/Metri Chand Medium.svg";
+import SindbadMedium from "/public/images/public/brands/Sindbad Medium.svg";
 
 function Brands(props) {
   const { title, colorTitle } = props

@@ -6,17 +6,17 @@ import Link from 'next/link'
 //react icons
 import { HiOutlineUserCircle, HiOutlineMenuAlt4, HiOutlineX, HiUserCircle } from 'react-icons/hi'
 //assets
-import Kargosha_Logo from '@/public/images/public/logo/Kargosha_Logo.svg'
-import user from '@/public/icons/user_landing.svg'
+import Kargosha_Logo from '/public/images/public/logo/Kargosha_Logo.svg'
+import user from '/public/icons/user_landing.svg'
 //components
 import MobileNavigation from './MobileNavigation'
 import ProfileDropdown from "./ProfileDropdown"
 import ProfileMobile from './ProfileMobile'
-import Loading from '@/src/app/_components/Loading';
+import Loading from '/src/app/_components/Loading';
 //function
-import getCookie from '@/src/functions/getCookie'
+import getCookie from '/src/functions/getCookie'
 //services
-import profileBase from '@/src/services/person_kg_local/profileBase'
+import profileBase from '/src/services/person_kg_local/profileBase'
 
 function Header() {
   const isLogin = getCookie("TOKEN")

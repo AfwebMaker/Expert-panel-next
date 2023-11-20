@@ -35,19 +35,18 @@ function UploadContain({ multiple, accept }) {
 
       let data = new FormData();
       data.append("file", files[0]);
-      console.log("files",files[0]);
-      
+
       // for (let i = 0; i < files.length; i++) {
       //   data.append("file" + i, files[i]);
       //   console.log(data.append("file" + i, files[i]));
       // }
-      console.log(data)
       await axios
         .post(
           `${process.env.NEXT_PUBLIC_file_kg_local}/admin/category/UploadImage`,
           data,
           {
             headers: {
+              "Content-Type": "multipart/form-data",
               'Authorization': `Bearer ${getCookie('TOKEN')}`
             },
             onUploadProgress: (progressEvent) => {
@@ -56,20 +55,11 @@ function UploadContain({ multiple, accept }) {
               );
               setUploadProgress(percentCompleted);
             },
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
           }
         )
-        .then((res) => {
-
-          if (res.data.status === 200) console.log(res.data.data)
-        }
-        
-        );
+        .then((res) => {});
       setIsUploading(false);
     }
-    console.log(files);
   };
   // console.log(uploadedImages.length);
   // console.log(uploadedImages);

@@ -38,7 +38,6 @@ function Prefer() {
       dispatch(loadingHandler(true))
       add(data)
         .then(res => {
-          console.log(res)
           router.replace("/expert/deputy/")
         })
         .catch((err) => {

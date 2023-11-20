@@ -156,7 +156,6 @@ function Forms({ setAvatar, avatar, formState }) {
             dispatch(loadingHandler(true))
             updateExpertInfo(data)
                 .then(res => {
-                    console.log(res)
                 })
                 .catch(() => {
                 })
@@ -171,6 +170,7 @@ function Forms({ setAvatar, avatar, formState }) {
         !legalFormIsActive ?
             setValidation(baseValidation) :
             setValidation({ ...baseValidation, ...legalValidation })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [legalFormIsActive])
 
     //get initial data from server
@@ -202,6 +202,7 @@ function Forms({ setAvatar, avatar, formState }) {
             .finally(() => {
                 setLoadingPage(false)
             })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

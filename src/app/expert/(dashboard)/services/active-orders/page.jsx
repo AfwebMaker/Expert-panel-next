@@ -19,7 +19,7 @@ const initialState = {
   loading: false,
 };
 
-function reducer(state, action) {
+function pageReducer(state, action) {
   switch (action.type) {
     case 'SET_DATA':
       return { ...state, data: [...state.data, ...action.payload] };
@@ -37,13 +37,12 @@ function reducer(state, action) {
 }
 
 function Page() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(pageReducer, initialState, (s) => s);
 
   useEffect(() => {
     dispatch({ type: 'SET_LOADING', payload: true });
     fetchServices(state.page, 4, 3, state.searchInput)
       .then((res) => {
-        console.log("active", res.data.data);
         dispatch({ type: 'SET_DATA', payload: res.data.data.lstData });
         dispatch({ type: 'SET_COUNT', payload: res.data.data.count });
       })
@@ -54,6 +53,7 @@ function Page() {
         dispatch({ type: 'SET_LOADING_PAGE', payload: false });
         dispatch({ type: 'SET_LOADING', payload: false });
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.page]);
 
   // const convertToJalali = (gregorianDateTime) => {

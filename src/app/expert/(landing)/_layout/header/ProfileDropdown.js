@@ -7,19 +7,22 @@ import { useRouter } from 'next/navigation';
 //react icons
 import { HiClipboardList, HiUserCircle, HiLogin, HiPresentationChartLine } from 'react-icons/hi'
 import Cookies from 'js-cookie'
+import Image from "next/image";
 
 function ProfileDropDown({ data }) {
     const router = useRouter()
-    console.log(data)
+
     return (
         <div className="w-auto text-right">
             <Menu as="div" className="relative inline-block text-left">
                 <div>
                     <Menu.Button className="flex items-center justify-around w-full text-sm font-medium focus:outline-none focus-visible:ring-2 hover:hover:text-color-font-3">
                         <div className='bg-black w-10 h-10 rounded-full overflow-hidden'>
-                            <img
+                            <Image
+                                width={400}
+                                height={400}
                                 className="inline-block h-full w-full object-cover rounded-full"
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                src="https://kargosha.com/assets/avatar.png"
                                 alt=""
                             />
                         </div>

@@ -49,8 +49,6 @@ function mobileNavigation({ data }) {
     }
   ]
 
-  console.log(data)
-
   return (
     <>
       <div className='block lg:hidden px-5 h-[calc(100vh-138px)]'>

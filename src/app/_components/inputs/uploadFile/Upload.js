@@ -6,9 +6,6 @@ function Upload({ file, setUploadedImages, files }) {
     const [uploadProgress, setUploadProgress] = useState(0);
 
     useEffect(() => {
-        console.log("------------", file)
-
-
         const uploadImage = async () => {
             let data = new FormData();
             data.append("file", file);
@@ -27,11 +24,11 @@ function Upload({ file, setUploadedImages, files }) {
                     },
                 }
             )
-                .then((res) => console.log(res))
-
+                .then((res) => {})
         };
 
-        uploadImage();
+        uploadImage().then((res) => {});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

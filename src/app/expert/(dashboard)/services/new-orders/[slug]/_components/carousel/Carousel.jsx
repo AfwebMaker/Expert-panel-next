@@ -25,6 +25,7 @@ function Carousel() {
       primarySlider.current.sync(secondarySlider.current);
       secondarySlider.current.sync(primarySlider.current);
     }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [primarySlider.current, secondarySlider.current]);
 
 

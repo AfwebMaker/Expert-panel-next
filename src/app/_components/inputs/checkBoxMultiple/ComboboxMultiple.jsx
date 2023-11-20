@@ -30,6 +30,7 @@ export default function ComboBox({
       formik.values[name].includes(item.id)
     );
     setSelected(selectedItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   const filteredItems =
@@ -56,6 +57,7 @@ export default function ComboBox({
 
       formik.setFieldValue(name, itemSelect);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
   const removeItem = (id) => {

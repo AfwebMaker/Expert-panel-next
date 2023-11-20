@@ -4605,7 +4605,6 @@ export default function Step3({ currentStep, setCurrentStep }) {
         dispatch(loadingHandler(true))
         addLocations(data)
             .then((res) => {
-                console.log(res)
                 setCurrentStep(currentStep + 1)
             })
             .catch(() => {

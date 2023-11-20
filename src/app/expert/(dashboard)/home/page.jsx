@@ -20,7 +20,6 @@ function Page() {
   useEffect(() => {
     profileBase()
       .then(res => {
-        console.log(res)
         setData(res.data.data)
       })
       .catch(() => {

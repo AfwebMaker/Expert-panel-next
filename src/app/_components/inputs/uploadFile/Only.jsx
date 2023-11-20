@@ -33,6 +33,7 @@ function Only({
 
   useEffect(() => {
     setImageSrc([formik.values[name]]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ function Only({
 
       formik.setFieldValue(name, imageSelect[0]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageSrc]);
 
   const inputFileHandler = (e) => {
@@ -73,7 +75,7 @@ function Only({
             );
             return newFiles;
           });
-          if (loaded == total) {
+          if (loaded === total) {
             setUploadFiles([{ name: fileName, size: total }]);
             setIsError(false);
             // setFiles([]);

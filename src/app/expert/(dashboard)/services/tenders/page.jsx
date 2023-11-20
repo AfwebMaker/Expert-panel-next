@@ -43,7 +43,6 @@ function Page() {
     dispatch({ type: 'SET_LOADING', payload: true });
     fetchServices(state.page, 4, 2, state.searchInput)
       .then((res) => {
-        console.log("New", res.data.data);
         dispatch({ type: 'SET_DATA', payload: res.data.data.lstData });
         dispatch({ type: 'SET_COUNT', payload: res.data.data.count });
       })
@@ -54,6 +53,7 @@ function Page() {
         dispatch({ type: 'SET_LOADING_PAGE', payload: false });
         dispatch({ type: 'SET_LOADING', payload: false });
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.page]);
 
   return (

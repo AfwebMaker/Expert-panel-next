@@ -44,7 +44,6 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
             dispatch(loadingHandler(true))
             auth({ "mobile": phoneNumber, "pass": values.password, "appRequest": "expert" })
                 .then((res) => {
-                    console.log(res)
                     setCookie('TOKEN', res.data.data)
                     router.push('/expert/home/')
                 })
@@ -63,7 +62,6 @@ function CheckPassword({ phoneNumber, setPageState, setForgetPassword }) {
         dispatch(loadingHandler(true))
         forgetPhoneNumber(phoneNumber)
             .then(res => {
-                console.log(res)
                 setForgetPassword(true)
                 setPageState('checkOtp')
             })

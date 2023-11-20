@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 
 function NewOrders({ data }) {
-    console.log("NewOrder", data)
     const type_job = useSelector(state => state.staticVariable.type_job)
 
     const type = (requestType) => {

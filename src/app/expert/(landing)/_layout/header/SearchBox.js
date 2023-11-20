@@ -30,7 +30,6 @@ function SearchBox({ mobile }) {
             const param = e.target.value ? e.target.value : 'ا'
             mainPageSearch(param)
                 .then((res) => {
-                    console.log(res.data.data)
                     setSearchData(res.data.data)
                 })
                 .catch(() => {

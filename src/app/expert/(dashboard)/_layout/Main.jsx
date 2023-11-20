@@ -27,6 +27,7 @@ function Main({ children }) {
       .catch(error => {
         console.log("Get Data User", error)
       })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

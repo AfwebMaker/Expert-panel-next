@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 import convertToJalali from "@/src/functions/convertToJalali"
 
 function ActiveOrders({ data }) {
-  console.log("ActiveOrders", data)
   const type_job = useSelector(state => state.staticVariable.type_job)
 
   const type = (requestType) => {

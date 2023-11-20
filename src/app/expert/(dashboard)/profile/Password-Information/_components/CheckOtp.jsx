@@ -16,12 +16,12 @@ function CheckOtp({ setForgetPassword, phoneNumber }) {
     const [otp, setOtp] = useState('');
 
     //otp submit
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const otpSubmitHandler = () => {
         if (otp.length === 4) {
             dispatch(loadingHandler(true))
             forgetCheckOtp({ phoneNumber: phoneNumber, otp: otp })
                 .then((res) => {
-                    console.log(res)
                     setCookie('guid', res.data.data)
                     setForgetPassword('changePassword')
                 })
@@ -40,7 +40,6 @@ function CheckOtp({ setForgetPassword, phoneNumber }) {
         dispatch(loadingHandler(true))
         forgetPhoneNumber(phoneNumber)
             .then(res => {
-                console.log(res)
             })
             .catch(() => {
             })

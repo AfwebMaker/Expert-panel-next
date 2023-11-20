@@ -7,7 +7,7 @@ import sendOtp from '@/services/register_kg_local/phoneNumber'
 import forgetCheckOtp from '@/services/register_kg_local/forgetCheckOtp'
 import forgetPhoneNumber from '@/services/register_kg_local/forgetPhoneNumber'
 //functions
-import setCookie from '@/src/functions/setCookie'
+import setCookie from '@/functions/setCookie'
 import toast from 'react-hot-toast';
 //redux loading
 import { useDispatch } from 'react-redux';
@@ -19,13 +19,13 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
     const router = useRouter()
 
     //otp submit
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const otpSubmitHandler = () => {
         if (otp.length === 4) {
             dispatch(loadingHandler(true))
             if (forgetPassword) {
                 forgetCheckOtp({ phoneNumber: phoneNumber, otp: otp })
                     .then((res) => {
-                        console.log(res)
                         setCookie('guid', res.data.data)
                         setPageState('forgetPassword')
                     })
@@ -61,7 +61,6 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
         if (forgetPassword) {
             forgetPhoneNumber(phoneNumber)
                 .then(res => {
-                    console.log(res)
                 })
                 .catch(() => { 
                 })
@@ -71,7 +70,6 @@ function CheckOtp({ forgetPassword, setPageState, phoneNumber }) {
         } else {
             sendOtp(phoneNumber)
                 .then(res => {
-                    console.log(res)
                     setCookie('guid', res.data.data)
                 })
                 .catch(() => {

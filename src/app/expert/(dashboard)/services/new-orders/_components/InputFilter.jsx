@@ -5,7 +5,6 @@ import { HiAdjustments, HiOutlineSearch } from "react-icons/hi";
 function InputFilter({ ...res }) {
     const [value, setValue] = useState("")
 
-    console.log(res)
     return (
         <div className='w-full h-12 rounded-lg bg-gray-200 flex items-center mt-3 px-10 py-2 relative'>
             <div className='absolute top-3.5 right-3 text-xl text-cf-300 font-extrabold'>

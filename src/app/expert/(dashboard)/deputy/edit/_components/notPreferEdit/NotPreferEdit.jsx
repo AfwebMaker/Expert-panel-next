@@ -106,13 +106,14 @@ function NotPreferEdit({ stateForm, setStateForm }) {
     mainDataCompany !== null ?
       setValidation({ ...baseValidation, ...legalValidation }) :
       setValidation(baseValidation)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainDataCompany])
 
   useEffect(() => {
-    console.log(activeDataLocal)
     if (activeDataLocal === null) {
       router.replace('/expert/deputy')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -154,7 +155,6 @@ function NotPreferEdit({ stateForm, setStateForm }) {
       dispatch(loadingHandler(true))
       add(data)
         .then(res => {
-          console.log(res)
           router.replace("/expert/deputy/")
         })
         .catch((err) => {

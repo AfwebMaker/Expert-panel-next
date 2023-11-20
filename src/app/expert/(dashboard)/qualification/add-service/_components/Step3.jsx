@@ -41,6 +41,7 @@ function Step2({ currentStep, setCurrentStep, stepInformation }) {
       .finally(() => {
         setLoadingPage(false)
       })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

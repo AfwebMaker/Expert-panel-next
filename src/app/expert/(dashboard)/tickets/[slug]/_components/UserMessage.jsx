@@ -6,9 +6,6 @@ function UserMessage({ id, isSender, userSupport, userName, message, appendices 
   const isUserName = userSupport || userName;
   // console.log(Boolean(isUserName))
 
-  const text = message;
-  console.log(text);
-
   return (
     <li
       className={`w-full mb-4 flex items-center ${isSender ? "justify-start" : "justify-end"

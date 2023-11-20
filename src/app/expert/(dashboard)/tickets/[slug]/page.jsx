@@ -15,7 +15,6 @@ function Page() {
   useEffect(() => {
     fetchMessages()
       .then((res) => {
-        console.log(res.data);
         if (res.status === 200) {
           setMessages("ok");
         }
@@ -28,7 +27,6 @@ function Page() {
   const fetchNewMessagesHandler = () => {
     fetchNewMessages()
       .then((res) => {
-        console.log(res.data);
         if (res.status === 200) {
           setMessages([...messages, res.data]);
         }
@@ -45,7 +43,6 @@ function Page() {
     };
     sendMessage(postData)
       .then((res) => {
-        console.log(res.data);
         if (res.status === 200) {
           fetchNewMessagesHandler();
         }

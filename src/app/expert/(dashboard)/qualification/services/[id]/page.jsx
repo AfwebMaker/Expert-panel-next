@@ -10,7 +10,6 @@ import { HiOutlineChevronRight, HiBadgeCheck, HiExclamation, HiExclamationCircle
 
 function Page({ params }) {
   const state = 1
-  console.log(params.id)
 
   return (
     <div className="flex w-full h-[calc(100vh-138px)] md:h-auto md:pb-[80px] lg:pb-0 lg:h-auto xl:h-[calc(100vh-152px)] rounded-lg bg-[#F8F9F9] flex-col items-center justify-start relative">

@@ -12,7 +12,6 @@ function ChatBoxHeader({ name, problem, ticketNumber, status }) {
 
   const removeTicketHandler = () => {
     router.replace("/expert/tickets")
-    console.log("removeTicketHandler");
   };
 
   return (

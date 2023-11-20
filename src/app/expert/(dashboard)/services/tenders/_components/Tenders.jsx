@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 import formatPrice from "@/src/functions/formatPrice"
 
 function Tenders({ data }) {
-    console.log("Tenders", data)
     const type_job = useSelector(state => state.staticVariable.type_job)
 
     const type = (requestType) => {

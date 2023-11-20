@@ -2,7 +2,7 @@ import { dynamicApiCall } from "../dynamicApiCall";
 import { deputy_kg_local } from '../APIRepositories'
 
 const reActive = async (data) => {
-    console.log("reActive",data)
+
     const option = {
         axios: deputy_kg_local,
         method: 'POST',

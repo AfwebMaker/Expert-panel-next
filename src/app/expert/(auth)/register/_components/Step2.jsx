@@ -99,7 +99,6 @@ export default function Step2({ currentStep, setCurrentStep }) {
         dispatch(loadingHandler(true))
         addActivity(data)
             .then((res) => {
-                console.log(res)
                 setCurrentStep(currentStep + 1)
             })
             .catch(() => {

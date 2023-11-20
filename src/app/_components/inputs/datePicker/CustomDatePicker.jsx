@@ -32,6 +32,7 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
     useLayoutEffect(() => {
         setDateInput(document.getElementsByClassName(name))
         setContainer(document.getElementsByClassName(`${name}-contain`))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //click on custom input body 
@@ -48,22 +49,24 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
 
     //change style of ready component
     useEffect(() => {
-        if (focus , container[0]) {
-            container[0] && (container[0].children[2].children[0].style.display = 'none')
-            container[0] && (container[0].children[2].style.zIndex  = '20')
-            container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[0].style.direction = 'ltr')
-            container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[0].children[1].style.direction = 'rtl')
-            container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[1].children[0].style.display = 'none')
-            container[0] && (container[0].children[2].children[0].style.display = 'none')
-            container[0] && (container[0].children[2].children[1].children[0].style.padding = "8px 0px 0px 0px")
-            container[0] && (container[0].children[2].children[1].children[0].children[0].style.padding = "0px 4px 0px 4px")
-            container[0] && (container[0].children[2].children[1].children[0].children[0].children[0].children[1].style.minHeight = 'auto')
+        if (focus && container[0]) {
+            container[0].children[2].children[0].style.display = 'none'
+            container[0].children[2].style.zIndex  = '20'
+            container[0].children[2].children[1].children[0].children[0].children[0].children[0].style.direction = 'ltr'
+            container[0].children[2].children[1].children[0].children[0].children[0].children[0].children[1].style.direction = 'rtl'
+            container[0].children[2].children[1].children[0].children[0].children[0].children[1].children[0].style.display = 'none'
+            container[0].children[2].children[0].style.display = 'none'
+            container[0].children[2].children[1].children[0].style.padding = "8px 0px 0px 0px"
+            container[0].children[2].children[1].children[0].children[0].style.padding = "0px 4px 0px 4px"
+            container[0].children[2].children[1].children[0].children[0].children[0].children[1].style.minHeight = 'auto'
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [focus])
 
     //focus on input element when focus on parent element
     useEffect(() => {
         focus && dateInput[0].focus()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [focus])
 
     //get click out side of element
@@ -81,6 +84,7 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
                 document.removeEventListener("mousedown", handleClickOutside);
             };
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [focus]);
 
     const getRingStyle = () => {
@@ -125,7 +129,7 @@ function CustomDatePicker({ state, title, placeholder, className, name, required
             case 'High':
                 return <HiExclamation className='text-error' size={20} />;
             default:
-                return required === undefined ? '' : 'اجباری';
+                return 'اجباری';
         }
     }
 

@@ -16,7 +16,7 @@ import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 function Step1({ currentStep, setCurrentStep, stepInformation }) {
   const [loadingPage, setLoadingPage] = useState(true);
   const [jobList, setJobList] = useState(true);
-  const [jobTypeList, setJobTypeList] = useState(true);
+  const [jobTypeList, setJobTypeList] = useState([]);
   const dispatch = useDispatch();
   const jobType = useSelector(state => state.staticVariable.type_job);
   const information = [
@@ -90,7 +90,7 @@ function Step1({ currentStep, setCurrentStep, stepInformation }) {
           const listOfJobType = []
           res.data.data.forEach((item) => {
             jobType.forEach((jobItem) => {
-              jobItem.id == item.requestType && listOfJobType.push(jobItem)
+              jobItem.id === item.requestType && listOfJobType.push(jobItem)
             })
           })
 
@@ -102,6 +102,7 @@ function Step1({ currentStep, setCurrentStep, stepInformation }) {
           dispatch(loadingHandler(false))
         })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formik.values.job])
 
   return (

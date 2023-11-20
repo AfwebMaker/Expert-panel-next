@@ -26,7 +26,6 @@ function DeputyCard({ status, phone, name, activeData, avatarURL, nationalCode }
   const dispatch = useDispatch();
 
   const cancellationHandler = () => {
-    console.log("first")
     const data = {
       "nationalCode": activeData ? activeData.nationalCode : "",
     }
@@ -34,7 +33,6 @@ function DeputyCard({ status, phone, name, activeData, avatarURL, nationalCode }
     deActive(data)
       .then(res => {
         router.replace("/expert/deputy/")
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)
@@ -45,7 +43,6 @@ function DeputyCard({ status, phone, name, activeData, avatarURL, nationalCode }
   }
 
   const activationHandler = (e) => {
-    console.log(e.target.id)
     const data = {
       "nationalCode": e.target.id,
     }
@@ -53,7 +50,6 @@ function DeputyCard({ status, phone, name, activeData, avatarURL, nationalCode }
     reActive(data)
       .then(res => {
         router.replace("/expert/deputy/")
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)
@@ -64,7 +60,6 @@ function DeputyCard({ status, phone, name, activeData, avatarURL, nationalCode }
   }
 
   const cancelHandler = (e) => {
-    console.log(e.target.id)
     const data = {
       "nationalCode": e.target.id,
     }
@@ -72,7 +67,6 @@ function DeputyCard({ status, phone, name, activeData, avatarURL, nationalCode }
     cancel(data)
       .then(res => {
         router.replace("/expert/deputy/")
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)

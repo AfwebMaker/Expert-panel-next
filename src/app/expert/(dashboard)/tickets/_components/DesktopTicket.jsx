@@ -23,7 +23,6 @@ function DesktopNavigation() {
   useEffect(() => {
     fetchTickets()
       .then((res) => {
-        console.log(res.data.data.results)
         setDataTickets(res.data.data.results);
       })
       .catch((error) => {
@@ -75,7 +74,6 @@ function DesktopNavigation() {
   ];
 
   const SendNewTicketHandler = () => {
-    console.log("first");
     router.push("/expert/tickets/new-ticket");
   };
 

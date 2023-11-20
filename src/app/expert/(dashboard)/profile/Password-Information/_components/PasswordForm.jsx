@@ -67,7 +67,6 @@ function PasswordForm() {
         forgetPhoneNumber(phoneNumber)
             .then(res => {
                 setForgetPassword('checkOtp')
-                console.log(res)
             })
             .catch(() => {
             })

@@ -47,7 +47,6 @@ function ForgetPassword({ setPageState }) {
             dispatch(loadingHandler(true))
             forgetChangePassword(values.password)
                 .then((res) => {
-                    console.log(res)
                     customToast('success', 'رمز شما با موفقیت تغییر کرد.')
                     setPageState('checkNumber')
                 })

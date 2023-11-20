@@ -110,6 +110,7 @@ function NotPrefer() {
       setValidation({ ...baseValidation, ...legalValidation }) :
       setValidation(baseValidation)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainDataCompany])
 
   const formik = useFormik({
@@ -150,7 +151,6 @@ function NotPrefer() {
       dispatch(loadingHandler(true))
       add(data)
         .then(res => {
-          console.log(res)
           router.replace("/expert/deputy/")
         })
         .catch((err) => {

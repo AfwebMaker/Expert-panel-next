@@ -44,7 +44,6 @@ function CheckNumber({ setPhoneNumber, setPageState }) {
                         //send otp
                         sendOtp(values.phoneNumber)
                             .then(res => {
-                                console.log(res)
                                 setCookie('guid', res.data.data)
                                 setPageState('checkOtp')
                             })

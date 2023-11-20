@@ -174,7 +174,6 @@ function Page() {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values.checkBoxMultipleInput);
       alert(JSON.stringify(values, null, 2));
     },
   });

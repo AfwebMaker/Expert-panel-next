@@ -6,7 +6,6 @@ import { HiOutlinePaperAirplane, HiOutlinePhotograph } from "react-icons/hi";
 function ChatBoxFooter({ sendMessageHandler }) {
   const [value, setValue] = useState("");
   const fileHandler = () => {
-    console.log("fileHandler");
   };
 
   const changeHandler = (e) => {

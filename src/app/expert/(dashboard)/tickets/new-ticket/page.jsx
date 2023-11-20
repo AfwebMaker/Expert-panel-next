@@ -64,18 +64,16 @@ function Page() {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log("tickets",values)
       const data = {
         "departmentId": values.departmentId,
         "subjectId": values.subjectId,
         "content": values.content,
         "media": values.media,
       }
-      console.log(data)
+
       dispatch(loadingHandler(true))
       sendMessage(data)
         .then(res => {
-          console.log(res)
           router.replace("/expert/tickets/")
         })
         .catch((err) => {

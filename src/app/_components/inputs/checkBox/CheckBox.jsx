@@ -40,6 +40,7 @@ function CheckBox({ state, title, placeholder, className, name, required, formik
             return { ...item, text: cartNumberFormat(item.text) }
         })
         setCartNumbers(newData)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //input blur handler
@@ -107,7 +108,7 @@ function CheckBox({ state, title, placeholder, className, name, required, formik
             case 'High':
                 return <HiOutlineChevronDown className="h-4 w-4 text-error" />;
             default:
-                return required === undefined ? '' : <HiOutlineChevronDown className="h-4 w-4 text-gray-400" />;
+                return <HiOutlineChevronDown className="h-4 w-4 text-gray-400"/>;
         }
     }
 

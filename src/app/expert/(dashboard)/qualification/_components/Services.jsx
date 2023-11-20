@@ -1,6 +1,7 @@
 //react icons
 import Link from "next/link";
 import { HiCheckCircle, HiXCircle, HiOutlinePencilAlt, HiExclamationCircle, HiOutlineClipboardList } from "react-icons/hi";
+import Image from "next/image";
 
 export default function Services({ products }) {
     return (
@@ -12,7 +13,9 @@ export default function Services({ products }) {
                             <li key={product.id} className={`p-4 md:p-6 sm:h-auto bg-white mt-6 md:mt-0 rounded-md border border-cf-200 md:border-x-0 md:border-t-0 ${products.length - 1 === i ? 'md:border-b-0' : ''}`}>
                                 <div className="h-full flex flex-col sm:flex-row items-center sm:items-start">
                                     <div className="relative sm:ml-6 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 sm:h-40 h-40 w-full sm:w-auto">
-                                        <img
+                                        <Image
+                                            width={600}
+                                            height={600}
                                             src={product.imageSrc}
                                             alt={product.imageAlt}
                                             className="h-full ms:h-40 w-full object-contain object-center"

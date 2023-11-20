@@ -40,6 +40,7 @@ function MultipleContainingUploads({
         { id: shortText(item.name, 12), url: item.url },
       ]);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //set formik value
@@ -55,6 +56,7 @@ function MultipleContainingUploads({
     });
 
     formik.setFieldValue(name, passArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadFiles]);
 
   const handleAddFileClick = () => {

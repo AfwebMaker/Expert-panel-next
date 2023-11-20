@@ -9,7 +9,6 @@ import Link from 'next/link'
 
 
 function ServicesCard({ state, src, slug, title, serviceType, address, meterage, description, price, time, totalTime, avatar, name, startDate, startTime }) {
-    console.log("startTime",startTime)
 
     return (
         <li className='col-span-12 w-full h-[410px] sm:h-[170px] rounded-lg border border-gray-200 bg-white shadow-lg fcc overflow-hidden'>

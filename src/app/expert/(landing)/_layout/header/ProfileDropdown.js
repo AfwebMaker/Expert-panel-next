@@ -10,7 +10,7 @@ import Cookies from 'js-cookie'
 
 function ProfileDropDown({ data }) {
     const router = useRouter()
-    console.log(data)
+    
     return (
         <div className="w-auto text-right">
             <Menu as="div" className="relative inline-block text-left">

@@ -19,14 +19,13 @@ import getCookie from '@/src/functions/getCookie'
 import profileBase from '@/src/services/person_kg_local/profileBase'
 
 function Header() {
-  const isLogin = getCookie("TOKEN")
+  const [isLogin, setIsLogin] = useState(false)
   const [data, setData] = useState({})
   const [subMenuData, setSubMenuData] = useState({})
   const [loadingPage, setLoadingPage] = useState(true)
   const [hamburgerMenuIsActive, setHamburgerMenuIsActive] = useState(false);
   const [menuIsActive, setMenuIsActive] = useState(false);
   const [profileMobileActive, setProfileMobileActive] = useState(false)
-
 
   useEffect(() => {
     profileBase()
@@ -38,6 +37,11 @@ function Header() {
       .finally(() => {
         setLoadingPage(false)
       })
+  }, [])
+
+  //user is Login or not
+  useEffect(() => {
+    setIsLogin(getCookie("TOKEN"))
   }, [])
 
   //detect scrollTop largest 100 or not
@@ -58,7 +62,7 @@ function Header() {
             <Image src={Kargosha_Logo} height={35} alt='kargosha logo' className='ml-4' />
           </Link>
 
-          {!isLogin ?
+          {isLogin ?
             <div className='text-sm flex justify-center items-center text-cf-400'>
               <div className='fcc lg:hidden'>
                 {!profileMobileActive ?
@@ -72,15 +76,6 @@ function Header() {
                 }
               </div>
               <div className='hidden lg:fcc'>
-                {/* <div className='fcc'>
-                  <Link href='/expert/tickets'>
-                    <HiOutlineMail className='ml-5 text-cf-300 cursor-pointer' size={24} />
-                  </Link>
-                  <Link href='/expert/notification/orders'>
-                    <HiOutlineBell className='text-cf-300 cursor-pointer' size={24} />
-                  </Link>
-                </div>
-                <span className='w-[2px] h-7 rounded-full bg-gray-300 block mx-4'></span> */}
                 <ProfileDropdown data={data} />
               </div>
             </div>

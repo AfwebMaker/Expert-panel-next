@@ -46,9 +46,9 @@ function Step1({ currentStep, setCurrentStep, stepInformation }) {
   const validationSchema = Yup.object({
     job: Yup.string()
       .required(
-        "لطفا نام خانوادگی خود را به درستی وارد کنید."
+        "لطفا نام سرویس خود را انتخاب کنید."
       ),
-    requestType: jobTypeList ? Yup.string().required("لطفا نام خانوادگی خود را به درستی وارد کنید.") : Yup.string(),
+    requestType: jobTypeList ? Yup.string().required("لطفا نوع سرویس خود را انتخاب کنید.") : Yup.string(),
   });
 
   //input handler

@@ -1,7 +1,7 @@
 import React from 'react'
+import Link from 'next/link'
 //components
 import SubNavigationItem from './SubNavigationItem'
-import Link from 'next/link'
 
 function SubNavigation(props) {
 

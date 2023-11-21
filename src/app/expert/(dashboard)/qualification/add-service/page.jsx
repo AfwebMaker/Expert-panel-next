@@ -20,6 +20,10 @@ function Page() {
     }, {
       number: 2,
       title: 'قدم دوم',
+      description: 'شرایط و ضوابط سرویس'
+    }, {
+      number: 3,
+      title: 'قدم سوم',
       description: 'انتخاب مناطق کاری'
     }
   ]
@@ -43,6 +47,10 @@ function Page() {
           }
 
           {currentStep === 2 &&
+            <Step2 currentStep={currentStep} setCurrentStep={setCurrentStep} stepInformation={stepInformation} />
+          }
+
+          {currentStep === 3 &&
             <Step3 currentStep={currentStep} setCurrentStep={setCurrentStep} stepInformation={stepInformation} />
           }
 

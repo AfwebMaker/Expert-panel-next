@@ -10,7 +10,7 @@ import formatPrice from "@/src/functions/formatPrice"
 // react icons
 import { HiUser, HiOutlineTicket, HiOutlineMinusSm } from 'react-icons/hi'
 
-function TenderBox({ time, minPrice, maxPrice, link }) {
+function TenderBox({ state, time, minPrice, maxPrice, link }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (

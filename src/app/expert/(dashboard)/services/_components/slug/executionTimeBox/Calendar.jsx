@@ -17,13 +17,16 @@ const Calendar = ({ date }) => {
 
     const firstDayOfMonth = moment(date).startOf('month').weekday();
 
+    const prevMonth = moment(date).subtract(1, 'month');
+    const prevMonthDays = prevMonth.daysInMonth();
+
     for (let i = 0; i < firstDayOfMonth; i++) {
         boxes[i].unshift(
             <div
                 key={'prev' + i}
-                className="w-[50px] h-[50px] rounded text-lg mx-1 mb-4 text-center fcc font-bold bg-red-300"
+                className="w-full h-[30px] text-sm sm:h-[50px] sm:text-lg lg:h-[30px] lg:text-sm xl:h-[50px] xl:text-lg rounded mb-3 text-center fcc font-bold text-[#808080] bg-[#E5E7EB] opacity-30"
             >
-                -
+                {prevMonthDays - firstDayOfMonth + i + 1}
             </div>
         );
     }
@@ -38,13 +41,13 @@ const Calendar = ({ date }) => {
                 key={i}
                 style={{
                     backgroundColor: isSameDay ? '#45B649' : '#E5E7EB',
-                    color: isSameDay ? 'white' : '#808080',
+                    color: isSameDay ? 'white' : dayOfWeek === 6 ? '#EF4444' : '#808080',
                 }}
-                className="w-[50px] h-[50px] rounded text-lg mx-1 mb-4 text-center fcc font-bold"
+                className="w-full h-[30px] text-sm sm:h-[50px] sm:text-lg lg:h-[30px] lg:text-sm xl:h-[50px] xl:text-lg fcc rounded mb-3 text-center font-bold"
             >
                 {isSameDay ? (
                     <div className='w-full h-full relative fcc'>
-                        <TiChevronRight className='absolute -right-0.5 -top-0.5 -rotate-45 text-yellow-400'/>
+                        <TiChevronRight className='hidden sm:block absolute -right-0.5 -top-0.5 -rotate-45 text-yellow-400' />
                         {currentDate.format('jD')}
                     </div>
                 ) : (
@@ -55,15 +58,15 @@ const Calendar = ({ date }) => {
     }
 
     return (
-        <div className="w-full flex flex-row justify-center">
+        <div className="w-full flex flex-row justify-center mb-1">
             {weekDays.map((day, index) => (
-                <div key={index} className='mx-1'>
+                <div key={index} className='mx-1.5 flex flex-col w-[30px] sm:w-[50px] lg:w-[30px] xl:w-[50px]'>
                     <div
-                        className="w-[50px] h-[50px] border-b border-cf-300 fcc mb-6 mx-1 text-cf-300"
+                        className="w-full h-[40px] border-b-2 border-gray-200 text-[10px] sm:text-xs lg:text-[10px] xl:text-xs font-bold fcc mb-6 mx-1 text-cf-300"
                     >
                         {day}
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div className='flex flex-col fcc'>
                         {boxes[index]}
                     </div>
                 </div>

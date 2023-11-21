@@ -21,7 +21,7 @@ function Header({ currentStep, setCurrentStep, stepInformation }) {
                 </div>
             </div>
 
-            <div className='w-[150px] sm:w-[200px] m-auto'>
+            <div className='w-[300px] sm:w-[550px] m-auto'>
                 <Steps currentStep={currentStep} setCurrentStep={setCurrentStep} stepInformation={stepInformation} />
             </div>
         </div>

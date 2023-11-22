@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 // components
 import Modal from "@/app/_components/Modal"
-import TenderBoxModule from "./TenderBoxModule"
+import TenderBoxEditModule from "./Module/TenderBoxEditModule"
 import InfoCard from "@/app/_components/InfoCard"
 import TimerDown from "@/app/_components/TimerDown"
 // function
@@ -10,7 +10,7 @@ import formatPrice from "@/src/functions/formatPrice"
 // react icons
 import { HiUser, HiOutlineTicket, HiOutlineMinusSm } from 'react-icons/hi'
 
-function TenderBox({ state, time, minPrice, maxPrice, link }) {
+function TenderBoxEdit({ time, ProposedPrice, minPrice, maxPrice, link }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -27,6 +27,11 @@ function TenderBox({ state, time, minPrice, maxPrice, link }) {
                 <span className='text-sm text-cf-300'>
                     زمان تا پایان مناقصه
                 </span>
+                <div className='fcc w-full gap-x-1 text-sm text-cf-300 mt-2'>
+                    <span className='text-primary-500'>قیمت پیشنهادی شما</span>
+                    <span>:</span>
+                    <span>{formatPrice(ProposedPrice)} ریال</span>
+                </div>
             </div>
             <div className='w-full text-cf-300 mb-5'>
                 <h2 className='text-sm mb-5'>محدوده مجاز برای شرکت در مناقصه</h2>
@@ -49,15 +54,15 @@ function TenderBox({ state, time, minPrice, maxPrice, link }) {
                 توجه شود که این قیمت توسط متری چند تعیین شده و تمامی فاکتور عم از نیاز به مصالح و ... در آن دیده شده است.
                 <Link href={link} className='font-bold w-full fcc mt-5 cursor-pointer'>مشاهده برآورد هزینه در متری چند</Link>
             </InfoCard>
-            <div onClick={() => setIsOpen(true)} className='min-h-[40px] bg-primary-500 hover:bg-primary-600 transition-all duration-300 w-full h-10 text-white text-sm cursor-pointer fcc gap-x-1 rounded-lg mt-5'>
-                <span>شرکت در مناقصه و اعلام قیمت پیشنهادی</span>
+            <div onClick={() => setIsOpen(true)} className='min-h-[40px] bg-orange-400 hover:bg-orange-500 transition-all duration-300 w-full h-10 text-white text-sm cursor-pointer fcc gap-x-1 rounded-lg mt-5'>
+                <span>اصلاح اعلام قیمت پیشنهادی</span>
                 <HiOutlineTicket size={18} className='-rotate-45' />
             </div>
-            <Modal isOpen={isOpen} setIsOpen={setIsOpen} h={"auto"} w={"500px"} >
-                <TenderBoxModule setIsOpen={setIsOpen} />
+            <Modal isOpen={isOpen} setIsOpen={setIsOpen} h={"h-screen md:h-auto"} w={"w-screen md:w-[500px]"} >
+                <TenderBoxEditModule setIsOpen={setIsOpen} />
             </Modal>
         </div>
     )
 }
 
-export default TenderBox;
+export default TenderBoxEdit;

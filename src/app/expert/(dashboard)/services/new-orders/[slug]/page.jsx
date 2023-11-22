@@ -36,7 +36,7 @@ function Page() {
     }
 
     return (
-        <div className="flex w-full flex-col pb-[200px] lg:pb-0">
+        <div className="flex w-full flex-col mt-5 pb-[200px] lg:pb-0">
             <div className="w-full h-full flex flex-col items-center justify-start">
                 <MasterCarousel />
                 <div className='grid grid-cols-12 w-full gap-0 lg:gap-5 mt-0 lg:mt-5 mb-5'>

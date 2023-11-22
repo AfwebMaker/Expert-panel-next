@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // react icons
-import { HiOutlineSpeakerphone } from "react-icons/hi";
+import { HiOutlineSpeakerphone, HiOutlinePencilAlt } from "react-icons/hi";
 //formik
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -31,7 +31,7 @@ const inputData = [
     }
 ]
 
-function TenderBoxModule({ setIsOpen }) {
+function TenderBoxEditModule({ setIsOpen }) {
     const [step, setStep] = useState(1);
     const [price, setPrice] = useState({});
 
@@ -109,7 +109,12 @@ function TenderBoxModule({ setIsOpen }) {
                                         />
                                     ))}
                                 </div>
-                                <Button type='submit' title='اعلام قیمت' />
+                                <button type="submit" className="rounded-md w-full fcc text-blue-500 bg-blue-200 h-11" >
+                                    <div>
+                                        <HiOutlinePencilAlt size={18} />
+                                    </div>
+                                    <div className='mr-2 font-bold text-base'>ویرایش قیمت</div>
+                                </button>
                             </form>
                         </>
                     )
@@ -125,7 +130,7 @@ function TenderBoxModule({ setIsOpen }) {
                                 توجه داشته باشید در صورت تایید شما وارد مناقصه می شوید و امکان لغو را ندارید.
                             </p>
                             <div className='w-full h-11 flex items-center justify-around'>
-                                <div onClick={confirmationHandler} className='transition-all duration-300 h-full bg-primary-100 hover:bg-primary-200 text-primary-500 rounded-lg fcc w-[200px]'>تایید و اعلام قیمت</div>
+                                <div onClick={confirmationHandler} className='transition-all duration-300 h-full bg-blue-100 hover:bg-blue-200 text-blue-500 rounded-lg fcc w-[200px]'>تایید و اعلام قیمت</div>
                                 <div onClick={cancelHandler} className='transition-all duration-300 h-full bg-red-100 hover:bg-red-200 text-red-500 rounded-lg fcc w-[200px]'>لغو و بستن صفحه</div>
                             </div>
                         </div>
@@ -135,4 +140,4 @@ function TenderBoxModule({ setIsOpen }) {
     )
 }
 
-export default TenderBoxModule
+export default TenderBoxEditModule

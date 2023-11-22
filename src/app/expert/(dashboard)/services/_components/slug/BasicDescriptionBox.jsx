@@ -9,7 +9,7 @@ import expert_icon from "@/public/images/dashboard/services/expert.svg"
 
 function BasicDescriptionBox({ serviceType, meterage, expertLevel }) {
     return (
-        <div className='bg-white lg:shadow-lg w-full p-5 border-b border-gray-300 lg:border-none lg:rounded-xl flex flex-col items-start justify-center gap-y-2 lg:mt-5'>
+        <div className='bg-white lg:shadow-lg w-full p-5 border-b border-gray-300 lg:border-none lg:rounded-xl flex flex-col items-start justify-center gap-y-2'>
             <div className='flex w-full items-center gap-x-2'>
                 <HiDocumentText className='text-primary-500 text-xl' />
                 <span className='text-cf-300 text-base'>توضیحات اولیه پروژه</span>

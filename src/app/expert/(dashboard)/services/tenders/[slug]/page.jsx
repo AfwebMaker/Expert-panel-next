@@ -32,16 +32,16 @@ function Page() {
 
   function cardStatus(state, time, minPrice, maxPrice, link) {
     if (state === "edit") {
-      return <TenderBoxEdit time={time} minPrice={minPrice} maxPrice={maxPrice} link={link} />;
+      return <TenderBoxEdit ProposedPrice={26700000} time={time} minPrice={minPrice} maxPrice={maxPrice} link={link} />;
     } else if (state === "contract") {
       return <TenderBoxContract time={time} minPrice={minPrice} maxPrice={maxPrice} link={link} />;
     } else if (state === "commission") {
-      return <TenderBoxCommission time={time} minPrice={minPrice} maxPrice={maxPrice} link={link} />;
+      return <TenderBoxCommission time={time} projectCommission={122222} payableStart={52212356} />;
     }
   }
 
   return (
-    <div className="flex w-full flex-col pb-[200px] lg:pb-0">
+    <div className="flex w-full flex-col mt-5 pb-[200px] lg:pb-0">
       <div className="w-full h-full flex flex-col items-center justify-start">
         <MasterCarousel />
         <div className='grid grid-cols-12 w-full gap-0 lg:gap-5 mt-0 lg:mt-5 mb-5'>
@@ -52,7 +52,7 @@ function Page() {
             <FurtherDetailsBox text={text} />
           </div>
           <div className='col-span-12 lg:col-span-6 flex flex-col'>
-            {cardStatus("edit", 2 * 24 * 60 * 60 * 1000, 20000000, 50000000, "#")}
+            {cardStatus("commission", 2 * 24 * 60 * 60 * 1000, 20000000, 50000000, "#")}
             <TenderBoxPhone time={2 * 24 * 60 * 60 * 1000} minPrice={20000000} maxPrice={50000000} link={"#"} />
             <ExecutionTimeBox />
           </div>

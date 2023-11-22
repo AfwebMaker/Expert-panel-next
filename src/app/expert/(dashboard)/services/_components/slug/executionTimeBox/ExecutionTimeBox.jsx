@@ -8,7 +8,7 @@ import { HiClock } from 'react-icons/hi'
 
 function ExecutionTimeBox() {
     return (
-        <div className='bg-white lg:shadow-lg w-full p-5 border-b border-gray-300 lg:border-none lg:rounded-xl flex flex-col items-start justify-center gap-y-2 lg:mt-5'>
+        <div className='bg-white lg:shadow-lg w-full h-full p-5 border-b border-gray-300 lg:border-none lg:rounded-xl flex flex-col items-start justify-center gap-y-2 lg:mt-5'>
             <div className='flex w-full items-center gap-x-2 mb-7'>
                 <HiClock className='text-primary-500 text-xl' />
                 <span className='text-cf-300 text-base'>زمان انجام و اجرای پروژه</span>

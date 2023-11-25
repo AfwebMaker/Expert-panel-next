@@ -4,7 +4,7 @@ import { HiLocationMarker } from 'react-icons/hi'
 
 function TitleBox({ title, address }) {
     return (
-        <div className='bg-white lg:shadow-lg w-full h-[100px] p-5 border-b border-gray-300 lg:border-none lg:rounded-xl flex flex-col items-start justify-center gap-y-2'>
+        <div className='bg-white lg:shadow-lg w-full h-[100px] p-5 border-b mb-5 border-gray-300 lg:border-none lg:rounded-xl flex flex-col items-start justify-center gap-y-2'>
             <span className='font-bold w-full'>{title}</span>
             <div className='flex w-full items-center gap-x-2'>
                 <HiLocationMarker className='text-primary-500 text-xl' />

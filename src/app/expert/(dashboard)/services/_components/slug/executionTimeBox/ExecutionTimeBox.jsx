@@ -6,7 +6,7 @@ import convertToJalali from "@/src/functions/convertToJalali"
 // react icons
 import { HiClock } from 'react-icons/hi'
 
-function ExecutionTimeBox() {
+function ExecutionTimeBox({ date }) {
     return (
         <div className='bg-white lg:shadow-lg w-full h-full p-5 border-b border-gray-300 lg:border-none lg:rounded-xl flex flex-col items-start justify-center gap-y-2 lg:mt-5'>
             <div className='flex w-full items-center gap-x-2 mb-7'>

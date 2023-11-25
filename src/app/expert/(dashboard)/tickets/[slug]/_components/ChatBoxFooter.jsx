@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
 //react icons
-import { HiOutlinePaperAirplane, HiOutlinePhotograph } from "react-icons/hi";
+import { HiOutlinePaperAirplane, HiOutlinePaperClip } from "react-icons/hi";
+// components
+import ClipModule from "./ClipModal"
+import UploadFile from "./UploadFile"
 
 function ChatBoxFooter({ sendMessageHandler }) {
   const [value, setValue] = useState("");
-  const fileHandler = () => {
-    console.log("fileHandler");
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   const changeHandler = (e) => {
     // console.log(e.target.value);
@@ -29,11 +30,7 @@ function ChatBoxFooter({ sendMessageHandler }) {
             placeholder="پیام خود را بنویسید ..."
             className="w-full h-full pr-5 pl-2 pt-[10px] border-none outline-none bg-transparent resize-none scroll_custom text-sm caret-primary-500"
           />
-          <HiOutlinePhotograph
-            role="button"
-            onClick={fileHandler}
-            className="absolute left-3.5 top-4 text-2xl text-gray-500"
-          />
+          <UploadFile isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
         <div
           onClick={clickHandler}

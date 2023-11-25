@@ -34,18 +34,18 @@ function Page() {
         <div className='grid grid-cols-12 w-full gap-0 lg:gap-5 mt-0 lg:mt-5 mb-5'>
           <div className='col-span-12 lg:col-span-6 flex flex-col'>
             <TitleBox title={"نصب و اجرای شیشه دو جداره"} address={"تهران، منطقه ۷، سهرودی شمالی"} />
-            <ContractorBox />
-            <ExecutionTimeBox />
+            <ContractorBox imageProfile={""} familyName={"علی جباری"} number={"09106686121"}/>
+            <ExecutionTimeBox date={""} />
 
           </div>
           <div className='col-span-12 lg:col-span-6 flex flex-col'>
-            {/* <TenderBoxPhone time={2 * 24 * 60 * 60 * 1000} minPrice={20000000} maxPrice={50000000} link={"#"} /> */}
             <BasicDescriptionBox serviceType={type(1)} meterage={"۸ متر در ارتفاع ۳ متر"} expertLevel={"مجرب"} />
             <DescriptionBox data={data} />
             <FurtherDetailsBox text={text} />
           </div>
           <div className='col-span-12 flex flex-col'>
             <AddressBox address={"تهران سهرودی منطقه ۸ خیابان آذری پلاک ۱۹ واحد ۲"} mapLocation={[51.42047, 35.729054]} />
+            {/* <TenderBoxPhone time={2 * 24 * 60 * 60 * 1000} minPrice={20000000} maxPrice={50000000} link={"#"} /> */}
           </div>
         </div>
       </div>

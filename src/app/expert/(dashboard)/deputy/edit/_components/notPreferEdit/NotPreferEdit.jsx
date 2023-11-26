@@ -5,6 +5,7 @@ import DynamicInputs from "@/app/_components/inputs/DynamicInputs";
 import InformationForm from "./InformationForm"
 import LegalForm from "./LegalForm"
 import Button from "@/app/_components/Button"
+import Loading from '@/src/app/_components/Loading';
 //formik
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -15,13 +16,14 @@ import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 import { HiOutlineFingerPrint } from "react-icons/hi";
 // services
 import add from "@/services/deputy_kg_local/add"
+import expertData from "@/src/services/deputy_kg_local/expertData";
 
-function NotPreferEdit({ stateForm, setStateForm }) {
+function NotPreferEdit({ stateForm }) {
 
   const [validation, setValidation] = useState(false);
-  let data = {};
   const { mainDataCompany } = useSelector(state => state.getExpertInfo.user)
-  // const activeDataLocal = useSelector(state => state.getExpertInfo.activeData)
+  const [loadingPage, setLoadingPage] = useState(true)
+  const [id, setId] = useState()
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -110,33 +112,15 @@ function NotPreferEdit({ stateForm, setStateForm }) {
       setValidation(baseValidation)
   }, [mainDataCompany])
 
-  useEffect(() => {
-    if (data === null) {
-      router.replace('/expert/deputy')
-    }
-  }, [])
-
 
   const formik = useFormik({
     initialValues: {
-      // nameFamily: activeDataLocal ? activeDataLocal.nameFamily : "",
-      // mobile: activeDataLocal ? "0" + activeDataLocal.mobile : "",
-      // nationalCode: activeDataLocal ? activeDataLocal.nationalCode : "",
-      // zipCode: activeDataLocal ? activeDataLocal.zipCode : "",
-      // description: activeDataLocal && activeDataLocal.description ? activeDataLocal.description : "",
-      // avatarURL: activeDataLocal ? activeDataLocal.avatarURL : {},
-      // company_OrganizationLevel: activeDataLocal && activeDataLocal.company_OrganizationLevel ? activeDataLocal.company_OrganizationLevel : null,
-      // company_LastEducationalCertificate: activeDataLocal && activeDataLocal.company_LastEducationalCertificate ? activeDataLocal.company_LastEducationalCertificate : null,
-      // company_Resume: activeDataLocal && activeDataLocal.company_Resume ? activeDataLocal.company_Resume : "",
-      // company_ResumeURL: activeDataLocal && activeDataLocal.company_ResumeURL ? activeDataLocal.company_ResumeURL : {},
-
-
       nameFamily: "",
       mobile: "",
       nationalCode: "",
       zipCode: "",
       description: "",
-      avatarURL: "",
+      avatarURL: {},
       company_OrganizationLevel: "",
       company_LastEducationalCertificate: "",
       company_Resume: "",
@@ -145,7 +129,7 @@ function NotPreferEdit({ stateForm, setStateForm }) {
     validationSchema,
     onSubmit: (values) => {
       const dataUser = {
-        // "id": activeDataLocal.id,
+        "id": id,
         "nameFamily": values.nameFamily,
         "avatarURL": values.avatarURL,
         "isMyself": false,
@@ -163,7 +147,7 @@ function NotPreferEdit({ stateForm, setStateForm }) {
       }
 
       const data = mainDataCompany !== null ? Object.assign(dataUser, dataExpert) : Object.assign(dataUser);
-
+      console.log("first")
       dispatch(loadingHandler(true))
       add(data)
         .then(res => {
@@ -179,75 +163,87 @@ function NotPreferEdit({ stateForm, setStateForm }) {
     },
   });
 
-
-
   useEffect(() => {
-    data = JSON.parse(localStorage.getItem('activeData') ?? '')
-
-    formik.setValues({
-
-      nameFamily: data ? data.nameFamily : "",
-      mobile: data ? "0" + data.mobile : "",
-      nationalCode: data ? data.nationalCode : "",
-      zipCode: data ? data.zipCode : "",
-      description: data && data.description ? data.description : "",
-      avatarURL: data ? data.avatarURL : {},
-      company_OrganizationLevel: data && data.company_OrganizationLevel ? data.company_OrganizationLevel : null,
-      company_LastEducationalCertificate: data && data.company_LastEducationalCertificate ? data.company_LastEducationalCertificate : null,
-      company_Resume: data && data.company_Resume ? data.company_Resume : "",
-      company_ResumeURL: data && data.company_ResumeURL ? data.company_ResumeURL : {},
-
-    })
-
-  }, [])
+    expertData()
+      .then(res => {
+        console.log(res.data.data)
+        let oldData = res.data.data.activeData
+        setId(oldData.id)
+        if (!Object.keys(oldData).length) {
+          router.replace('/expert/deputy');
+          return;
+        }
+        formik.setValues({
+          nameFamily: oldData?.nameFamily ?? "",
+          mobile: "0" + oldData?.mobile ?? "",
+          nationalCode: oldData?.nationalCode ?? "",
+          zipCode: oldData?.zipCode ?? "",
+          description: oldData?.description ?? "",
+          avatarURL: oldData?.avatarURL ?? {},
+          company_OrganizationLevel: oldData.company_OrganizationLevel ?? null,
+          company_LastEducationalCertificate: oldData.company_LastEducationalCertificate ?? null,
+          company_Resume: oldData.company_Resume ?? "",
+          company_ResumeURL: oldData.company_ResumeURL ?? {},
+        })
+      })
+      .catch(() => {
+      })
+      .finally(() => {
+        setLoadingPage(false)
+      })
+  }, []);
 
   return (
-    <div className="w-full flex flex-col">
-      <span className="text-xs leading-5 w-full text-cf-300 mb-5">
-        مشخصات نماینده شما
-      </span>
-      <form onSubmit={formik.handleSubmit}>
-        <InformationForm stateForm={stateForm} formik={formik} />
-        {mainDataCompany !== null && <LegalForm stateForm={stateForm} formik={formik} />}
-        <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
-          <h2 className="text-cf-300 text-sm">عکس نماینده</h2>
-          <p className="text-cf-300 text-xs">مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.</p>
-          <DynamicInputs
-            inputType={"uploadFile"}
-            title={"آپلود فایل"}
-            state={stateForm ? 1 : 0}
-            required={true}
-            className="my-2 w-full"
-            placeholder={"به طور مثال : سلام روز بخیر .."}
-            id={"avatarURL"}
-            name={"avatarURL"}
-            formik={formik}
-          />
-        </div>
-        {
-          mainDataCompany !== null && (
-            <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
-              <h2 className="text-cf-300 text-sm">عکس آخرین مدرک تحصیلی نماینده تان</h2>
-              <p className="text-cf-300 text-xs">
-                مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.
-              </p>
-              <DynamicInputs
-                inputType={"uploadFile"}
-                title={"آپلود فایل"}
-                state={stateForm ? 1 : 0}
-                required={true}
-                className="my-2 w-full"
-                placeholder={"به طور مثال : سلام روز بخیر .."}
-                id={"company_ResumeURL"}
-                name={"company_ResumeURL"}
-                formik={formik}
-              />
-            </div>
-          )
-        }
-        <Button type='submit' disable={!stateForm} icon={<HiOutlineFingerPrint size={20} />} title='ثبت تغییرات' />
-      </form>
-    </div>
+    <>
+      {loadingPage && <Loading />}
+      <div className="w-full flex flex-col">
+        <span className="text-xs leading-5 w-full text-cf-300 mb-5">
+          مشخصات نماینده شما
+        </span>
+
+        <form onSubmit={formik.handleSubmit}>
+          <InformationForm stateForm={stateForm} formik={formik} />
+          {mainDataCompany !== null && <LegalForm stateForm={stateForm} formik={formik} />}
+          <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
+            <h2 className="text-cf-300 text-sm">عکس نماینده</h2>
+            <p className="text-cf-300 text-xs">مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.</p>
+            <DynamicInputs
+              inputType={"uploadFile"}
+              title={"آپلود فایل"}
+              state={stateForm ? 1 : 0}
+              required={true}
+              className="my-2 w-full"
+              placeholder={"به طور مثال : سلام روز بخیر .."}
+              id={"avatarURL"}
+              name={"avatarURL"}
+              formik={formik}
+            />
+          </div>
+          {
+            mainDataCompany !== null && (
+              <div className="w-full flex items-start justify-center flex-col gap-y-3 mb-5">
+                <h2 className="text-cf-300 text-sm">عکس آخرین مدرک تحصیلی نماینده تان</h2>
+                <p className="text-cf-300 text-xs">
+                  مدارک شامل اسناد تصویری می باشد که شما باید آنها را به صورت یکی از فرمت های JPG , JPEG , PNG آپلود کنید.
+                </p>
+                <DynamicInputs
+                  inputType={"uploadFile"}
+                  title={"آپلود فایل"}
+                  state={stateForm ? 1 : 0}
+                  required={true}
+                  className="my-2 w-full"
+                  placeholder={"به طور مثال : سلام روز بخیر .."}
+                  id={"company_ResumeURL"}
+                  name={"company_ResumeURL"}
+                  formik={formik}
+                />
+              </div>
+            )
+          }
+          <Button type='submit' disable={!stateForm} icon={<HiOutlineFingerPrint size={20} />} title='ثبت تغییرات' />
+        </form>
+      </div>
+    </>
   );
 }
 

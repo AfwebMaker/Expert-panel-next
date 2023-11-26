@@ -4,7 +4,6 @@ const initialState = () => {
     try {
         return  {
             user: {},
-            // activeData: typeof window !== 'undefined' && (JSON.parse(localStorage.getItem('activeData')) ? JSON.parse(localStorage.getItem('activeData')) : null)
             activeData: JSON.parse(localStorage.getItem('activeData')) ? JSON.parse(localStorage.getItem('activeData')) : null
         };
     }

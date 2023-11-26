@@ -87,7 +87,7 @@ function DeputyCard({ status, phone, name, activeData, avatarURL, nationalCode }
       <div className="w-full flex md:flex-col">
         <section className="md:w-full fcc">
           <div className="h-14 w-14 md:h-24 md:w-24 rounded-full fcc overflow-hidden border border-gray-300">
-            <Image src={avatarURL} width={60} height={60} alt="" />
+            <Image src={avatarURL} width={60} height={60} quality={100} alt="" className="object-cover h-full w-full" />
           </div>
         </section>
         <section className="md:w-full flex-col mt-5 mr-3 md:mr-0 truncate">

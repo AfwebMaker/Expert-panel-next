@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 // react icons
 import { HiOutlineChevronRight, HiOutlineUser } from "react-icons/hi";
@@ -14,6 +14,10 @@ function Page() {
     const [stateForm, setStateForm] = useState(false);
     const router = useRouter();
     const activeDataLocal = useSelector(state => state.getExpertInfo.activeData)
+
+    useEffect(() => {
+
+    },[])
 
     return (
         <div className="flex w-full flex-col pb-5">

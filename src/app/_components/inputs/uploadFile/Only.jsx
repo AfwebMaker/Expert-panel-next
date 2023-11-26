@@ -33,7 +33,7 @@ function Only({
 
   useEffect(() => {
     setImageSrc([formik.values[name]]);
-  }, []);
+  }, [formik.values]);
 
   useEffect(() => {
     if (imageSrc) {

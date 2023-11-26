@@ -19,10 +19,12 @@ import add from "@/services/deputy_kg_local/add"
 function NotPreferEdit({ stateForm, setStateForm }) {
 
   const [validation, setValidation] = useState(false);
+  let data = {};
   const { mainDataCompany } = useSelector(state => state.getExpertInfo.user)
-  const activeDataLocal = useSelector(state => state.getExpertInfo.activeData)
+  // const activeDataLocal = useSelector(state => state.getExpertInfo.activeData)
   const router = useRouter()
   const dispatch = useDispatch()
+
 
   const baseValidation = {
     nameFamily: Yup.string()
@@ -109,7 +111,7 @@ function NotPreferEdit({ stateForm, setStateForm }) {
   }, [mainDataCompany])
 
   useEffect(() => {
-    if (activeDataLocal === null) {
+    if (data === null) {
       router.replace('/expert/deputy')
     }
   }, [])
@@ -117,21 +119,33 @@ function NotPreferEdit({ stateForm, setStateForm }) {
 
   const formik = useFormik({
     initialValues: {
-      nameFamily: activeDataLocal ? activeDataLocal.nameFamily : "",
-      mobile: activeDataLocal ? "0" + activeDataLocal.mobile : "",
-      nationalCode: activeDataLocal ? activeDataLocal.nationalCode : "",
-      zipCode: activeDataLocal ? activeDataLocal.zipCode : "",
-      description: activeDataLocal && activeDataLocal.description ? activeDataLocal.description : "",
-      avatarURL: activeDataLocal ? activeDataLocal.avatarURL : {},
-      company_OrganizationLevel: activeDataLocal && activeDataLocal.company_OrganizationLevel ? activeDataLocal.company_OrganizationLevel : null,
-      company_LastEducationalCertificate: activeDataLocal && activeDataLocal.company_LastEducationalCertificate ? activeDataLocal.company_LastEducationalCertificate : null,
-      company_Resume: activeDataLocal && activeDataLocal.company_Resume ? activeDataLocal.company_Resume : "",
-      company_ResumeURL: activeDataLocal && activeDataLocal.company_ResumeURL ? activeDataLocal.company_ResumeURL : {},
+      // nameFamily: activeDataLocal ? activeDataLocal.nameFamily : "",
+      // mobile: activeDataLocal ? "0" + activeDataLocal.mobile : "",
+      // nationalCode: activeDataLocal ? activeDataLocal.nationalCode : "",
+      // zipCode: activeDataLocal ? activeDataLocal.zipCode : "",
+      // description: activeDataLocal && activeDataLocal.description ? activeDataLocal.description : "",
+      // avatarURL: activeDataLocal ? activeDataLocal.avatarURL : {},
+      // company_OrganizationLevel: activeDataLocal && activeDataLocal.company_OrganizationLevel ? activeDataLocal.company_OrganizationLevel : null,
+      // company_LastEducationalCertificate: activeDataLocal && activeDataLocal.company_LastEducationalCertificate ? activeDataLocal.company_LastEducationalCertificate : null,
+      // company_Resume: activeDataLocal && activeDataLocal.company_Resume ? activeDataLocal.company_Resume : "",
+      // company_ResumeURL: activeDataLocal && activeDataLocal.company_ResumeURL ? activeDataLocal.company_ResumeURL : {},
+
+
+      nameFamily: "",
+      mobile: "",
+      nationalCode: "",
+      zipCode: "",
+      description: "",
+      avatarURL: "",
+      company_OrganizationLevel: "",
+      company_LastEducationalCertificate: "",
+      company_Resume: "",
+      company_ResumeURL: "",
     },
     validationSchema,
     onSubmit: (values) => {
       const dataUser = {
-        "id": activeDataLocal.id,
+        // "id": activeDataLocal.id,
         "nameFamily": values.nameFamily,
         "avatarURL": values.avatarURL,
         "isMyself": false,
@@ -164,6 +178,28 @@ function NotPreferEdit({ stateForm, setStateForm }) {
         })
     },
   });
+
+
+
+  useEffect(() => {
+    data = JSON.parse(localStorage.getItem('activeData') ?? '')
+
+    formik.setValues({
+
+      nameFamily: data ? data.nameFamily : "",
+      mobile: data ? "0" + data.mobile : "",
+      nationalCode: data ? data.nationalCode : "",
+      zipCode: data ? data.zipCode : "",
+      description: data && data.description ? data.description : "",
+      avatarURL: data ? data.avatarURL : {},
+      company_OrganizationLevel: data && data.company_OrganizationLevel ? data.company_OrganizationLevel : null,
+      company_LastEducationalCertificate: data && data.company_LastEducationalCertificate ? data.company_LastEducationalCertificate : null,
+      company_Resume: data && data.company_Resume ? data.company_Resume : "",
+      company_ResumeURL: data && data.company_ResumeURL ? data.company_ResumeURL : {},
+
+    })
+
+  }, [])
 
   return (
     <div className="w-full flex flex-col">

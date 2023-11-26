@@ -109,7 +109,6 @@ function NotPreferEdit({ stateForm, setStateForm }) {
   }, [mainDataCompany])
 
   useEffect(() => {
-    console.log(activeDataLocal)
     if (activeDataLocal === null) {
       router.replace('/expert/deputy')
     }

@@ -5,6 +5,29 @@ import DynamicInputs from '@/src/app/_components/inputs/DynamicInputs'
 
 function LegalForm({ formik, stateForm }) {
 
+    const EducationalSections = [
+        {
+            id:0,
+            text:"دیپلم"
+        },
+        {
+            id:1,
+            text:"فوق دیپلم"
+        },
+        {
+            id:2,
+            text:"کارشناسی"
+        },
+        {
+            id:3,
+            text:"کارشناسی ارشد"
+        },
+        {
+            id:4,
+            text:"دکتری"
+        },
+    ]
+
     const inputData = [
         {
             id: "company_OrganizationLevel",
@@ -54,6 +77,7 @@ function LegalForm({ formik, stateForm }) {
                             id={item.id}
                             name={item.name}
                             formik={formik}
+                            list={EducationalSections}
                         />
                     ))
                 }

@@ -54,7 +54,6 @@ function Page() {
       .catch(err => {
         dispatch(loadingHandler(false))
         if (err.response.status === 413) {
-          console.log(err)
           toast.error('حجم فایل بیش از حد مجاز  است.')
         }
       })
@@ -77,8 +76,10 @@ function Page() {
                   onLoad={() => { dispatch(loadingHandler(false)) }}
                   src={avatar.url}
                   alt='avatar'
+                  priority={true}
                   className='object-cover w-full h-full'
-                  fill
+                  fill={true}
+                  sizes={150}
                 />
               }
             </div>

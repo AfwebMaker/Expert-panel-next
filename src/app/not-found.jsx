@@ -18,7 +18,9 @@ function NotFoundPage() {
       <div className='absolute fcc flex-col'>
         <div className='font-bold text-2xl text-white'>متاسفانه این صفحه پیدا نشد.</div>
         <Image height={500} src={notFoundIcon} />
-        <button onClick={() => { route.back() }} className='fcc bg-primary-600 text-white py-2 px-4 rounded-md font-bold'>بازگشت به صفحه اصلی</button>
+        <button onClick={() => { route.back() }} className='fcc bg-primary-600 text-white py-2 px-4 rounded-md font-bold'>
+          بازگشت به صفحه اصلی
+        </button>
       </div>
 
       <Image height={40} src={label} className='absolute left-0 bottom-10' />

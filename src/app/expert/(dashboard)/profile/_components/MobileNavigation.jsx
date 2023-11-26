@@ -49,8 +49,6 @@ function mobileNavigation({ data }) {
     }
   ]
 
-  console.log(data)
-
   return (
     <>
       <div className='block lg:hidden px-5 h-[calc(100vh-138px)]'>
@@ -59,7 +57,7 @@ function mobileNavigation({ data }) {
             {data.avatarURL &&
               <Image
                 src={data.avatarURL.url}
-                alt="sample image"
+                alt="avatar"
                 fill
                 className='object-cover'
               />

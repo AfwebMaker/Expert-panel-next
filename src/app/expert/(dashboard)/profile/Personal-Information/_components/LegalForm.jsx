@@ -34,6 +34,15 @@ function LegalForm({ formik, formState, legalFormIsActive, setLegalFormIsActive 
             id: 'companyType',
             name: 'companyType',
             inputType: "dropDown",
+            list: [
+                {id:0, text:'سهامی'},
+                {id:1, text:'مسئولیت محدود'},
+                {id:2, text:'تضامنی'},
+                {id:3, text:'مختلط غیر سهامی'},
+                {id:4, text:'مختلط سهامی'},
+                {id:5, text:'نسبی'},
+                {id:6, text:'تعاونی تولید و مصرف'},
+            ],
             title: 'نوع شرکت',
             required: true,
             placeholder: ''
@@ -73,6 +82,7 @@ function LegalForm({ formik, formState, legalFormIsActive, setLegalFormIsActive 
                                 inputType={item.inputType}
                                 title={item.title}
                                 state={formState}
+                                list={item.list}
                                 required={item.required}
                                 className="my-2 w-full lg:w-[49%]"
                                 placeholder={item.placeholder}

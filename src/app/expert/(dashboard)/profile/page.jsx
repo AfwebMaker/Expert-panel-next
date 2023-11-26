@@ -19,7 +19,6 @@ function Page() {
   useEffect(() => {
     profileBase()
       .then(res => {
-        console.log(res)
         setData(res.data.data)
       })
       .catch(() => {
@@ -41,8 +40,8 @@ function Page() {
                 {data.avatarURL &&
                   <Image
                     src={data.avatarURL.url}
-                    alt="sample image"
-                    fill
+                    alt="avatar"
+                    fill={true}
                     className='object-cover'
                   />}
               </div>

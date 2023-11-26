@@ -8,7 +8,7 @@ import Services from './_components/Services';
 import Banner from './_components/Banner';
 import Reports from './_components/Reports';
 //react icons
-import { HiSearch, HiOutlineAdjustments } from "react-icons/hi";
+import { HiSearch } from "react-icons/hi";
 //services
 import profileBase from '@/services/person_kg_local/profileBase'
 
@@ -20,7 +20,7 @@ function Page() {
   useEffect(() => {
     profileBase()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         setData(res.data.data)
       })
       .catch(() => {

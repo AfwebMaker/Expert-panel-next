@@ -14,15 +14,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   console.log()
   return (
-    <html lang="fa" dir="rtl">
-      <body
-        suppressHydrationWarning={true}
-        className={`${iranYekanFont.variable} font-sans`}
-      >
+    
         <Providers>
           <Main>{children}</Main>
         </Providers>
-      </body>
-    </html>
+      
   );
 }

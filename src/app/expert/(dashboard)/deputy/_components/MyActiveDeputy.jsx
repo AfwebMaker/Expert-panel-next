@@ -29,7 +29,7 @@ function MyActiveDeputy({ activeData, newData }) {
             status={"active"}
             phone={activeData.mobile}
             name={activeData.nameFamily}
-            avatarURL={activeData && activeData.avatarURL.url}
+            avatarURL={activeData.avatarURL?.url}
           />
         )}
         {newData && (
@@ -38,7 +38,7 @@ function MyActiveDeputy({ activeData, newData }) {
             phone={newData.mobile}
             name={newData.nameFamily}
             nationalCode={newData.nationalCode}
-            avatarURL={newData && newData.avatarURL.url}
+            avatarURL={newData.avatarURL.url}
           />
         )}
         <div className="hidden md:flex bg-white md:col-span-6 xl:col-span-4 w-full rounded-lg p-5 flex-col items-center uploadBorder_active">

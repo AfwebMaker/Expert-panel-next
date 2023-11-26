@@ -1,29 +1,37 @@
+import { Fragment } from "react";
+import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import Image from "next/image";
+// @headlessui
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+// react icons
 import { RiArrowDownSLine } from "react-icons/ri";
-// react router dom
+import { HiLogout, HiUser } from "react-icons/hi";
+// js-cookie
+import Cookies from 'js-cookie'
 
-function ProfileDropDown(props) {
+function ProfileDropDown({ profileData }) {
+
+  const router = useRouter()
+
+
   return (
     <div className="text-right">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="flex items-center justify-around w-full text-sm font-medium focus:outline-none focus-visible:ring-2 hover:hover:text-color-font-3">
+          <Menu.Button className="flex items-center justify-around w-full text-sm font-medium focus:outline-none focus-visible:ring-2">
             <span className="w-[2px] h-7 rounded-full bg-gray-300 block ml-3"></span>
-            <div className="bg-black w-10 h-10 rounded-full">
-              {/* <Image
-                width={10}
-                height={10}
-                className="inline-block h-9 w-h-9 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              /> */}
+            <div className='flex w-10 h-10 flex-shrink-0 fcc rounded-full overflow-hidden ml-2 relative bg-black'>
+              {profileData.avatarURL &&
+                <Image
+                  className='w-full h-full object-cover'
+                  src={profileData.avatarURL.url}
+                  fill
+                  alt=""
+                />
+              }
             </div>
-            <span className="mx-2 text-sm text-color-font-1 hover:text-color-font-3">
-              محمد جوادی
-            </span>
+            <div className='mx-2 text-sm'>{profileData.name} {profileData.family}</div>
             <RiArrowDownSLine
               className="h-5 w-5 text-color-font-2 hover:text-color-font-3"
               aria-hidden="true"
@@ -39,52 +47,30 @@ function ProfileDropDown(props) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 px-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="px-1 py-1">
+          <Menu.Items className="absolute right-1 p-2 divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="py-1">
               <Menu.Item>
                 {({ active }) => (
                   <Link
-                    href="/expert/profile/"
-                    className={`${
-                      active ? "bg-color-3 text-white" : "text-gray-900"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    href="/expert/profile"
+                    className={`${active ? "text-primary-500 bg-primary-100" : "text-gray-900"
+                      } group flex w-[135px] transition-all duration-300 justify-start items-center rounded-md py-2 text-sm`}
                   >
-                    {active ? (
-                      <ArchiveActiveIcon
-                        className="mx-2 h-5 w-5 text-teal-400"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <ArchiveInactiveIcon
-                        className="mx-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    )}
+                    <HiUser className={`mx-2 h-5 w-5 ${active ? "" : "text-primary-500"}`} />
                     پروفایل کاربری
                   </Link>
                 )}
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <Link
-                    href="#"
-                    className={`${
-                      active ? "bg-color-3 text-white" : "text-color-font-1"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  <button
+                    onClick={() => { Cookies.remove('TOKEN'); router.push('/expert/login/') }}
+                    className={`${active ? "bg-color-3 text-white bg-red-500" : "text-red-500"
+                      } group flex w-[135px] transition-all duration-300 items-center rounded-md py-2 text-sm`}
                   >
-                    {active ? (
-                      <MoveActiveIcon
-                        className="mx-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <MoveInactiveIcon
-                        className="mx-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    )}
+                    <HiLogout className={`mx-2 h-5 w-5 ${active ? "" : "text-red-500"}`} />
                     خروج از حساب
-                  </Link>
+                  </button>
                 )}
               </Menu.Item>
             </div>

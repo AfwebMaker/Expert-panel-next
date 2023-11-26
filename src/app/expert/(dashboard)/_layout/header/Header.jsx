@@ -44,7 +44,7 @@ function Header() {
             <Image
               className="ml-2"
               src={kargosha_logo}
-              alt="Picture of the author"
+              alt="kargosha_logo"
               width={30}
               height={30}
             />
@@ -52,7 +52,7 @@ function Header() {
           <Image
             hidden={showMenu}
             src={kargosha_typo}
-            alt="Picture of the author"
+            alt="kargosha_typo"
             height={20}
             priority
           />

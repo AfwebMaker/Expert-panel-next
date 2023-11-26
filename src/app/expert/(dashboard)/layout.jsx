@@ -1,23 +1,18 @@
-import "../../globals.css";
-// fonts
-import iranYekanFont from "@/constants/localFonts";
 // redux provider
 import Providers from "../../../redux/Providers";
 // components
-import Main from "../(dashboard)/_layout/Main"
+import Main from "./_layout/Main"
 
 export const metadata = {
-  title: "پنل متخصصین | ",
+  title: "کارگشا | پنل متخصصین",
   description: "",
 };
 
 export default function RootLayout({ children }) {
   console.log()
   return (
-    
-        <Providers>
-          <Main>{children}</Main>
-        </Providers>
-      
+    <Providers>
+      <Main>{children}</Main>
+    </Providers>
   );
 }

@@ -21,7 +21,6 @@ function Page() {
   useEffect(() => {
     newNotification()
       .then((res) => {
-        console.log(res)
         const getNewNotification = res.data.data.results.filter((item) => {
           if (item.tab === 0) {
             return item

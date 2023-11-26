@@ -33,15 +33,12 @@ function Only({
 
   useEffect(() => {
     imageSrc != formik.values[name] && setImageSrc([formik.values[name]]);
-  }, [formik.values]);
+  }, [formik.values[name]]);
 
   useEffect(() => {
     if (imageSrc) {
-      const imageSelect = imageSrc.map((item) => {
-        return item;
-      });
 
-      formik.setFieldValue(name, imageSelect[0]);
+      imageSrc != formik.values[name] && formik.setFieldValue(name, imageSelect[0]);
     }
   }, [imageSrc]);
 

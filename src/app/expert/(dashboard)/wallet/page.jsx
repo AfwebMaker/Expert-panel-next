@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 //components
-import Cart from './_components/Cart'
+import Carts from './_components/Carts'
 import Loading from '@/src/app/_components/Loading'
+import Modal from '@/src/app/_components/Modal'
 import WalletCart from './_components/WalletCart'
 //assets
 import withdrawal from '@/public/icons/withdrawal.svg'
@@ -23,7 +24,9 @@ import walletData from '@/services/wallet_kg_local/walletData'
 function Page() {
   const [loadingPage, setLoadingPage] = useState(true)
   const [transaction, setTransaction] = useState({});
-  const [walletDataState, setWalletDataState] = useState('')
+  const [walletDataState, setWalletDataState] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalName, setModalName] = useState('')
 
   const items = [
     {
@@ -40,14 +43,20 @@ function Page() {
       title: 'شارژ کیف پول',
       color: 'text-blue-500',
       icon: deposit,
-      link: '/expert/wallet/deposit',
+      action: 'deposit',
     }, {
       title: 'برداشت',
       color: 'text-yellow-500',
       icon: withdrawal,
-      link: '/expert/wallet/withdrawal',
+      action: 'withdrawal',
     }
   ]
+
+  //modal handler
+  const modalHandler = (name) => {
+    setIsOpen(true)
+    setModalName(name)
+  }
 
   //get wallet details
   useEffect(() => {
@@ -77,7 +86,6 @@ function Page() {
         setTransaction(res.data.data.lstData)
       })
       .catch(() => {
-
       })
       .finally(() => {
         setLoadingPage(false)
@@ -86,6 +94,17 @@ function Page() {
 
   return (
     <div className='w-full'>
+      <Modal setIsOpen={setIsOpen} isOpen={isOpen} w={'w-full'} h={'h-full'} >
+        {
+          modalName === 'deposit' ?
+            <div>
+              deposit
+            </div> :
+            <div>
+              withdrawal
+            </div>
+        }
+      </Modal>
       {loadingPage && <Loading />}
       <div className='w-full fcc text-primary-500 font-medium text-lg lg:hidden'>
         کیف پول
@@ -100,24 +119,39 @@ function Page() {
           موجودی کیف پول شما
         </div>
       </div>
-      {/* <Cart /> */}
       <div className='fcc w-full mt-10 gap-5'>
         {
           items.map((item, i) => (
-            <Link href={item.link} key={i} className='w-full fcc flex-col'>
-              <div className='bg-indigo-500/10 mb-4 w-full fcc h-[70px] rounded-lg'>
-                <Image
-                  src={item.icon}
-                  alt='icon item'
-                  sizes='40px'
-                />
-              </div>
-              <span className={`text-xs font-bold ${item.color}`}>{item.title}</span>
-            </Link>
+            <>
+              {!item.action ?
+                <Link href={item.link} key={i} className='w-full fcc flex-col'>
+                  <div className='bg-indigo-500/10 mb-4 w-full fcc h-[70px] rounded-lg'>
+                    <Image
+                      src={item.icon}
+                      alt='icon item'
+                      sizes='40px'
+                    />
+                  </div>
+                  <span className={`text-xs font-bold ${item.color}`}>{item.title}</span>
+                </Link> :
+                <button onClick={() => { modalHandler(item.action) }} key={i} className='w-full fcc flex-col'>
+                  <div className='bg-indigo-500/10 mb-4 w-full fcc h-[70px] rounded-lg'>
+                    <Image
+                      src={item.icon}
+                      alt='icon item'
+                      sizes='40px'
+                    />
+                  </div>
+                  <span className={`text-xs font-bold ${item.color}`}>{item.title}</span>
+                </button>
+              }
+            </>
           ))
         }
       </div>
 
+      <Carts />
+      
       <div className='flex justify-between items-center my-8'>
         <div className='fcc text-cf-300'>
           <div className='fcc ml-2 w-6 relative'>

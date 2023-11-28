@@ -33,8 +33,8 @@ function WalletCart({ title, style, date }) {
                     </div>
                 </div>
                 <div className='py-1 flex flex-col px-5'>
-                    <div className='font-bold text-base'>{title}</div>
-                    <div className='font-normal fcc text-xs text-cf-300 mt-4'>
+                    <div className='font-medium text-base'>{title}</div>
+                    <div className='font-normal fcc text-xs text-cf-300 mt-2'>
                         <span>{convertToJalali(date).date}</span>
                         <span className='mr-2'>ساعت {convertToJalali(date).watch} </span>
                     </div>

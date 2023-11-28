@@ -4,7 +4,7 @@ import React from 'react'
 //components
 import DesktopNavigation from './_components/DesktopNavigation'
 //react icons
-import { HiHome, HiOutlineChevronLeft,HiOutlineBell } from 'react-icons/hi'
+import { HiHome, HiOutlineChevronLeft } from 'react-icons/hi'
 
 function RootLayout({ children }) {
     return (

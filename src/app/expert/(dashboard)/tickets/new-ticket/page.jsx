@@ -92,19 +92,20 @@ function Page() {
     },
   });
 
-  // useEffect(() => {
-  //   fetchDepartment()
-  //     .then((res) => {
-  //       console.log("fetchDepartment", res)
-  //       // setDataTickets(res.data.data.tickets.results);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-  //     .finally(() => {
-  //       // setLoadingPage(false)
-  //     })
-  // }, []);
+
+  // get error CROS
+  useEffect(() => {
+    fetchDepartment()
+      .then((res) => {
+        console.log("fetchDepartment", res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        // setLoadingPage(false)
+      })
+  }, []);
 
   return (
     <div className="w-[100%] h-[calc(100vh-135px)] md:h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start py-10 px-5 overflow-y-scroll hideScroll">

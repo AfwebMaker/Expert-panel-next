@@ -12,7 +12,7 @@ function ChatBoxMain({ messages }) {
         block: "end",
       });
     }
-  }, []);
+  }, [messages]);
 
   return (
     <div className="overflow-y-scroll hideScroll w-full h-[calc(100%-140px)] flex flex-col pb-0 px-3 sm:px-5">
@@ -28,7 +28,7 @@ function ChatBoxMain({ messages }) {
               // message={}
             />
           ))}
-          <UserMessage
+          {/* <UserMessage
               isSender={true}
               userSupport={"5"}
               userName={"4"}
@@ -75,7 +75,7 @@ function ChatBoxMain({ messages }) {
               userSupport={"5"}
               userName={"4"}
               // message={message}
-            />
+            /> */}
             <div ref={ref} />
       </ul>
     </div>

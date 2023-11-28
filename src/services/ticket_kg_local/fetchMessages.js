@@ -1,12 +1,11 @@
 import { dynamicApiCall } from "../dynamicApiCall";
-import { ticketRequestAPI } from '../APIRepositories'
+import { ticket_kg_local } from '../APIRepositories'
 
-const fetchMessages = async (data) => {
+const fetchMessages = async (ticketId) => {
     const option = {
-        axios: ticketRequestAPI,
+        axios: ticket_kg_local,
         method: 'GET',
-        endpoint: '/users',
-        data: data,
+        endpoint: `/Api/V1/User/Ticket/${ticketId}/Message`,
     }
 
     const response = await dynamicApiCall(option)

@@ -7,7 +7,7 @@ function UserMessage({ id, isSender, userSupport, userName, message, appendices 
   // console.log(Boolean(isUserName))
 
   const text = message;
-  console.log(text);
+  // console.log(text);
 
   return (
     <li

@@ -1,10 +1,13 @@
 import React, { useState } from "react"
 import Image from "next/image";
 import Link from "next/link";
+//formik 
+import { useFormik } from "formik";
+import * as Yup from "yup";
 //functions
 import formatPrice from '@/src/functions/formatPrice'
 //react icons
-import { HiOutlineExclamationCircle, HiPlusCircle, HiCreditCard, HiCheckCircle } from "react-icons/hi";
+import { HiOutlineExclamationCircle, HiPlusCircle, HiCreditCard, HiCheckCircle, HiOutlineCreditCard } from "react-icons/hi";
 //assets
 import icon1 from '@/public/icons/wallet/icon1.svg'
 import icon2 from '@/public/icons/wallet/icon2.svg'
@@ -14,20 +17,34 @@ import icon5 from '@/public/icons/wallet/icon5.svg'
 import icon6 from '@/public/icons/wallet/icon6.svg'
 //components
 import Modal from "@/src/app/_components/Modal";
+import DynamicInputs from '@/app/_components/inputs/DynamicInputs';
+import customToast from "@/src/functions/customToast";
 
-export default function Carts() {
+export default function Carts({ walletDataState }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeBox, setActiveBox] = useState(0);
+  const [activeCart, setActiveCart] = useState(null);
+  const [continueModal, setContinueModal] = useState(false)
+
+  const validationSchema = Yup.object({
+    debt:
+      activeBox === 1 ?
+        Yup.string().required("لطفا مبلغ بدهی خود را وارد کنید.").matches(/\d/, "مبلغ بدهی باید شامل اعداد باشد.") :
+        Yup.string()
+  });
 
   //cart information
   const carts = [
     {
+      id: 1,
       title: 'خدمات فوری',
       debt: 3000000,
-      debt_ceiling: 123000000,
+      debt_ceiling: 1000000,
       state: true,
       icon: icon1
     },
     {
+      id: 2,
       title: 'خرده کاری',
       debt: 3000000,
       debt_ceiling: 0,
@@ -35,13 +52,15 @@ export default function Carts() {
       icon: icon2
     },
     {
+      id: 3,
       title: 'نیروی فنی و اجرایی روزمزد',
       debt: 3000000,
-      debt_ceiling: 123000000,
+      debt_ceiling: 2000000,
       state: true,
       icon: icon3
     },
     {
+      id: 4,
       title: 'نیروی فنی و اجرایی آیتمی',
       debt: 1000000,
       debt_ceiling: 0,
@@ -49,30 +68,121 @@ export default function Carts() {
       icon: icon4
     },
     {
+      id: 5,
       title: 'پیمانکاران ساخت',
       debt: 2000000,
-      debt_ceiling: 123000000,
+      debt_ceiling: 1000,
       state: true,
       icon: icon5
     },
     {
+      id: 6,
       title: 'تعمیرات اساسی',
       debt: 2000000,
-      debt_ceiling: 123000000,
+      debt_ceiling: 4000000,
       state: true,
       icon: icon6
     }
   ]
 
+  const formik = useFormik({
+    initialValues: {
+      debt: ''
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      if (activeBox === 1) {
+        if (values.debt <= walletDataState.balance) {
+          setContinueModal('wallet')
+        } else {
+          customToast('err', 'موجودی کیف پول شما کافی نمی‌ باشد.')
+        }
+      } else {
+        if (activeCart.debt_ceiling <= walletDataState.balance) {
+          setContinueModal('wallet')
+        } else {
+          customToast('err', 'موجودی کیف پول شما کافی نمی‌ باشد.')
+        }
+      }
+    },
+  });
+
+  const cartClickHandler = (item) => {
+    setActiveCart(item);
+    setIsOpen(true);
+    setActiveBox(0)
+    setContinueModal(false)
+    formik.resetForm()
+  }
+
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
-      <Modal setIsOpen={setIsOpen} isOpen={isOpen} w={'w-full'} h={'h-full'} >
-        cart modal
+      <Modal setIsOpen={setIsOpen} isOpen={isOpen} w={'w-full md:w-[500px]'} h={'h-full md:h-auto'} >
+        <div>
+          <div className="text-primary-500 fcc font-bold" >
+            <span>پرداخت بدهی این سرویس</span>
+            <HiOutlineCreditCard size={20} className="mr-2" />
+          </div>
+          {!continueModal ?
+            <>
+              <div className="my-6 font-medium text-sm">
+                در صورتی پرادخت بدهیتان در این سرویس سرویس شما از حالت غیر فعال در خواهد آمد و کار به شما ارجاع خواهد شد.
+              </div>
+
+              <div onClick={() => { setActiveBox(0); formik.resetForm() }} className={`border-[2px] rounded-lg p-4 mb-4 cursor-pointer ${activeBox === 1 ? 'border-gray-200' : 'border-primary-500 bg-primary-100'}`}>
+                <div className={`font-bold mb-4 fcc justify-between ${activeBox === 1 ? 'text-cf-300' : 'text-primary-500'}`}>
+                  <span>
+                    پرداخت کل بدهی این سرویس
+                  </span>
+                  {activeBox === 0 && <HiCheckCircle size={20} />}
+                </div>
+                {activeCart &&
+                  <span className="text-cf-300 text-sm">معادل {formatPrice(activeCart.debt_ceiling)} ریال</span>
+                }
+              </div>
+
+              <div onClick={() => { setActiveBox(1) }} className={`border-[2px] rounded-lg p-4 mb-4 cursor-pointer ${activeBox === 0 ? 'border-gray-200' : 'border-primary-500 bg-primary-100'}`}>
+                <div className={`font-bold fcc justify-between ${activeBox === 0 ? 'text-cf-300' : 'text-primary-500'}`}>
+                  <span>
+                    پرداخت بخشی از بدهی این سرویس
+                  </span>
+                  {activeBox === 1 && <HiCheckCircle size={20} />}
+                </div>
+                <div className="text-sm my-4 text-cf-300">میزان پرداختی خود را در این بخش وارد کنید :</div>
+                <DynamicInputs
+                  inputType='text'
+                  title='میزان پرداختی (ریال)'
+                  state="Low"
+                  required={true}
+                  className="my-2 w-full"
+                  placeholder='به طور مثال : ۲،۰۰۰،۰۰۰'
+                  id='debt'
+                  name='debt'
+                  formik={formik}
+                />
+              </div>
+              <div className="fcc gap-4 pt-4">
+                <button className="w-full py-2 px-4 fcc font-medium bg-primary-100 text-primary-500 rounded-md">
+                  پرداخت مستقیم
+                </button>
+                <button onClick={formik.submitForm} className="w-full py-2 px-4 fcc font-medium bg-blue-100 text-blue-500 rounded-md">
+                  پرداخت با کیف پول
+                </button>
+              </div>
+            </> : continueModal === 'wallet' ?
+              <div className="my-5 fcc text-cf-400">
+                میزان بدهی شما از اعتبار کیف پول شما با موفقیت کسر شد.
+              </div> :
+              <div className="my-5 text-cf-400">
+                پرداخت شما با موفقیت انجام شد.
+              </div>
+          }
+        </div>
       </Modal>
 
       {
-        carts.map((item, i) => (
-          <div key={i} className="relative h-32 rounded-lg border border-gray-200 bg-white p-3 flex overflow-hidden group">
+        carts.map((item) => (
+          <div key={item.id} className="relative h-32 rounded-lg border border-gray-200 bg-white p-3 flex overflow-hidden group">
             <div className="fcc duration-200 opacity-0 bg-black/40 backdrop-blur-sm group-hover:opacity-100 w-full h-full absolute inset-0 text-sm font-bold text-white">
               {
                 item.state === false ?
@@ -84,7 +194,7 @@ export default function Carts() {
                       <span>شما بدهی در این سرویس ندارید</span>
                       <HiCheckCircle size={20} className="mr-2" />
                     </div> :
-                    <button onClick={() => { setIsOpen(true) }} className="fcc w-full h-full">
+                    <button onClick={() => {cartClickHandler(item)}} className="fcc w-full h-full">
                       <span>تسویه بدهی</span>
                       <HiCreditCard size={20} className="mr-2" />
                     </button>

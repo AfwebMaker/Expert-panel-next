@@ -18,7 +18,7 @@ function ChatBoxMain({ refScroll, ticketData, messages }) {
 
   return (
     <div className="overflow-y-scroll hideScroll w-full h-[calc(100%-140px)] flex flex-col pb-0 px-3 sm:px-5">
-      <ul className="bg-amber-300 w-full flex flex-col">
+      <ul className="w-full flex flex-col">
         {messages &&
           Array.isArray(messages) &&
           messages.map((message, index) => (

@@ -43,7 +43,7 @@ function Dropdown({ Problem, number, status, removeTicketHandler }) {
                 </Listbox.Option>
                 <Listbox.Option className="relative select-none p-2 flex items-center justify-start w-full">
                   وضعیت تیکت :
-                  {status === "pending" ? (
+                  {status === "Pending" ? (
                     <div className="flex text-warning fcc px-2 text-sm">
                       <span>در انتظار پاسخ</span>
                       <HiOutlineDotsCircleHorizontal className="mr-1" />

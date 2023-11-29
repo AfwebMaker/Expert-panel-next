@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from "react";
 // components
 import UserMessage from "./UserMessage";
+// function
+import convertToJalali from "@/src/functions/convertToJalali";
 
-function ChatBoxMain({ messages }) {
-  const ref = useRef(null);
+function ChatBoxMain({ refScroll, ticketData, messages }) {
 
   useEffect(() => {
     if (true) {
-      ref.current?.scrollIntoView({
-        behavior: "smooth",
+      refScroll.current?.scrollIntoView({
+        // behavior: "smooth",
+        behavior: "instant",
         block: "end",
       });
     }
@@ -22,61 +24,14 @@ function ChatBoxMain({ messages }) {
           messages.map((message, index) => (
             <UserMessage
               key={index}
-              isSender={true}
-              userSupport={"5"}
-              userName={"4"}
-              // message={}
+              isSender={ticketData.ticket.users.find(x => x.userId === message.userId).isStarter}
+              name={ticketData.users.find(x => x.id === message.userId).name}
+              content={message.content}
+              media={message.media}
+              date={convertToJalali(message.dateCreated)}
             />
           ))}
-          {/* <UserMessage
-              isSender={true}
-              userSupport={"5"}
-              userName={"4"}
-              // message={}
-            />
-          <UserMessage
-              isSender={false}
-              userSupport={"5"}
-              userName={"4"}
-              // message={message}
-            />
-          <UserMessage
-              isSender={true}
-              userSupport={"5"}
-              userName={"4"}
-              // message={}
-            />
-          <UserMessage
-              isSender={false}
-              userSupport={"5"}
-              userName={"4"}
-              // message={message}
-            />
-          <UserMessage
-              isSender={true}
-              userSupport={"5"}
-              userName={"4"}
-              // message={}
-            />
-          <UserMessage
-              isSender={false}
-              userSupport={"5"}
-              userName={"4"}
-              // message={message}
-            />
-          <UserMessage
-              isSender={true}
-              userSupport={"5"}
-              userName={"4"}
-              // message={}
-            />
-          <UserMessage
-              isSender={false}
-              userSupport={"5"}
-              userName={"4"}
-              // message={message}
-            /> */}
-            <div ref={ref} />
+        <div ref={refScroll} />
       </ul>
     </div>
   );

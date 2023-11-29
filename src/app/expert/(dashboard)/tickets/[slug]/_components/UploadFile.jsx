@@ -16,6 +16,8 @@ import getCookie from "@/src/functions/getCookie";
 import ClipModule from "./ClipModal"
 // function
 import customToast from '@/src/functions/customToast';
+import shortText from '@/src/functions/shortText';
+import getFileIcon from '@/src/functions/getFileIcon';
 
 function UploadFile({
     disabled,
@@ -29,14 +31,6 @@ function UploadFile({
     const [srcImages, setSrcImages] = useState([]);
     const [value, setValue] = useState("");
     const fileInputRef = useRef();
-
-    const shortText = (text, value) => {
-        if (String(text) && String(text).length > value) {
-            return `${String(text).slice(0, value - 1) + " ..."}`;
-        } else {
-            return String(text);
-        }
-    };
 
     useEffect(() => {
         if (!uploadFiles.length) {
@@ -206,6 +200,9 @@ function UploadFile({
                                             <HiXCircle className="text-red-500 text-lg" />
                                         )}
                                     </div>
+                                    <div className="h-full fcc text-2xl text-cf-300">
+                                        {getFileIcon(file.url)}
+                                    </div>
                                     <p className="text-cf-300 text-xs h-full fcc">
                                         {shortText(file.name, 12)}
                                     </p>
@@ -228,7 +225,12 @@ function UploadFile({
                     <textarea
                         value={value}
                         onChange={(e) => setValue(e.target.value)}
-                        // onKeyDown={handleKeyDown}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
+                                clickHandler()
+                            }
+                        }}
                         placeholder="پیام خود را بنویسید ..."
                         className="w-full h-full px-2 pt-[10px] border-none outline-none bg-transparent resize-none scroll_custom text-sm caret-primary-500"
                     />

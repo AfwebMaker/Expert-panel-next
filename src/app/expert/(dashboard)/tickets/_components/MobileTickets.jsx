@@ -15,8 +15,8 @@ function MobileTickets() {
   useEffect(() => {
     fetchTickets()
       .then((res) => {
-        console.log(res.data.data.results)
-        setDataTickets(res.data.data.results);
+        console.log(res.data.data.tickets.results)
+        setDataTickets(res.data.data.tickets.results);
       })
       .catch((error) => {
         console.log(error);

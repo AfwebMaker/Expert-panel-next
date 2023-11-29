@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 //react icons
-import { HiOutlinePaperAirplane, HiOutlinePaperClip } from "react-icons/hi";
+import { HiOutlinePaperAirplane } from "react-icons/hi";
 // components
 import ClipModule from "./ClipModal"
 import UploadFile from "./UploadFile"
 
-function ChatBoxFooter({ sendMessageHandler, sendMessageUploadFileHandler }) {
+function ChatBoxFooter({ refScroll, sendMessageHandler, sendMessageUploadFileHandler }) {
   const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,7 +16,12 @@ function ChatBoxFooter({ sendMessageHandler, sendMessageUploadFileHandler }) {
   };
 
   const clickHandler = (e) => {
+    setValue("");
     sendMessageHandler(value, setValue);
+    // refScroll.current?.scrollIntoView({
+    //   behavior: "instant",
+    //   block: "end",
+    // });
   };
 
   return (
@@ -26,7 +31,12 @@ function ChatBoxFooter({ sendMessageHandler, sendMessageUploadFileHandler }) {
           <textarea
             value={value}
             onChange={changeHandler}
-            // onKeyDown={handleKeyDown}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                clickHandler()
+              }
+            }}
             placeholder="پیام خود را بنویسید ..."
             className="w-full h-full pr-5 pl-2 pt-[10px] border-none outline-none bg-transparent resize-none scroll_custom text-sm caret-primary-500"
           />

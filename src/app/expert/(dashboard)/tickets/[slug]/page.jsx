@@ -1,23 +1,28 @@
 "use client";
 import React, { useState, useEffect } from "react";
 // services
-import  fetchMessages  from "@/src/services/ticket_kg_local/fetchMessages";
-import  sendMessage  from "@/src/services/ticket_kg_local/sendMessage";
-import  fetchNewMessages  from "@/src/services/ticket_kg_local/fetchNewMessages";
+import fetchMessages from "@/src/services/ticket_kg_local/fetchMessages";
+import sendMessage from "@/src/services/ticket_kg_local/sendMessage";
+import fetchNewMessages from "@/src/services/ticket_kg_local/fetchNewMessages";
 // components
 import ChatBoxHeader from "./_components/ChatBoxHeader";
 import ChatBoxMain from "./_components/ChatBoxMain";
 import ChatBoxFooter from "./_components/ChatBoxFooter";
+//
+import { useParams } from "next/navigation";
 
 function Page() {
-  const [messages, setMessages] = useState([]);
+  const [dataMessages, setDataMessages] = useState([]);
+  const pathname = useParams();
+  const ticketId = pathname.slug;
+
 
   useEffect(() => {
-    fetchMessages()
+    fetchMessages(ticketId)
       .then((res) => {
-        console.log(res.data);
+        console.log("fetchMessages", res.data.data);
         if (res.status === 200) {
-          setMessages("ok");
+          setDataMessages(res.data.data);
         }
       })
       .catch((err) => {
@@ -25,12 +30,31 @@ function Page() {
       });
   }, []);
 
-  const fetchNewMessagesHandler = () => {
-    fetchNewMessages()
+  // const fetchNewMessagesHandler = () => {
+  //   fetchNewMessages()
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       if (res.status === 200) {
+  //         setMessages([...messages, res.data]);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  const sendMessageHandler = (value, setValue) => {
+    setValue("");
+    const data = {
+      content: value,
+      media: []
+    };
+    sendMessage(data, ticketId)
       .then((res) => {
         console.log(res.data);
         if (res.status === 200) {
-          setMessages([...messages, res.data]);
+          console.log("jon")
+          // fetchNewMessagesHandler();
         }
       })
       .catch((err) => {
@@ -38,16 +62,17 @@ function Page() {
       });
   };
 
-  const sendMessageHandler = (value, setValue) => {
+  const sendMessageUploadFileHandler = (value, setValue, uploadFiles) => {
     setValue("");
-    const postData = {
-      id: 1,
+    const data = {
+      content: value,
+      media: uploadFiles.map((item) => ({ path: JSON.stringify(item) })),
     };
-    sendMessage(postData)
+    sendMessage(data, ticketId)
       .then((res) => {
         console.log(res.data);
         if (res.status === 200) {
-          fetchNewMessagesHandler();
+          // fetchNewMessagesHandler();
         }
       })
       .catch((err) => {
@@ -63,8 +88,11 @@ function Page() {
         ticketNumber={485731}
         status={"pending"}
       />
-      <ChatBoxMain messages={messages} />
-      <ChatBoxFooter sendMessageHandler={sendMessageHandler} />
+      <ChatBoxMain messages={dataMessages.results} />
+      <ChatBoxFooter
+        sendMessageHandler={sendMessageHandler}
+        sendMessageUploadFileHandler={sendMessageUploadFileHandler}
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 // react icons
 import { HiOutlinePlusCircle, HiTicket, HiOutlineChevronRight } from "react-icons/hi";
@@ -15,11 +15,16 @@ import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 import { useDispatch } from "react-redux";
 // services
 import sendMessage from "@/services/ticket_kg_local/sendMessage"
+import fetchDepartment from "@/services/department_kg_local/fetchDepartment"
 import { useRouter } from "next/navigation";
 
 function Page() {
   const dispatch = useDispatch();
   const router = useRouter()
+
+  const dataDrop = [
+    { id: 1, text: "ffff" },
+  ]
 
   const validationSchema = Yup.object().shape({
     departmentId: Yup.string().required(
@@ -64,7 +69,7 @@ function Page() {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log("tickets",values)
+      console.log("tickets", values)
       const data = {
         "departmentId": values.departmentId,
         "subjectId": values.subjectId,
@@ -86,6 +91,21 @@ function Page() {
         })
     },
   });
+
+
+  // get error CROS
+  useEffect(() => {
+    fetchDepartment()
+      .then((res) => {
+        console.log("fetchDepartment", res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        // setLoadingPage(false)
+      })
+  }, []);
 
   return (
     <div className="w-[100%] h-[calc(100vh-135px)] md:h-[calc(100vh-190px)] rounded-lg bg-white flex flex-col items-center justify-start py-10 px-5 overflow-y-scroll hideScroll">
@@ -122,6 +142,7 @@ function Page() {
                 id={"departmentId"}
                 name={"departmentId"}
                 formik={formik}
+                list={dataDrop}
               />
               <DynamicInputs
                 inputType={"dropDown"}
@@ -133,6 +154,7 @@ function Page() {
                 id={"subjectId"}
                 name={"subjectId"}
                 formik={formik}
+                list={dataDrop}
               />
             </div>
           </div>

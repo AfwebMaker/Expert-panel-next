@@ -31,7 +31,6 @@ function HeaderDesktop() {
   useEffect(() => {
     profileBase()
       .then(res => {
-        console.log("header", res)
         setData(res.data.data)
       })
       .catch(() => {

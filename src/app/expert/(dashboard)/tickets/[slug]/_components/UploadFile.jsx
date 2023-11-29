@@ -20,12 +20,14 @@ import customToast from '@/src/functions/customToast';
 function UploadFile({
     disabled,
     isOpen,
-    setIsOpen
+    setIsOpen,
+    sendMessageUploadFileHandler
 }) {
     const [files, setFiles] = useState([]);
     const [uploadFiles, setUploadFiles] = useState([]);
     const [showProgress, setShowProgress] = useState([]);
     const [srcImages, setSrcImages] = useState([]);
+    const [value, setValue] = useState("");
     const fileInputRef = useRef();
 
     const shortText = (text, value) => {
@@ -38,11 +40,11 @@ function UploadFile({
 
     useEffect(() => {
         if (!uploadFiles.length) {
-           setIsOpen(false) 
+            setIsOpen(false)
         }
-    },[uploadFiles])
+    }, [uploadFiles])
 
-    
+
     const handleAddFileClick = () => {
         fileInputRef.current.click();
     };
@@ -50,7 +52,7 @@ function UploadFile({
     const inputFileHandler = (e) => {
         const filesVar = Array.from(e.target.files);
         if (!filesVar) return;
-        
+
         if (filesVar.length > 4) {
             customToast("err", "شما بیشتر از 4 فایل نمی توانید آپلود کنید")
             return;
@@ -100,6 +102,16 @@ function UploadFile({
                         ...pre,
                         { id: fileName, url: res.data.data.url },
                     ]);
+                    // Add the URL to the corresponding file in uploadFiles
+                    setUploadFiles((pre) => {
+                        const newUploadFiles = [...pre];
+                        newUploadFiles.forEach((it) => {
+                            if (it.name === item.name) {
+                                it.url = res.data.data.url;
+                            }
+                        });
+                        return newUploadFiles;
+                    });
                 })
                 .catch(() => {
                     setSrcImages((pre) => [...pre, {}]);
@@ -126,6 +138,13 @@ function UploadFile({
         if (foundItem) {
             window.open(foundItem.url);
         }
+    };
+
+    const clickHandler = async (e) => {
+        await sendMessageUploadFileHandler(value, setValue, uploadFiles);
+        setIsOpen(false);
+        setFiles([])
+        setUploadFiles([])
     };
 
     return (
@@ -207,13 +226,13 @@ function UploadFile({
                 </div>
                 <div className="w-full h-16 bg-gray-100 pl-12 py-2 relative rounded-lg mt-4">
                     <textarea
-                        // value={value}
-                        // onChange={changeHandler}
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
                         // onKeyDown={handleKeyDown}
                         placeholder="پیام خود را بنویسید ..."
                         className="w-full h-full px-2 pt-[10px] border-none outline-none bg-transparent resize-none scroll_custom text-sm caret-primary-500"
                     />
-                    <div className="fcc absolute left-2 top-3.5 p-2 rounded-md text-cf-300 hover:text-primary-500 transition-all duration-300">
+                    <div onClick={clickHandler} className="fcc absolute left-2 top-3.5 p-2 rounded-md text-cf-300 hover:text-primary-500 transition-all duration-300">
                         <HiOutlinePaperAirplane size={18} className="-rotate-45" />
                     </div>
                 </div>

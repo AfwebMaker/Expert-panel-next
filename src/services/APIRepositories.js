@@ -64,6 +64,15 @@ export const core_kg_local = axios.create({
     }
 })
 
+export const department_kg_local = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_DEPARTMENT_KG_LOCAL,
+    timeout: 20000,
+    headers: {
+        "Accept": "application/json"
+    }
+})
+
+
 export const wallet_kg_local = axios.create({
     baseURL: process.env.NEXT_PUBLIC_WALLET_KG_LOCAL,
     timeout: 20000,

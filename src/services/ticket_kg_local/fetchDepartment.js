@@ -1,9 +1,9 @@
 import { dynamicApiCall } from "../dynamicApiCall";
-import { department_kg_local } from '../APIRepositories'
+import { ticket_kg_local } from '../APIRepositories'
 
 const fetchDepartment = async () => {
     const option = {
-        axios: department_kg_local,
+        axios: ticket_kg_local,
         method: 'GET',
         endpoint: '/Api/V1/User/Ticket/Departments'
     }

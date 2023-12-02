@@ -3,9 +3,13 @@ import { Fragment, useEffect, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 
 export default function CustomComboBox({ name, placeholder, onBlur, inputRef, buttonRef, formik, className, activeInput, data, focus }) {
-    const [items] = useState(data)
+    const [items, setItems] = useState(data)
     const [selected, setSelected] = useState({})
     const [query, setQuery] = useState('')
+
+    useEffect(() => {
+        setItems(data)
+    }, [data])
 
     //find initial value
     useEffect(() => {

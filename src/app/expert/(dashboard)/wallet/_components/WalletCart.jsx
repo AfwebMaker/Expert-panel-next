@@ -22,7 +22,7 @@ function WalletCart({ title, style, date }) {
     }, [style])
 
     return (
-        <div className='border-b border-cf-200 px-5 pl-0 flex justify-between bg-white'>
+        <div className='border-b border-gray-200 px-5 pl-0 flex justify-between'>
             <div className='flex py-5'>
                 <div>
                     <div className={`w-[44px] h-[44px] fcc rounded-full relative bg-${styleTailwind}-100`}>
@@ -34,9 +34,9 @@ function WalletCart({ title, style, date }) {
                 </div>
                 <div className='py-1 flex flex-col px-5'>
                     <div className='font-medium text-base'>{title}</div>
-                    <div className='font-normal fcc text-xs text-cf-300 mt-2'>
+                    <div className='font-normal flex justify-start text-xs text-cf-300 mt-2'>
                         <span>{convertToJalali(date).date}</span>
-                        <span className='mr-2'>ساعت {convertToJalali(date).watch} </span>
+                        <span className='mr-2 flex'>ساعت {convertToJalali(date).watch} </span>
                     </div>
                 </div>
             </div>

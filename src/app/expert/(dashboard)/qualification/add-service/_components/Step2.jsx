@@ -13,7 +13,7 @@ function Step2({ currentStep, setCurrentStep, stepInformation }) {
   //input handler
   const formik = useFormik({
     initialValues: {
-      city:'1'
+      city: '1'
     },
     onSubmit: (values) => {
       setCurrentStep(currentStep + 1)
@@ -24,21 +24,21 @@ function Step2({ currentStep, setCurrentStep, stepInformation }) {
   return (
     <div className='text-sm font-medium pt-5'>
       <div className='mb-5'>
-        در این مرحله شهر و مناطقی که می خواهید در این ضمینه به شما کار ارجاع شود را انتخاب کنید.
+        در این مرحله شرایط و ضوابط ای سرویس را مطالعه می کنید در صورتی که آنها را تایید می کنید به مرحله بعد بروید.
       </div>
 
-        <DynamicInputs
-          inputType='dropDown'
-          list={list}
-          title='شهر'
-          state="1"
-          required={true}
-          className="my-2 w-full mb-5"
-          placeholder='به طور مثال : تهران'
-          id='city'
-          name='city'
-          formik={formik}
-        />
+      <DynamicInputs
+        inputType='dropDown'
+        list={list}
+        title='شهر'
+        state="1"
+        required={true}
+        className="my-2 w-full mb-5"
+        placeholder='به طور مثال : تهران'
+        id='city'
+        name='city'
+        formik={formik}
+      />
 
       <StepController
         currentStep={currentStep}

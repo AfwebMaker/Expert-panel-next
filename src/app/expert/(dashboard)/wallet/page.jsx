@@ -14,7 +14,8 @@ import deposit from '@/public/icons/deposit.svg'
 import withdrawals from '@/public/icons/withdrawals.svg'
 import deposits from '@/public/icons/deposits.svg'
 //react icons
-import { HiOutlineLibrary, HiArrowNarrowDown, HiArrowNarrowUp, HiOutlineCreditCard } from "react-icons/hi";
+import { HiOutlineLibrary, HiSwitchVertical, HiOutlineCreditCard } from "react-icons/hi";
+
 //functions
 import formatPrice from '@/src/functions/formatPrice'
 import Link from 'next/link'
@@ -169,7 +170,7 @@ function Page() {
                 شارژ کیف پول شما با موفقیت انجام شد.
               </div> :
               <div className="my-5 text-cf-400">
-                برداشت از کیف پولشما با موفقیت انجام شد.
+                برداشت از کیف پول شما با موفقیت انجام شد.
               </div>
           }
         </div>
@@ -181,38 +182,38 @@ function Page() {
         <HiOutlineLibrary size={24} className='mr-2 my-10' />
       </div>
       <div className='fcc flex-col text-primary-500 mb-10'>
-        <div className='fcc font-bold text-lg'>
+        <div className='fcc font-medium text-2xl'>
           {walletDataState && formatPrice(walletDataState.balance)}
-          <span className='mr-2'>تومان</span>
+          <span className='mr-4'>تومان</span>
         </div>
-        <div className='font-bold mt-2'>
+        <div className='font-light text-xl mt-3'>
           موجودی کیف پول شما
         </div>
       </div>
-      <div className='fcc w-full mt-10 gap-5'>
+      <div className='fcc w-full mt-10 gap-5 items-start'>
         {
           items.map((item, i) => (
             <div key={i} className='w-full'>
               {!item.action ?
                 <Link href={item.link} className='w-full fcc flex-col'>
-                  <div className='bg-indigo-500/10 mb-4 w-full fcc h-[70px] rounded-lg'>
+                  <div className='bg-indigo-500/10 hover:bg-indigo-500/20 mb-4 w-full fcc h-[70px] rounded-lg duration-300'>
                     <Image
                       src={item.icon}
                       alt='icon item'
                       sizes='40px'
                     />
                   </div>
-                  <span className={`text-xs font-bold ${item.color}`}>{item.title}</span>
+                  <span className={`text-sm font-bold ${item.color}`}>{item.title}</span>
                 </Link> :
                 <button onClick={() => { modalHandler(item.action) }} key={i} className='w-full fcc flex-col'>
-                  <div className='bg-indigo-500/10 mb-4 w-full fcc h-[70px] rounded-lg'>
+                  <div className='bg-indigo-500/10 hover:bg-indigo-500/20 mb-4 w-full fcc h-[70px] rounded-lg duration-300'>
                     <Image
                       src={item.icon}
                       alt='icon item'
                       sizes='40px'
                     />
                   </div>
-                  <span className={`text-xs font-bold ${item.color}`}>{item.title}</span>
+                  <span className={`text-sm font-bold ${item.color}`}>{item.title}</span>
                 </button>
               }
             </div>
@@ -220,22 +221,30 @@ function Page() {
         }
       </div>
 
+      <div className='flex justify-between items-center my-8'>
+        <div className='fcc text-cf-300 gap-2'>
+          <div className='fcc relative'>
+          <HiOutlineCreditCard className='w-full' size={20} />
+          </div>
+          <div className='font-bold'>سرویس های من</div>
+        </div>
+      </div>
       <Carts walletDataState={walletDataState} />
 
       <div className='flex justify-between items-center my-8'>
-        <div className='fcc text-cf-300'>
-          <div className='fcc ml-2 w-6 relative'>
-            <HiArrowNarrowDown className='mt-1 right-0 absolute' />
-            <HiArrowNarrowUp className='mb-1 left-0 absolute' />
+        <div className='fcc text-cf-300 gap-2'>
+          <div className='fcc relative'>
+          <HiSwitchVertical  className='w-full' size={20} />
           </div>
           <div className='font-bold'>آخرین تراکنشات</div>
         </div>
-        <div className='font-bold text-blue-500 text-lg'>...</div>
       </div>
-
+      
+      <div  className='border border-gray-200 rounded-lg  bg-white' >
       {transaction.length && transaction.map((item, i) => (
-        <WalletCart key={i} title={item.description} style={item.amount > 0 ? 1 : 0} date={item.date} />
+        <WalletCart key={i} title={item.description} style={item.amount > 0 ? 1 : 0} date={item.date}/>
       ))}
+      </div>
     </div>
   )
 }

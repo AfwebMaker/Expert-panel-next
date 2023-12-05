@@ -6,6 +6,7 @@ import Header from './_components/Header'
 import Step1 from './_components/Step1'
 import Step2 from './_components/Step2'
 import Step3 from './_components/Step3'
+import Step4 from './_components/Step4'
 //react icon 
 import { HiOutlineChevronRight } from "react-icons/hi";
 import Link from 'next/link'
@@ -47,11 +48,11 @@ function Page() {
           }
 
           {currentStep === 2 &&
-            <Step2 currentStep={currentStep} setCurrentStep={setCurrentStep} stepInformation={stepInformation} />
+            <Step3 currentStep={currentStep} setCurrentStep={setCurrentStep} stepInformation={stepInformation} />
           }
 
           {currentStep === 3 &&
-            <Step3 currentStep={currentStep} setCurrentStep={setCurrentStep} stepInformation={stepInformation} />
+            <Step4 currentStep={currentStep} setCurrentStep={setCurrentStep} stepInformation={stepInformation} />
           }
 
         </div>

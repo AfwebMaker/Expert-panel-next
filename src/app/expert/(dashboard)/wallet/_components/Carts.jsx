@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Image from "next/image";
 import Link from "next/link";
 //formik 
@@ -19,12 +19,14 @@ import icon6 from '@/public/icons/wallet/icon6.svg'
 import Modal from "@/src/app/_components/Modal";
 import DynamicInputs from '@/app/_components/inputs/DynamicInputs';
 import customToast from "@/src/functions/customToast";
+import { useSelector } from "react-redux";
 
 export default function Carts({ walletDataState }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeBox, setActiveBox] = useState(0);
   const [activeCart, setActiveCart] = useState(null);
-  const [continueModal, setContinueModal] = useState(false)
+  const [continueModal, setContinueModal] = useState(false);
+  const [carts, setCarts] = useState([])
 
   const validationSchema = Yup.object({
     debt:
@@ -33,57 +35,54 @@ export default function Carts({ walletDataState }) {
         Yup.string()
   });
 
-  //cart information
-  const carts = [
+  //static cart information
+  const staticCartInfo = [
     {
-      id: 1,
-      title: 'خدمات فوری',
-      debt: 3000000,
-      debt_ceiling: 1000000,
-      state: true,
-      icon: icon1
-    },
-    {
-      id: 2,
-      title: 'خرده کاری',
-      debt: 3000000,
-      debt_ceiling: 0,
-      state: false,
-      icon: icon2
-    },
-    {
-      id: 3,
-      title: 'نیروی فنی و اجرایی روزمزد',
-      debt: 3000000,
-      debt_ceiling: 2000000,
-      state: true,
-      icon: icon3
-    },
-    {
-      id: 4,
       title: 'نیروی فنی و اجرایی آیتمی',
       debt: 1000000,
-      debt_ceiling: 0,
       state: true,
       icon: icon4
     },
     {
-      id: 5,
+      title: 'نیروی فنی و اجرایی روزمزد',
+      debt: 3000000,
+      state: true,
+      icon: icon3
+    },
+    {
+      title: 'خدمات فوری',
+      debt: 3000000,
+      state: true,
+      icon: icon1
+    },
+    {
+      title: 'خرده کاری',
+      debt: 3000000,
+      state: true,
+      icon: icon2
+    },
+    {
       title: 'پیمانکاران ساخت',
       debt: 2000000,
-      debt_ceiling: 1000,
       state: true,
       icon: icon5
     },
     {
-      id: 6,
       title: 'تعمیرات اساسی',
       debt: 2000000,
-      debt_ceiling: 4000000,
       state: true,
       icon: icon6
     }
   ]
+
+  useEffect(() => {
+    const createNewCarts = [];
+    walletDataState && walletDataState.lst_walletDetails_Child.filter((item, i) => {
+      i < 6 && createNewCarts.push({ ...item, ...staticCartInfo[i] })
+    })
+
+    setCarts(createNewCarts)
+  }, [walletDataState])
 
   const formik = useFormik({
     initialValues: {
@@ -98,7 +97,7 @@ export default function Carts({ walletDataState }) {
           customToast('err', 'موجودی کیف پول شما کافی نمی‌ باشد.')
         }
       } else {
-        if (activeCart.debt_ceiling <= walletDataState.balance) {
+        if (activeCart.balance <= walletDataState.balance) {
           setContinueModal('wallet')
         } else {
           customToast('err', 'موجودی کیف پول شما کافی نمی‌ باشد.')
@@ -116,7 +115,7 @@ export default function Carts({ walletDataState }) {
   }
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       <Modal setIsOpen={setIsOpen} isOpen={isOpen} w={'w-full md:w-[500px]'} h={'h-full md:h-auto'} >
         <div>
           <div className="text-primary-500 fcc font-bold" >
@@ -137,7 +136,7 @@ export default function Carts({ walletDataState }) {
                   {activeBox === 0 && <HiCheckCircle size={20} />}
                 </div>
                 {activeCart &&
-                  <span className="text-cf-300 text-sm">معادل {formatPrice(activeCart.debt_ceiling)} ریال</span>
+                  <span className="text-cf-300 text-sm">معادل {formatPrice(Math.abs(activeCart.balance))} ریال</span>
                 }
               </div>
 
@@ -180,7 +179,7 @@ export default function Carts({ walletDataState }) {
         </div>
       </Modal>
 
-      {
+      {carts.length &&
         carts.map((item) => (
           <div key={item.id} className="relative h-32 rounded-lg border border-gray-200 bg-white p-3 flex overflow-hidden group">
             <div className="fcc duration-200 opacity-0 bg-black/40 backdrop-blur-sm group-hover:opacity-100 w-full h-full absolute inset-0 text-sm font-bold text-white">
@@ -189,14 +188,16 @@ export default function Carts({ walletDataState }) {
                   <Link href='/expert/qualification/general' className="fcc w-full h-full">
                     <span>اضافه کردن شغل در این سرویس</span>
                     <HiPlusCircle size={20} className="mr-2" />
-                  </Link> : item.debt_ceiling <= 0 ?
+                  </Link> : item.balance >= 0 ?
                     <div className="fcc">
                       <span>شما بدهی در این سرویس ندارید</span>
-                      <HiCheckCircle size={20} className="mr-2" />
+                      <HiCheckCircle size={20} className="mr-2 text-primary-500" />
                     </div> :
-                    <button onClick={() => {cartClickHandler(item)}} className="fcc w-full h-full">
+                    <button onClick={() => { cartClickHandler(item) }} className="fcc w-full h-full">
+                      <div className="hover:text-primary-400 fcc duration-300">
                       <span>تسویه بدهی</span>
                       <HiCreditCard size={20} className="mr-2" />
+                      </div>
                     </button>
               }
             </div>
@@ -209,22 +210,22 @@ export default function Carts({ walletDataState }) {
               />
             </div>
             <div className="flex items-start justify-between flex-col h-full py-2">
-              <div className="fcc">
-                <span className="text-sm font-bold whitespace-nowrap">سرویس :</span>
-                <span className="mr-1 text-primary-500 text-sm font-bold">{item.title}</span>
+              <div className="fcc items-start">
+                <span className="text-xs sm:text-sm font-bold whitespace-nowrap">سرویس :</span>
+                <span className="mr-1 text-primary-500 text-xs sm:text-sm font-bold">{item.title}</span>
               </div>
-              <div className="fcc">
-                <span className="text-sm font-bold whitespace-nowrap">سقف بدهی :</span>
-                <span className="mr-1 text-cf-300 text-sm font-bold">{formatPrice(item.debt) + ' ریال'}</span>
+              <div className="fcc items-start">
+                <span className="text-xs sm:text-sm font-bold whitespace-nowrap">سقف بدهی :</span>
+                <span className="mr-1 text-cf-300 text-xs sm:text-sm font-bold">{formatPrice(item.debt) + ' ریال'}</span>
               </div>
               {item.state === true ?
-                <div className="fcc">
-                  <span className="text-sm font-bold whitespace-nowrap">سرویس :</span>
-                  <span className={`mr-1 text-primary-500 text-sm font-bold ${item.debt_ceiling <= 0 ? 'text-primary-500' : 'text-red-500'}`}>
-                    {item.debt_ceiling <= 0 ? '۰ ریال - تسویه شده' : formatPrice(item.debt_ceiling) + ' ریال'}
+                <div className="fcc items-start">
+                  <span className="text-xs sm:text-sm font-bold whitespace-nowrap">میزان بدهی :</span>
+                  <span className={`mr-1 text-primary-500 text-xs sm:text-sm font-bold ${item.balance >= 0 ? 'text-primary-500' : 'text-red-500'}`}>
+                    {item.balance >= 0 ? '۰ ریال - تسویه شده' : formatPrice(Math.abs(item.balance)) + ' ریال'}
                   </span>
                 </div> :
-                <div className="fcc text-red-500 text-sm font-bold">
+                <div className="fcc items-start text-red-500 text-sm font-bold">
                   <HiOutlineExclamationCircle size={20} className="ml-2" />
                   <span>این سرویس برای شما فعال نیست.</span>
                 </div>

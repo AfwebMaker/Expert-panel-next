@@ -1,73 +1,49 @@
-import React, { useEffect, useState } from 'react'
-// import * as Yup from "yup";
+import React, { useState } from 'react'
+//formik
+import { useFormik } from "formik";
+import * as Yup from "yup";
 //components
+import DynamicInputs from '@/app/_components/inputs/DynamicInputs'
 import StepController from '../../_components/StepController'
-import Loading from '@/src/app/_components/Loading';
-//services
-import getJob from '@/services/category_kg_local/getJob'
-//redux
-import { useSelector } from 'react-redux';
+// import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 
-function Step2({ currentStep, setCurrentStep, stepInformation }) {
-  const [loadingPage, setLoadingPage] = useState(true)
-  const [selectedJob, setSelectedJob] = useState('')
-  const [selectedTypeJob, setSelectedTypeJob] = useState('')
-  const jobType = useSelector(state => state.staticVariable.type_job);
+function Step3({ currentStep, setCurrentStep, stepInformation }) {
+  const [list] = useState([{ id: 1, text: 'تهران' }])
 
-  const submitHandler = () => {
-    localStorage.removeItem('services')
-  }
+  //input handler
+  const formik = useFormik({
+    initialValues: {
+      city: '1'
+    },
+    onSubmit: (values) => {
+      setCurrentStep(currentStep + 1)
+    },
+  });
 
-  useEffect(() => {
-    const services = JSON.parse(localStorage.getItem('services'))
-
-    getJob()
-      .then(res => {
-        let selectedMyJob;
-        res.data.data.forEach((item) => {
-          item.id === services.job && (selectedMyJob = item)
-        })
-
-        let selectedType;
-        jobType.forEach((item) => {
-          item.id === services.requestType && (selectedType = item)
-        })
-
-        setSelectedTypeJob(selectedType.text)
-        setSelectedJob(selectedMyJob.name)
-      })
-      .catch(() => {
-      })
-      .finally(() => {
-        setLoadingPage(false)
-      })
-  }, [])
 
   return (
     <div className='text-sm font-medium pt-5'>
-      {loadingPage && <Loading />}
-      <div className='mb-5 w-full fcc font-medium text-base'>
-        اطلاعات سرویس
+      <div className='mb-5'>
+        در این مرحله شهر و مناطقی که می خواهید در این ضمینه به شما کار ارجاع شود را انتخاب کنید.
       </div>
-      <div className='fcc'>
-        <div className='text-sm font-medium'>سرویس :</div>
-        {selectedJob && <div className='text-primary-500 mr-2 font-bold text-sm'>{selectedJob}</div>}
-      </div>
-      <div className='fcc my-4'>
-        <div className='text-sm font-medium'>نوع سرویس :</div>
-        {selectedTypeJob && <div className='text-primary-500 mr-2 font-bold text-sm'>{selectedTypeJob}</div>}
-      </div>
-      {/* <div className='fcc'>
-        <div className='text-sm font-medium'>مناطق کاری :</div>
-        <div className='text-primary-500 mr-2 font-bold text-sm'>نقاشی</div>
-      </div> */}
 
-      <div className='w-full fcc mt-8 text-cf-300'>در صورت تایید اطلاعات بر روی دکمه زیر کلیک کنید.</div>
+      <DynamicInputs
+        inputType='dropDown'
+        list={list}
+        title='شهر'
+        state="1"
+        required={true}
+        className="my-2 w-full mb-5"
+        placeholder='به طور مثال : تهران'
+        id='city'
+        name='city'
+        formik={formik}
+      />
 
       <StepController
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
-        onsubmit={submitHandler}
+        onsubmit={formik.submitForm}
         allSteps={stepInformation.length}
         lastStepTitle={'اضافه کردن سرویس'}
       />
@@ -75,4 +51,4 @@ function Step2({ currentStep, setCurrentStep, stepInformation }) {
   )
 }
 
-export default Step2
+export default Step3

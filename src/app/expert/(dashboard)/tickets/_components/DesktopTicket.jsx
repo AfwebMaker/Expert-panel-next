@@ -13,11 +13,13 @@ import { HiOutlineChat, HiOutlineTicket } from "react-icons/hi";
 import ScrollContainer from 'react-indiana-drag-scroll'
 // services
 import fetchTickets from "@/src/services/ticket_kg_local/fetchTickets";
+import fetchDepartment from "@/src/services/ticket_kg_local/fetchDepartment";
 // react-loader-spinner
 import { ThreeDots } from 'react-loader-spinner'
 
 function DesktopNavigation() {
   const [dataTickets, setDataTickets] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const pathName = usePathname();
   const router = useRouter();
@@ -25,7 +27,27 @@ function DesktopNavigation() {
   useEffect(() => {
     fetchTickets()
       .then((res) => {
+        console.log(res.data.data.tickets.results)
         setDataTickets(res.data.data.tickets.results);
+
+        // fetchDepartment()
+        //   .then((response) => {
+        //     console.log("fetchDepartment", response.data.data)
+        //     res.data.data.tickets.results.map(item => {
+        //       const dep = response.data.data.find(dep => dep.id === item.departmentId)
+        //       const subDep = dep.subjects.find(sub => sub.id === item.subjectId)
+        //       console.log(dep)
+        //       console.log(subDep)
+              
+        //     })
+        //     // setDepartments();
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   })
+        //   .finally(() => {
+        //     // setLoadingPage(false)
+        //   })
       })
       .catch((error) => {
         console.log(error);
@@ -85,7 +107,7 @@ function DesktopNavigation() {
 
       <div className="hidden md:block ml-5 xl:w-[390px] py-5 xl:py-0">
         <div>
-          <div className="text-cf-300 text-sm flex items-center justify-between mb-2">
+          <div className="text-cf-300 text-sm flex items-center justify-between mb-2 px-5 lg:px-0">
             <div className="flex">
               <HiOutlineChat className="ml-1 text-base" />
               <h2>تیکت های من</h2>

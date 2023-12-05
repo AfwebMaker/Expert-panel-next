@@ -103,7 +103,7 @@ function Page() {
 
       <ChatBoxHeader
         name={ticketData.users?.find(x => x.isStarter !== true && x.isActive === true)?.name ?? "در انتظار بررسی"}
-        problem={ticketData.subject}
+        problem={ticketData.department}
         ticketNumber={ticketData.ticket?.id}
         status={ticketData.ticket?.status}
       />

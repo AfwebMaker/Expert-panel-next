@@ -5,7 +5,8 @@ import {
     HiOutlineExclamation,
     HiOutlineMusicNote,
     HiOutlineFilm,
-    HiOutlinePresentationChartBar
+    HiOutlinePresentationChartBar,
+    HiOutlineFolder
 } from 'react-icons/hi';
 
 function getFileIcon(url) {
@@ -38,7 +39,7 @@ function getFileIcon(url) {
         'mov': <HiOutlineFilm />,
     };
 
-    return icons[mimeType] || <HiOutlineExclamation />;
+    return icons[mimeType] || <HiOutlineFolder />;
 }
 
 export default getFileIcon;

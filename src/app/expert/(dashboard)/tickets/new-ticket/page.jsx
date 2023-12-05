@@ -14,22 +14,18 @@ import Button from "@/app/_components/Button"
 import { loadingHandler } from '@/src/redux/features/layout/layoutConfigSlice';
 import { useDispatch } from "react-redux";
 // services
-import sendMessage from "@/services/ticket_kg_local/sendMessage"
+import sendTickets from "@/services/ticket_kg_local/sendTickets"
 import fetchDepartment from "@/services/ticket_kg_local/fetchDepartment"
 import { useRouter } from "next/navigation";
 
 function Page() {
   const [data, setData] = useState([]);
   const [departments, setDepartments] = useState([]);
-  const [selectedDept, setSelectedDept] = useState(null);
   const [subjects, setSubjects] = useState([]);
 
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
-  const dataDrop = [
-    { id: 1, text: "ffff" },
-  ]
 
   const validationSchema = Yup.object().shape({
     departmentId: Yup.string().required(
@@ -79,11 +75,11 @@ function Page() {
         "departmentId": values.departmentId,
         "subjectId": values.subjectId,
         "content": values.content,
-        "media": values.media,
+        "media": [{"path": JSON.stringify(values.media)}]    
       }
       console.log(data)
       dispatch(loadingHandler(true))
-      sendMessage(data)
+      sendTickets(data)
         .then(res => {
           console.log(res)
           router.replace("/expert/tickets/")
@@ -98,7 +94,6 @@ function Page() {
   });
 
 
-  // get error CROS
   useEffect(() => {
     fetchDepartment()
       .then((res) => {
@@ -118,12 +113,11 @@ function Page() {
       })
   }, []);
 
-  // get list of requestType
+
   useEffect(() => {
     if (formik.values.departmentId) {
+      formik.setFieldValue('subjectId', '')
       const dept = data.find((d) => d.id === formik.values.departmentId);
-      console.log(dept)
-      setSelectedDept(dept);
 
       const transformedSubjects = dept.subjects.map(item => {
         return { id: item.id, text: item.name }
@@ -131,11 +125,7 @@ function Page() {
       setSubjects(dept ? transformedSubjects : []);
     }
   }, [formik.values.departmentId])
-  console.log('aaa')
 
-
-  // console.log("formik", formik.values.departmentId)
-  // console.log("departments", departments)
 
   return (
     <>
@@ -155,7 +145,7 @@ function Page() {
             خود دست نیافتید می‌توانید از طریق ارسال تیکت به دپارتمان مربوطه با
             کارشناسان کارگشا در ارتباط باشید.
           </InfoCard>
-          <form onSubmit={formik.handleSubmit} className="mt-10 w-full">
+          <form onSubmit={formik.handleSubmit} className="mt-10 w-full mb-0 md:mb-16 lg:mb-0">
             {!!departments.length && (
               <div>
                 <h2 className="text-xs leading-6 sm:text-sm sm:leading-6 text-cf-300">
